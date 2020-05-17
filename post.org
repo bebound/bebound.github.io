@@ -1598,7 +1598,7 @@ Recently, I met a bug which has both features mentioned before. I write a Spark 
 
 #+begin_src 
 java.io.EOFException
-ERROR PythonRUnner: Python worker exited unexpectedly (crashed).
+ERROR PythonRunner: Python worker exited unexpectedly (crashed).
 #+end_src
 
 Because the Python Worker is created by Spark JVM, I can't get the internal state of Python Worker. By inserting log into Code, I get the rough position of crash code. But the code looks good.

@@ -2,7 +2,7 @@
 title = "Program Crash Caused by CPU Instruction"
 author = ["KK"]
 date = 2020-05-17T17:36:00+08:00
-lastmod = 2020-05-17T17:37:40+08:00
+lastmod = 2020-05-17T17:38:09+08:00
 tags = ["Python"]
 draft = false
 noauthor = true
@@ -18,7 +18,7 @@ Recently, I met a bug which has both features mentioned before. I write a Spark 
 
 ```nil
 java.io.EOFException
-ERROR PythonRUnner: Python worker exited unexpectedly (crashed).
+ERROR PythonRunner: Python worker exited unexpectedly (crashed).
 ```
 
 Because the Python Worker is created by Spark JVM, I can't get the internal state of Python Worker. By inserting log into Code, I get the rough position of crash code. But the code looks good.
