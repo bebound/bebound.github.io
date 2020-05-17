@@ -1587,7 +1587,7 @@ You can also upload zip file to hdfs, and using ~sc.addPyFile('hdfs://kk.zip')~ 
 
 This has the same effect as =--py-files=, but your import statement must be after this line.
 
-*** DONE Program Crash Caused by CPU Instruction
+*** DONE Program Crash Caused by CPU Instruction                    :Spark:
 CLOSED: [2020-05-17 Sun 17:36]
    :PROPERTIES:
    :EXPORT_FILE_NAME: program-crash-caused-by-cpu-instruction
