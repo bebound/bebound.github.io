@@ -1613,7 +1613,7 @@ But why faiss only crash on the Spark Platform? I ask the colleague to know the 
 
 By compare the host server's CPU instruction. The crashed ones lack of =avx2= instruction. =avx2= is added after the Intel Fourth generation core (Haswell). The develop server is using sixth generation CPU, and some platform server is too to support this instruction. By adding a parameter to enforce the script scheduling on new server, the crash disappears.
 
-PS: Running faiss code =index.add(xx)= will not trigger the crash, but calling =faiss.seach(xx)= does. When I trying to locate the code which cause the crash, the =faiss= package was imported correctly and the index is built normally. This mislead me to believe that faiss code is working.
+PS: Running faiss code =index.add(xx)= will not trigger the crash, but calling =faiss.search(xx)= does. When I trying to locate the code which cause the crash, the =faiss= package was imported correctly and the index is built normally. This mislead me to believe that faiss code is working.
 
 ** Go                                                                   :Go:
 *** DONE Difference between Value and Pointer variable in Defer in Go :Defer:

@@ -2,7 +2,7 @@
 title = "Program Crash Caused by CPU Instruction"
 author = ["KK"]
 date = 2020-05-17T17:36:00+08:00
-lastmod = 2020-05-17T18:34:54+08:00
+lastmod = 2020-05-21T02:56:38+08:00
 tags = ["Python", "Spark"]
 draft = false
 noauthor = true
@@ -33,4 +33,4 @@ But why faiss only crash on the Spark Platform? I ask the colleague to know the 
 
 By compare the host server's CPU instruction. The crashed ones lack of `avx2` instruction. `avx2` is added after the Intel Fourth generation core (Haswell). The develop server is using sixth generation CPU, and some platform server is too to support this instruction. By adding a parameter to enforce the script scheduling on new server, the crash disappears.
 
-PS: Running faiss code `index.add(xx)` will not trigger the crash, but calling `faiss.seach(xx)` does. When I trying to locate the code which cause the crash, the `faiss` package was imported correctly and the index is built normally. This mislead me to believe that faiss code is working.
+PS: Running faiss code `index.add(xx)` will not trigger the crash, but calling `faiss.search(xx)` does. When I trying to locate the code which cause the crash, the `faiss` package was imported correctly and the index is built normally. This mislead me to believe that faiss code is working.
