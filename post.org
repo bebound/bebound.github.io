@@ -827,7 +827,7 @@ It uses $k$ hashing functions to calculate the phrase hashes. Then for each hash
 #+attr_html: :width 600
 [[file:/images/simhash_minhash2.png]]
 
-Compare with Hashing, *MinHash* successfully reduce the time complexity and storage complexity to $O(1)$, an improvement over $O(m+n)$ and $O(n)$
+Compare with Hashing, *MinHash* successfully reduce the time complexity and storage complexity to $O(1)$, an improvement over $O(m+n)$ and $O(n)$, where n is the phrase number, m is the phrase to compare.
 
 **** SimHash 
 

@@ -2,7 +2,7 @@
 title = "Near-duplicate with SimHash"
 author = ["KK"]
 date = 2019-12-04T00:16:00+08:00
-lastmod = 2020-04-02T00:32:28+08:00
+lastmod = 2020-05-23T16:27:58+08:00
 tags = ["Machine Learning", "SimHash"]
 draft = false
 noauthor = true
@@ -51,7 +51,7 @@ It uses \\(k\\) hashing functions to calculate the phrase hashes. Then for each 
 
 {{< figure src="/images/simhash_minhash2.png" width="600" >}}
 
-Compare with Hashing, **MinHash** successfully reduce the time complexity and storage complexity to \\(O(1)\\), an improvement over \\(O(m+n)\\) and \\(O(n)\\)
+Compare with Hashing, **MinHash** successfully reduce the time complexity and storage complexity to \\(O(1)\\), an improvement over \\(O(m+n)\\) and \\(O(n)\\), where n is the phrase number, m is the phrase to compare.
 
 
 ## SimHash {#simhash}
@@ -86,7 +86,7 @@ Iterating over all document and compare with target simhash value is a time cons
 
 If the hash value is a 64-bit vector, and we want to find the document which is 2-bit differs with the target. Then we can divided the vector to 4 part: \\(A\\), \\(B\\), \\(C\\) and \\(D\\). Then we know that at least two part should be the identical.
 
-Suppose part \\(A\\) and \\(B\\) is identical, if we have sorted the hash by \\(ABCD\\) order, we can easily find all hash that \\(AB\\) part is identical. Then we can compare the rest part \\(B\\) and \\(C\\) and find hash vectors that differs from target at most 2 bit. If you have 8B(\\(2^{34}\\)) document and documents are distributed uniformly at random, on average, you only need to compare \\(2^{34-32}=4\\) fingerprints.(As the first two parts 32 bits are decided)
+Suppose part \\(A\\) and \\(B\\) is identical, if we have sorted the hash by \\(ABCD\\) order, we can easily find all hash that \\(AB\\) part is identical. Then we can compare the rest part \\(B\\) and \\(C\\) and find hash vectors that differs from target at most 2 bit. If you have 8B(\\(2^{34}\\)) document and documents are distributed uniformly at random, on average, you only need to compare \\(2^{34-32}=4\\) fingerprints.
 
 {{< figure src="/images/simhash_query1.png" >}}
 
