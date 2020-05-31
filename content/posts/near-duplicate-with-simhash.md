@@ -2,7 +2,7 @@
 title = "Near-duplicate with SimHash"
 author = ["KK"]
 date = 2019-12-04T00:16:00+08:00
-lastmod = 2020-05-23T16:27:58+08:00
+lastmod = 2020-05-30T22:22:51+08:00
 tags = ["Machine Learning", "SimHash"]
 draft = false
 noauthor = true
@@ -51,7 +51,7 @@ It uses \\(k\\) hashing functions to calculate the phrase hashes. Then for each 
 
 {{< figure src="/images/simhash_minhash2.png" width="600" >}}
 
-Compare with Hashing, **MinHash** successfully reduce the time complexity and storage complexity to \\(O(1)\\), an improvement over \\(O(m+n)\\) and \\(O(n)\\), where n is the phrase number, m is the phrase to compare.
+Compare with Hashing, **MinHash** successfully reduce the time complexity and storage complexity to \\(O(1)\\), an improvement over \\(O(m+n)\\) and \\(O(n)\\), where n is the phrase number, m is the phrase number to compare.
 
 
 ## SimHash {#simhash}
