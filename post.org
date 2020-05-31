@@ -1288,7 +1288,7 @@ The *real data* become this:
 | xxx1 | yyy1 | zzz1  |
 | xxx2 | yyy2 | zzz2  |
 #+END_SRC
-This saves memory, especially when table is not full.
+This saves memory, especially when table load factor is low.
 
 
 **** Ref:
