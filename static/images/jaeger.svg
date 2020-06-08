@@ -34,7 +34,7 @@
     </font-face>
   </defs>
   <metadata> Produced by OmniGraffle 7.12.1 
-    <dc:date>2020-06-08 15:47:39 +0000</dc:date>
+    <dc:date>2020-06-08 15:49:23 +0000</dc:date>
   </metadata>
   <g id="Canvas_1" fill-opacity="1" fill="none" stroke-opacity="1" stroke="none" stroke-dasharray="none">
     <title>Canvas 1</title>
@@ -376,12 +376,12 @@
         <line x1="206.5" y1="1705.75" x2="206.5" y2="1744.6" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
       </g>
       <g id="Graphic_52">
-        <text transform="translate(1021.75 401)" fill="black">
+        <text transform="translate(1021.75 415)" fill="black">
           <tspan font-family="Helvetica Neue" font-size="50" font-weight="400" fill="black" x="0" y="48">Agent</tspan>
         </text>
       </g>
       <g id="Graphic_54">
-        <text transform="translate(936 1503)" fill="black">
+        <text transform="translate(986.6 1498.1)" fill="black">
           <tspan font-family="Helvetica Neue" font-size="50" font-weight="400" fill="black" x="0" y="48">Collector</tspan>
         </text>
       </g>
@@ -543,7 +543,7 @@
         <line x1="405.326" y1="2242.75" x2="488.6" y2="2242.75" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
       </g>
       <g id="Graphic_79">
-        <text transform="translate(969.75 2375)" fill="black">
+        <text transform="translate(1020.35 2377)" fill="black">
           <tspan font-family="Helvetica Neue" font-size="50" font-weight="400" fill="black" x="0" y="48">Query</tspan>
         </text>
       </g>
