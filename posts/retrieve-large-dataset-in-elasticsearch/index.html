@@ -1,0 +1,92 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=content-language content="en"><meta name=author content="KK"><meta name=description content="It&rsquo;s easy to get small dataset from Elasticsearch by using size and from. However, it&rsquo;s impossible to retrieve large dataset in the same way.
+Deep Paging Problem As we know it, Elasticsearch data is organised into indexes, which is a logical namespace, and the real data is stored into physical shards. Each shard is an instance of Lucene. There are two kind of shards, primary shards and replica shards. Replica shards is the copy of primary shards in case nodes or shards fail."><meta name=keywords content="fromkk,blog,kk blog,developer,personal,python,golang,go,linux,machine learning"><meta name=twitter:card content="summary"><meta name=twitter:title content="Retrieve Large Dataset in Elasticsearch"><meta name=twitter:description content="It&rsquo;s easy to get small dataset from Elasticsearch by using size and from. However, it&rsquo;s impossible to retrieve large dataset in the same way.
+Deep Paging Problem As we know it, Elasticsearch data is organised into indexes, which is a logical namespace, and the real data is stored into physical shards. Each shard is an instance of Lucene. There are two kind of shards, primary shards and replica shards. Replica shards is the copy of primary shards in case nodes or shards fail."><meta property="og:title" content="Retrieve Large Dataset in Elasticsearch"><meta property="og:description" content="It&rsquo;s easy to get small dataset from Elasticsearch by using size and from. However, it&rsquo;s impossible to retrieve large dataset in the same way.
+Deep Paging Problem As we know it, Elasticsearch data is organised into indexes, which is a logical namespace, and the real data is stored into physical shards. Each shard is an instance of Lucene. There are two kind of shards, primary shards and replica shards. Replica shards is the copy of primary shards in case nodes or shards fail."><meta property="og:type" content="article"><meta property="og:url" content="https://www.fromkk.com/posts/retrieve-large-dataset-in-elasticsearch/"><meta property="article:published_time" content="2020-06-21T20:33:00+08:00"><meta property="article:modified_time" content="2020-06-21T20:33:15+08:00"><base href=https://www.fromkk.com/posts/retrieve-large-dataset-in-elasticsearch/><title>Retrieve Large Dataset in Elasticsearch · KK's Blog (fromkk)</title><link rel=canonical href=https://www.fromkk.com/posts/retrieve-large-dataset-in-elasticsearch/><link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel=stylesheet><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.13.0/css/all.css integrity=sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin=anonymous><link rel=stylesheet href=https://www.fromkk.com/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin=anonymous media=screen><link rel=stylesheet href=https://www.fromkk.com/css/custom.css><link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-32x32.png sizes=32x32><link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-16x16.png sizes=16x16><meta name=generator content="Hugo 0.68.3"></head><body class=colorscheme-light><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=https://www.fromkk.com/>KK's Blog (fromkk)</a>
+<input type=checkbox id=menu-toggle>
+<label class="menu-button float-right" for=menu-toggle><i class="fas fa-bars"></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/posts/>Blog</a></li><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/tags/>Tags</a></li><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/about/>About</a></li><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/posts/index.xml>RSS</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title>Retrieve Large Dataset in Elasticsearch</h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fas fa-calendar"></i><time datetime=2020-06-21T20:33:00+08:00>06/21/2020</time></span>
+<span class=reading-time><i class="fas fa-clock"></i>5-minute read</span></div><div class=tags><i class="fas fa-tag"></i><a href=https://www.fromkk.com/tags/elasticsearch/>Elasticsearch</a></div></div></header><div><p>It&rsquo;s easy to get small dataset from Elasticsearch by using <code>size</code> and <code>from</code>. However, it&rsquo;s impossible to retrieve large dataset in the same way.</p><h2 id=deep-paging-problem>Deep Paging Problem</h2><p>As we know it, Elasticsearch data is organised into indexes, which is a logical namespace, and the real data is stored into physical shards. Each shard is an instance of Lucene. There are two kind of shards, primary shards and replica shards. Replica shards is the copy of primary shards in case nodes or shards fail. By distributing documents in an index across multiple shards, and distributing those shards across multiple nodes, Elasticsearch can ensure redundancy and scalability. By default, Elasticsearch create <strong>5</strong> primary shards and one replica shard for each primary shards.</p><figure><img src=https://www.fromkk.com/images/elasticsearch_cluster.png width=600></figure><p>How to decide which shard should the document be distributed? By default, <code>shard = hashCode(doc._id) % primary_shards_number</code>. To make this stable, the number of primary shards cannot be change the index has been created.</p><p>Usually, the shards size should be 20GB to 40GB. The number of shards a node can hold is depending on the heap space. In general, 1GB heap space can hold 20 shards.</p><p>As data is store in different shards. If there are 5 shards, when doing this query:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>GET /_search?size=10
+</code></pre></div><p>Each shards will generate 10 search result, and send results to coordinate node. The coordinate node will sort 50 items, and result the first 10 result to user. However when query become this:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>GET /_search?size=10&amp;from=10000
+</code></pre></div><p>Although we only need 10 items, each shards has to return the first 10010 result to coordinate node, and coordinate node has to sort 50050 items, this search cost lots of resource.</p><p>As deep paging is costly, Elasticsearch has restrict <code>from+size</code> less than <code>index.max-result-window</code>, the default value is <code>10000</code>.</p><h2 id=scroll>Scroll</h2><p>The <code>search</code> method has to retrieve and sort the result over and over again, because it does not know how to continue the search from previous position.</p><p><code>scroll</code> is more efficient when retrieve large set of data.</p><p>For example:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>POST /twitter/_search?scroll=1m
+{
+    &#34;size&#34;: 100,
+    &#34;query&#34;: {
+        &#34;match&#34; : {
+            &#34;title&#34; : &#34;elasticsearch&#34;
+        }
+    }
+}
+</code></pre></div><p>and the returned result will contains a <code>_scroll_id</code>, which should be passed to the <code>scroll</code> API in order to retrieve the rest of data.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>POST /_search/scroll
+{
+    &#34;scroll&#34; : &#34;1m&#34;,
+    &#34;scroll_id&#34; : &#34;DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==&#34;
+}
+</code></pre></div><p><code>Scroll</code> return the matched result at the time of the initial search request, like a snapshot, and ignore the subsequent changes to the documents(index, update or delete). The <code>scroll=1m</code> is used to tell how long should Elasticsearch keep the context. If there no following requests using the returned <code>scroll_id</code>, the scroll context will expire.</p><p>PS: In fact, when dealing the initial search request, <code>scoll</code> will cache all the matched documents&rsquo; id, then get the <code>size</code> document content in batches for each following requests.</p><h3 id=slice>Slice</h3><p>It&rsquo;s also possible to split the scroll in multiple slices and consume them independently.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>GET /twitter/_search?scroll=1m
+{
+    &#34;slice&#34;: {
+        &#34;id&#34;: 0,
+        &#34;max&#34;: 2
+    },
+    &#34;query&#34;: {
+        &#34;match&#34; : {
+            &#34;title&#34; : &#34;elasticsearch&#34;
+        }
+    }
+}
+GET /twitter/_search?scroll=1m
+{
+    &#34;slice&#34;: {
+        &#34;id&#34;: 1,
+        &#34;max&#34;: 2
+    },
+    &#34;query&#34;: {
+        &#34;match&#34; : {
+            &#34;title&#34; : &#34;elasticsearch&#34;
+        }
+    }
+}
+</code></pre></div><p>The above request contains split the slice into <code>2</code> parts by using <code>max:2</code> parameter. These union of two requests&rsquo; data is equivalent to the result of a scroll query without slicing.</p><p>The slice of the document can be calculated by this formula: <code>slice(doc) = hash(doc._id) % max_slice</code>. This is quiet similar to the calculation of shards mentioned before. For example if slice is 4, and shards is 2. Then slices <code>0,2</code> are assigned to first shard and slices <code>1,3</code> are assigned to second shard.</p><p>When slices number is <code>n</code>, each matched documents use a <code>n</code> bitset to remember which slice it belongs to. So you should limit the number of sliced query you perform in parallel to avoid the memory explosion.</p><p>Getting <code>hash(doc._id)</code> is expensive. You can also use another numeric <code>doc_value</code> field to do the slicing without hash function. For instance:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>GET /twitter/_search?scroll=1m
+{
+    &#34;slice&#34;: {
+        &#34;field&#34;: &#34;date&#34;,
+        &#34;id&#34;: 0,
+        &#34;max&#34;: 10
+    },
+    &#34;query&#34;: {
+        &#34;match&#34; : {
+            &#34;title&#34; : &#34;elasticsearch&#34;
+        }
+    }
+}
+</code></pre></div><blockquote><p>Query performance is most efficient when the number of slices is equal to the number of shards in the index. If that number is large (e.g. 500), choose a lower number as too many slices will hurt performance. Setting slices higher than the number of shards generally does not improve efficiency and adds overhead.</p><p>from <a href=https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html#docs-reindex-automatic-slice>Picking the number of slices</a></p></blockquote><h2 id=search-after>Search After</h2><p>Scroll is not suitable for real-time user requests. After Elasticsearch 5, <code>Search After</code> API is added. It&rsquo;s similar to scroll but provides a live cursor. It uses the results from the previous page to retrieve the next page.</p><p>To use search after, the query must be sorted, and the following query also contains <code>search_after=previous sort value</code>.</p><p>For example, if the initial query is this:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>GET twitter/_search
+{
+    &#34;size&#34;: 10,
+    &#34;query&#34;: {
+        &#34;match&#34; : {
+            &#34;title&#34; : &#34;elasticsearch&#34;
+        }
+    },
+    &#34;sort&#34;: [
+        {&#34;date&#34;: &#34;asc&#34;},
+        {&#34;tie_breaker_id&#34;: &#34;asc&#34;}
+    ]
+}
+</code></pre></div><p>Then you have to extract the sort value of the last document, and pass it to <code>search_after</code> to get the next page result.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>GET twitter/_search
+{
+    &#34;size&#34;: 10,
+    &#34;query&#34;: {
+        &#34;match&#34; : {
+            &#34;title&#34; : &#34;elasticsearch&#34;
+        }
+    },
+    &#34;search_after&#34;: [1463538857, &#34;654323&#34;],
+    &#34;sort&#34;: [
+        {&#34;date&#34;: &#34;asc&#34;},
+        {&#34;tie_breaker_id&#34;: &#34;asc&#34;}
+    ]
+}
+</code></pre></div><h2 id=ref>Ref</h2><ol><li><a href=https://www.elastic.co/guide/en/elasticsearch/guide/current/pagination.html>Elasticsearch: The Definitive Guide: Pagination</a></li><li><a href=https://www.elastic.co/guide/en/elasticsearch/reference/current/scalability.html>Scalability and resilience: clusters, nodes, and shards</a></li><li><a href=http://arganzheng.life/deep-pagination-in-elasticsearch.html>ElasticSearch如何支持深度分页</a></li><li><a href=https://discuss.elastic.co/t/documentation-for-scroll-api-is-a-bit-confusing/185954>Documentation for scroll API is a bit confusing!</a></li><li><a href=https://www.elastic.co/guide/en/elasticsearch/reference/6.3/search-request-scroll.html>Request Body Search: Scroll</a></li><li><a href=https://qbox.io/blog/optimizing-elasticsearch-how-many-shards-per-index>Optimizing Elasticsearch: How Many Shards per Index?</a></li></ol></div><footer><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
+var d=document,s=d.createElement('script');s.async=true;s.src='//'+"kkblog-1"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></footer></article><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script type=text/javascript async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script><script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js id=MathJax-script></script><script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],processEscapes:true,processEnvironments:true},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script></section></div><footer class=footer><section class=container>©
+2020
+KK
+·
+Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.</section></footer></main><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-153788833-1','auto');ga('send','pageview');}</script></body></html>
