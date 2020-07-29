@@ -1615,6 +1615,96 @@ By compare the host server's CPU instruction. The crashed ones lack of =avx2= in
 
 PS: Running faiss code =index.add(xx)= will not trigger the crash, but calling =faiss.search(xx)= does. When I trying to locate the code which cause the crash, the =faiss= package was imported correctly and the index is built normally. This mislead me to believe that faiss code is working.
 
+*** DONE Using cibuildwheel to Create Python Wheels
+CLOSED: [2020-07-29 Wed 22:53]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: using-cibuildwheel-to-create-python-wheels
+   :END:
+
+Have you ever tried to install =MySQL-python=? It contains the C code and need to compile the code while install the package. You have to follow the steps in this articles: [[https://ruddra.com/install-mysqlclient-macos/][Install MySQL and MySQLClient(Python) in MacOS]]. Things get worse if you are using Windows. 
+
+Luckily, as new distribution format *Wheel* has been published in [[https://www.python.org/dev/peps/pep-0427/][PEP 427]].
+#+begin_quote
+The wheel binary package format frees installers from having to know about the build system, saves time by amortizing compile time over many installations, and removes the need to install a build system in the target environment.
+#+end_quote
+
+Installation of wheels does not require a compiler on system and is much faster.
+
+[[https://github.com/joerick/cibuildwheel][Cibuildwheel]] is a very useful tool for building wheels. It can run on many CI server (GitHub Actions, Travis , Azure Pipelines etc) and build wheels across many platforms.
+
+**** Usage
+
+You need to create a configuration file for the CI server, you can read the [[https://github.com/joerick/cibuildwheel/tree/master/examples][examples]] and [[https://cibuildwheel.readthedocs.io/en/stable/options/][documents]].
+
+For example, GitHub Actions can use this configuration file:
+
+#+begin_src yml
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+  build_wheels:
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-18.04, windows-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        name: Install Python
+        with:
+          python-version: '3.7'
+
+      - name: Install cibuildwheel
+        run: |
+          python -m pip install cibuildwheel==1.5.5
+      - name: Install Visual C++ for Python 2.7
+        if: runner.os == 'Windows'
+        run: |
+          choco install vcpython27 -f -y
+      - name: Build wheels
+        run: |
+          python -m cibuildwheel --output-dir wheelhouse
+      - uses: actions/upload-artifact@v2
+        with:
+          path: ./wheelhouse/*.whl
+#+end_src
+
+**** Useful Options
+These options can be applied by setting environment variables.
+
+***** [[https://cibuildwheel.readthedocs.io/en/stable/options/#build-skip][CIBW_BUILD / CIBW_SKIP]]
+Use this options to filter the Python versions to build.
+
+Example:
+#+begin_src
+# Only build on Python 3.6
+CIBW_BUILD: cp36-*
+
+# Skip building on Python 2.7 on the Mac
+CIBW_SKIP: cp27-macosx_x86_64
+
+# Skip building on Python 3.8 on the Mac
+CIBW_SKIP: cp38-macosx_x86_64
+#+end_src
+
+***** [[https://cibuildwheel.readthedocs.io/en/stable/options/#before-build][CIBW_BEFORE_BUILD]]
+Execute the shell command before wheel building.
+
+
+**** Upload to PyPI
+Now you can download =wheelhouse.zip= from =Actions= panel on GitHub, and unzip it to dist folder. Then manually publish it by =rm -rf dist && python setup.py sdist && twine upload dist/*=. You can get more detailed guide from this article: [[https://packaging.python.org/tutorials/packaging-projects/][Packaging Python Projects]].
+
+This process can also be done automatically by using CI configuration file. You can find the example configuration files from [[https://github.com/joerick/cibuildwheel/blob/master/examples/][official repo]].
+
+**** Ref:
+1. [[https://gertjanvandenburg.com/blog/wheels/][Building Python Platform Wheels for Packages with Binary Extensions]]
+2. [[https://stackoverflow.com/questions/23916186/how-to-include-external-library-with-python-wheel-package][How to include external library with python wheel package]]
+3. [[https://github.com/joerick/cibuildwheel][cibuildwheel]]
 ** Go                                                                   :Go:
 *** DONE Difference between Value and Pointer variable in Defer in Go :Defer:
 CLOSED: [2019-12-19 Thu 22:33]
@@ -1730,7 +1820,7 @@ calling os.Exit
 Process finished with exit code 0
 #+end_src
 
-The defer code in =subGoroutine= will not execute.
+The defer code in main goroutine are executed, but those in =subGoroutine= will not be executed.
 
 **** Ref:
 1. [[https://draveness.me/golang/keyword/golang-defer.html][面向信仰编程 defer]]
