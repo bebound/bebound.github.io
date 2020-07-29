@@ -2,7 +2,7 @@
 title = "Difference between Value and Pointer variable in Defer in Go"
 author = ["KK"]
 date = 2019-12-19T22:33:00+08:00
-lastmod = 2020-04-04T23:37:40+08:00
+lastmod = 2020-07-29T23:19:53+08:00
 tags = ["Go", "Defer"]
 draft = false
 noauthor = true
@@ -123,7 +123,7 @@ calling os.Exit
 Process finished with exit code 0
 ```
 
-The defer code in `subGoroutine` will not execute.
+The defer code in main goroutine are executed, but those in `subGoroutine` will not be executed.
 
 
 ## Ref: {#ref}
