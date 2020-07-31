@@ -1820,7 +1820,13 @@ calling os.Exit
 Process finished with exit code 0
 #+end_src
 
-The defer code in main goroutine are executed, but those in =subGoroutine= will not be executed.
+The defer code in main goroutine are executed, but those in =subGoroutine= will not be executed. As =os.Exit= will 
+
+#+begin_quote
+Exit causes the current program to exit with the given status code. Conventionally, code zero indicates success, non-zero an error. The program terminates immediately; deferred functions are not run.
+
+from [[https://golang.org/pkg/os/#Exit][godoc]]
+#+end_quote
 
 **** Ref:
 1. [[https://draveness.me/golang/keyword/golang-defer.html][面向信仰编程 defer]]
@@ -1828,6 +1834,7 @@ The defer code in main goroutine are executed, but those in =subGoroutine= will 
 3. [[https://stackoverflow.com/questions/27629380/how-to-exit-a-go-program-honoring-deferred-calls/39755730][How to exit a go program honoring deferred calls?]]
 4. [[https://golang.org/doc/effective_go.html#defer][Effective Go]]
 5. [[https://golang.org/pkg/runtime/#Goexit][Golang Runtime]]
+6. [[https://tachingchen.com/tw/blog/go-defer-and-os-exit/][Go defer 遇上 os.Exit 時失效]]
 ** Misc
 *** DONE Some Useful Shell Tools                                      :Shell:
 CLOSED: [2017-05-07 Sun 15:34]

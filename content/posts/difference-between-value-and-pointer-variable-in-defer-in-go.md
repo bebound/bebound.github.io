@@ -2,7 +2,7 @@
 title = "Difference between Value and Pointer variable in Defer in Go"
 author = ["KK"]
 date = 2019-12-19T22:33:00+08:00
-lastmod = 2020-07-29T23:19:53+08:00
+lastmod = 2020-08-01T00:39:56+08:00
 tags = ["Go", "Defer"]
 draft = false
 noauthor = true
@@ -123,7 +123,11 @@ calling os.Exit
 Process finished with exit code 0
 ```
 
-The defer code in main goroutine are executed, but those in `subGoroutine` will not be executed.
+The defer code in main goroutine are executed, but those in `subGoroutine` will not be executed. As `os.Exit` will
+
+> Exit causes the current program to exit with the given status code. Conventionally, code zero indicates success, non-zero an error. The program terminates immediately; deferred functions are not run.
+>
+> from [godoc](https://golang.org/pkg/os/#Exit)
 
 
 ## Ref: {#ref}
@@ -133,3 +137,4 @@ The defer code in main goroutine are executed, but those in `subGoroutine` will 
 3.  [How to exit a go program honoring deferred calls?](https://stackoverflow.com/questions/27629380/how-to-exit-a-go-program-honoring-deferred-calls/39755730)
 4.  [Effective Go](https://golang.org/doc/effective%5Fgo.html#defer)
 5.  [Golang Runtime](https://golang.org/pkg/runtime/#Goexit)
+6.  [Go defer 遇上 os.Exit 時失效](https://tachingchen.com/tw/blog/go-defer-and-os-exit/)
