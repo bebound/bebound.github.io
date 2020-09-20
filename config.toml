@@ -30,6 +30,7 @@ copyright = "© This post is licensed under a Creative Commons Attribution-NonCo
 
     favicon_32 = "/icons/icon-32x32.png"
     favicon_16 = "/icons/icon-16x16.png"
+    touchicon = "/icons/icon-192x192.png"
 
     custom_css = ["css/custom.css"]
 
