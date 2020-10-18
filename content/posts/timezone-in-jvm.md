@@ -2,7 +2,7 @@
 title = "Timezone in JVM"
 author = ["KK"]
 date = 2020-10-18T23:49:00+08:00
-lastmod = 2020-10-18T23:56:54+08:00
+lastmod = 2020-10-19T00:00:15+08:00
 tags = ["Java", "Scala"]
 draft = false
 noauthor = true
@@ -58,7 +58,9 @@ In `Timezone_md.c`, it will find timezone by following steps, it will return the
 4.  Return `GMT` as timezone.
 
 
-## How to change timezone {#how-to-change-timezone}
+## How to Change Timezone {#how-to-change-timezone}
+
+The available timezone in Linux can be listed by this command: `timedatectl list-timezones`
 
 
 ### Add JVM param {#add-jvm-param}

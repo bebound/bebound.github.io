@@ -2446,7 +2446,8 @@ In =Timezone_md.c=, it will find timezone by following steps, it will return the
 3. Read =/etc/localtime=. If it is a soft link(ex: =/usr/share/zoneinfo/Asia/Shanghai=), return timezone by path. Otherwise, compare the content with all files in =/usr/share/zoneinfo=, if found, return timezone.
 4. Return =GMT= as timezone.
 
-**** How to change timezone
+**** How to Change Timezone
+The available timezone in Linux can be listed by this command: =timedatectl list-timezones=
 ***** Add JVM param
 You can add =-Duser.timezone=Asia/Shanghai= as JVM parameters.
 ***** Set TZ environment variable
