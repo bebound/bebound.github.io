@@ -2,7 +2,7 @@
 title = "C-m, RET and Return Key in Emacs"
 author = ["KK"]
 date = 2020-04-11T21:23:00+08:00
-lastmod = 2020-04-11T21:50:55+08:00
+lastmod = 2021-02-10T14:55:07+08:00
 tags = ["Emacs"]
 draft = false
 noauthor = true
@@ -16,12 +16,12 @@ I use Emacs to write blog. In the recent update, I found `M-RET` no longer behav
 
 SO I opened this [issue](https://github.com/syl20bnr/spacemacs/issues/13374), with the help of these friends, the issue has been fixed. Here is the cause of the bug.
 
-In Emacs, `RET` is not a key in keyboard, it is same as `C-m` (press ctrl and m) key. Pressing `<Enter>` / `<Return>` key actually sends `<return>` to Emacs, and Emacs automatically maps `<return>` to `RET`.
+In Emacs, `RET` is not a key in keyboard(it's a logical key), it is same as `C-m` (press ctrl and m) key. In GUI, pressing `<Enter>` / `<Return>` key actually sends `<return>` to Emacs, and Emacs automatically maps `<return>` to `RET`. In terminal, `<Enter>` / `<Return>` key is always `RET`.
 
 This can be proved: type `SPC h d k <Enter>` in spacemacs, it will output `RET (translated from <return>) runs the command org-open-at-point, which is an
 interactive compiled Lisp function in ‘org.el’.`
 
-Press `C-m` or `<Enter>` key usually given the same result. But you can also bind these with two different command. Take `M-RET` as example. If only `<M-return>` is bind, the `C-M-m` is unbinded. If only `C-M-m` is binded, then `M-return` is implicitly also bind to same command as `C-M-m`.
+Pressing `C-m` or `<Enter>` key usually given the same result, but you can also bind these with two different command. Take `M-RET` as example. If only `<M-return>` is bind, the `M-RET` is unbinded. If only `M-RET` is binded, then `M-return` is implicitly also bind to same command as `M-RET`.
 
 In org mode [scr](https://github.com/bzg/org-mode/blob/093e65ecc74767fb6452f5b9cf13abc4c2f44917/lisp/org-keys.el#L468-L469):
 
