@@ -2468,3 +2468,14 @@ All of these methods should work
 3. [[http://kaiwangchen.github.io/2018/09/30/java-timezone-revisited.html][Java default timezone detection, revisited]]
 4. [[https://www.cnblogs.com/darange/p/9368245.html][Java读取系统默认时区]]
 5. [[https://stackoverflow.com/questions/2493749/how-to-set-a-jvm-timezone-properly/64415095#64415095][How to set a JVM TimeZone Properly]]
+
+*** DONE Fix Error: Cask 'java' is unavailable in Homebrew       :Homebrew:
+CLOSED: [2021-03-07 Sun 00:10]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: fix-error-cask-java-is-unavailable-in-homebrew
+   :END:
+After update brew to latest version, when calling =cask= related command, it always outputs =Error: Cask 'java' is unavailable: No Cask with this name exists.=, such as =brew list --cask=. However, =brew= command works.
+
+After doing some research, I found [[https://github.com/Homebrew/homebrew-cask/pull/72284][Java has been moved to homebrew/core]]. As I installed java by cask, now it's not available and throw this error. Now I need to uninstall it from cask.
+
+Finally I found this issue: [[https://github.com/Homebrew/homebrew-cask/issues/72562][brew cask upgrade fails with "No Cask with this name exists"]]. After running =rm -rf "$(brew --prefix)/Caskroom/java=, the error disappears.
