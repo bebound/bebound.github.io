@@ -2,7 +2,7 @@
 title = "The Annotated The Annotated Transformer"
 author = ["KK"]
 date = 2019-09-01T16:00:00+08:00
-lastmod = 2020-02-29T14:47:38+08:00
+lastmod = 2021-05-10T21:19:26+08:00
 tags = ["Machine Learning", "Transformer"]
 draft = false
 noauthor = true
@@ -148,3 +148,4 @@ Using a linear layer to predict the output.
 7.  [Deconstructing BERT, Part 2: Visualizing the Inner Workings of Attention](https://towardsdatascience.com/deconstructing-bert-part-2-visualizing-the-inner-workings-of-attention-60a16d86b5c1)
 8.  [Transformer: A Novel Neural Network Architecture for Language Understanding](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)
 9.  [Dive into Deep Learning - 10.3 Transformer](https://d2l.ai/chapter%5Fattention-mechanisms/transformer.html)
+10. [10分钟带你深入理解Transformer原理及实现](https://zhuanlan.zhihu.com/p/80986272)
