@@ -2,7 +2,7 @@
 title = "Fix Error: Cask 'java' is unavailable in Homebrew"
 author = ["KK"]
 date = 2021-03-07T00:10:00+08:00
-lastmod = 2021-03-07T00:10:57+08:00
+lastmod = 2021-05-28T01:03:10+08:00
 tags = ["Homebrew"]
 draft = false
 noauthor = true
@@ -12,8 +12,8 @@ nopaging = true
 noread = true
 +++
 
-After update brew to latest version, when calling `cask` related command, it always outputs `Error: Cask 'java' is unavailable: No Cask with this name exists.`, such as `brew list --cask`. However, `brew` command works.
+After update brew to latest version, when calling `cask` related command, it always outputs `Error: Cask 'java' is unavailable: No Cask with this name exists.`, such as `brew list --cask`. However, the `brew` command works.
 
-After doing some research, I found [Java has been moved to homebrew/core](https://github.com/Homebrew/homebrew-cask/pull/72284). As I installed java by cask, now it's not available and throw this error. Now I need to uninstall it from cask.
+After doing some research, I found [Java has been moved to homebrew/core](https://github.com/Homebrew/homebrew-cask/pull/72284). This makes sense now. I installed java by cask, but it's not available now and cask throw this error. If I uninstall java from cask, the error should disappear.
 
-Finally I found this issue: [brew cask upgrade fails with "No Cask with this name exists"](https://github.com/Homebrew/homebrew-cask/issues/72562). After running `rm -rf "$(brew --prefix)/Caskroom/java`, the error disappears.
+This is not easy as cask is broken. Finally, I found this issue: [brew cask upgrade fails with "No Cask with this name exists"](https://github.com/Homebrew/homebrew-cask/issues/72562). After running `rm -rf "$(brew --prefix)/Caskroom/java`, cask is back.
