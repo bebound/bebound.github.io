@@ -2488,14 +2488,16 @@ CLOSED: [2021-05-28 Fri 00:57]
    :END:
 
 Kafka is a high-performance and scalable messaging system. Sometimes when handling big data. The default configuration may limit the maximum performance. In this article, I'll explain how messages are generate and saved in Kafka, and how to improve performance by changing configuration.
-**** How does Producer Send Messages?
+
+**** Kafka Internals
+***** How does Producer Send Messages?
 In short, messages will assembled into batches (named =RecordBatch=) and send to broker.
 
 The producer manages some internal queues, and each queue contains =RecordBatch= that will send to one broker. When calling =send= method, the producer will look into the internal queue and try to append this message to =RecordBatch= which is smaller than =batch.size= (default value is 16KB) or create new =RecordBatch=.
 
-There is also a thread in producer which is responsible for turning =RecordBatch= into requests and send to broker.
+There is also a thread in producer which is responsible for turning =RecordBatch= into requests（`<broker node，List(ProducerBatch)>`） and send to broker.
 
-**** how are Records Saved?
+***** how are Records Saved?
 The details can be found from these two articles: [[https://kafka.apache.org/documentation/#messageformat][Apache Kafka - Message Format]] and [[https://cwiki.apache.org/confluence/display/KAFKA/A+Guide+To+The+Kafka+Protocol#:~:text=A%20message%20in%20kafka%20is,on%2Dthe%2Dwire%20format.&text=This%20byte%20holds%20metadata%20attributes%20about%20the%20message.][A Guide To The Kafka Protocol - Apache Kafka - Apache Software Foundation]].
 
 Here are some important properties in =RecordBatch= are: =batch_lenth=, =compresstion_type=, =CRC=, =timestamp= and, of course, the =List(Record)=.
@@ -2520,7 +2522,7 @@ Furthermore, the segment divided into three kinds of file: log file, index file 
 - The =index= file contains the record's relative offset and its physical position in the log file. This makes the look up complexity for specific offset record to =O(1)=.
 - The =timeindex= file contains the record's relative offset and its timestamp.
   
-**** How does Consumer pull messages?
+***** How does Consumer pull messages?
 Consumer keeps reading data from broker, and decompress data if necessary. It will put data into a internal queue and return the target number of records to client.
 
 =max.poll.records= (default values is 500) means the maximum number of records returned in a single call to poll().
@@ -2555,7 +2557,7 @@ How to choose compression type? According to cloudflare's test result in [[https
 | Snappy |      1.61x |             2.35x |
 | Lz4    |      2.51x |             1.81x |
 
-=Gzip= has best compression ratio but take lots of CPU time. =Snappy= keeps a balance between the CPU time and space. The new compression type =zstd= produce larger compression ratio than =Snappy= with the cost of a little more CPU time.
+=Gzip= has best compression ratio but take lots of CPU time. =Snappy= keeps a balance between the CPU time and space. The new compression type =zstd= added in Kafka 2.1 produce larger compression ratio than =Snappy= with the cost of a little more CPU time.
 
 Ref:
 1. [[https://kafka.apache.org/documentation/#messageformat][Kafka message format]]
