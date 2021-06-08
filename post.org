@@ -2532,7 +2532,7 @@ Consumer keeps reading data from broker, and decompress data if necessary. It wi
 **** How to Improve Performance
 ***** Increase Socket Buffer
 The default socket buffer value in Java client is too small for high-throughput environment.
-=socket.receive.buffer.bytes=(default value is 64KB) and =send.buffer.bytes=(default value is 128KB) is the =SO_RCVBUFF= and =SO_SNDBUFF= buffer for socket connections respectively. I recommend to set it to a bigger value or =-1= to use the OS default value.
+=socket.receive.buffer.bytes= (default value is 64KB) and =send.buffer.bytes= (default value is 128KB) is the =SO_RCVBUFF= and =SO_SNDBUFF= for socket connections respectively. I recommend to set it to a bigger value or =-1= to use the OS default value.
 
 ***** batch.size, linger.ms and buffer.memory
 As mentioned before, producer always send message as =RecordBatch=. Each batch should be smaller than =batch.size= (default value is 16KB). Increasing =batch.size= will not only reduce the TCP request to broker, but also lead to better compression ratio when compression is enabled.
