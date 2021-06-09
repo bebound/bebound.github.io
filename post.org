@@ -2548,16 +2548,18 @@ There are two kind of =compresstion.type=, topic level and producer level.
 
 If you set =compresstion.type= in producer, the producer will compress the records and send it to broker.
 
-The topic also has a =compresstion.type= configuration. It can be set as =gizp=, =snappy=, =lz4=, =zstd=, =uncompressed=, and =producer=. The default value is =producer=, which means the broker will keep the original data send from the producer. Otherwise, the broker will convert the data to target =compresstion.type=.
+There is also a topic level =compresstion.type= configuration. When it is set, producer's compression type is not constrained. The broker will convert data sent from producer to target =compresstion.type=. =compresstion.type= can be set as =gzip=, =snappy=, =lz4=, =zstd=, =uncompressed=, and =producer=. The default value is =producer=, which means the broker will keep the original data send from the producer.
 
 How to choose compression type? According to cloudflare's test result in [[https://blog.cloudflare.com/squeezing-the-firehose/][Squeezing the firehose: getting the most from Kafka compression]]:
 | type   | CPU ration | Compression ratio |
 | None   |         1x |                1x |
 | Gzip   |     10.14x |             3.58x |
 | Snappy |      1.61x |             2.35x |
-| Lz4    |      2.51x |             1.81x |
+| LZ4    |      2.51x |             1.81x |
 
 =Gzip= has best compression ratio but take lots of CPU time. =Snappy= keeps a balance between the CPU time and space. The new compression type =zstd= added in Kafka 2.1 produce larger compression ratio than =Snappy= with the cost of a little more CPU time.
+
+These are common configurations, you can find more from the official document contains such as `max.in.flight.requests.per.connection`.
 
 Ref:
 1. [[https://kafka.apache.org/documentation/#messageformat][Kafka message format]]
