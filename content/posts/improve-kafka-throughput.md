@@ -2,7 +2,8 @@
 title = "Improve Kafka throughput"
 author = ["KK"]
 date = 2021-05-28T00:57:00+08:00
-lastmod = 2021-06-13T16:26:01+08:00
+lastmod = 2021-06-13T16:27:09+08:00
+tags = ["Kafka"]
 draft = false
 noauthor = true
 nocomment = true
