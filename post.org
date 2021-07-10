@@ -2481,7 +2481,7 @@ After doing some research, I found [[https://github.com/Homebrew/homebrew-cask/p
 
 This is not easy as cask is broken. Finally, I found this issue: [[https://github.com/Homebrew/homebrew-cask/issues/72562][brew cask upgrade fails with "No Cask with this name exists"]]. After running =rm -rf "$(brew --prefix)/Caskroom/java=, cask is back.
 
-*** DONE Improve Kafka throughput
+*** DONE Improve Kafka throughput                                   :Kafka:
 CLOSED: [2021-05-28 Fri 00:57]
    :PROPERTIES:
    :EXPORT_FILE_NAME: improve-kafka-throughput
@@ -2574,3 +2574,12 @@ Ref:
 10. [[https://kafka-python.readthedocs.io/en/master/apidoc/KafkaProducer.html][kafka-python KafkaProducer]]
 11. [[https://rohithsankepally.github.io/Kafka-Storage-Internals/][Deep Dive Into Apache Kafka | Storage Internals]]
     
+    
+*** TODO Dynamic Allocate Executors when Executing Jobs in Spark
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: dynamic-allocate-executors-when-executing-jobs-in-spark
+   :END:
+I wrote a Spark program to process logs. The number of logs always changes as time goes by. To ensure logs can be processed instantly, the number of executors is calculated by the maximum of logs per minutes. The CPU usage is low in executors.
+
+
+   
