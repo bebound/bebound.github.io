@@ -2,7 +2,7 @@
 title = "Improve Kafka throughput"
 author = ["KK"]
 date = 2021-05-28T00:57:00+08:00
-lastmod = 2021-06-13T16:27:09+08:00
+lastmod = 2021-07-10T23:22:03+08:00
 tags = ["Kafka"]
 draft = false
 noauthor = true
@@ -24,7 +24,7 @@ In short, messages will assembled into batches (named `RecordBatch`) and send to
 
 The producer manages some internal queues, and each queue contains `RecordBatch` that will send to one broker. When calling `send` method, the producer will look into the internal queue and try to append this message to `RecordBatch` which is smaller than `batch.size` (default value is 16KB) or create new `RecordBatch`.
 
-There is also a thread in producer which is responsible for turning `RecordBatch` into requests（\`<broker node，List(ProducerBatch)>\`） and send to broker.
+There is also a sender thread in producer which is responsible for turning `RecordBatch` into requests（\`<broker node，List(ProducerBatch)>\`） and send to broker.
 
 
 ### how are Records Saved? {#how-are-records-saved}
@@ -77,7 +77,7 @@ The default socket buffer value in Java client is too small for high-throughput 
 
 As mentioned before, producer always send message as `RecordBatch`. Each batch should be smaller than `batch.size` (default value is 16KB). Increasing `batch.size` will not only reduce the TCP request to broker, but also lead to better compression ratio when compression is enabled.
 
-The producer groups together any records that arrive in between request transmissions into a single batched request. If the system load is low, there will be only one message in the record batch. `linger.ms`'s default value is 0, this means broker will send message as quick as possible(but the messaged arrived between two send requests will also be batched to `RecordBatch`). If it's greater than 0, then producer will wait for more messages until the batch size is greater than `batch.size` or `current time - last transmissions > linger.ms`. Increasing this value to make sure each batch is close to `batch.size` and reducing the number of requests to be sent.
+`linger.ms` is used to  specific the wait time before sending `RecordBatch`, and it will effect the real size of `RecordBatch` indirectly. The producer groups together any records that arrive in between request transmissions into a single batched request. If the system load is low and the `RecordBatch` is not full, the producer sender will still send this batch once it has been waited for `linger.ms`. `linger.ms`'s default value is 0, which means producer will send message as quick as possible(but the messaged arrived between two send requests will also be batched to `RecordBatch`). Increasing this value not only makes real batch size be close to `batch.size` and reducing the number of requests to be sent, but also increases the delay of messages.
 
 The `buffer.memory` (default value is 32MB) controls the total amount of memory available to the producer for buffering. If records are sent faster than they can be transmitted to the server then this buffer space will be exhausted. When the buffer space is exhausted additional send calls will block.
 
