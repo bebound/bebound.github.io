@@ -1706,6 +1706,60 @@ This process can also be done automatically by using CI configuration file. You 
 1. [[https://gertjanvandenburg.com/blog/wheels/][Building Python Platform Wheels for Packages with Binary Extensions]]
 2. [[https://stackoverflow.com/questions/23916186/how-to-include-external-library-with-python-wheel-package][How to include external library with python wheel package]]
 3. [[https://github.com/joerick/cibuildwheel][cibuildwheel]]
+
+*** DONE Using JSONField before Django 3.1                         :Django:
+CLOSED: [2021-09-11 Sat 21:12]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: using-jsonfield-before-django-3-dot-1
+   :END:
+In Django 3.1, Django support save python data into database as JSON encoded data and it is also possible to make query based on field value in JSONField. The detailed usage can be found [[https://docs.djangoproject.com/en/3.2/topics/db/queries/#querying-jsonfield][here]]. If you are using older version and want to try this feature. Though there are many packages ported this function, I recommend [[https://github.com/laymonage/django-jsonfield-backport][django-jsonfield-backport]].
+
+**** django-jsonfield-backport
+This package save data as JSON in database and also support JSON query. If your database meet the requirements (MySQL > 5.7, PG > 9.5, MariaDB > 10.2 or SQLite > 3.9 with [[https://docs.djangoproject.com/en/3.1/ref/databases/#sqlite-json1][JSON1]] extension), you can use JSONField like Django's native implementation.
+
+#+begin_src python3
+from django.db import models
+from django_jsonfield_backport.models import JSONField
+
+class ContactInfo(models.Model):
+    data = JSONField()
+
+ContactInfo.objects.create(data={
+    'name': 'John',
+    'cities': ['London', 'Cambridge'],
+    'pets': {'dogs': ['Rufus', 'Meg']},
+})
+ContactInfo.objects.filter(
+    data__name='John',
+    data__pets__has_key='dogs',
+    data__cities__contains='London',
+).delete()
+#+end_src
+
+**** jsonfield
+[[https://github.com/rpkilby/jsonfield][jsonfield]] is another popular package to use JSONField. It will save data as =Text= in database, but you can manipulate field value as python data. In addition, it does not provide JSON querying capability as =django-jsonfield-backport=.
+
+***** Django REST framework
+As data is stored as JSON string in database, the output is string rather than object when Django DRF serialize =jsonfield.JSONField=. If you prefer to get and update the data like object, you need to manually specify it as `serializer.JSONField` like this:
+#+begin_src python3
+from rest_framework import serializers
+from .models import Product
+
+class ProductSerializer(serializers.ModelSerializer):
+    images = serializers.JSONField()
+    class Meta:
+        model = Product
+        fields = '__all__'
+#+end_src
+
+(You do not need to do this when using =django-jsonfield-backport=, everything just works.)
+
+**** Ref:
+1. [[https://github.com/laymonage/django-jsonfield-backport][GitHub - django-jsonfield-backport]]
+2. [[https://librenepal.com/article/use-jsonfield-with-django-rest-framework/][Use JSONField with Django Rest Framework]]
+3. [[https://www.geeksforgeeks.org/jsonfield-in-serializers-django-rest-framework/][JSONField in serializers – Django REST Framework]]
+4. [[https://www.django-rest-framework.org/api-guide/fields/#jsonfield][Django REST framework - jsonfield]]
+
 ** Go                                                                   :Go:
 *** DONE Difference between Value and Pointer variable in Defer in Go :Defer:
 CLOSED: [2019-12-19 Thu 22:33]
@@ -1980,7 +2034,7 @@ services:
     restart: always
     command: sh -c 'sh /wait-for.sh database.postgres:5432 -- php /configure-db.php && exec s6-svscan /etc/s6/'
 
-  service.mercury: # set Mercury Parser API endpoint to `service.mercury:3000` on TTRSS plugin setting page
+  service.mercury: # set Mercury Parser API endpoint to =service.mercury:3000= on TTRSS plugin setting page
     image: wangqiru/mercury-parser-api:latest
     container_name: mercury
     expose:
@@ -2559,7 +2613,7 @@ How to choose compression type? According to cloudflare's test result in [[https
 
 =Gzip= has best compression ratio but take lots of CPU time. =Snappy= keeps a balance between the CPU time and space. The new compression type =zstd= added in Kafka 2.1 produce larger compression ratio than =Snappy= with the cost of a little more CPU time.
 
-These are common configurations, you can find more from the official document contains such as `max.in.flight.requests.per.connection`.
+These are common configurations, you can find more from the official document contains such as =max.in.flight.requests.per.connection=.
 
 Ref:
 1. [[https://kafka.apache.org/documentation/#messageformat][Kafka message format]]
