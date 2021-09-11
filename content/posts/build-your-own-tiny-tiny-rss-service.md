@@ -2,7 +2,7 @@
 title = "Build Your Own Tiny Tiny RSS Service"
 author = ["KK"]
 date = 2019-06-10T00:25:00+08:00
-lastmod = 2020-04-04T23:13:50+08:00
+lastmod = 2021-09-11T20:51:58+08:00
 draft = false
 noauthor = true
 nocomment = true
@@ -59,7 +59,7 @@ services:
     restart: always
     command: sh -c 'sh /wait-for.sh database.postgres:5432 -- php /configure-db.php && exec s6-svscan /etc/s6/'
 
-  service.mercury: # set Mercury Parser API endpoint to `service.mercury:3000` on TTRSS plugin setting page
+  service.mercury: # set Mercury Parser API endpoint to =service.mercury:3000= on TTRSS plugin setting page
     image: wangqiru/mercury-parser-api:latest
     container_name: mercury
     expose:
