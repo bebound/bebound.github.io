@@ -2,7 +2,7 @@
 title = "C-m, RET and Return Key in Emacs"
 author = ["KK"]
 date = 2020-04-11T21:23:00+08:00
-lastmod = 2021-02-10T14:55:07+08:00
+lastmod = 2021-10-24T13:37:28+08:00
 tags = ["Emacs"]
 draft = false
 noauthor = true
@@ -16,7 +16,9 @@ I use Emacs to write blog. In the recent update, I found `M-RET` no longer behav
 
 SO I opened this [issue](https://github.com/syl20bnr/spacemacs/issues/13374), with the help of these friends, the issue has been fixed. Here is the cause of the bug.
 
-In Emacs, `RET` is not a key in keyboard(it's a logical key), it is same as `C-m` (press ctrl and m) key. In GUI, pressing `<Enter>` / `<Return>` key actually sends `<return>` to Emacs, and Emacs automatically maps `<return>` to `RET`. In terminal, `<Enter>` / `<Return>` key is always `RET`.
+In Emacs, `RET` is not a key in keyboard, it's a logical key). Emacs bind `RET` to `C-m` in source code. In terminal, `<Enter>` and `C-m` both send `<CR>` (ASCII 13) character, so `<Enter>` / `<Return>` key is equal to `RET`. In GUI, pressing `<Enter>` / `<Return>` key actually sends `<return>` to Emacs, and Emacs automatically translate `<return>` to `RET`.
+
+{{< figure src="/images/emacs.png" >}}
 
 This can be proved: type `SPC h d k <Enter>` in spacemacs, it will output `RET (translated from <return>) runs the command org-open-at-point, which is an
 interactive compiled Lisp function in ‘org.el’.`
@@ -33,8 +35,6 @@ In org mode [scr](https://github.com/bzg/org-mode/blob/093e65ecc74767fb6452f5b9c
 These two keys were binded to `org-meta-return`.
 
 The unfixed Spacemacs configuration file binds `C-M-m` as `dotspacemacs-major-mode-emacs-leader-key`.
-
-In terminal, the `<Enter>` is the same as `C-m`, both of them send ASCII 13 character. So press meta return will trigger leader key.
 
 In GUI, the `<Enter>` key will send `<return>` to Emacs. Org mode has explicitly bind `M-<return>` to `org-meta-return`, so `org-meta-return` is triggered. In other mode, the `M-<return>` key binding is not defined, so `<return>` will translate to `RET`, then trigger leader key.
 
