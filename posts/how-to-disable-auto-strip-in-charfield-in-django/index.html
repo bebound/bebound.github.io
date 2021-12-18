@@ -1,22 +1,129 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=content-language content="en"><meta name=color-scheme content="light dark"><meta name=author content="KK"><meta name=description content="In Django, when edit field in admin page or post data to forms, the leading and tailing whitespace in CharField and TextField are removed.
-The reason is strip=True parameter in forms.CharField, which is added in Djagno 1.9. You can see the discussion in django tiket #4960 and here is source code. models.CharField and models.TextField use formfield() to create form to interact with user, then both of them eventually create a forms."><meta name=keywords content="fromkk,blog,kk blog,developer,personal,python,golang,go,linux,machine learning"><meta name=twitter:card content="summary"><meta name=twitter:title content="How to disable auto strip in Charfield in Django"><meta name=twitter:description content="In Django, when edit field in admin page or post data to forms, the leading and tailing whitespace in CharField and TextField are removed.
-The reason is strip=True parameter in forms.CharField, which is added in Djagno 1.9. You can see the discussion in django tiket #4960 and here is source code. models.CharField and models.TextField use formfield() to create form to interact with user, then both of them eventually create a forms."><meta property="og:title" content="How to disable auto strip in Charfield in Django"><meta property="og:description" content="In Django, when edit field in admin page or post data to forms, the leading and tailing whitespace in CharField and TextField are removed.
-The reason is strip=True parameter in forms.CharField, which is added in Djagno 1.9. You can see the discussion in django tiket #4960 and here is source code. models.CharField and models.TextField use formfield() to create form to interact with user, then both of them eventually create a forms."><meta property="og:type" content="article"><meta property="og:url" content="https://www.fromkk.com/posts/how-to-disable-auto-strip-in-charfield-in-django/"><meta property="article:published_time" content="2021-12-18T23:31:43+08:00"><meta property="article:modified_time" content="2021-12-18T23:31:43+08:00"><title>How to disable auto strip in Charfield in Django · KK's Blog (fromkk)</title><link rel=canonical href=https://www.fromkk.com/posts/how-to-disable-auto-strip-in-charfield-in-django/><link rel=preload href="https://www.fromkk.com/fonts/forkawesome-webfont.woff2?v=1.1.7" as=font type=font/woff2 integrity="sha256-hEIt6X6xzye8ubyk8/uxjz68cRZHsJxoKS9fQ8idUGQ=" crossorigin><link rel=stylesheet href=https://www.fromkk.com/css/coder.min.ec198d25949ddd79a670b1ead43ca88e0bc2c1343266d0df0a9eeb7f3f207777.css integrity="sha256-7BmNJZSd3XmmcLHq1DyojgvCwTQyZtDfCp7rfz8gd3c=" crossorigin=anonymous media=screen><link rel=stylesheet href=https://www.fromkk.com/css/coder-dark.min.89c82b6022b96f77aeb521b240daec4f87ea029d84d1c78b8acd0735b91b3c92.css integrity="sha256-icgrYCK5b3eutSGyQNrsT4fqAp2E0ceLis0HNbkbPJI=" crossorigin=anonymous media=screen><link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-32x32.png sizes=32x32><link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-16x16.png sizes=16x16><link rel=apple-touch-icon href=https://www.fromkk.com/icons/icon-192x192.png><link rel=apple-touch-icon sizes=180x180 href=https://www.fromkk.com/icons/icon-192x192.png><meta name=generator content="Hugo 0.68.3"></head><body class=colorscheme-auto><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=https://www.fromkk.com/>KK's Blog (fromkk)</a>
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=content-language content="en">
+<meta name=color-scheme content="light dark">
+<meta name=author content="KK">
+<meta name=description content="In Django, when edit field in admin page or post data to forms, the leading and tailing whitespace in CharField and TextField are removed.
+The reason is strip=True parameter in forms.CharField, which is added in Djagno 1.9. You can see the discussion in django tiket #4960 and here is source code. models.CharField and models.TextField use formfield() to create form to interact with user, then both of them eventually create a forms.">
+<meta name=keywords content="fromkk,blog,kk blog,developer,personal,python,golang,go,linux,machine learning">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="How to disable auto strip in Charfield in Django">
+<meta name=twitter:description content="In Django, when edit field in admin page or post data to forms, the leading and tailing whitespace in CharField and TextField are removed.
+The reason is strip=True parameter in forms.CharField, which is added in Djagno 1.9. You can see the discussion in django tiket #4960 and here is source code. models.CharField and models.TextField use formfield() to create form to interact with user, then both of them eventually create a forms.">
+<meta property="og:title" content="How to disable auto strip in Charfield in Django">
+<meta property="og:description" content="In Django, when edit field in admin page or post data to forms, the leading and tailing whitespace in CharField and TextField are removed.
+The reason is strip=True parameter in forms.CharField, which is added in Djagno 1.9. You can see the discussion in django tiket #4960 and here is source code. models.CharField and models.TextField use formfield() to create form to interact with user, then both of them eventually create a forms.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.fromkk.com/posts/how-to-disable-auto-strip-in-charfield-in-django/"><meta property="article:section" content="posts">
+<meta property="article:modified_time" content="2021-12-18T23:31:43+08:00">
+<title>
+How to disable auto strip in Charfield in Django · KK's Blog (fromkk)
+</title>
+<link rel=canonical href=https://www.fromkk.com/posts/how-to-disable-auto-strip-in-charfield-in-django/>
+<link rel=preload href="https://www.fromkk.com/fonts/forkawesome-webfont.woff2?v=1.1.7" as=font type=font/woff2 integrity="sha256-hEIt6X6xzye8ubyk8/uxjz68cRZHsJxoKS9fQ8idUGQ=" crossorigin>
+<link rel=stylesheet href=https://www.fromkk.com/css/coder.min.ec198d25949ddd79a670b1ead43ca88e0bc2c1343266d0df0a9eeb7f3f207777.css integrity="sha256-7BmNJZSd3XmmcLHq1DyojgvCwTQyZtDfCp7rfz8gd3c=" crossorigin=anonymous media=screen>
+<link rel=stylesheet href=https://www.fromkk.com/css/coder-dark.min.89c82b6022b96f77aeb521b240daec4f87ea029d84d1c78b8acd0735b91b3c92.css integrity="sha256-icgrYCK5b3eutSGyQNrsT4fqAp2E0ceLis0HNbkbPJI=" crossorigin=anonymous media=screen>
+<link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-32x32.png sizes=32x32>
+<link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-16x16.png sizes=16x16>
+<link rel=apple-touch-icon href=https://www.fromkk.com/icons/icon-192x192.png>
+<link rel=apple-touch-icon sizes=180x180 href=https://www.fromkk.com/icons/icon-192x192.png>
+<meta name=generator content="Hugo 0.91.0">
+</head>
+<body class=colorscheme-auto>
+<div class=float-container>
+<a id=dark-mode-toggle class=colorscheme-toggle>
+<i class="fa fa-adjust fa-fw" aria-hidden=true></i>
+</a>
+</div>
+<main class=wrapper>
+<nav class=navigation>
+<section class=container>
+<a class=navigation-title href=https://www.fromkk.com/>
+KK's Blog (fromkk)
+</a>
 <input type=checkbox id=menu-toggle>
-<label class="menu-button float-right" for=menu-toggle><i class="fa fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/posts/>Blog</a></li><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/tags/>Tags</a></li><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/about/>About</a></li><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/posts/index.xml>RSS</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://www.fromkk.com/posts/how-to-disable-auto-strip-in-charfield-in-django/>How to disable auto strip in Charfield in Django</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa fa-calendar" aria-hidden=true></i><time datetime=2021-12-18T23:31:43+08:00>12/18/2021</time></span>
-<span class=reading-time><i class="fa fa-clock-o" aria-hidden=true></i>2-minute read</span></div><div class=tags><i class="fa fa-tag" aria-hidden=true></i><a href=https://www.fromkk.com/tags/python/>Python</a>
+<label class="menu-button float-right" for=menu-toggle>
+<i class="fa fa-bars fa-fw" aria-hidden=true></i>
+</label>
+<ul class=navigation-list>
+<li class=navigation-item>
+<a class=navigation-link href=https://www.fromkk.com/posts/>Blog</a>
+</li>
+<li class=navigation-item>
+<a class=navigation-link href=https://www.fromkk.com/tags/>Tags</a>
+</li>
+<li class=navigation-item>
+<a class=navigation-link href=https://www.fromkk.com/about/>About</a>
+</li>
+<li class=navigation-item>
+<a class=navigation-link href=https://www.fromkk.com/posts/index.xml>RSS</a>
+</li>
+</ul>
+</section>
+</nav>
+<div class=content>
+<section class="container post">
+<article>
+<header>
+<div class=post-title>
+<h1 class=title>
+<a class=title-link href=https://www.fromkk.com/posts/how-to-disable-auto-strip-in-charfield-in-django/>
+How to disable auto strip in Charfield in Django
+</a>
+</h1>
+</div>
+<div class=post-meta>
+<div class=date>
+<span class=posted-on>
+<i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2021-12-18T23:31:43+08:00>
+12/18/2021
+</time>
+</span>
+<span class=reading-time>
+<i class="fa fa-clock-o" aria-hidden=true></i>
+2-minute read
+</span>
+</div>
+<div class=tags>
+<i class="fa fa-tag" aria-hidden=true></i>
+<a href=https://www.fromkk.com/tags/python/>Python</a>
 <span class=separator>•</span>
-<a href=https://www.fromkk.com/tags/django/>Django</a></div></div></header><div><p>In Django, when edit field in admin page or post data to forms, the leading and tailing whitespace in <code>CharField</code> and <code>TextField</code> are removed.</p><p>The reason is <code>strip=True</code> parameter in <code>forms.CharField</code>, which is added in Djagno 1.9. You can see the discussion in <a href=https://code.djangoproject.com/ticket/4960>django tiket #4960</a> and here is <a href=https://github.com/django/django/blob/4ce59f602ed28320caf3035212cb4d1c5430da2b/django/forms/fields.py#L211>source code</a>. <code>models.CharField</code> and <code>models.TextField</code> use <code>formfield()</code> to create form to interact with user, then both of them eventually create a <code>forms.CharField</code></p><p>It only affect the value return from forms, you can still update model manually and calling <code>save()</code> to save it with spaces.</p><p>Normally, this feature help us to keep text field clean. But sometimes you may want to get the original value, and here are three different solutions:</p><p>Suppose we have this <code>Test</code> model.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3><span style=color:#75715e># models.py</span>
+<a href=https://www.fromkk.com/tags/django/>Django</a></div>
+</div>
+</header>
+<div>
+<p>In Django, when edit field in admin page or post data to forms, the leading and tailing whitespace in <code>CharField</code> and <code>TextField</code> are removed.</p>
+<p>The reason is <code>strip=True</code> parameter in <code>forms.CharField</code>, which is added in Djagno 1.9. You can see the discussion in <a href=https://code.djangoproject.com/ticket/4960>django tiket #4960</a> and here is <a href=https://github.com/django/django/blob/4ce59f602ed28320caf3035212cb4d1c5430da2b/django/forms/fields.py#L211>source code</a>. <code>models.CharField</code> and <code>models.TextField</code> use <code>formfield()</code> to create form to interact with user, then both of them eventually create a <code>forms.CharField</code></p>
+<p>It only affect the value return from forms, you can still update model manually and calling <code>save()</code> to save it with spaces.</p>
+<p>Normally, this feature help us to keep text field clean. But sometimes you may want to get the original value, and here are three different solutions:</p>
+<p>Suppose we have this <code>Test</code> model.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3><span style=color:#75715e># models.py</span>
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Test</span>(models<span style=color:#f92672>.</span>Model):
     char <span style=color:#f92672>=</span> models<span style=color:#f92672>.</span>CharField(max_length<span style=color:#f92672>=</span><span style=color:#ae81ff>20</span>)
     text <span style=color:#f92672>=</span> models<span style=color:#f92672>.</span>TextField()
-</code></pre></div><h2 id=change-modeladmin>Change ModelAdmin</h2><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3><span style=color:#75715e># admin.py</span>
+</code></pre></div><h2 id=change-modeladmin>
+Change ModelAdmin
+<a class=heading-link href=#change-modeladmin>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3><span style=color:#75715e># admin.py</span>
 TestAdmin(admin<span style=color:#f92672>.</span>ModelAdmin):
     <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>formfield_for_dbfield</span>(self, db_field, request, <span style=color:#f92672>**</span>kwargs):
         <span style=color:#66d9ef>if</span> db_field<span style=color:#f92672>.</span>name <span style=color:#f92672>in</span> [<span style=color:#e6db74>&#39;char&#39;</span>, <span style=color:#e6db74>&#39;text&#39;</span>]:
             kwargs[<span style=color:#e6db74>&#39;strip&#39;</span>] <span style=color:#f92672>=</span> <span style=color:#66d9ef>False</span>
         <span style=color:#66d9ef>return</span> super()<span style=color:#f92672>.</span>formfield_for_dbfield(db_field, request, <span style=color:#f92672>**</span>kwargs)
-</code></pre></div><p>This method tackles the problem by overriding fields&rsquo; default <code>fromfiled</code> method.</p><h2 id=define-custom-form>Define Custom Form</h2><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3><span style=color:#75715e># forms.py</span>
+</code></pre></div><p>This method tackles the problem by overriding fields' default <code>fromfiled</code> method.</p>
+<h2 id=define-custom-form>
+Define Custom Form
+<a class=heading-link href=#define-custom-form>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3><span style=color:#75715e># forms.py</span>
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CustomForm</span>(forms<span style=color:#f92672>.</span>ModelForm):
     char <span style=color:#f92672>=</span> forms<span style=color:#f92672>.</span>CharField(strip<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)
     text <span style=color:#f92672>=</span> forms<span style=color:#f92672>.</span>CharField(strip<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>, widget<span style=color:#f92672>=</span>forms<span style=color:#f92672>.</span>Textarea)
@@ -28,8 +135,16 @@ TestAdmin(admin<span style=color:#f92672>.</span>ModelAdmin):
 <span style=color:#75715e># admin.py</span>
 TestAdmin(admin<span style=color:#f92672>.</span>ModelAdmin):
     form <span style=color:#f92672>=</span> CustomForm
-</code></pre></div><p>Now when edit data in admin panel, the whitespace is not removed anymore.</p><h2 id=use-custom-field>Use Custom Field</h2><p>You can also use your custom field in <code>models.py</code>. For example:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3><span style=color:#75715e># models.py</span>
-<span style=color:#f92672>from</span> django.db.models <span style=color:#66d9ef>import</span> TextField
+</code></pre></div><p>Now when edit data in admin panel, the whitespace is not removed anymore.</p>
+<h2 id=use-custom-field>
+Use Custom Field
+<a class=heading-link href=#use-custom-field>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h2>
+<p>You can also use your custom field in <code>models.py</code>. For example:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3><span style=color:#75715e># models.py</span>
+<span style=color:#f92672>from</span> django.db.models <span style=color:#f92672>import</span> TextField
 
 
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>NonStrippingTextField</span>(TextField):
@@ -39,15 +154,45 @@ TestAdmin(admin<span style=color:#f92672>.</span>ModelAdmin):
 
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Test</span>(models<span style=color:#f92672>.</span>Model):
     text <span style=color:#f92672>=</span> NonStrippingTextField()
-</code></pre></div><p><code>==</code></p><p>If you use Django REST framework to modify model, you only need to change the serializer.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TestSerializer</span>(serializers<span style=color:#f92672>.</span>HyperlinkedModelSerializer):
+</code></pre></div><p><code>==</code></p>
+<p>If you use Django REST framework to modify model, you only need to change the serializer.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TestSerializer</span>(serializers<span style=color:#f92672>.</span>HyperlinkedModelSerializer):
     <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Meta</span>:
         model <span style=color:#f92672>=</span> Test
         fields <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;__all__&#39;</span>
         extra_kwargs <span style=color:#f92672>=</span> {<span style=color:#e6db74>&#34;char&#34;</span>: {<span style=color:#e6db74>&#34;trim_whitespace&#34;</span>: <span style=color:#66d9ef>False</span>},
                         <span style=color:#e6db74>&#34;text&#34;</span>: {<span style=color:#e6db74>&#34;trim_whitespace&#34;</span>: <span style=color:#66d9ef>False</span>}}
-</code></pre></div><p>Ref:</p><ol><li><a href=https://stackoverflow.com/questions/38995764/django-textfield-and-charfield-is-stripping-spaces-and-blank-lines>StackOverflow - Django TextField and CharField is stripping spaces and blank lines</a></li><li><a href=https://code.djangoproject.com/ticket/30077>Djanog - TextField constructor needs a strip=False option</a></li><li><a href=https://stackoverflow.com/questions/50019009/in-django-rest-control-serializer-does-not-automatically-remove-spaces>StackOverflow - In Django REST control serializer does not automatically remove spaces</a></li><li><a href=https://www.aaronoellis.com/articles/allow-whitespace-to-be-a-valid-charfield-value-in-django-admin>Allow Whitespace to be a Valid CharField Value in Django Admin</a></li></ol></div><footer><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
-var d=document,s=d.createElement('script');s.async=true;s.src='//'+"kkblog-1"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></footer></article><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script><script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],processEscapes:true,processEnvironments:true},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script></section></div><footer class=footer><section class=container>©
+</code></pre></div><p>Ref:</p>
+<ol>
+<li><a href=https://stackoverflow.com/questions/38995764/django-textfield-and-charfield-is-stripping-spaces-and-blank-lines>StackOverflow - Django TextField and CharField is stripping spaces and blank lines</a></li>
+<li><a href=https://code.djangoproject.com/ticket/30077>Djanog - TextField constructor needs a strip=False option</a></li>
+<li><a href=https://stackoverflow.com/questions/50019009/in-django-rest-control-serializer-does-not-automatically-remove-spaces>StackOverflow - In Django REST control serializer does not automatically remove spaces</a></li>
+<li><a href=https://www.aaronoellis.com/articles/allow-whitespace-to-be-a-valid-charfield-value-in-django-admin>Allow Whitespace to be a Valid CharField Value in Django Admin</a></li>
+</ol>
+</div>
+<footer>
+<div id=disqus_thread></div>
+<script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//kkblog-1.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</footer>
+</article>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script>
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],processEscapes:!0,processEnvironments:!0},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}}</script>
+</section>
+</div>
+<footer class=footer>
+<section class=container>
+©
 2021
 KK
 ·
-Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.</section></footer></main><script src=https://www.fromkk.com/js/dark-mode.min.0213e1773e6d1c5a644f847c67a6f8abac49a3776e2976f6008038af8c5b76a1.js integrity="sha256-AhPhdz5tHFpkT4R8Z6b4q6xJo3duKXb2AIA4r4xbdqE="></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-153788833-1','auto');ga('send','pageview');}</script></body></html>
+Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
+</section>
+</footer>
+</main>
+<script src=https://www.fromkk.com/js/dark-mode.min.aee9c8a464eb7b3534c7110f7c5e169e7039e2fd92710e0626d451d6725af137.js integrity="sha256-runIpGTrezU0xxEPfF4WnnA54v2ScQ4GJtRR1nJa8Tc="></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-153788833-1','auto'),ga('send','pageview'))</script>
+</body>
+</html>

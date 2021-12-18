@@ -1,20 +1,163 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=content-language content="en"><meta name=color-scheme content="light dark"><meta name=author content="KK"><meta name=description content="As I said before, I&rsquo;m working on a text classification project. I use doc2vec to convert text into vectors, then I use LPA to classify the vectors.
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=content-language content="en">
+<meta name=color-scheme content="light dark">
+<meta name=author content="KK">
+<meta name=description content="As I said before, I&rsquo;m working on a text classification project. I use doc2vec to convert text into vectors, then I use LPA to classify the vectors.
 LPA is a simple, effective semi-supervised algorithm. It can use the density of unlabeled data to find a hyperplane to split the data.
 Here are the main stop of the algorithm:
- Let $ (x_1,y1)&mldr;(x_l,y_l)$ be labeled data, $Y_L = \{y_1&mldr;y_l\} $ are the class labels."><meta name=keywords content="fromkk,blog,kk blog,developer,personal,python,golang,go,linux,machine learning"><meta name=twitter:card content="summary"><meta name=twitter:title content="Brief Introduction of Label Propagation Algorithm"><meta name=twitter:description content="As I said before, I&rsquo;m working on a text classification project. I use doc2vec to convert text into vectors, then I use LPA to classify the vectors.
+ Let $ (x_1,y1)&mldr;(x_l,y_l)$ be labeled data, $Y_L = \{y_1&mldr;y_l\} $ are the class labels.">
+<meta name=keywords content="fromkk,blog,kk blog,developer,personal,python,golang,go,linux,machine learning">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Brief Introduction of Label Propagation Algorithm">
+<meta name=twitter:description content="As I said before, I&rsquo;m working on a text classification project. I use doc2vec to convert text into vectors, then I use LPA to classify the vectors.
 LPA is a simple, effective semi-supervised algorithm. It can use the density of unlabeled data to find a hyperplane to split the data.
 Here are the main stop of the algorithm:
- Let $ (x_1,y1)&mldr;(x_l,y_l)$ be labeled data, $Y_L = \{y_1&mldr;y_l\} $ are the class labels."><meta property="og:title" content="Brief Introduction of Label Propagation Algorithm"><meta property="og:description" content="As I said before, I&rsquo;m working on a text classification project. I use doc2vec to convert text into vectors, then I use LPA to classify the vectors.
+ Let $ (x_1,y1)&mldr;(x_l,y_l)$ be labeled data, $Y_L = \{y_1&mldr;y_l\} $ are the class labels.">
+<meta property="og:title" content="Brief Introduction of Label Propagation Algorithm">
+<meta property="og:description" content="As I said before, I&rsquo;m working on a text classification project. I use doc2vec to convert text into vectors, then I use LPA to classify the vectors.
 LPA is a simple, effective semi-supervised algorithm. It can use the density of unlabeled data to find a hyperplane to split the data.
 Here are the main stop of the algorithm:
- Let $ (x_1,y1)&mldr;(x_l,y_l)$ be labeled data, $Y_L = \{y_1&mldr;y_l\} $ are the class labels."><meta property="og:type" content="article"><meta property="og:url" content="https://www.fromkk.com/posts/brief-introduction-of-label-propagation-algorithm/"><meta property="article:published_time" content="2017-07-16T21:45:00+08:00"><meta property="article:modified_time" content="2019-11-29T00:29:04+08:00"><title>Brief Introduction of Label Propagation Algorithm · KK's Blog (fromkk)</title><link rel=canonical href=https://www.fromkk.com/posts/brief-introduction-of-label-propagation-algorithm/><link rel=preload href="https://www.fromkk.com/fonts/forkawesome-webfont.woff2?v=1.1.7" as=font type=font/woff2 integrity="sha256-hEIt6X6xzye8ubyk8/uxjz68cRZHsJxoKS9fQ8idUGQ=" crossorigin><link rel=stylesheet href=https://www.fromkk.com/css/coder.min.ec198d25949ddd79a670b1ead43ca88e0bc2c1343266d0df0a9eeb7f3f207777.css integrity="sha256-7BmNJZSd3XmmcLHq1DyojgvCwTQyZtDfCp7rfz8gd3c=" crossorigin=anonymous media=screen><link rel=stylesheet href=https://www.fromkk.com/css/coder-dark.min.89c82b6022b96f77aeb521b240daec4f87ea029d84d1c78b8acd0735b91b3c92.css integrity="sha256-icgrYCK5b3eutSGyQNrsT4fqAp2E0ceLis0HNbkbPJI=" crossorigin=anonymous media=screen><link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-32x32.png sizes=32x32><link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-16x16.png sizes=16x16><link rel=apple-touch-icon href=https://www.fromkk.com/icons/icon-192x192.png><link rel=apple-touch-icon sizes=180x180 href=https://www.fromkk.com/icons/icon-192x192.png><meta name=generator content="Hugo 0.68.3"></head><body class=colorscheme-auto><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=https://www.fromkk.com/>KK's Blog (fromkk)</a>
+ Let $ (x_1,y1)&mldr;(x_l,y_l)$ be labeled data, $Y_L = \{y_1&mldr;y_l\} $ are the class labels.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.fromkk.com/posts/brief-introduction-of-label-propagation-algorithm/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2017-07-16T21:45:00+08:00">
+<meta property="article:modified_time" content="2019-11-29T00:29:04+08:00">
+<title>
+Brief Introduction of Label Propagation Algorithm · KK's Blog (fromkk)
+</title>
+<link rel=canonical href=https://www.fromkk.com/posts/brief-introduction-of-label-propagation-algorithm/>
+<link rel=preload href="https://www.fromkk.com/fonts/forkawesome-webfont.woff2?v=1.1.7" as=font type=font/woff2 integrity="sha256-hEIt6X6xzye8ubyk8/uxjz68cRZHsJxoKS9fQ8idUGQ=" crossorigin>
+<link rel=stylesheet href=https://www.fromkk.com/css/coder.min.ec198d25949ddd79a670b1ead43ca88e0bc2c1343266d0df0a9eeb7f3f207777.css integrity="sha256-7BmNJZSd3XmmcLHq1DyojgvCwTQyZtDfCp7rfz8gd3c=" crossorigin=anonymous media=screen>
+<link rel=stylesheet href=https://www.fromkk.com/css/coder-dark.min.89c82b6022b96f77aeb521b240daec4f87ea029d84d1c78b8acd0735b91b3c92.css integrity="sha256-icgrYCK5b3eutSGyQNrsT4fqAp2E0ceLis0HNbkbPJI=" crossorigin=anonymous media=screen>
+<link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-32x32.png sizes=32x32>
+<link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-16x16.png sizes=16x16>
+<link rel=apple-touch-icon href=https://www.fromkk.com/icons/icon-192x192.png>
+<link rel=apple-touch-icon sizes=180x180 href=https://www.fromkk.com/icons/icon-192x192.png>
+<meta name=generator content="Hugo 0.91.0">
+</head>
+<body class=colorscheme-auto>
+<div class=float-container>
+<a id=dark-mode-toggle class=colorscheme-toggle>
+<i class="fa fa-adjust fa-fw" aria-hidden=true></i>
+</a>
+</div>
+<main class=wrapper>
+<nav class=navigation>
+<section class=container>
+<a class=navigation-title href=https://www.fromkk.com/>
+KK's Blog (fromkk)
+</a>
 <input type=checkbox id=menu-toggle>
-<label class="menu-button float-right" for=menu-toggle><i class="fa fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/posts/>Blog</a></li><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/tags/>Tags</a></li><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/about/>About</a></li><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/posts/index.xml>RSS</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://www.fromkk.com/posts/brief-introduction-of-label-propagation-algorithm/>Brief Introduction of Label Propagation Algorithm</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa fa-calendar" aria-hidden=true></i><time datetime=2017-07-16T21:45:00+08:00>07/16/2017</time></span>
-<span class=reading-time><i class="fa fa-clock-o" aria-hidden=true></i>2-minute read</span></div><div class=tags><i class="fa fa-tag" aria-hidden=true></i><a href=https://www.fromkk.com/tags/machine-learning/>Machine Learning</a>
+<label class="menu-button float-right" for=menu-toggle>
+<i class="fa fa-bars fa-fw" aria-hidden=true></i>
+</label>
+<ul class=navigation-list>
+<li class=navigation-item>
+<a class=navigation-link href=https://www.fromkk.com/posts/>Blog</a>
+</li>
+<li class=navigation-item>
+<a class=navigation-link href=https://www.fromkk.com/tags/>Tags</a>
+</li>
+<li class=navigation-item>
+<a class=navigation-link href=https://www.fromkk.com/about/>About</a>
+</li>
+<li class=navigation-item>
+<a class=navigation-link href=https://www.fromkk.com/posts/index.xml>RSS</a>
+</li>
+</ul>
+</section>
+</nav>
+<div class=content>
+<section class="container post">
+<article>
+<header>
+<div class=post-title>
+<h1 class=title>
+<a class=title-link href=https://www.fromkk.com/posts/brief-introduction-of-label-propagation-algorithm/>
+Brief Introduction of Label Propagation Algorithm
+</a>
+</h1>
+</div>
+<div class=post-meta>
+<div class=date>
+<span class=posted-on>
+<i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2017-07-16T21:45:00+08:00>
+07/16/2017
+</time>
+</span>
+<span class=reading-time>
+<i class="fa fa-clock-o" aria-hidden=true></i>
+2-minute read
+</span>
+</div>
+<div class=tags>
+<i class="fa fa-tag" aria-hidden=true></i>
+<a href=https://www.fromkk.com/tags/machine-learning/>Machine Learning</a>
 <span class=separator>•</span>
-<a href=https://www.fromkk.com/tags/label-propagation/>Label Propagation</a></div></div></header><div><p>As I said before, I&rsquo;m working on a text classification project. I use <code>doc2vec</code> to convert text into vectors, then I use LPA to classify the vectors.</p><p>LPA is a simple, effective semi-supervised algorithm. It can use the density of unlabeled data to find a hyperplane to split the data.</p><p>Here are the main stop of the algorithm:</p><ol><li>Let $ (x_1,y1)&mldr;(x_l,y_l)$ be labeled data, $Y_L = \{y_1&mldr;y_l\} $ are the class labels. Let \((x_{l+1},y_{l+u})\) be unlabeled data where \(Y_U = \{y_{l+1}&mldr;y_{l+u}\}\) are unobserved, usually \(l \ll u\). Let \(X=\{x_1&mldr;x_{l+u}\}\) where \(x_i\in R^D\). The problem is to estimate \(Y_U\) for \(X\) and \(Y_L\).</li><li>Calculate the similarity of the data points. The most simple metric is Euclidean distance. Use a parameter \(\sigma\) to control the weights.</li></ol><p>\[w_{ij}= exp(-\frac{d^2_{ij}}{\sigma^2})=exp(-\frac{\sum^D_{d=1}{(x^d_i-x^d_j})^2}{\sigma^2})\]</p><p>Larger weight allow labels to travel through easier.</p><ol><li>Define a \((l+u)*(l+u)\) probabilistic transition matrix \(T\)</li></ol><p>\[T_{ij}=P(j \rightarrow i)=\frac{w_{ij}}{\sum^{l+u}_{k=1}w_{kj}}\]</p><p>\(T_{ij}\) is the probability to jump from node \(j\) to \(i\). If there are \(C\) classes, we can define a \((l+u)*C\) label matrix \(Y\), to represent the probability of a label belong to class \(c\). The initialization of unlabeled data points is not important.</p><ol><li>Propagate \(Y \leftarrow TY\)</li><li>Row-normalize Y.</li><li>Reset labeled data&rsquo;s Y. Repeat 3 until Y converges.</li></ol><p>In short, let the nearest label has larger weight, then calculate each label&rsquo;s new label, reset labeled data&rsquo;s label, repeat.</p><figure><img src=https://www.fromkk.com/images/label_spreading.png width=400></figure><h2 id=ref>Ref:</h2><ol><li><a href=http://mlg.eng.cam.ac.uk/zoubin/papers/CMU-CALD-02-107.pdf>Learning from Labeled and Unlabeled Data with Label Propagation</a></li><li><a href=http://blog.csdn.net/zouxy09/article/details/49105265>标签传播算法（Label Propagation）及Python实现</a></li></ol></div><footer><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
-var d=document,s=d.createElement('script');s.async=true;s.src='//'+"kkblog-1"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></footer></article><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script><script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],processEscapes:true,processEnvironments:true},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script></section></div><footer class=footer><section class=container>©
+<a href=https://www.fromkk.com/tags/label-propagation/>Label Propagation</a></div>
+</div>
+</header>
+<div>
+<p>As I said before, I&rsquo;m working on a text classification project. I use <code>doc2vec</code> to convert text into vectors, then I use LPA to classify the vectors.</p>
+<p>LPA is a simple, effective semi-supervised algorithm. It can use the density of unlabeled data to find a hyperplane to split the data.</p>
+<p>Here are the main stop of the algorithm:</p>
+<ol>
+<li>Let $ (x_1,y1)&mldr;(x_l,y_l)$ be labeled data, $Y_L = \{y_1&mldr;y_l\} $ are the class labels. Let \((x_{l+1},y_{l+u})\) be unlabeled data where \(Y_U = \{y_{l+1}&mldr;y_{l+u}\}\) are unobserved, usually \(l \ll u\). Let \(X=\{x_1&mldr;x_{l+u}\}\) where \(x_i\in R^D\). The problem is to estimate \(Y_U\) for \(X\) and \(Y_L\).</li>
+<li>Calculate the similarity of the data points. The most simple metric is Euclidean distance. Use a parameter \(\sigma\) to control the weights.</li>
+</ol>
+<p>\[w_{ij}= exp(-\frac{d^2_{ij}}{\sigma^2})=exp(-\frac{\sum^D_{d=1}{(x^d_i-x^d_j})^2}{\sigma^2})\]</p>
+<p>Larger weight allow labels to travel through easier.</p>
+<ol>
+<li>Define a \((l+u)*(l+u)\) probabilistic transition matrix \(T\)</li>
+</ol>
+<p>\[T_{ij}=P(j \rightarrow i)=\frac{w_{ij}}{\sum^{l+u}_{k=1}w_{kj}}\]</p>
+<p>\(T_{ij}\) is the probability to jump from node \(j\) to \(i\). If there are \(C\) classes, we can define a \((l+u)*C\) label matrix \(Y\), to represent the probability of a label belong to class \(c\). The initialization of unlabeled data points is not important.</p>
+<ol>
+<li>Propagate \(Y \leftarrow TY\)</li>
+<li>Row-normalize Y.</li>
+<li>Reset labeled data&rsquo;s Y. Repeat 3 until Y converges.</li>
+</ol>
+<p>In short, let the nearest label has larger weight, then calculate each label&rsquo;s new label, reset labeled data&rsquo;s label, repeat.</p>
+<figure><img src=https://www.fromkk.com/images/label_spreading.png width=400>
+</figure>
+<h2 id=ref>
+Ref:
+<a class=heading-link href=#ref>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h2>
+<ol>
+<li><a href=http://mlg.eng.cam.ac.uk/zoubin/papers/CMU-CALD-02-107.pdf>Learning from Labeled and Unlabeled Data with Label Propagation</a></li>
+<li><a href=http://blog.csdn.net/zouxy09/article/details/49105265>标签传播算法（Label Propagation）及Python实现</a></li>
+</ol>
+</div>
+<footer>
+<div id=disqus_thread></div>
+<script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//kkblog-1.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</footer>
+</article>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script>
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],processEscapes:!0,processEnvironments:!0},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}}</script>
+</section>
+</div>
+<footer class=footer>
+<section class=container>
+©
 2021
 KK
 ·
-Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.</section></footer></main><script src=https://www.fromkk.com/js/dark-mode.min.0213e1773e6d1c5a644f847c67a6f8abac49a3776e2976f6008038af8c5b76a1.js integrity="sha256-AhPhdz5tHFpkT4R8Z6b4q6xJo3duKXb2AIA4r4xbdqE="></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-153788833-1','auto');ga('send','pageview');}</script></body></html>
+Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
+</section>
+</footer>
+</main>
+<script src=https://www.fromkk.com/js/dark-mode.min.aee9c8a464eb7b3534c7110f7c5e169e7039e2fd92710e0626d451d6725af137.js integrity="sha256-runIpGTrezU0xxEPfF4WnnA54v2ScQ4GJtRR1nJa8Tc="></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-153788833-1','auto'),ga('send','pageview'))</script>
+</body>
+</html>
