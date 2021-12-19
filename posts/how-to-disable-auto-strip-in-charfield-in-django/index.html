@@ -17,7 +17,7 @@ The reason is strip=True parameter in forms.CharField, which is added in Djagno 
 The reason is strip=True parameter in forms.CharField, which is added in Djagno 1.9. You can see the discussion in django tiket #4960 and here is source code. models.CharField and models.TextField use formfield() to create form to interact with user, then both of them eventually create a forms.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://www.fromkk.com/posts/how-to-disable-auto-strip-in-charfield-in-django/"><meta property="article:section" content="posts">
-<meta property="article:modified_time" content="2021-12-18T23:31:43+08:00">
+<meta property="article:modified_time" content="2021-12-19T22:15:59+08:00">
 <title>
 How to disable auto strip in Charfield in Django · KK's Blog (fromkk)
 </title>
@@ -78,8 +78,8 @@ How to disable auto strip in Charfield in Django
 <div class=date>
 <span class=posted-on>
 <i class="fa fa-calendar" aria-hidden=true></i>
-<time datetime=2021-12-18T23:31:43+08:00>
-12/18/2021
+<time datetime=2021-12-19T22:15:59+08:00>
+12/19/2021
 </time>
 </span>
 <span class=reading-time>
@@ -108,12 +108,12 @@ How to disable auto strip in Charfield in Django
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Test</span>(models<span style=color:#f92672>.</span>Model):
     char <span style=color:#f92672>=</span> models<span style=color:#f92672>.</span>CharField(max_length<span style=color:#f92672>=</span><span style=color:#ae81ff>20</span>)
     text <span style=color:#f92672>=</span> models<span style=color:#f92672>.</span>TextField()
-</code></pre></div><h2 id=change-modeladmin>
+</code></pre></div><h3 id=change-modeladmin>
 Change ModelAdmin
 <a class=heading-link href=#change-modeladmin>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
+</h3>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3><span style=color:#75715e># admin.py</span>
 TestAdmin(admin<span style=color:#f92672>.</span>ModelAdmin):
     <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>formfield_for_dbfield</span>(self, db_field, request, <span style=color:#f92672>**</span>kwargs):
@@ -121,12 +121,12 @@ TestAdmin(admin<span style=color:#f92672>.</span>ModelAdmin):
             kwargs[<span style=color:#e6db74>&#39;strip&#39;</span>] <span style=color:#f92672>=</span> <span style=color:#66d9ef>False</span>
         <span style=color:#66d9ef>return</span> super()<span style=color:#f92672>.</span>formfield_for_dbfield(db_field, request, <span style=color:#f92672>**</span>kwargs)
 </code></pre></div><p>This method tackles the problem by overriding fields' default <code>fromfiled</code> method.</p>
-<h2 id=define-custom-form>
+<h3 id=define-custom-form>
 Define Custom Form
 <a class=heading-link href=#define-custom-form>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
+</h3>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3><span style=color:#75715e># forms.py</span>
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CustomForm</span>(forms<span style=color:#f92672>.</span>ModelForm):
     char <span style=color:#f92672>=</span> forms<span style=color:#f92672>.</span>CharField(strip<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)
@@ -140,12 +140,12 @@ Define Custom Form
 TestAdmin(admin<span style=color:#f92672>.</span>ModelAdmin):
     form <span style=color:#f92672>=</span> CustomForm
 </code></pre></div><p>Now when edit data in admin panel, the whitespace is not removed anymore.</p>
-<h2 id=use-custom-field>
+<h3 id=use-custom-field>
 Use Custom Field
 <a class=heading-link href=#use-custom-field>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
-</h2>
+</h3>
 <p>You can also use your custom field in <code>models.py</code>. For example:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3><span style=color:#75715e># models.py</span>
 <span style=color:#f92672>from</span> django.db.models <span style=color:#f92672>import</span> TextField
@@ -159,7 +159,13 @@ Use Custom Field
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Test</span>(models<span style=color:#f92672>.</span>Model):
     text <span style=color:#f92672>=</span> NonStrippingTextField()
 </code></pre></div><p><code>==</code></p>
-<p>If you use Django REST framework to modify model, you only need to change the serializer.</p>
+<h2 id=rest-framework>
+REST Framework
+<a class=heading-link href=#rest-framework>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h2>
+<p>If you use Django REST framework to edit data, you only need to change the serializer.</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python3 data-lang=python3><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TestSerializer</span>(serializers<span style=color:#f92672>.</span>HyperlinkedModelSerializer):
     <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Meta</span>:
         model <span style=color:#f92672>=</span> Test
