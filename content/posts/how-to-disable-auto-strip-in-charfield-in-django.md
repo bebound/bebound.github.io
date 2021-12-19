@@ -1,7 +1,7 @@
 +++
 title = "How to disable auto strip in Charfield in Django"
 author = ["KK"]
-lastmod = 2021-12-18T23:31:43+08:00
+lastmod = 2021-12-19T22:15:59+08:00
 tags = ["Python", "Django"]
 draft = false
 noauthor = true
@@ -29,7 +29,7 @@ class Test(models.Model):
 ```
 
 
-## Change ModelAdmin {#change-modeladmin}
+### Change ModelAdmin {#change-modeladmin}
 
 ```python3
 # admin.py
@@ -43,7 +43,7 @@ TestAdmin(admin.ModelAdmin):
 This method tackles the problem by overriding fields' default `fromfiled` method.
 
 
-## Define Custom Form {#define-custom-form}
+### Define Custom Form {#define-custom-form}
 
 ```python3
 # forms.py
@@ -63,7 +63,7 @@ TestAdmin(admin.ModelAdmin):
 Now when edit data in admin panel, the whitespace is not removed anymore.
 
 
-## Use Custom Field {#use-custom-field}
+### Use Custom Field {#use-custom-field}
 
 You can also use your custom field in `models.py`. For example:
 
@@ -83,7 +83,10 @@ class Test(models.Model):
 
 `==`
 
-If you use Django REST framework to modify model, you only need to change the serializer.
+
+## REST Framework {#rest-framework}
+
+If you use Django REST framework to edit data, you only need to change the serializer.
 
 ```python3
 class TestSerializer(serializers.HyperlinkedModelSerializer):

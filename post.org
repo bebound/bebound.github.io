@@ -1828,7 +1828,8 @@ class Test(models.Model):
 
 ====
 
-If you use Django REST framework to modify model, you only need to change the serializer.
+**** REST Framework
+If you use Django REST framework to edit data, you only need to change the serializer.
 #+begin_src python3
 class TestSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
