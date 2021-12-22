@@ -2,7 +2,7 @@
 title = "Build Your Own Tiny Tiny RSS Service"
 author = ["KK"]
 date = 2019-06-10T00:25:00+08:00
-lastmod = 2021-09-11T20:51:58+08:00
+lastmod = 2021-12-22T23:29:32+08:00
 draft = false
 noauthor = true
 nocomment = true
@@ -74,7 +74,7 @@ Run this command to deploy: `docker-compose up -d`. After it finished, the TTRSS
 I made minor modification on the yml file, you can find the latest file [here](https://github.com/HenryQW/Awesome-TTRSS).
 
 
-## Nginx configuration {#nginx-configuration}
+## Nginx Configuration {#nginx-configuration}
 
 If you have a domain and you can use Nginx as reverse proxy to redirect TTRSS to the domain.
 
@@ -126,6 +126,21 @@ server {
 To enable HTTPS on your website, you can use [certbot](https://certbot.eff.org).
 
 
+## Caddy Configuration {#caddy-configuration}
+
+Update in 22/12/2021
+
+I found Caddy2 is much easier to use than Nginx, all you need to do is add 3 lines in \`/etc/caddy/Caddyfile\`
+
+\`\`\`
+rss.com {
+encode gzip zstd
+reverse\_proxy  127.0.0.1:181
+}
+\`\`\`
+Voila, a HTTPS enabled website is deployed.
+
+
 ## Fever API and Mercury {#fever-api-and-mercury}
 
 -   Fever
@@ -141,7 +156,7 @@ To enable HTTPS on your website, you can use [certbot](https://certbot.eff.org).
 Simply run this command to update TTRSS code.
 
 ```nil
-docker-compose down
+docker-compose pull
 docker-compose up -d
 ```
 
