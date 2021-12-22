@@ -21,7 +21,7 @@ Prerequisite    You need to install Docker and Docker Compose before using docke
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://www.fromkk.com/posts/build-your-own-tiny-tiny-rss-service/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2019-06-10T00:25:00+08:00">
-<meta property="article:modified_time" content="2021-09-11T20:51:58+08:00">
+<meta property="article:modified_time" content="2021-12-22T23:29:32+08:00">
 <title>
 Build Your Own Tiny Tiny RSS Service · KK's Blog (fromkk)
 </title>
@@ -154,7 +154,7 @@ Install docker
 </code></pre></div><p>Run this command to deploy: <code>docker-compose up -d</code>. After it finished, the TTRSS service is running on port <code>181</code>, the default account is <code>admin</code> with password <code>password</code>.</p>
 <p>I made minor modification on the yml file, you can find the latest file <a href=https://github.com/HenryQW/Awesome-TTRSS>here</a>.</p>
 <h2 id=nginx-configuration>
-Nginx configuration
+Nginx Configuration
 <a class=heading-link href=#nginx-configuration>
 <i class="fa fa-link" aria-hidden=true></i>
 </a>
@@ -203,6 +203,21 @@ server {
 
 }
 </code></pre></div><p>To enable HTTPS on your website, you can use <a href=https://certbot.eff.org>certbot</a>.</p>
+<h2 id=caddy-configuration>
+Caddy Configuration
+<a class=heading-link href=#caddy-configuration>
+<i class="fa fa-link" aria-hidden=true></i>
+</a>
+</h2>
+<p>Update in 22/12/2021</p>
+<p>I found Caddy2 is much easier to use than Nginx, all you need to do is add 3 lines in `/etc/caddy/Caddyfile`</p>
+<p>```
+rss.com {
+encode gzip zstd
+reverse_proxy 127.0.0.1:181
+}
+```
+Voila, a HTTPS enabled website is deployed.</p>
 <h2 id=fever-api-and-mercury>
 Fever API and Mercury
 <a class=heading-link href=#fever-api-and-mercury>
@@ -230,7 +245,7 @@ Update
 </a>
 </h2>
 <p>Simply run this command to update TTRSS code.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>docker-compose down
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>docker-compose pull
 docker-compose up -d
 </code></pre></div><h2 id=app-recommendation>
 APP recommendation
