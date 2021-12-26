@@ -2,7 +2,7 @@
 title = "Improve Kafka throughput"
 author = ["KK"]
 date = 2021-05-28T00:57:00+08:00
-lastmod = 2021-09-11T20:51:19+08:00
+lastmod = 2021-12-27T00:06:05+08:00
 tags = ["Kafka"]
 draft = false
 noauthor = true
@@ -24,7 +24,7 @@ In short, messages will assembled into batches (named `RecordBatch`) and send to
 
 The producer manages some internal queues, and each queue contains `RecordBatch` that will send to one broker. When calling `send` method, the producer will look into the internal queue and try to append this message to `RecordBatch` which is smaller than `batch.size` (default value is 16KB) or create new `RecordBatch`.
 
-There is also a sender thread in producer which is responsible for turning `RecordBatch` into requests（\`<broker node，List(ProducerBatch)>\`） and send to broker.
+There is also a sender thread in producer which is responsible for turning `RecordBatch` into requests (`<broker node，List(ProducerBatch)>`) and send to broker.
 
 
 ### how are Records Saved? {#how-are-records-saved}

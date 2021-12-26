@@ -2647,7 +2647,7 @@ In short, messages will assembled into batches (named =RecordBatch=) and send to
 
 The producer manages some internal queues, and each queue contains =RecordBatch= that will send to one broker. When calling =send= method, the producer will look into the internal queue and try to append this message to =RecordBatch= which is smaller than =batch.size= (default value is 16KB) or create new =RecordBatch=.
 
-There is also a sender thread in producer which is responsible for turning =RecordBatch= into requests（`<broker node，List(ProducerBatch)>`） and send to broker.
+There is also a sender thread in producer which is responsible for turning =RecordBatch= into requests (~<broker node，List(ProducerBatch)>~) and send to broker.
 
 ***** how are Records Saved?
 The details can be found from these two articles: [[https://kafka.apache.org/documentation/#messageformat][Apache Kafka - Message Format]] and [[https://cwiki.apache.org/confluence/display/KAFKA/A+Guide+To+The+Kafka+Protocol#:~:text=A%20message%20in%20kafka%20is,on%2Dthe%2Dwire%20format.&text=This%20byte%20holds%20metadata%20attributes%20about%20the%20message.][A Guide To The Kafka Protocol - Apache Kafka - Apache Software Foundation]].
