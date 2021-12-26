@@ -21,7 +21,7 @@ The producer manages some internal queues, and each queue contains RecordBatch t
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://www.fromkk.com/posts/improve-kafka-throughput/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2021-05-28T00:57:00+08:00">
-<meta property="article:modified_time" content="2021-09-11T20:51:19+08:00">
+<meta property="article:modified_time" content="2021-12-27T00:06:05+08:00">
 <title>
 Improve Kafka throughput · KK's Blog (fromkk)
 </title>
@@ -33,7 +33,7 @@ Improve Kafka throughput · KK's Blog (fromkk)
 <link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-16x16.png sizes=16x16>
 <link rel=apple-touch-icon href=https://www.fromkk.com/icons/icon-192x192.png>
 <link rel=apple-touch-icon sizes=180x180 href=https://www.fromkk.com/icons/icon-192x192.png>
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 </head>
 <body class="preload-transitions colorscheme-auto">
 <div class=float-container>
@@ -114,7 +114,7 @@ How does Producer Send Messages?
 </h3>
 <p>In short, messages will assembled into batches (named <code>RecordBatch</code>) and send to broker.</p>
 <p>The producer manages some internal queues, and each queue contains <code>RecordBatch</code> that will send to one broker. When calling <code>send</code> method, the producer will look into the internal queue and try to append this message to <code>RecordBatch</code> which is smaller than <code>batch.size</code> (default value is 16KB) or create new <code>RecordBatch</code>.</p>
-<p>There is also a sender thread in producer which is responsible for turning <code>RecordBatch</code> into requests（`&lt;broker node，List(ProducerBatch)>`） and send to broker.</p>
+<p>There is also a sender thread in producer which is responsible for turning <code>RecordBatch</code> into requests (<code>&lt;broker node，List(ProducerBatch)></code>) and send to broker.</p>
 <h3 id=how-are-records-saved>
 how are Records Saved?
 <a class=heading-link href=#how-are-records-saved>
