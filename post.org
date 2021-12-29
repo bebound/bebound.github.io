@@ -2018,15 +2018,29 @@ Magnificent app which corrects your previous console command.
 **** [[https://github.com/tldr-pages/tldr][tldr]]
 More concise and user-friendly man pages. (This screenshot uses [[https://github.com/romkatv/powerlevel10k][powerlevel10k]] theme)
 
-#+attr_html: :width 600
 [[file:/images/shell_tldr.png]]
 
+**** [[https://github.com/BurntSushi/ripgrep][ripgrep]]
+Another search tool. Use ~rg -.~ to include hidden files.
+
+**** [[https://github.com/sharkdp/fd][fd]]
+A user-friendly alternative to ~find~. Ignore hidden files and gitignore file by default.
+
+**** [[https://github.com/sharkdp/bat][bat]]
+Similar to ~cat~ with syntax highlighting and git integration.
+
+[[file:/images/shell_bat.png]]
+
 ---
-- update 19-11-18
+- update 18/11/19
   
   Add tldr
   
   [[https://github.com/romkatv/powerlevel10k][powerlevel10k]] theme is a fancy ZSH theme
+
+- update 29/12/21
+
+  Add rg, bat, fd
   
 *** DONE Start
 CLOSED: [2017-04-18 Tue 15:46]

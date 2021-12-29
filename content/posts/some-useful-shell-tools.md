@@ -2,7 +2,7 @@
 title = "Some Useful Shell Tools"
 author = ["KK"]
 date = 2017-05-07T15:34:00+08:00
-lastmod = 2020-04-04T23:15:43+08:00
+lastmod = 2021-12-29T21:58:33+08:00
 tags = ["Shell"]
 draft = false
 noauthor = true
@@ -61,12 +61,33 @@ Magnificent app which corrects your previous console command.
 
 More concise and user-friendly man pages. (This screenshot uses [powerlevel10k](https://github.com/romkatv/powerlevel10k) theme)
 
-{{< figure src="/images/shell_tldr.png" width="600" >}}
+{{< figure src="/images/shell_tldr.png" >}}
+
+
+## [ripgrep](https://github.com/BurntSushi/ripgrep) {#ripgrep}
+
+Another search tool. Use `rg -.` to include hidden files.
+
+
+## [fd](https://github.com/sharkdp/fd) {#fd}
+
+A user-friendly alternative to `find`. Ignore hidden files and gitignore file by default.
+
+
+## [bat](https://github.com/sharkdp/bat) {#bat}
+
+Similar to `cat` with syntax highlighting and git integration.
+
+{{< figure src="/images/shell_bat.png" >}}
 
 ---
 
--   update 19-11-18
+-   update 18/11/19
 
     Add tldr
 
     [powerlevel10k](https://github.com/romkatv/powerlevel10k) theme is a fancy ZSH theme
+
+-   update 29/12/21
+
+    Add rg, bat, fd
