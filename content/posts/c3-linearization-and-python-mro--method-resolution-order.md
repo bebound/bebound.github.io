@@ -2,7 +2,7 @@
 title = "C3 Linearization and Python MRO(Method Resolution Order)"
 author = ["KK"]
 date = 2020-03-14T17:37:00+08:00
-lastmod = 2020-03-26T00:31:24+08:00
+lastmod = 2021-12-31T21:56:54+08:00
 tags = ["Python", "MRO"]
 draft = false
 noauthor = true
@@ -85,7 +85,7 @@ L[M(B,A,Z)]=[M]+merge(L[B],L[A],L[Z],[B,A,Z])
 
 `super` also use C3 to find the inherited method to execute.
 
-For instance, `C`'s MRO is `C,A,B,C,obj`, so after `enter B`, it will output `enter A` rather than `enter base`.
+For instance, `C`'s MRO is `C,A,B,Base,obj`, so after `enter A`, it will output `enter B` rather than `enter base`.
 
 ```python3
 class Base:
