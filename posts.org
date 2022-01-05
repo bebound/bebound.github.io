@@ -1760,7 +1760,6 @@ class ProductSerializer(serializers.ModelSerializer):
 3. [[https://www.geeksforgeeks.org/jsonfield-in-serializers-django-rest-framework/][JSONField in serializers – Django REST Framework]]
 4. [[https://www.django-rest-framework.org/api-guide/fields/#jsonfield][Django REST framework - jsonfield]]
 
-
 *** How to disable auto strip in Charfield in Django               :Django:
    :PROPERTIES:
    :EXPORT_FILE_NAME: how-to-disable-auto-strip-in-charfield-in-django
@@ -2025,6 +2024,8 @@ Another search tool. Use ~rg -.~ to include hidden files.
 
 **** [[https://github.com/sharkdp/fd][fd]]
 A user-friendly alternative to ~find~. Ignore hidden files and gitignore file by default.
+
+For example: =fd -H 'flac$'= search all files ends with flac.
 
 **** [[https://github.com/sharkdp/bat][bat]]
 Similar to ~cat~ with syntax highlighting and git integration.
@@ -2739,7 +2740,6 @@ Ref:
 9. [[https://kafka.apache.org/documentation/#producerconfigs][Kakfa Document]]
 10. [[https://kafka-python.readthedocs.io/en/master/apidoc/KafkaProducer.html][kafka-python KafkaProducer]]
 11. [[https://rohithsankepally.github.io/Kafka-Storage-Internals/][Deep Dive Into Apache Kafka | Storage Internals]]
-    
     
 *** DONE Dynamic Allocate Executors when Executing Jobs in Spark    :Spark:
 CLOSED: [2021-07-18 Sun 16:52]

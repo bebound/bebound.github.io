@@ -2,7 +2,7 @@
 title = "Some Useful Shell Tools"
 author = ["KK"]
 date = 2017-05-07T15:34:00+08:00
-lastmod = 2021-12-29T21:58:33+08:00
+lastmod = 2022-01-05T23:31:04+08:00
 tags = ["Shell"]
 draft = false
 noauthor = true
@@ -72,6 +72,8 @@ Another search tool. Use `rg -.` to include hidden files.
 ## [fd](https://github.com/sharkdp/fd) {#fd}
 
 A user-friendly alternative to `find`. Ignore hidden files and gitignore file by default.
+
+For example: `fd -H 'flac$'` search all files ends with flac.
 
 
 ## [bat](https://github.com/sharkdp/bat) {#bat}
