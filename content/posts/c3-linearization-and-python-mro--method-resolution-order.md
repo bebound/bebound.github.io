@@ -2,7 +2,7 @@
 title = "C3 Linearization and Python MRO(Method Resolution Order)"
 author = ["KK"]
 date = 2020-03-14T17:37:00+08:00
-lastmod = 2021-12-31T21:56:54+08:00
+lastmod = 2022-01-06T21:24:31+08:00
 tags = ["Python", "MRO"]
 draft = false
 noauthor = true
@@ -142,7 +142,7 @@ When running this line `super(C, self).__init__()`, self is `C`'s instance, mro 
 [<class '__main__.C'>, <class '__main__.A'>, <class '__main__.B'>, <class '__main__.Base'>, <class 'object'>]
 ```
 
-So it returns `A`, and A will execute `__init__()`, then calling `super(A, self).__init__()`, end enter `B`'s `__init__()`. (`C`'s instance will pass as `self` in the calling chain.)
+So it returns `A`, and A will execute `__init__()`, then calling `super(A, self).__init__()`, end enter `B`'s `__init__()`. (`C`'s instance `inst` will pass as `self` in the calling chain.)
 
 
 ## Ref: {#ref}

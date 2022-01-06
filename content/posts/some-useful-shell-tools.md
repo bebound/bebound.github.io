@@ -2,7 +2,7 @@
 title = "Some Useful Shell Tools"
 author = ["KK"]
 date = 2017-05-07T15:34:00+08:00
-lastmod = 2022-01-05T23:31:04+08:00
+lastmod = 2022-01-06T21:23:36+08:00
 tags = ["Shell"]
 draft = false
 noauthor = true
@@ -82,6 +82,17 @@ Similar to `cat` with syntax highlighting and git integration.
 
 {{< figure src="/images/shell_bat.png" >}}
 
+
+## [Zim](https://github.com/zimfw/zimfw) {#zim}
+
+A fast Zsh framework. You can use OMZ plugin like this:
+
+```shell
+export ZSH_CACHE_DIR=~/.cache
+
+zmodule ohmyzsh/ohmyzsh --use degit --source 'plugins/fasd/fasd.plugin.zsh'
+```
+
 ---
 
 -   update 18/11/19
@@ -93,3 +104,7 @@ Similar to `cat` with syntax highlighting and git integration.
 -   update 29/12/21
 
     Add rg, bat, fd
+
+-   update 06/01/22
+
+    Add Zim

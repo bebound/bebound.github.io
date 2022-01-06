@@ -1552,7 +1552,7 @@ When running this line ~super(C, self).__init__()~, self is =C='s instance, mro 
 [<class '__main__.C'>, <class '__main__.A'>, <class '__main__.B'>, <class '__main__.Base'>, <class 'object'>]
 #+end_src
 
-So it returns =A=, and A will execute ~__init__()~, then calling ~super(A, self).__init__()~, end enter =B='s ~__init__()~. (=C='s instance will pass as =self= in the calling chain.)
+So it returns =A=, and A will execute ~__init__()~, then calling ~super(A, self).__init__()~, end enter =B='s ~__init__()~. (=C='s instance ~inst~ will pass as =self= in the calling chain.)
 
 **** Ref: 
 1. [[https://www.python.org/download/releases/2.3/mro/][The Python 2.3 Method Resolution Order]]
@@ -2032,6 +2032,15 @@ Similar to ~cat~ with syntax highlighting and git integration.
 
 [[file:/images/shell_bat.png]]
 
+**** [[https://github.com/zimfw/zimfw][Zim]]
+A fast Zsh framework. You can use OMZ plugin like this:
+
+#+begin_src shell
+export ZSH_CACHE_DIR=~/.cache
+
+zmodule ohmyzsh/ohmyzsh --use degit --source 'plugins/fasd/fasd.plugin.zsh'
+#+end_src
+
 ---
 - update 18/11/19
   
@@ -2042,6 +2051,10 @@ Similar to ~cat~ with syntax highlighting and git integration.
 - update 29/12/21
 
   Add rg, bat, fd
+
+- update 06/01/22
+
+  Add Zim
   
 *** DONE Start
 CLOSED: [2017-04-18 Tue 15:46]
