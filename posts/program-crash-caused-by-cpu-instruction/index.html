@@ -18,7 +18,7 @@ Recently, I met a bug which has both features mentioned before. I write a Spark 
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://www.fromkk.com/posts/program-crash-caused-by-cpu-instruction/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2020-05-17T17:36:00+08:00">
-<meta property="article:modified_time" content="2020-05-21T02:56:38+08:00">
+<meta property="article:modified_time" content="2022-01-07T22:54:27+08:00">
 <title>
 Program Crash Caused by CPU Instruction · KK's Blog (fromkk)
 </title>
@@ -108,7 +108,7 @@ ERROR PythonRunner: Python worker exited unexpectedly (crashed).
 <p>I have tested the code on my develop environment. My develop machine is Using Spark 2.4. but the Spark platform is using Spark 3.0. I guess maybe there is some compatible problem on Spark 3.0. So I use the same docker images as Spark platform to run the code. The code works as expected without crash. That&rsquo;s wired, the docker has isolate the environment, how could same docker image produce different output?</p>
 <p>I search the error from google, some said it&rsquo;s because spark is running out of memory. This doesn&rsquo;t seem correct, this update shouldn&rsquo;t increase the RAM usage. I still gave it a try and no luck.</p>
 <p>Alright, this update add faiss to the code, maybe faiss lead to the crash, as Python doesn&rsquo;t raise any other. If the crash is caused by the C code in faiss, this makes sense. First, I write a code with spark and faiss, the program crashed. Then I wrote a code only contains faiss, it still crashed. So I can confirm that the crash is cause by faiss and Spark is innocent. Even stranger, when running on Spark platform, sometimes the script crashes, sometimes not.</p>
-<p>But why faiss only crash on the Spark Platform? I ask the colleague to know the detail of the failed job and know that the docker&rsquo;s exit code is 132. <code>132</code> means illegal instruction. I search illegal instruction on faiss&rsquo;s GitHub issue. I found this issue: <a href=https://github.com/facebookresearch/faiss/pulls>Illegal instruction (core dumped)</a>.</p>
+<p>But why faiss only crash on the Spark Platform? I ask the colleague to know the detail of the failed job and know that the docker&rsquo;s exit code is 132. <code>132</code> means illegal instruction. I search illegal instruction on faiss&rsquo;s GitHub issue. I found this issue: <a href=https://github.com/facebookresearch/faiss/issues/426>Illegal instruction (core dumped)</a>.</p>
 <p>By compare the host server&rsquo;s CPU instruction. The crashed ones lack of <code>avx2</code> instruction. <code>avx2</code> is added after the Intel Fourth generation core (Haswell). The develop server is using sixth generation CPU, and some platform server is too to support this instruction. By adding a parameter to enforce the script scheduling on new server, the crash disappears.</p>
 <p>PS: Running faiss code <code>index.add(xx)</code> will not trigger the crash, but calling <code>faiss.search(xx)</code> does. When I trying to locate the code which cause the crash, the <code>faiss</code> package was imported correctly and the index is built normally. This mislead me to believe that faiss code is working.</p>
 </div>
