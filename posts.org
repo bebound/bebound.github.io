@@ -2825,6 +2825,7 @@ I tried these methods, but none of them works.
 
 + Boot in [[https://support.apple.com/en-us/HT201262][safe mode]], delete account.
 + Delete record in ~ZACCOUNT~ table in ~~/Library/Accounts/Accounts4.sqlite~.
++ Delete realated items in Keycharin Access APP.
 
 
 Later, =RedHatDude='s answer in [[https://discussions.apple.com/thread/252924363?login=true][this post]] gives me a clue, it looks like a iCloud sync problem. I trie to delete the account on my 3 MacBooks together. Thank goodness! It does not show up again.
