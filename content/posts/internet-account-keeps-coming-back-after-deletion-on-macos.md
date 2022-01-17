@@ -2,7 +2,7 @@
 title = "Internet Account Keeps Coming Back after deletion on MacOS"
 author = ["KK"]
 date = 2022-01-08T00:09:00+08:00
-lastmod = 2022-01-08T20:04:55+08:00
+lastmod = 2022-01-18T00:27:37+08:00
 tags = ["MacOS"]
 draft = false
 noauthor = true
@@ -12,15 +12,15 @@ nopaging = true
 noread = true
 +++
 
-Today I tried to delete an inctive Internet account on system preference. It was deleted successfully but come back again after 20 seconds. This drives me nuts.
+Today I tried to delete an inactive Internet account on system preference. It was deleted successfully but come back again after 20 seconds. This drives me nuts.
 
 I tried these methods, but none of them works.
 
 -   Boot in [safe mode](https://support.apple.com/en-us/HT201262), delete account.
 -   Delete record in `ZACCOUNT` table in `~/Library/Accounts/Accounts4.sqlite`.
--   Delete realated items in Keycharin Access APP.
+-   Delete related items in Keychain Access APP.
 
-Later, `RedHatDude`'s answer in [this post](https://discussions.apple.com/thread/252924363?login=true) gives me a clue, it looks like a iCloud sync problem. I trie to delete the account on my 3 MacBooks together. Thank goodness! It does not show up again.
+Later, `RedHatDude`'s answer in [this post](https://discussions.apple.com/thread/252924363?login=true) gives me a clue, it looks like a iCloud sync problem. I tried to delete the account on my 3 MacBooks together. Thank goodness! It does not show up again.
 
 Ref:
 

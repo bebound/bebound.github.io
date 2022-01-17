@@ -2,7 +2,7 @@
 title = "Dynamic Allocate Executors when Executing Jobs in Spark"
 author = ["KK"]
 date = 2021-07-18T16:52:00+08:00
-lastmod = 2021-07-18T17:28:37+08:00
+lastmod = 2022-01-15T14:25:28+08:00
 tags = ["Spark"]
 draft = false
 noauthor = true
@@ -56,10 +56,12 @@ Luckily, spark also provide a way to control the number of executors manually. W
 
 In order to use these two function, we have to know the number of running executors and their IDs.
 
-**\*Number of Running Executors**
+**Number of Running Executors**
+
 The Spark program's RAM usage can be obtained from `sc.getExecutorMemoryStatus`. It returns a dict list like this: `[Map(10.73.3.67:59136 -> (2101975449,2101612350))]`. The key is IP with port and value is a tuple contains the max RAM and available RAM. Please note that driver is also included in the return data.
 
-****IDs of Running Executors****
+**IDs of Running Executors**
+
 IDs is required when calling `sc.killExecutors`. This can be found in [Spark REST API](https://spark.apache.org/docs/latest/monitoring.html#rest-api). The executors information such as ID, cores and tasks is record in `/applications/[app-id]/executors`.
 
 With the help of `sc.requestExecutors`, we can create as many executors as we want in one request. But the pod create time is still too long. To eliminate the pod create request, I used these strategies:
