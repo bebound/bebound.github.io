@@ -2794,10 +2794,12 @@ Luckily, spark also provide a way to control the number of executors manually. W
 
 In order to use these two function, we have to know the number of running executors and their IDs.
 
-**Number of Running Executors*
+*Number of Running Executors*
+
 The Spark program's RAM usage can be obtained from =sc.getExecutorMemoryStatus=. It returns a dict list like this: =[Map(10.73.3.67:59136 -> (2101975449,2101612350))]=. The key is IP with port and value is a tuple contains the max RAM and available RAM. Please note that driver is also included in the return data.
 
-**IDs of Running Executors**
+*IDs of Running Executors*
+
 IDs is required when calling =sc.killExecutors=. This can be found in [[eww:https://spark.apache.org/docs/latest/monitoring.html#rest-api][Spark REST API]]. The executors information such as ID, cores and tasks is record in =/applications/[app-id]/executors=.
 
 With the help of =sc.requestExecutors=, we can create as many executors as we want in one request. But the pod create time is still too long. To eliminate the pod create request, I used these strategies:
@@ -2819,18 +2821,85 @@ CLOSED: [2022-01-08 Sat 00:09]
    :PROPERTIES:
    :EXPORT_FILE_NAME: internet-account-keeps-coming-back-after-deletion-on-macos
    :END:
-Today I tried to delete an inctive Internet account on system preference. It was deleted successfully but come back again after 20 seconds. This drives me nuts.
+Today I tried to delete an inactive Internet account on system preference. It was deleted successfully but come back again after 20 seconds. This drives me nuts.
 
 I tried these methods, but none of them works.
 
 + Boot in [[https://support.apple.com/en-us/HT201262][safe mode]], delete account.
 + Delete record in ~ZACCOUNT~ table in ~~/Library/Accounts/Accounts4.sqlite~.
-+ Delete realated items in Keycharin Access APP.
++ Delete related items in Keychain Access APP.
 
 
-Later, =RedHatDude='s answer in [[https://discussions.apple.com/thread/252924363?login=true][this post]] gives me a clue, it looks like a iCloud sync problem. I trie to delete the account on my 3 MacBooks together. Thank goodness! It does not show up again.
+Later, =RedHatDude='s answer in [[https://discussions.apple.com/thread/252924363?login=true][this post]] gives me a clue, it looks like a iCloud sync problem. I tried to delete the account on my 3 MacBooks together. Thank goodness! It does not show up again.
 
 Ref:
 1. [[https://community.jamf.com/t5/jamf-pro/removing-accounts-from-internet-accounts/td-p/179654][Removing Accounts from Internet Accounts]]
 2. [[https://www.twit.community/t/every-time-i-delete-an-internet-account-it-comes-back/9914][Every time I delete an internet account it comes back]]
 3. [[https://discussions.apple.com/thread/252924363?login=true][Gmail account keeps coming back after delete]]
+
+*** DONE QNAP TS-453Dmini Review                                      :NAS:
+CLOSED: [2022-01-19 Wed 00:17]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: qnap-ts-453bmini-review
+   :END:
+My first NAS is Synology DS120j, which is ARM based entry level product. It's okay to use it for downloading and backup, but not power enough for running docker and virtual machine.
+
+So I bought this NAS last month, and I'm satisfied with it. Here are the advantages and disadvantages.
+
+**** Advantages
+1. High performance.
+
+  It is equipped with J4125 quad-core 2.0 GHz processor, 8G RAM, two 2.5G Ports and 4 bays. Here is the [[https://www.qnap.com/zh-cn/product/ts-453dmini/specs/hardware][spec]]. Although J4125 is not the fastest CPU in 2022, the new model are using N5105. It is able to run several docker containers together, and I can even run Synology and Windows 10 inside build-in =Virtualization Station=.
+
+2. Low Price.
+
+  I bought is at 2050 Yuan (about $320). Synology has similar model DS920+, which is 70% more expensive.
+
+3. [[https://www.qnap.com/solution/qtier/en/][Qtier]]
+
+  A special feature only available on QNAP. It will automatically move hot and cold data between SSD and HDD to get higher performance. There is one noticeable change: this NAS is so quiet and you can hardly hear HDD running.
+
+**** Disadvantages
+1. No native HEIC Support
+
+  This means you can't preview the photos imported from iPhone. You have to pay for $12 to buy [[https://www.qnap.com/en-in/software/cayin-mediasign-player][CAYIN MediaSign Player]] to fix this.
+
+2. Slow Start and Shutdown
+
+  I know it's rarely to restart NAS, but taking several minutes to restart is not acceptable. I hope QNAP engineers can improve this in the future.
+
+**** Docker Images Recommendation
+Here are some docker images I think is useful:
+
+- ~johngong/qbittorrent~
+
+A torrent client which can also download new file through RSS feed.
+
+- ~p3terx/aria2-pro~
+
+Everyone knows what is =aria2=.
+
+- ~dreamacro/clash~
+
+A rule based proxy client.
+
+- ~jeessy/ddns-go~
+
+A simple DDNS client.
+
+- ~linuxserver/plex~
+
+Plex is APP which helps you to manage and browser your media library. It can grab the metadata of TV shows, movies and music from Internet. It's provide APP in different platform so you can access your media from anywhere.
+
+There is only one thing I think that needs to improve: playback speed is fixed, which is not convenient when watching animation.
+
+You can also give [[https://emby.media][Emby]] or [[https://jellyfin.org][Jellyfin]] a shot.
+
+- ~portainer/portainer-ce~
+
+QNAP has build-in ~docker-compose~ command. You can use this Web APP if you prefer GUI.
+
+- ~vaultwarden/server~
+
+I deploy this on my VPS instead of NAS as port 443 is forbidden on NAS. It's a alternative of [[https://1password.com][1Password]]. Although the APP UI is not perfect, it has all the function required by a password manager. There is no official way to backup data, so I use =crontab= to run backup script to save data to Google Drive by [[https://rclone.org][Rclone]].
+
