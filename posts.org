@@ -2104,7 +2104,7 @@ CLOSED: [2019-06-10 Mon 00:25]
    :PROPERTIES:
    :EXPORT_FILE_NAME: build-your-own-tiny-tiny-rss-service
    :END:
-After Inoreader change the free plan, which limit the max subscription to 150, I begin to find an alternative. Finally, I found Tiny Tiny RSS. It has a nice website and has the fever API Plugin which was supported by most of the RSS reader APP, so you can read RSS on all of you devices.
+After Inoreader change the free plan, which limit the max subscription to 150, I begin to find an alternative. Finally, I found Tiny Tiny RSS. It has a nice website and has the fever API Plugin which was supported by most of the RSS reader app, so you can read RSS on all of you devices.
 
 This post will tell you how to deploy it on your server.
 
@@ -2241,10 +2241,10 @@ docker-compose pull
 docker-compose up -d
 #+end_src
 
-**** APP recommendation
+**** App recommendation
 [[https://reederapp.com][Reeder 4]] works great on my iPad. It's smooth and fast, and is worth every penny.
 
-If you want a free APP, I suggest [[http://cocoacake.net/apps/fiery/][Fiery Feeds]]. I stopped using it after ver 2.2, as it's so lagging. If this issue was fixed, I thought it was the biggest competitor for Reeder 4. For more alternative, read this article: [[https://thesweetsetup.com/apps/best-rss-app-ipad/][The Best RSS App for iPhone and iPad]].
+If you want a free app, I suggest [[http://cocoacake.net/apps/fiery/][Fiery Feeds]]. I stopped using it after ver 2.2, as it's so lagging. If this issue was fixed, I thought it was the biggest competitor for Reeder 4. For more alternative, read this article: [[https://thesweetsetup.com/apps/best-rss-app-ipad/][The Best RSS App for iPhone and iPad]].
 
 
 - update 25-03-20:
@@ -2827,7 +2827,7 @@ I tried these methods, but none of them works.
 
 + Boot in [[https://support.apple.com/en-us/HT201262][safe mode]], delete account.
 + Delete record in ~ZACCOUNT~ table in ~~/Library/Accounts/Accounts4.sqlite~.
-+ Delete related items in Keychain Access APP.
++ Delete related items in Keychain Access app.
 
 
 Later, =RedHatDude='s answer in [[https://discussions.apple.com/thread/252924363?login=true][this post]] gives me a clue, it looks like a iCloud sync problem. I tried to delete the account on my 3 MacBooks together. Thank goodness! It does not show up again.
@@ -2849,7 +2849,7 @@ So I bought this NAS last month, and I'm satisfied with it. Here are the advanta
 **** Advantages
 1. High performance.
 
-  It is equipped with J4125 quad-core 2.0 GHz processor, 8G RAM, two 2.5G Ports and 4 bays. Here is the [[https://www.qnap.com/zh-cn/product/ts-453dmini/specs/hardware][spec]]. Although J4125 is not the fastest CPU in 2022, the new model are using N5105. It is able to run several docker containers together, and I can even run Synology and Windows 10 inside build-in =Virtualization Station=.
+  It is equipped with J4125 quad-core 2.0 GHz processor, 8G RAM, two 2.5G Ports and 4 bays. Here is the [[https://www.qnap.com/zh-cn/product/ts-453dmini/specs/hardware][spec]]. Although J4125 is not the fastest CPU in 2022(the newer model coming with N5105), it is still able to run several docker containers together, and I can even run Synology and Windows 10 inside build-in =Virtualization Station=.
 
 2. Low Price.
 
@@ -2889,7 +2889,7 @@ A simple DDNS client.
 
 - ~linuxserver/plex~
 
-Plex is APP which helps you to manage and browser your media library. It can grab the metadata of TV shows, movies and music from Internet. It's provide APP in different platform so you can access your media from anywhere.
+Plex is app which helps you to manage and browser your media library. It can grab the metadata of TV shows, movies and music from Internet. It's provide app in different platform so you can access your media from anywhere.
 
 There is only one thing I think that needs to improve: playback speed is fixed, which is not convenient when watching animation.
 
@@ -2897,9 +2897,9 @@ You can also give [[https://emby.media][Emby]] or [[https://jellyfin.org][Jellyf
 
 - ~portainer/portainer-ce~
 
-QNAP has build-in ~docker-compose~ command. You can use this Web APP if you prefer GUI.
+QNAP has build-in ~docker-compose~ command. You can use this Web app if you prefer GUI.
 
 - ~vaultwarden/server~
 
-I deploy this on my VPS instead of NAS as port 443 is forbidden on NAS. It's a alternative of [[https://1password.com][1Password]]. Although the APP UI is not perfect, it has all the function required by a password manager. There is no official way to backup data, so I use =crontab= to run backup script to save data to Google Drive by [[https://rclone.org][Rclone]].
+I deploy this on my VPS instead of NAS as port 443 is forbidden on NAS. It's a alternative of [[https://1password.com][1Password]]. Although the app UI is not perfect, it has all the function required by a password manager. There is no official way to backup data, so I use =crontab= to run backup script to save data to Google Drive by [[https://rclone.org][Rclone]].
 

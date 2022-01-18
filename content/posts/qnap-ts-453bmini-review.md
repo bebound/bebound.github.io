@@ -2,7 +2,7 @@
 title = "QNAP TS-453Dmini Review"
 author = ["KK"]
 date = 2022-01-19T00:17:00+08:00
-lastmod = 2022-01-19T00:30:11+08:00
+lastmod = 2022-01-19T00:38:23+08:00
 tags = ["NAS"]
 draft = false
 noauthor = true
@@ -21,7 +21,7 @@ So I bought this NAS last month, and I'm satisfied with it. Here are the advanta
 
 1.  High performance.
 
-    It is equipped with J4125 quad-core 2.0 GHz processor, 8G RAM, two 2.5G Ports and 4 bays. Here is the [spec](https://www.qnap.com/zh-cn/product/ts-453dmini/specs/hardware). Although J4125 is not the fastest CPU in 2022, the new model are using N5105. It is able to run several docker containers together, and I can even run Synology and Windows 10 inside build-in `Virtualization Station`.
+    It is equipped with J4125 quad-core 2.0 GHz processor, 8G RAM, two 2.5G Ports and 4 bays. Here is the [spec](https://www.qnap.com/zh-cn/product/ts-453dmini/specs/hardware). Although J4125 is not the fastest CPU in 2022(the newer model coming with N5105), it is still able to run several docker containers together, and I can even run Synology and Windows 10 inside build-in `Virtualization Station`.
 
 2.  Low Price.
 
@@ -65,7 +65,7 @@ A simple DDNS client.
 
 -   `linuxserver/plex`
 
-Plex is APP which helps you to manage and browser your media library. It can grab the metadata of TV shows, movies and music from Internet. It's provide APP in different platform so you can access your media from anywhere.
+Plex is app which helps you to manage and browser your media library. It can grab the metadata of TV shows, movies and music from Internet. It's provide app in different platform so you can access your media from anywhere.
 
 There is only one thing I think that needs to improve: playback speed is fixed, which is not convenient when watching animation.
 
@@ -73,8 +73,8 @@ You can also give [Emby](https://emby.media) or [Jellyfin](https://jellyfin.org)
 
 -   `portainer/portainer-ce`
 
-QNAP has build-in `docker-compose` command. You can use this Web APP if you prefer GUI.
+QNAP has build-in `docker-compose` command. You can use this Web app if you prefer GUI.
 
 -   `vaultwarden/server`
 
-I deploy this on my VPS instead of NAS as port 443 is forbidden on NAS. It's a alternative of [1Password](https://1password.com). Although the APP UI is not perfect, it has all the function required by a password manager. There is no official way to backup data, so I use `crontab` to run backup script to save data to Google Drive by [Rclone](https://rclone.org).
+I deploy this on my VPS instead of NAS as port 443 is forbidden on NAS. It's a alternative of [1Password](https://1password.com). Although the app UI is not perfect, it has all the function required by a password manager. There is no official way to backup data, so I use `crontab` to run backup script to save data to Google Drive by [Rclone](https://rclone.org).
