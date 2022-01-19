@@ -69,7 +69,7 @@ copyright = "© This post is licensed under a Creative Commons Attribution-NonCo
 [params.utterances]
   repo = "bebound/bebound.github.io"
   issueTerm = "pathname"
-  label = "utterances"
+  label = "comment"
   theme = "preferred-color-scheme"
 
 

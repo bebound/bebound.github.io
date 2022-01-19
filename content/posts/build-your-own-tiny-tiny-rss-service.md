@@ -2,7 +2,7 @@
 title = "Build Your Own Tiny Tiny RSS Service"
 author = ["KK"]
 date = 2019-06-10T00:25:00+08:00
-lastmod = 2021-12-22T23:29:32+08:00
+lastmod = 2022-01-19T22:43:58+08:00
 draft = false
 noauthor = true
 nocomment = true
@@ -11,7 +11,7 @@ nopaging = true
 noread = true
 +++
 
-After Inoreader change the free plan, which limit the max subscription to 150, I begin to find an alternative. Finally, I found Tiny Tiny RSS. It has a nice website and has the fever API Plugin which was supported by most of the RSS reader APP, so you can read RSS on all of you devices.
+After Inoreader change the free plan, which limit the max subscription to 150, I begin to find an alternative. Finally, I found Tiny Tiny RSS. It has a nice website and has the fever API Plugin which was supported by most of the RSS reader app, so you can read RSS on all of you devices.
 
 This post will tell you how to deploy it on your server.
 
@@ -132,12 +132,13 @@ Update in 22/12/2021
 
 I found Caddy2 is much easier to use than Nginx, all you need to do is add 3 lines in \`/etc/caddy/Caddyfile\`
 
-\`\`\`
+```nil
 rss.com {
 encode gzip zstd
-reverse\_proxy  127.0.0.1:181
+reverse_proxy  127.0.0.1:181
 }
-\`\`\`
+```
+
 Voila, a HTTPS enabled website is deployed.
 
 
@@ -161,11 +162,11 @@ docker-compose up -d
 ```
 
 
-## APP recommendation {#app-recommendation}
+## App recommendation {#app-recommendation}
 
 [Reeder 4](https://reederapp.com) works great on my iPad. It's smooth and fast, and is worth every penny.
 
-If you want a free APP, I suggest [Fiery Feeds](http://cocoacake.net/apps/fiery/). I stopped using it after ver 2.2, as it's so lagging. If this issue was fixed, I thought it was the biggest competitor for Reeder 4. For more alternative, read this article: [The Best RSS App for iPhone and iPad](https://thesweetsetup.com/apps/best-rss-app-ipad/).
+If you want a free app, I suggest [Fiery Feeds](http://cocoacake.net/apps/fiery/). I stopped using it after ver 2.2, as it's so lagging. If this issue was fixed, I thought it was the biggest competitor for Reeder 4. For more alternative, read this article: [The Best RSS App for iPhone and iPad](https://thesweetsetup.com/apps/best-rss-app-ipad/).
 
 -   update 25-03-20:
 
