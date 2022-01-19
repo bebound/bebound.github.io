@@ -12,7 +12,7 @@ pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
 
 # Disqus Username
-disqusShortname = "kkblog-1"
+# disqusShortname = "kkblog-1"
 
 # Google Analytics UA number
 googleAnalytics = "UA-153788833-1"
@@ -65,6 +65,12 @@ copyright = "© This post is licensed under a Creative Commons Attribution-NonCo
     weight = 4
     url = "/posts/index.xml"
 
+
+[params.utterances]
+  repo = "bebound/bebound.github.io"
+  issueTerm = "pathname"
+  label = "utterances"
+  theme = "preferred-color-scheme"
 
 
 [[menu.main]]
