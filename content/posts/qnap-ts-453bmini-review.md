@@ -2,7 +2,7 @@
 title = "QNAP TS-453Dmini Review"
 author = ["KK"]
 date = 2022-01-19T00:17:00+08:00
-lastmod = 2022-01-19T00:38:23+08:00
+lastmod = 2022-02-08T22:27:55+08:00
 tags = ["NAS"]
 draft = false
 noauthor = true
@@ -78,3 +78,14 @@ QNAP has build-in `docker-compose` command. You can use this Web app if you pref
 -   `vaultwarden/server`
 
 I deploy this on my VPS instead of NAS as port 443 is forbidden on NAS. It's a alternative of [1Password](https://1password.com). Although the app UI is not perfect, it has all the function required by a password manager. There is no official way to backup data, so I use `crontab` to run backup script to save data to Google Drive by [Rclone](https://rclone.org).
+
+The backup script is quite simple, you need to link your Google Drive account as `google` in Rclone before using this.
+
+```bash
+#!/bin/sh
+pwd
+echo backing up
+rm bit.zip
+zip -rq bit.zip ./data -x ./data/icon_cache/* ./data/bitwarden.log
+rclone copy bit.zip google:/应用/vaultwarden
+```
