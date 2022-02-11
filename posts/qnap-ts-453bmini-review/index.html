@@ -24,7 +24,7 @@ It is equipped with J4125 quad-core 2.0 GHz processor, 8G RAM, two 2.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://www.fromkk.com/posts/qnap-ts-453bmini-review/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-01-19T00:17:00+08:00">
-<meta property="article:modified_time" content="2022-01-19T00:38:23+08:00">
+<meta property="article:modified_time" content="2022-02-08T22:27:55+08:00">
 <title>
 QNAP TS-453Dmini Review · KK's Blog (fromkk)
 </title>
@@ -36,7 +36,7 @@ QNAP TS-453Dmini Review · KK's Blog (fromkk)
 <link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-16x16.png sizes=16x16>
 <link rel=apple-touch-icon href=https://www.fromkk.com/icons/icon-192x192.png>
 <link rel=apple-touch-icon sizes=180x180 href=https://www.fromkk.com/icons/icon-192x192.png>
-<meta name=generator content="Hugo 0.92.0">
+<meta name=generator content="Hugo 0.92.1">
 </head>
 <body class="preload-transitions colorscheme-auto">
 <div class=float-container>
@@ -91,7 +91,7 @@ QNAP TS-453Dmini Review
 </span>
 <span class=reading-time>
 <i class="fa fa-clock-o" aria-hidden=true></i>
-2-minute read
+3-minute read
 </span>
 </div>
 <div class=tags>
@@ -177,6 +177,14 @@ Docker Images Recommendation
 <li><code>vaultwarden/server</code></li>
 </ul>
 <p>I deploy this on my VPS instead of NAS as port 443 is forbidden on NAS. It&rsquo;s a alternative of <a href=https://1password.com>1Password</a>. Although the app UI is not perfect, it has all the function required by a password manager. There is no official way to backup data, so I use <code>crontab</code> to run backup script to save data to Google Drive by <a href=https://rclone.org>Rclone</a>.</p>
+<p>The backup script is quite simple, you need to link your Google Drive account as <code>google</code> in Rclone before using this.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e>#!/bin/sh
+</span><span style=color:#75715e></span>pwd
+echo backing up
+rm bit.zip
+zip -rq bit.zip ./data -x ./data/icon_cache/* ./data/bitwarden.log
+rclone copy bit.zip google:/应用/vaultwarden
+</code></pre></div>
 </div>
 <footer>
 <script src=https://utteranc.es/client.js repo=bebound/bebound.github.io issue-term=pathname label=comment theme=preferred-color-scheme crossorigin=anonymous async></script>
@@ -197,7 +205,7 @@ Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luiz
 </section>
 </footer>
 </main>
-<script src=https://www.fromkk.com/js/coder.min.03b17769f4f91ae35667e1f2a1ca8c16f50562576cf90ff32b3179926914daa5.js integrity="sha256-A7F3afT5GuNWZ+HyocqMFvUFYlds+Q/zKzF5kmkU2qU="></script>
+<script src=https://www.fromkk.com/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-153788833-1','auto'),ga('send','pageview'))</script>
 </body>
 </html>
