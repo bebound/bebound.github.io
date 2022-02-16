@@ -206,7 +206,7 @@ where $\theta$ is the parameters of the model($\upsilon$ and $u$).
 I found this two articles pretty useful: [[https://rohanvarma.me/Word2Vec/][Language Models, Word2Vec, and Efficient Softmax Approximations]] and [[https://towardsdatascience.com/word2vec-from-scratch-with-numpy-8786ddd49e72][Word2vec from Scratch with NumPy]].
 
 **** Ref:
-1. [word2vec原理推导与代码分析](http://www.hankcs.com/nlp/word2vec.html)
+1. [word2vec 原理推导与代码分析](http://www.hankcs.com/nlp/word2vec.html)
 2. [CS 224D: Deep Learning for NLP Lecture Notes: Part I](http://cs224d.stanford.edu/lecture_notes/notes1.pdf)
 3. [word2vec 中的数学原理详解（一）目录和前言](http://blog.csdn.net/itplus/article/details/37969519)
 
@@ -2902,3 +2902,66 @@ QNAP has build-in ~docker-compose~ command. You can use this Web app if you pref
 
 I deploy this on my VPS instead of NAS as port 443 is forbidden on NAS. It's a alternative of [[https://1password.com][1Password]]. Although the app UI is not perfect, it has all the function required by a password manager. There is no official way to backup data, so I use =crontab= to run backup script to save data to Google Drive by [[https://rclone.org][Rclone]].
 
+The backup script is quite simple, you need to link your Google Drive account as ~google~ in Rclone before using this.
+
+#+begin_src bash
+#!/bin/sh
+pwd
+echo backing up
+rm bit.zip
+zip -rq bit.zip ./data -x ./data/icon_cache/* ./data/bitwarden.log
+rclone copy bit.zip google:/应用/vaultwarden
+#+end_src
+
+*** DONE Emacs Chinese-related Settings                             :Emacs:
+CLOSED: [2022-02-17 Thu 01:27]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: emacs-chinese-related-settings
+   :END:
+**** Auto Switch Input Method in Evil
+This setting makes it possible to switch input method based on the context of cursor when entering insert mode.
+
+***** sis
+
+I'm using ~sis~ package with this configuration. You may need to install ~macism~ if you're not using ~railwaycat/emacsmacport~. More settings can be found in [[https://github.com/laishulu/emacs-smart-input-source][emacs-smart-input-source]].
+
+#+begin_src elisp
+(sis-ism-lazyman-config
+  "com.apple.keylayout.US"
+  "com.apple.inputmethod.SCIM.ITABC")
+
+(sis-global-cursor-color-mode t)
+(sis-global-respect-mode t)
+(sis-global-context-mode t)
+(sis-global-inline-mode t)
+#+end_src
+
+***** fcitx
+You can also install [[https://github.com/xcodebuild/fcitx-remote-for-osx][fcitx-remote for-osx]] and use ~cute-jumper/fcitx.el~ to do so. As ~homebrew~ no longer support some build options, you need to follow the install instructions in the GitHub repository to build ~fcitx~.
+
+**** Mono Chinese Font
+I use a 14pt English font and 16pt Chinese font, one Chinese character is the same width as two English characters. It can be set by adding this into Emacs configuration file.
+
+#+begin_src elisp
+dotspacemacs-default-font '("Menlo"
+                            :size 14.0
+                            :weight normal
+                            :width normal)
+
+;; add into dotspacemacs/user-config()
+(dolist (charset '(kana han symbol cjk-misc bopomofo))
+   (set-fontset-font (frame-parameter nil 'font)
+                     charset (font-spec :family "PingFang SC"
+                                        :size 16)))
+#+end_src
+
+If you enable the ~chinese~ layer in Spacemacs, it provides a more convenient function:
+#+begin_src elisp
+(spacemacs//set-monospaced-font   "Menlo" "PingFang SC" 14 16)
+#+end_src
+
+PS: [[https://github.com/casouri/valign][valign]] provides visual alignment for Org Mode and Markdown without changing fonts.
+
+Ref:
+1. [[https://develop.spacemacs.org/layers/+intl/chinese/README.html][Spacemacs - Chinese Layer]]
+2. [[https://blindwith.science/2019/07/443.html/][Emacs 中文环境配置]]
