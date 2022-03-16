@@ -1,139 +1,19 @@
-<!doctype html><html lang=en>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta http-equiv=content-language content="en">
-<meta name=color-scheme content="light dark">
-<meta name=author content="KK">
-<meta name=description content="Today I tried to delete an inactive Internet account on system preference. It was deleted successfully but come back again after 20 seconds. This drives me nuts.
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=content-language content="en"><meta name=color-scheme content="light dark"><meta name=author content="KK"><meta name=description content="Today I tried to delete an inactive Internet account on system preference. It was deleted successfully but come back again after 20 seconds. This drives me nuts.
 I tried these methods, but none of them works.
- Boot in safe mode, delete account. Delete record in ZACCOUNT table in ~/Library/Accounts/Accounts4.sqlite. Delete related items in Keychain Access APP.  Later, RedHatDude&rsquo;s answer in this post gives me a clue, it looks like a iCloud sync problem.">
-<meta name=keywords content="fromkk,blog,kk blog,developer,personal,python,golang,go,linux,machine learning">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="Internet Account Keeps Coming Back after deletion on MacOS">
-<meta name=twitter:description content="Today I tried to delete an inactive Internet account on system preference. It was deleted successfully but come back again after 20 seconds. This drives me nuts.
+ Boot in safe mode, delete account. Delete record in ZACCOUNT table in ~/Library/Accounts/Accounts4.sqlite. Delete related items in Keychain Access APP.  Later, RedHatDude&rsquo;s answer in this post gives me a clue, it looks like a iCloud sync problem."><meta name=keywords content="fromkk,blog,kk blog,developer,personal,python,golang,go,linux,machine learning"><meta name=twitter:card content="summary"><meta name=twitter:title content="Internet Account Keeps Coming Back after deletion on MacOS"><meta name=twitter:description content="Today I tried to delete an inactive Internet account on system preference. It was deleted successfully but come back again after 20 seconds. This drives me nuts.
 I tried these methods, but none of them works.
- Boot in safe mode, delete account. Delete record in ZACCOUNT table in ~/Library/Accounts/Accounts4.sqlite. Delete related items in Keychain Access APP.  Later, RedHatDude&rsquo;s answer in this post gives me a clue, it looks like a iCloud sync problem.">
-<meta property="og:title" content="Internet Account Keeps Coming Back after deletion on MacOS">
-<meta property="og:description" content="Today I tried to delete an inactive Internet account on system preference. It was deleted successfully but come back again after 20 seconds. This drives me nuts.
+ Boot in safe mode, delete account. Delete record in ZACCOUNT table in ~/Library/Accounts/Accounts4.sqlite. Delete related items in Keychain Access APP.  Later, RedHatDude&rsquo;s answer in this post gives me a clue, it looks like a iCloud sync problem."><meta property="og:title" content="Internet Account Keeps Coming Back after deletion on MacOS"><meta property="og:description" content="Today I tried to delete an inactive Internet account on system preference. It was deleted successfully but come back again after 20 seconds. This drives me nuts.
 I tried these methods, but none of them works.
- Boot in safe mode, delete account. Delete record in ZACCOUNT table in ~/Library/Accounts/Accounts4.sqlite. Delete related items in Keychain Access APP.  Later, RedHatDude&rsquo;s answer in this post gives me a clue, it looks like a iCloud sync problem.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://www.fromkk.com/posts/internet-account-keeps-coming-back-after-deletion-on-macos/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2022-01-08T00:09:00+08:00">
-<meta property="article:modified_time" content="2022-01-18T00:27:37+08:00">
-<title>
-Internet Account Keeps Coming Back after deletion on MacOS · KK's Blog (fromkk)
-</title>
-<link rel=canonical href=https://www.fromkk.com/posts/internet-account-keeps-coming-back-after-deletion-on-macos/>
-<link rel=preload href="https://www.fromkk.com/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
-<link rel=stylesheet href=https://www.fromkk.com/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
-<link rel=stylesheet href=https://www.fromkk.com/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
-<link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-32x32.png sizes=32x32>
-<link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-16x16.png sizes=16x16>
-<link rel=apple-touch-icon href=https://www.fromkk.com/icons/icon-192x192.png>
-<link rel=apple-touch-icon sizes=180x180 href=https://www.fromkk.com/icons/icon-192x192.png>
-<meta name=generator content="Hugo 0.92.2">
-</head>
-<body class="preload-transitions colorscheme-auto">
-<div class=float-container>
-<a id=dark-mode-toggle class=colorscheme-toggle>
-<i class="fa fa-adjust fa-fw" aria-hidden=true></i>
-</a>
-</div>
-<main class=wrapper>
-<nav class=navigation>
-<section class=container>
-<a class=navigation-title href=https://www.fromkk.com/>
-KK's Blog (fromkk)
-</a>
+ Boot in safe mode, delete account. Delete record in ZACCOUNT table in ~/Library/Accounts/Accounts4.sqlite. Delete related items in Keychain Access APP.  Later, RedHatDude&rsquo;s answer in this post gives me a clue, it looks like a iCloud sync problem."><meta property="og:type" content="article"><meta property="og:url" content="https://www.fromkk.com/posts/internet-account-keeps-coming-back-after-deletion-on-macos/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-01-08T00:09:00+08:00"><meta property="article:modified_time" content="2022-01-18T00:27:37+08:00"><title>Internet Account Keeps Coming Back after deletion on MacOS · KK's Blog (fromkk)</title><link rel=canonical href=https://www.fromkk.com/posts/internet-account-keeps-coming-back-after-deletion-on-macos/><link rel=preload href="https://www.fromkk.com/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin><link rel=stylesheet href=https://www.fromkk.com/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen><link rel=stylesheet href=https://www.fromkk.com/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen><link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-32x32.png sizes=32x32><link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-16x16.png sizes=16x16><link rel=apple-touch-icon href=https://www.fromkk.com/icons/icon-192x192.png><link rel=apple-touch-icon sizes=180x180 href=https://www.fromkk.com/icons/icon-192x192.png><meta name=generator content="Hugo 0.94.2"></head><body class="preload-transitions colorscheme-auto"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=https://www.fromkk.com/>KK's Blog (fromkk)</a>
 <input type=checkbox id=menu-toggle>
-<label class="menu-button float-right" for=menu-toggle>
-<i class="fa fa-bars fa-fw" aria-hidden=true></i>
-</label>
-<ul class=navigation-list>
-<li class=navigation-item>
-<a class=navigation-link href=https://www.fromkk.com/posts/>Blog</a>
-</li>
-<li class=navigation-item>
-<a class=navigation-link href=https://www.fromkk.com/tags/>Tags</a>
-</li>
-<li class=navigation-item>
-<a class=navigation-link href=https://www.fromkk.com/about/>About</a>
-</li>
-<li class=navigation-item>
-<a class=navigation-link href=https://www.fromkk.com/posts/index.xml>RSS</a>
-</li>
-</ul>
-</section>
-</nav>
-<div class=content>
-<section class="container post">
-<article>
-<header>
-<div class=post-title>
-<h1 class=title>
-<a class=title-link href=https://www.fromkk.com/posts/internet-account-keeps-coming-back-after-deletion-on-macos/>
-Internet Account Keeps Coming Back after deletion on MacOS
-</a>
-</h1>
-</div>
-<div class=post-meta>
-<div class=date>
-<span class=posted-on>
-<i class="fa fa-calendar" aria-hidden=true></i>
-<time datetime=2022-01-08T00:09:00+08:00>
-01/08/2022
-</time>
-</span>
-<span class=reading-time>
-<i class="fa fa-clock-o" aria-hidden=true></i>
-One-minute read
-</span>
-</div>
-<div class=tags>
-<i class="fa fa-tag" aria-hidden=true></i>
-<span class=tag>
-<a href=https://www.fromkk.com/tags/macos/>MacOS</a>
-</span></div>
-</div>
-</header>
-<div>
-<p>Today I tried to delete an inactive Internet account on system preference. It was deleted successfully but come back again after 20 seconds. This drives me nuts.</p>
-<p>I tried these methods, but none of them works.</p>
-<ul>
-<li>Boot in <a href=https://support.apple.com/en-us/HT201262>safe mode</a>, delete account.</li>
-<li>Delete record in <code>ZACCOUNT</code> table in <code>~/Library/Accounts/Accounts4.sqlite</code>.</li>
-<li>Delete related items in Keychain Access APP.</li>
-</ul>
-<p>Later, <code>RedHatDude</code>&rsquo;s answer in <a href="https://discussions.apple.com/thread/252924363?login=true">this post</a> gives me a clue, it looks like a iCloud sync problem. I tried to delete the account on my 3 MacBooks together. Thank goodness! It does not show up again.</p>
-<p>Ref:</p>
-<ol>
-<li><a href=https://community.jamf.com/t5/jamf-pro/removing-accounts-from-internet-accounts/td-p/179654>Removing Accounts from Internet Accounts</a></li>
-<li><a href=https://www.twit.community/t/every-time-i-delete-an-internet-account-it-comes-back/9914>Every time I delete an internet account it comes back</a></li>
-<li><a href="https://discussions.apple.com/thread/252924363?login=true">Gmail account keeps coming back after delete</a></li>
-</ol>
-</div>
-<footer>
-<script src=https://utteranc.es/client.js repo=bebound/bebound.github.io issue-term=pathname label=comment theme=preferred-color-scheme crossorigin=anonymous async></script>
-</footer>
-</article>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:!0},{left:'$',right:'$',display:!1},{left:'\\(',right:'\\)',display:!1},{left:'\\[',right:'\\]',display:!0}]})"></script>
-</section>
-</div>
-<footer class=footer>
-<section class=container>
-©
+<label class="menu-button float-right" for=menu-toggle><i class="fa fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/posts/>Blog</a></li><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/tags/>Tags</a></li><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/about/>About</a></li><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/posts/index.xml>RSS</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://www.fromkk.com/posts/internet-account-keeps-coming-back-after-deletion-on-macos/>Internet Account Keeps Coming Back after deletion on MacOS</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2022-01-08T00:09:00+08:00>01/08/2022</time></span>
+<span class=reading-time><i class="fa fa-clock-o" aria-hidden=true></i>
+One-minute read</span></div><div class=tags><i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag><a href=https://www.fromkk.com/tags/macos/>MacOS</a></span></div></div></header><div><p>Today I tried to delete an inactive Internet account on system preference. It was deleted successfully but come back again after 20 seconds. This drives me nuts.</p><p>I tried these methods, but none of them works.</p><ul><li>Boot in <a href=https://support.apple.com/en-us/HT201262>safe mode</a>, delete account.</li><li>Delete record in <code>ZACCOUNT</code> table in <code>~/Library/Accounts/Accounts4.sqlite</code>.</li><li>Delete related items in Keychain Access APP.</li></ul><p>Later, <code>RedHatDude</code>&rsquo;s answer in <a href="https://discussions.apple.com/thread/252924363?login=true">this post</a> gives me a clue, it looks like a iCloud sync problem. I tried to delete the account on my 3 MacBooks together. Thank goodness! It does not show up again.</p><p>Ref:</p><ol><li><a href=https://community.jamf.com/t5/jamf-pro/removing-accounts-from-internet-accounts/td-p/179654>Removing Accounts from Internet Accounts</a></li><li><a href=https://www.twit.community/t/every-time-i-delete-an-internet-account-it-comes-back/9914>Every time I delete an internet account it comes back</a></li><li><a href="https://discussions.apple.com/thread/252924363?login=true">Gmail account keeps coming back after delete</a></li></ol></div><footer><script src=https://utteranc.es/client.js repo=bebound/bebound.github.io issue-term=pathname label=comment theme=preferred-color-scheme crossorigin=anonymous async></script></footer></article><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous onload='renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})'></script></section></div><footer class=footer><section class=container>©
 2022
 KK
 ·
-Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
-</section>
-</footer>
-</main>
-<script src=https://www.fromkk.com/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-153788833-1','auto'),ga('send','pageview'))</script>
-</body>
-</html>
+Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.</section></footer></main><script src=https://www.fromkk.com/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-153788833-1","auto"),ga("send","pageview"))</script></body></html>

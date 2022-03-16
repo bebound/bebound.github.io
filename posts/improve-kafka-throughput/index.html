@@ -1,254 +1,34 @@
-<!doctype html><html lang=en>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta http-equiv=content-language content="en">
-<meta name=color-scheme content="light dark">
-<meta name=author content="KK">
-<meta name=description content="Kafka is a high-performance and scalable messaging system. Sometimes when handling big data. The default configuration may limit the maximum performance. In this article, I&rsquo;ll explain how messages are generate and saved in Kafka, and how to improve performance by changing configuration.
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=content-language content="en"><meta name=color-scheme content="light dark"><meta name=author content="KK"><meta name=description content="Kafka is a high-performance and scalable messaging system. Sometimes when handling big data. The default configuration may limit the maximum performance. In this article, I&rsquo;ll explain how messages are generate and saved in Kafka, and how to improve performance by changing configuration.
 Kafka Internals    How does Producer Send Messages?    In short, messages will assembled into batches (named RecordBatch) and send to broker.
-The producer manages some internal queues, and each queue contains RecordBatch that will send to one broker.">
-<meta name=keywords content="fromkk,blog,kk blog,developer,personal,python,golang,go,linux,machine learning">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="Improve Kafka throughput">
-<meta name=twitter:description content="Kafka is a high-performance and scalable messaging system. Sometimes when handling big data. The default configuration may limit the maximum performance. In this article, I&rsquo;ll explain how messages are generate and saved in Kafka, and how to improve performance by changing configuration.
+The producer manages some internal queues, and each queue contains RecordBatch that will send to one broker."><meta name=keywords content="fromkk,blog,kk blog,developer,personal,python,golang,go,linux,machine learning"><meta name=twitter:card content="summary"><meta name=twitter:title content="Improve Kafka throughput"><meta name=twitter:description content="Kafka is a high-performance and scalable messaging system. Sometimes when handling big data. The default configuration may limit the maximum performance. In this article, I&rsquo;ll explain how messages are generate and saved in Kafka, and how to improve performance by changing configuration.
 Kafka Internals    How does Producer Send Messages?    In short, messages will assembled into batches (named RecordBatch) and send to broker.
-The producer manages some internal queues, and each queue contains RecordBatch that will send to one broker.">
-<meta property="og:title" content="Improve Kafka throughput">
-<meta property="og:description" content="Kafka is a high-performance and scalable messaging system. Sometimes when handling big data. The default configuration may limit the maximum performance. In this article, I&rsquo;ll explain how messages are generate and saved in Kafka, and how to improve performance by changing configuration.
+The producer manages some internal queues, and each queue contains RecordBatch that will send to one broker."><meta property="og:title" content="Improve Kafka throughput"><meta property="og:description" content="Kafka is a high-performance and scalable messaging system. Sometimes when handling big data. The default configuration may limit the maximum performance. In this article, I&rsquo;ll explain how messages are generate and saved in Kafka, and how to improve performance by changing configuration.
 Kafka Internals    How does Producer Send Messages?    In short, messages will assembled into batches (named RecordBatch) and send to broker.
-The producer manages some internal queues, and each queue contains RecordBatch that will send to one broker.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://www.fromkk.com/posts/improve-kafka-throughput/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2021-05-28T00:57:00+08:00">
-<meta property="article:modified_time" content="2021-12-27T00:06:05+08:00">
-<title>
-Improve Kafka throughput · KK's Blog (fromkk)
-</title>
-<link rel=canonical href=https://www.fromkk.com/posts/improve-kafka-throughput/>
-<link rel=preload href="https://www.fromkk.com/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
-<link rel=stylesheet href=https://www.fromkk.com/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
-<link rel=stylesheet href=https://www.fromkk.com/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
-<link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-32x32.png sizes=32x32>
-<link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-16x16.png sizes=16x16>
-<link rel=apple-touch-icon href=https://www.fromkk.com/icons/icon-192x192.png>
-<link rel=apple-touch-icon sizes=180x180 href=https://www.fromkk.com/icons/icon-192x192.png>
-<meta name=generator content="Hugo 0.92.2">
-</head>
-<body class="preload-transitions colorscheme-auto">
-<div class=float-container>
-<a id=dark-mode-toggle class=colorscheme-toggle>
-<i class="fa fa-adjust fa-fw" aria-hidden=true></i>
-</a>
-</div>
-<main class=wrapper>
-<nav class=navigation>
-<section class=container>
-<a class=navigation-title href=https://www.fromkk.com/>
-KK's Blog (fromkk)
-</a>
+The producer manages some internal queues, and each queue contains RecordBatch that will send to one broker."><meta property="og:type" content="article"><meta property="og:url" content="https://www.fromkk.com/posts/improve-kafka-throughput/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-05-28T00:57:00+08:00"><meta property="article:modified_time" content="2021-12-27T00:06:05+08:00"><title>Improve Kafka throughput · KK's Blog (fromkk)</title><link rel=canonical href=https://www.fromkk.com/posts/improve-kafka-throughput/><link rel=preload href="https://www.fromkk.com/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin><link rel=stylesheet href=https://www.fromkk.com/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen><link rel=stylesheet href=https://www.fromkk.com/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen><link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-32x32.png sizes=32x32><link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-16x16.png sizes=16x16><link rel=apple-touch-icon href=https://www.fromkk.com/icons/icon-192x192.png><link rel=apple-touch-icon sizes=180x180 href=https://www.fromkk.com/icons/icon-192x192.png><meta name=generator content="Hugo 0.94.2"></head><body class="preload-transitions colorscheme-auto"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=https://www.fromkk.com/>KK's Blog (fromkk)</a>
 <input type=checkbox id=menu-toggle>
-<label class="menu-button float-right" for=menu-toggle>
-<i class="fa fa-bars fa-fw" aria-hidden=true></i>
-</label>
-<ul class=navigation-list>
-<li class=navigation-item>
-<a class=navigation-link href=https://www.fromkk.com/posts/>Blog</a>
-</li>
-<li class=navigation-item>
-<a class=navigation-link href=https://www.fromkk.com/tags/>Tags</a>
-</li>
-<li class=navigation-item>
-<a class=navigation-link href=https://www.fromkk.com/about/>About</a>
-</li>
-<li class=navigation-item>
-<a class=navigation-link href=https://www.fromkk.com/posts/index.xml>RSS</a>
-</li>
-</ul>
-</section>
-</nav>
-<div class=content>
-<section class="container post">
-<article>
-<header>
-<div class=post-title>
-<h1 class=title>
-<a class=title-link href=https://www.fromkk.com/posts/improve-kafka-throughput/>
-Improve Kafka throughput
-</a>
-</h1>
-</div>
-<div class=post-meta>
-<div class=date>
-<span class=posted-on>
-<i class="fa fa-calendar" aria-hidden=true></i>
-<time datetime=2021-05-28T00:57:00+08:00>
-05/28/2021
-</time>
-</span>
-<span class=reading-time>
-<i class="fa fa-clock-o" aria-hidden=true></i>
-5-minute read
-</span>
-</div>
-<div class=tags>
-<i class="fa fa-tag" aria-hidden=true></i>
-<span class=tag>
-<a href=https://www.fromkk.com/tags/kafka/>Kafka</a>
-</span></div>
-</div>
-</header>
-<div>
-<p>Kafka is a high-performance and scalable messaging system. Sometimes when handling big data. The default configuration may limit the maximum performance. In this article, I&rsquo;ll explain how messages are generate and saved in Kafka, and how to improve performance by changing configuration.</p>
-<h2 id=kafka-internals>
-Kafka Internals
-<a class=heading-link href=#kafka-internals>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2>
-<h3 id=how-does-producer-send-messages>
-How does Producer Send Messages?
-<a class=heading-link href=#how-does-producer-send-messages>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3>
-<p>In short, messages will assembled into batches (named <code>RecordBatch</code>) and send to broker.</p>
-<p>The producer manages some internal queues, and each queue contains <code>RecordBatch</code> that will send to one broker. When calling <code>send</code> method, the producer will look into the internal queue and try to append this message to <code>RecordBatch</code> which is smaller than <code>batch.size</code> (default value is 16KB) or create new <code>RecordBatch</code>.</p>
-<p>There is also a sender thread in producer which is responsible for turning <code>RecordBatch</code> into requests (<code>&lt;broker node，List(ProducerBatch)></code>) and send to broker.</p>
-<h3 id=how-are-records-saved>
-how are Records Saved?
-<a class=heading-link href=#how-are-records-saved>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3>
-<p>The details can be found from these two articles: <a href=https://kafka.apache.org/documentation/#messageformat>Apache Kafka - Message Format</a> and <a href="https://cwiki.apache.org/confluence/display/KAFKA/A+Guide+To+The+Kafka+Protocol#:~:text=A%20message%20in%20kafka%20is,on%2Dthe%2Dwire%20format.&text=This%20byte%20holds%20metadata%20attributes%20about%20the%20message.">A Guide To The Kafka Protocol - Apache Kafka - Apache Software Foundation</a>.</p>
-<p>Here are some important properties in <code>RecordBatch</code> are: <code>batch_lenth</code>, <code>compresstion_type</code>, <code>CRC</code>, <code>timestamp</code> and, of course, the <code>List(Record)</code>.</p>
-<p>Each <code>Record</code> consists of <code>length</code>, <code>timestamp_delta</code>, <code>key(byte)</code>, <code>value(byte)</code> etc.</p>
-<p>When look into the kafka topic data directory, you may find files like this:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>00000000000000000000.log
-00000000000000000000.index
-00000000000000000000.timeindex
-00000000000000000035.log
-00000000000000000035.index
-00000000000000000035.timeindex
-</code></pre></div><p>Kafka saves each partition as segments. When new record comes, it append to the active segment. If the segment&rsquo;s size limit is reached, a new segment is created as becomes the active segment. Segments are named by the offset of its first record, so the segments' names are incremental.</p>
-<p>Furthermore, the segment divided into three kinds of file: log file, index file and timeindex file.</p>
-<ul>
-<li>The <code>log</code> file contains the actual data</li>
-<li>The <code>index</code> file contains the record&rsquo;s relative offset and its physical position in the log file. This makes the look up complexity for specific offset record to <code>O(1)</code>.</li>
-<li>The <code>timeindex</code> file contains the record&rsquo;s relative offset and its timestamp.</li>
-</ul>
-<h3 id=how-does-consumer-pull-messages>
-How does Consumer pull messages?
-<a class=heading-link href=#how-does-consumer-pull-messages>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3>
-<p>Consumer keeps reading data from broker, and decompress data if necessary. It will put data into a internal queue and return the target number of records to client.</p>
-<p><code>max.poll.records</code> (default values is 500) means the maximum number of records returned in a single call to poll().</p>
-<p><code>fetch.min.bytes</code> (default value is 1) means the minimum amount of data the broker should return from a fetch request. If insufficient data is available, the server will wait up to <code>fetch.max.wait.ms</code> ms and accumulate the data before answering the request.</p>
-<h2 id=how-to-improve-performance>
-How to Improve Performance
-<a class=heading-link href=#how-to-improve-performance>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2>
-<h3 id=increase-socket-buffer>
-Increase Socket Buffer
-<a class=heading-link href=#increase-socket-buffer>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3>
-<p>The default socket buffer value in Java client is too small for high-throughput environment.
-<code>socket.receive.buffer.bytes</code> (default value is 64KB) and <code>send.buffer.bytes</code> (default value is 128KB) is the <code>SO_RCVBUFF</code> and <code>SO_SNDBUFF</code> for socket connections respectively. I recommend to set it to a bigger value or <code>-1</code> to use the OS default value.</p>
-<h3 id=batch-dot-size-linger-dot-ms-and-buffer-dot-memory>
-batch.size, linger.ms and buffer.memory
-<a class=heading-link href=#batch-dot-size-linger-dot-ms-and-buffer-dot-memory>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3>
-<p>As mentioned before, producer always send message as <code>RecordBatch</code>. Each batch should be smaller than <code>batch.size</code> (default value is 16KB). Increasing <code>batch.size</code> will not only reduce the TCP request to broker, but also lead to better compression ratio when compression is enabled.</p>
-<p><code>linger.ms</code> is used to specific the wait time before sending <code>RecordBatch</code>, and it will effect the real size of <code>RecordBatch</code> indirectly. The producer groups together any records that arrive in between request transmissions into a single batched request. If the system load is low and the <code>RecordBatch</code> is not full, the producer sender will still send this batch once it has been waited for <code>linger.ms</code>. <code>linger.ms</code>&rsquo;s default value is 0, which means producer will send message as quick as possible(but the messaged arrived between two send requests will also be batched to <code>RecordBatch</code>). Increasing this value not only makes real batch size be close to <code>batch.size</code> and reducing the number of requests to be sent, but also increases the delay of messages.</p>
-<p>The <code>buffer.memory</code> (default value is 32MB) controls the total amount of memory available to the producer for buffering. If records are sent faster than they can be transmitted to the server then this buffer space will be exhausted. When the buffer space is exhausted additional send calls will block.</p>
-<h3 id=compression-dot-type>
-Compression.type
-<a class=heading-link href=#compression-dot-type>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3>
-<p>As the throughput keep growing, bandwidth may become bottleneck. It&rsquo;s easy to tackle this by add <code>compresstion.type</code> param in producer. Once it is configured, the producer will compressed the <code>RecordBatch</code> before sending it to broker. If the records are texts, the compression ratio should be high and bandwidth usage will be significantly decreased.</p>
-<p>There are two kind of <code>compresstion.type</code>, topic level and producer level.</p>
-<p>If you set <code>compresstion.type</code> in producer, the producer will compress the records and send it to broker.</p>
-<p>There is also a topic level <code>compresstion.type</code> configuration. When it is set, producer&rsquo;s compression type is not constrained. The broker will convert data sent from producer to target <code>compresstion.type</code>. <code>compresstion.type</code> can be set as <code>gzip</code>, <code>snappy</code>, <code>lz4</code>, <code>zstd</code>, <code>uncompressed</code>, and <code>producer</code>. The default value is <code>producer</code>, which means the broker will keep the original data send from the producer.</p>
-<p>How to choose compression type? According to cloudflare&rsquo;s test result in <a href=https://blog.cloudflare.com/squeezing-the-firehose/>Squeezing the firehose: getting the most from Kafka compression</a>:</p>
-<table>
-<thead>
-<tr>
-<th>type</th>
-<th>CPU ration</th>
-<th>Compression ratio</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>None</td>
-<td>1x</td>
-<td>1x</td>
-</tr>
-<tr>
-<td>Gzip</td>
-<td>10.14x</td>
-<td>3.58x</td>
-</tr>
-<tr>
-<td>Snappy</td>
-<td>1.61x</td>
-<td>2.35x</td>
-</tr>
-<tr>
-<td>LZ4</td>
-<td>2.51x</td>
-<td>1.81x</td>
-</tr>
-</tbody>
-</table>
-<p><code>Gzip</code> has best compression ratio but take lots of CPU time. <code>Snappy</code> keeps a balance between the CPU time and space. The new compression type <code>zstd</code> added in Kafka 2.1 produce larger compression ratio than <code>Snappy</code> with the cost of a little more CPU time.</p>
-<p>These are common configurations, you can find more from the official document contains such as <code>max.in.flight.requests.per.connection</code>.</p>
-<p>Ref:</p>
-<ol>
-<li><a href=https://kafka.apache.org/documentation/#messageformat>Kafka message format</a></li>
-<li><a href=https://juejin.cn/post/6844903632521920519>Kafka高性能探秘</a></li>
-<li><a href=https://medium.com/swlh/exploit-apache-kafkas-message-format-to-save-storage-and-bandwidth-7e0c533edf26>Exploit Apache Kafka’s Message Format to Save Storage and Bandwidth</a></li>
-<li><a href=https://ibmstreams.github.io/streamsx.kafka/docs/user/ConsumingBigMessages/>Consuming big messages from Kafka</a></li>
-<li><a href=https://stackoverflow.com/questions/53308986/how-does-max-poll-records-affect-the-consumer-poll>How does max.poll.records affect the consumer poll</a></li>
-<li><a href=https://medium.com/@durgaswaroop/a-practical-introduction-to-kafka-storage-internals-d5b544f6925f>A Practical Introduction to Kafka Storage Internals</a></li>
-<li><a href=https://stackoverflow.com/questions/19890894/kafka-message-codec-compress-and-decompress>Kafka message codec - compress and decompress</a></li>
-<li><a href=https://dzone.com/articles/20-best-practices-for-working-with-apache-kafka-at>20 Best Practices for Working With Apache Kafka at Scale</a></li>
-<li><a href=https://kafka.apache.org/documentation/#producerconfigs>Kakfa Document</a></li>
-<li><a href=https://kafka-python.readthedocs.io/en/master/apidoc/KafkaProducer.html>kafka-python KafkaProducer</a></li>
-<li><a href=https://rohithsankepally.github.io/Kafka-Storage-Internals/>Deep Dive Into Apache Kafka | Storage Internals</a></li>
-</ol>
-</div>
-<footer>
-<script src=https://utteranc.es/client.js repo=bebound/bebound.github.io issue-term=pathname label=comment theme=preferred-color-scheme crossorigin=anonymous async></script>
-</footer>
-</article>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:!0},{left:'$',right:'$',display:!1},{left:'\\(',right:'\\)',display:!1},{left:'\\[',right:'\\]',display:!0}]})"></script>
-</section>
-</div>
-<footer class=footer>
-<section class=container>
-©
+<label class="menu-button float-right" for=menu-toggle><i class="fa fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/posts/>Blog</a></li><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/tags/>Tags</a></li><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/about/>About</a></li><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/posts/index.xml>RSS</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://www.fromkk.com/posts/improve-kafka-throughput/>Improve Kafka throughput</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2021-05-28T00:57:00+08:00>05/28/2021</time></span>
+<span class=reading-time><i class="fa fa-clock-o" aria-hidden=true></i>
+5-minute read</span></div><div class=tags><i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag><a href=https://www.fromkk.com/tags/kafka/>Kafka</a></span></div></div></header><div><p>Kafka is a high-performance and scalable messaging system. Sometimes when handling big data. The default configuration may limit the maximum performance. In this article, I&rsquo;ll explain how messages are generate and saved in Kafka, and how to improve performance by changing configuration.</p><h2 id=kafka-internals>Kafka Internals
+<a class=heading-link href=#kafka-internals><i class="fa fa-link" aria-hidden=true></i></a></h2><h3 id=how-does-producer-send-messages>How does Producer Send Messages?
+<a class=heading-link href=#how-does-producer-send-messages><i class="fa fa-link" aria-hidden=true></i></a></h3><p>In short, messages will assembled into batches (named <code>RecordBatch</code>) and send to broker.</p><p>The producer manages some internal queues, and each queue contains <code>RecordBatch</code> that will send to one broker. When calling <code>send</code> method, the producer will look into the internal queue and try to append this message to <code>RecordBatch</code> which is smaller than <code>batch.size</code> (default value is 16KB) or create new <code>RecordBatch</code>.</p><p>There is also a sender thread in producer which is responsible for turning <code>RecordBatch</code> into requests (<code>&lt;broker node，List(ProducerBatch)></code>) and send to broker.</p><h3 id=how-are-records-saved>how are Records Saved?
+<a class=heading-link href=#how-are-records-saved><i class="fa fa-link" aria-hidden=true></i></a></h3><p>The details can be found from these two articles: <a href=https://kafka.apache.org/documentation/#messageformat>Apache Kafka - Message Format</a> and <a href="https://cwiki.apache.org/confluence/display/KAFKA/A+Guide+To+The+Kafka+Protocol#:~:text=A%20message%20in%20kafka%20is,on%2Dthe%2Dwire%20format.&text=This%20byte%20holds%20metadata%20attributes%20about%20the%20message.">A Guide To The Kafka Protocol - Apache Kafka - Apache Software Foundation</a>.</p><p>Here are some important properties in <code>RecordBatch</code> are: <code>batch_lenth</code>, <code>compresstion_type</code>, <code>CRC</code>, <code>timestamp</code> and, of course, the <code>List(Record)</code>.</p><p>Each <code>Record</code> consists of <code>length</code>, <code>timestamp_delta</code>, <code>key(byte)</code>, <code>value(byte)</code> etc.</p><p>When look into the kafka topic data directory, you may find files like this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>00000000000000000000.log
+</span></span><span style=display:flex><span>00000000000000000000.index
+</span></span><span style=display:flex><span>00000000000000000000.timeindex
+</span></span><span style=display:flex><span>00000000000000000035.log
+</span></span><span style=display:flex><span>00000000000000000035.index
+</span></span><span style=display:flex><span>00000000000000000035.timeindex
+</span></span></code></pre></div><p>Kafka saves each partition as segments. When new record comes, it append to the active segment. If the segment&rsquo;s size limit is reached, a new segment is created as becomes the active segment. Segments are named by the offset of its first record, so the segments&rsquo; names are incremental.</p><p>Furthermore, the segment divided into three kinds of file: log file, index file and timeindex file.</p><ul><li>The <code>log</code> file contains the actual data</li><li>The <code>index</code> file contains the record&rsquo;s relative offset and its physical position in the log file. This makes the look up complexity for specific offset record to <code>O(1)</code>.</li><li>The <code>timeindex</code> file contains the record&rsquo;s relative offset and its timestamp.</li></ul><h3 id=how-does-consumer-pull-messages>How does Consumer pull messages?
+<a class=heading-link href=#how-does-consumer-pull-messages><i class="fa fa-link" aria-hidden=true></i></a></h3><p>Consumer keeps reading data from broker, and decompress data if necessary. It will put data into a internal queue and return the target number of records to client.</p><p><code>max.poll.records</code> (default values is 500) means the maximum number of records returned in a single call to poll().</p><p><code>fetch.min.bytes</code> (default value is 1) means the minimum amount of data the broker should return from a fetch request. If insufficient data is available, the server will wait up to <code>fetch.max.wait.ms</code> ms and accumulate the data before answering the request.</p><h2 id=how-to-improve-performance>How to Improve Performance
+<a class=heading-link href=#how-to-improve-performance><i class="fa fa-link" aria-hidden=true></i></a></h2><h3 id=increase-socket-buffer>Increase Socket Buffer
+<a class=heading-link href=#increase-socket-buffer><i class="fa fa-link" aria-hidden=true></i></a></h3><p>The default socket buffer value in Java client is too small for high-throughput environment.
+<code>socket.receive.buffer.bytes</code> (default value is 64KB) and <code>send.buffer.bytes</code> (default value is 128KB) is the <code>SO_RCVBUFF</code> and <code>SO_SNDBUFF</code> for socket connections respectively. I recommend to set it to a bigger value or <code>-1</code> to use the OS default value.</p><h3 id=batch-dot-size-linger-dot-ms-and-buffer-dot-memory>batch.size, linger.ms and buffer.memory
+<a class=heading-link href=#batch-dot-size-linger-dot-ms-and-buffer-dot-memory><i class="fa fa-link" aria-hidden=true></i></a></h3><p>As mentioned before, producer always send message as <code>RecordBatch</code>. Each batch should be smaller than <code>batch.size</code> (default value is 16KB). Increasing <code>batch.size</code> will not only reduce the TCP request to broker, but also lead to better compression ratio when compression is enabled.</p><p><code>linger.ms</code> is used to specific the wait time before sending <code>RecordBatch</code>, and it will effect the real size of <code>RecordBatch</code> indirectly. The producer groups together any records that arrive in between request transmissions into a single batched request. If the system load is low and the <code>RecordBatch</code> is not full, the producer sender will still send this batch once it has been waited for <code>linger.ms</code>. <code>linger.ms</code>&rsquo;s default value is 0, which means producer will send message as quick as possible(but the messaged arrived between two send requests will also be batched to <code>RecordBatch</code>). Increasing this value not only makes real batch size be close to <code>batch.size</code> and reducing the number of requests to be sent, but also increases the delay of messages.</p><p>The <code>buffer.memory</code> (default value is 32MB) controls the total amount of memory available to the producer for buffering. If records are sent faster than they can be transmitted to the server then this buffer space will be exhausted. When the buffer space is exhausted additional send calls will block.</p><h3 id=compression-dot-type>Compression.type
+<a class=heading-link href=#compression-dot-type><i class="fa fa-link" aria-hidden=true></i></a></h3><p>As the throughput keep growing, bandwidth may become bottleneck. It&rsquo;s easy to tackle this by add <code>compresstion.type</code> param in producer. Once it is configured, the producer will compressed the <code>RecordBatch</code> before sending it to broker. If the records are texts, the compression ratio should be high and bandwidth usage will be significantly decreased.</p><p>There are two kind of <code>compresstion.type</code>, topic level and producer level.</p><p>If you set <code>compresstion.type</code> in producer, the producer will compress the records and send it to broker.</p><p>There is also a topic level <code>compresstion.type</code> configuration. When it is set, producer&rsquo;s compression type is not constrained. The broker will convert data sent from producer to target <code>compresstion.type</code>. <code>compresstion.type</code> can be set as <code>gzip</code>, <code>snappy</code>, <code>lz4</code>, <code>zstd</code>, <code>uncompressed</code>, and <code>producer</code>. The default value is <code>producer</code>, which means the broker will keep the original data send from the producer.</p><p>How to choose compression type? According to cloudflare&rsquo;s test result in <a href=https://blog.cloudflare.com/squeezing-the-firehose/>Squeezing the firehose: getting the most from Kafka compression</a>:</p><table><thead><tr><th>type</th><th>CPU ration</th><th>Compression ratio</th></tr></thead><tbody><tr><td>None</td><td>1x</td><td>1x</td></tr><tr><td>Gzip</td><td>10.14x</td><td>3.58x</td></tr><tr><td>Snappy</td><td>1.61x</td><td>2.35x</td></tr><tr><td>LZ4</td><td>2.51x</td><td>1.81x</td></tr></tbody></table><p><code>Gzip</code> has best compression ratio but take lots of CPU time. <code>Snappy</code> keeps a balance between the CPU time and space. The new compression type <code>zstd</code> added in Kafka 2.1 produce larger compression ratio than <code>Snappy</code> with the cost of a little more CPU time.</p><p>These are common configurations, you can find more from the official document contains such as <code>max.in.flight.requests.per.connection</code>.</p><p>Ref:</p><ol><li><a href=https://kafka.apache.org/documentation/#messageformat>Kafka message format</a></li><li><a href=https://juejin.cn/post/6844903632521920519>Kafka高性能探秘</a></li><li><a href=https://medium.com/swlh/exploit-apache-kafkas-message-format-to-save-storage-and-bandwidth-7e0c533edf26>Exploit Apache Kafka’s Message Format to Save Storage and Bandwidth</a></li><li><a href=https://ibmstreams.github.io/streamsx.kafka/docs/user/ConsumingBigMessages/>Consuming big messages from Kafka</a></li><li><a href=https://stackoverflow.com/questions/53308986/how-does-max-poll-records-affect-the-consumer-poll>How does max.poll.records affect the consumer poll</a></li><li><a href=https://medium.com/@durgaswaroop/a-practical-introduction-to-kafka-storage-internals-d5b544f6925f>A Practical Introduction to Kafka Storage Internals</a></li><li><a href=https://stackoverflow.com/questions/19890894/kafka-message-codec-compress-and-decompress>Kafka message codec - compress and decompress</a></li><li><a href=https://dzone.com/articles/20-best-practices-for-working-with-apache-kafka-at>20 Best Practices for Working With Apache Kafka at Scale</a></li><li><a href=https://kafka.apache.org/documentation/#producerconfigs>Kakfa Document</a></li><li><a href=https://kafka-python.readthedocs.io/en/master/apidoc/KafkaProducer.html>kafka-python KafkaProducer</a></li><li><a href=https://rohithsankepally.github.io/Kafka-Storage-Internals/>Deep Dive Into Apache Kafka | Storage Internals</a></li></ol></div><footer><script src=https://utteranc.es/client.js repo=bebound/bebound.github.io issue-term=pathname label=comment theme=preferred-color-scheme crossorigin=anonymous async></script></footer></article><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous onload='renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})'></script></section></div><footer class=footer><section class=container>©
 2022
 KK
 ·
-Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
-</section>
-</footer>
-</main>
-<script src=https://www.fromkk.com/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-153788833-1','auto'),ga('send','pageview'))</script>
-</body>
-</html>
+Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.</section></footer></main><script src=https://www.fromkk.com/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-153788833-1","auto"),ga("send","pageview"))</script></body></html>

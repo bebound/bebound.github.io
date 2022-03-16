@@ -1,218 +1,27 @@
-<!doctype html><html lang=en>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta http-equiv=content-language content="en">
-<meta name=color-scheme content="light dark">
-<meta name=author content="KK">
-<meta name=description content="Overview     CPython allocation memory to save dictionary, the initial table size is 8, entries are saved as <hash,key,value> in each slot(The slot content changed after Python 3.6). When a new key is added, python use i = hash(key) & mask where mask=table_size-1 to calculate which slot it should be placed. If the slot is occupied, CPython using a probing algorithm to find the empty slot to store new item.">
-<meta name=keywords content="fromkk,blog,kk blog,developer,personal,python,golang,go,linux,machine learning">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="Python Dictionary Implementation">
-<meta name=twitter:description content="Overview     CPython allocation memory to save dictionary, the initial table size is 8, entries are saved as <hash,key,value> in each slot(The slot content changed after Python 3.6). When a new key is added, python use i = hash(key) & mask where mask=table_size-1 to calculate which slot it should be placed. If the slot is occupied, CPython using a probing algorithm to find the empty slot to store new item.">
-<meta property="og:title" content="Python Dictionary Implementation">
-<meta property="og:description" content="Overview     CPython allocation memory to save dictionary, the initial table size is 8, entries are saved as <hash,key,value> in each slot(The slot content changed after Python 3.6). When a new key is added, python use i = hash(key) & mask where mask=table_size-1 to calculate which slot it should be placed. If the slot is occupied, CPython using a probing algorithm to find the empty slot to store new item.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://www.fromkk.com/posts/python-dictionary-implementation/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2019-02-17T21:48:00+08:00">
-<meta property="article:modified_time" content="2020-05-31T23:52:58+08:00">
-<title>
-Python Dictionary Implementation · KK's Blog (fromkk)
-</title>
-<link rel=canonical href=https://www.fromkk.com/posts/python-dictionary-implementation/>
-<link rel=preload href="https://www.fromkk.com/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin>
-<link rel=stylesheet href=https://www.fromkk.com/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen>
-<link rel=stylesheet href=https://www.fromkk.com/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen>
-<link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-32x32.png sizes=32x32>
-<link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-16x16.png sizes=16x16>
-<link rel=apple-touch-icon href=https://www.fromkk.com/icons/icon-192x192.png>
-<link rel=apple-touch-icon sizes=180x180 href=https://www.fromkk.com/icons/icon-192x192.png>
-<meta name=generator content="Hugo 0.92.2">
-</head>
-<body class="preload-transitions colorscheme-auto">
-<div class=float-container>
-<a id=dark-mode-toggle class=colorscheme-toggle>
-<i class="fa fa-adjust fa-fw" aria-hidden=true></i>
-</a>
-</div>
-<main class=wrapper>
-<nav class=navigation>
-<section class=container>
-<a class=navigation-title href=https://www.fromkk.com/>
-KK's Blog (fromkk)
-</a>
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=content-language content="en"><meta name=color-scheme content="light dark"><meta name=author content="KK"><meta name=description content="Overview     CPython allocation memory to save dictionary, the initial table size is 8, entries are saved as <hash,key,value> in each slot(The slot content changed after Python 3.6). When a new key is added, python use i = hash(key) & mask where mask=table_size-1 to calculate which slot it should be placed. If the slot is occupied, CPython using a probing algorithm to find the empty slot to store new item."><meta name=keywords content="fromkk,blog,kk blog,developer,personal,python,golang,go,linux,machine learning"><meta name=twitter:card content="summary"><meta name=twitter:title content="Python Dictionary Implementation"><meta name=twitter:description content="Overview     CPython allocation memory to save dictionary, the initial table size is 8, entries are saved as <hash,key,value> in each slot(The slot content changed after Python 3.6). When a new key is added, python use i = hash(key) & mask where mask=table_size-1 to calculate which slot it should be placed. If the slot is occupied, CPython using a probing algorithm to find the empty slot to store new item."><meta property="og:title" content="Python Dictionary Implementation"><meta property="og:description" content="Overview     CPython allocation memory to save dictionary, the initial table size is 8, entries are saved as <hash,key,value> in each slot(The slot content changed after Python 3.6). When a new key is added, python use i = hash(key) & mask where mask=table_size-1 to calculate which slot it should be placed. If the slot is occupied, CPython using a probing algorithm to find the empty slot to store new item."><meta property="og:type" content="article"><meta property="og:url" content="https://www.fromkk.com/posts/python-dictionary-implementation/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2019-02-17T21:48:00+08:00"><meta property="article:modified_time" content="2020-05-31T23:52:58+08:00"><title>Python Dictionary Implementation · KK's Blog (fromkk)</title><link rel=canonical href=https://www.fromkk.com/posts/python-dictionary-implementation/><link rel=preload href="https://www.fromkk.com/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin><link rel=stylesheet href=https://www.fromkk.com/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen><link rel=stylesheet href=https://www.fromkk.com/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen><link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-32x32.png sizes=32x32><link rel=icon type=image/png href=https://www.fromkk.com/icons/icon-16x16.png sizes=16x16><link rel=apple-touch-icon href=https://www.fromkk.com/icons/icon-192x192.png><link rel=apple-touch-icon sizes=180x180 href=https://www.fromkk.com/icons/icon-192x192.png><meta name=generator content="Hugo 0.94.2"></head><body class="preload-transitions colorscheme-auto"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=https://www.fromkk.com/>KK's Blog (fromkk)</a>
 <input type=checkbox id=menu-toggle>
-<label class="menu-button float-right" for=menu-toggle>
-<i class="fa fa-bars fa-fw" aria-hidden=true></i>
-</label>
-<ul class=navigation-list>
-<li class=navigation-item>
-<a class=navigation-link href=https://www.fromkk.com/posts/>Blog</a>
-</li>
-<li class=navigation-item>
-<a class=navigation-link href=https://www.fromkk.com/tags/>Tags</a>
-</li>
-<li class=navigation-item>
-<a class=navigation-link href=https://www.fromkk.com/about/>About</a>
-</li>
-<li class=navigation-item>
-<a class=navigation-link href=https://www.fromkk.com/posts/index.xml>RSS</a>
-</li>
-</ul>
-</section>
-</nav>
-<div class=content>
-<section class="container post">
-<article>
-<header>
-<div class=post-title>
-<h1 class=title>
-<a class=title-link href=https://www.fromkk.com/posts/python-dictionary-implementation/>
-Python Dictionary Implementation
-</a>
-</h1>
-</div>
-<div class=post-meta>
-<div class=date>
-<span class=posted-on>
-<i class="fa fa-calendar" aria-hidden=true></i>
-<time datetime=2019-02-17T21:48:00+08:00>
-02/17/2019
-</time>
-</span>
-<span class=reading-time>
-<i class="fa fa-clock-o" aria-hidden=true></i>
-3-minute read
-</span>
-</div>
-<div class=tags>
-<i class="fa fa-tag" aria-hidden=true></i>
-<span class=tag>
-<a href=https://www.fromkk.com/tags/python/>Python</a>
-</span></div>
-</div>
-</header>
-<div>
-<h2 id=overview>
-Overview
-<a class=heading-link href=#overview>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2>
-<ol>
-<li>CPython allocation memory to save dictionary, the initial table size is 8, entries are saved as <code>&lt;hash,key,value></code> in each slot(The slot content changed after Python 3.6).</li>
-<li>When a new key is added, python use <code>i = hash(key) & mask</code> where <code>mask=table_size-1</code> to calculate which slot it should be placed. If the slot is occupied, CPython using a probing algorithm to find the empty slot to store new item.</li>
-<li>When 2/3 of the table is full, the table will be resized.</li>
-<li>When getting item from dictionary, both <code>hash</code> and <code>key</code> must be equal.</li>
-</ol>
-<h2 id=resizing>
-Resizing
-<a class=heading-link href=#resizing>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2>
-<p>When elements size is below 50000, the table size will increase by a factor of 4 based on used slots. Otherwise, it will increase by a factor of 2. The dictionary size is always \(2^{n}\).</p>
-<table>
-<thead>
-<tr>
-<th>dict size</th>
-<th>resize when elements in dict</th>
-<th>new table size</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>8</td>
-<td>6</td>
-<td>32</td>
-</tr>
-<tr>
-<td>32</td>
-<td>22</td>
-<td>128</td>
-</tr>
-<tr>
-<td>128</td>
-<td>86</td>
-<td>512</td>
-</tr>
-</tbody>
-</table>
-<p>Removing item from dictionary doesn&rsquo;t lead to shrink table. The value of the item will marks as null but not empty. When looking up element in dictionary, it will keep probing once find this special mark. So deleting element from Python will not decrease the memory using. If you really want to do so, you can the items in the old dictionary to create a new one.</p>
-<h2 id=probing>
-Probing
-<a class=heading-link href=#probing>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2>
-<p>CPython used a modified <strong>random probing</strong> algorithm to choose the empty slot. This algorithm can traval all of the slots in a pseudo random order.</p>
-<p>The travel order can be calculated by this formula: <code>j = ((5*j) + 1) mod 2**i</code>, where <code>j</code> is slot index.</p>
-<p>For example, if table size is 8, and the calculate slot index is 2, then the traversal order should be:</p>
-<p><code>2 -> (5*2+1) mod 8 = 3 -> (5*3+1) mod 8 = 0 -> (5*0+1) mod 8 = 1 -> 6 -> 7 -> 4 -> 5 -> 2</code></p>
-<p>CPython changed this formula by adding <code>perturb</code> and <code>PERTURB_SHIFT</code> variables, where <code>perturb</code> is hash value and <code>PERTURB_SHIFT</code> is 5. By adding <code>PERTURB_SHIFT</code>, the probe sequence depends on every bit in the hash code, and the collision probability is decreased. And <code>perturb</code> will eventually becomes to 0, this ensures that all of the slots will be checked.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>j = (5*j) + 1 + perturb;
-perturb &gt;&gt;= PERTURB_SHIFT;
-j = j % 2**i
-</code></pre></div><h2 id=dictionary-improvement-after-3-dot-6>
-Dictionary improvement after 3.6
-<a class=heading-link href=#dictionary-improvement-after-3-dot-6>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2>
-<p>CPython 3.6 use a compact representation to save entries, and &ldquo;The memory usage of the new dict() is between 20% and 25% smaller compared to Python 3.5&rdquo;.</p>
-<h3 id=compact-hash-table>
-Compact Hash Table
-<a class=heading-link href=#compact-hash-table>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h3>
-<p>As mentioned before, entries saved in the form of <code>&lt;hash,key,value></code>. This will takes 3B on 64 bit machine. And no matter how much item is added into the dictionary, the memory usage is the same(3B*table_size).</p>
-<p>After 3.6, CPython use two structure to save data. One is <strong>index</strong>, another is the <strong>real data</strong>.</p>
-<p>For example, if the table size is 8, and there is an item in slot 1, the <strong>index</strong> looks like this:</p>
-<p><code>[null, 0, null, null, null, null, null, null]</code></p>
-<p>And the <strong>real data</strong> is:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>| hash | key  | value |
-| xxx1 | yyy1 | zzz1  |
-</code></pre></div><p>0 represents the items index on <strong>real data</strong>. If another item is added in slot 3, the new <strong>index</strong> become this:</p>
-<p><code>[null, 0, null, 1, null, null, null, null]</code></p>
-<p>The <strong>real data</strong> become this:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>| hash | key  | value |
-| xxx1 | yyy1 | zzz1  |
-| xxx2 | yyy2 | zzz2  |
-</code></pre></div><p>This saves memory, especially when table load factor is low.</p>
-<h2 id=ref>
-Ref:
-<a class=heading-link href=#ref>
-<i class="fa fa-link" aria-hidden=true></i>
-</a>
-</h2>
-<ol>
-<li><a href=https://stackoverflow.com/questions/327311/how-are-pythons-built-in-dictionaries-implemented>How are Python&rsquo;s Built In Dictionaries Implemented</a></li>
-<li><a href=https://hg.python.org/cpython/file/52f68c95e025/Objects/dictobject.c#l33>cpython source code</a></li>
-<li><a href=https://stackoverflow.com/questions/3020514/is-it-possible-to-give-a-python-dict-an-initial-capacity-and-is-it-useful/3020810>Is it possible to give a python dict an initial capacity (and is it useful)</a></li>
-<li><a href=http://www.laurentluce.com/posts/python-dictionary-implementation/>Python dictionary implementation</a></li>
-</ol>
-</div>
-<footer>
-<script src=https://utteranc.es/client.js repo=bebound/bebound.github.io issue-term=pathname label=comment theme=preferred-color-scheme crossorigin=anonymous async></script>
-</footer>
-</article>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:!0},{left:'$',right:'$',display:!1},{left:'\\(',right:'\\)',display:!1},{left:'\\[',right:'\\]',display:!0}]})"></script>
-</section>
-</div>
-<footer class=footer>
-<section class=container>
-©
+<label class="menu-button float-right" for=menu-toggle><i class="fa fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/posts/>Blog</a></li><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/tags/>Tags</a></li><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/about/>About</a></li><li class=navigation-item><a class=navigation-link href=https://www.fromkk.com/posts/index.xml>RSS</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://www.fromkk.com/posts/python-dictionary-implementation/>Python Dictionary Implementation</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2019-02-17T21:48:00+08:00>02/17/2019</time></span>
+<span class=reading-time><i class="fa fa-clock-o" aria-hidden=true></i>
+3-minute read</span></div><div class=tags><i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag><a href=https://www.fromkk.com/tags/python/>Python</a></span></div></div></header><div><h2 id=overview>Overview
+<a class=heading-link href=#overview><i class="fa fa-link" aria-hidden=true></i></a></h2><ol><li>CPython allocation memory to save dictionary, the initial table size is 8, entries are saved as <code>&lt;hash,key,value></code> in each slot(The slot content changed after Python 3.6).</li><li>When a new key is added, python use <code>i = hash(key) & mask</code> where <code>mask=table_size-1</code> to calculate which slot it should be placed. If the slot is occupied, CPython using a probing algorithm to find the empty slot to store new item.</li><li>When 2/3 of the table is full, the table will be resized.</li><li>When getting item from dictionary, both <code>hash</code> and <code>key</code> must be equal.</li></ol><h2 id=resizing>Resizing
+<a class=heading-link href=#resizing><i class="fa fa-link" aria-hidden=true></i></a></h2><p>When elements size is below 50000, the table size will increase by a factor of 4 based on used slots. Otherwise, it will increase by a factor of 2. The dictionary size is always \(2^{n}\).</p><table><thead><tr><th>dict size</th><th>resize when elements in dict</th><th>new table size</th></tr></thead><tbody><tr><td>8</td><td>6</td><td>32</td></tr><tr><td>32</td><td>22</td><td>128</td></tr><tr><td>128</td><td>86</td><td>512</td></tr></tbody></table><p>Removing item from dictionary doesn&rsquo;t lead to shrink table. The value of the item will marks as null but not empty. When looking up element in dictionary, it will keep probing once find this special mark. So deleting element from Python will not decrease the memory using. If you really want to do so, you can the items in the old dictionary to create a new one.</p><h2 id=probing>Probing
+<a class=heading-link href=#probing><i class="fa fa-link" aria-hidden=true></i></a></h2><p>CPython used a modified <strong>random probing</strong> algorithm to choose the empty slot. This algorithm can traval all of the slots in a pseudo random order.</p><p>The travel order can be calculated by this formula: <code>j = ((5*j) + 1) mod 2**i</code>, where <code>j</code> is slot index.</p><p>For example, if table size is 8, and the calculate slot index is 2, then the traversal order should be:</p><p><code>2 -> (5*2+1) mod 8 = 3 -> (5*3+1) mod 8 = 0 -> (5*0+1) mod 8 = 1 -> 6 -> 7 -> 4 -> 5 -> 2</code></p><p>CPython changed this formula by adding <code>perturb</code> and <code>PERTURB_SHIFT</code> variables, where <code>perturb</code> is hash value and <code>PERTURB_SHIFT</code> is 5. By adding <code>PERTURB_SHIFT</code>, the probe sequence depends on every bit in the hash code, and the collision probability is decreased. And <code>perturb</code> will eventually becomes to 0, this ensures that all of the slots will be checked.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>j = (5*j) + 1 + perturb;
+</span></span><span style=display:flex><span>perturb &gt;&gt;= PERTURB_SHIFT;
+</span></span><span style=display:flex><span>j = j % 2**i
+</span></span></code></pre></div><h2 id=dictionary-improvement-after-3-dot-6>Dictionary improvement after 3.6
+<a class=heading-link href=#dictionary-improvement-after-3-dot-6><i class="fa fa-link" aria-hidden=true></i></a></h2><p>CPython 3.6 use a compact representation to save entries, and &ldquo;The memory usage of the new dict() is between 20% and 25% smaller compared to Python 3.5&rdquo;.</p><h3 id=compact-hash-table>Compact Hash Table
+<a class=heading-link href=#compact-hash-table><i class="fa fa-link" aria-hidden=true></i></a></h3><p>As mentioned before, entries saved in the form of <code>&lt;hash,key,value></code>. This will takes 3B on 64 bit machine. And no matter how much item is added into the dictionary, the memory usage is the same(3B*table_size).</p><p>After 3.6, CPython use two structure to save data. One is <strong>index</strong>, another is the <strong>real data</strong>.</p><p>For example, if the table size is 8, and there is an item in slot 1, the <strong>index</strong> looks like this:</p><p><code>[null, 0, null, null, null, null, null, null]</code></p><p>And the <strong>real data</strong> is:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>| hash | key  | value |
+</span></span><span style=display:flex><span>| xxx1 | yyy1 | zzz1  |
+</span></span></code></pre></div><p>0 represents the items index on <strong>real data</strong>. If another item is added in slot 3, the new <strong>index</strong> become this:</p><p><code>[null, 0, null, 1, null, null, null, null]</code></p><p>The <strong>real data</strong> become this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>| hash | key  | value |
+</span></span><span style=display:flex><span>| xxx1 | yyy1 | zzz1  |
+</span></span><span style=display:flex><span>| xxx2 | yyy2 | zzz2  |
+</span></span></code></pre></div><p>This saves memory, especially when table load factor is low.</p><h2 id=ref>Ref:
+<a class=heading-link href=#ref><i class="fa fa-link" aria-hidden=true></i></a></h2><ol><li><a href=https://stackoverflow.com/questions/327311/how-are-pythons-built-in-dictionaries-implemented>How are Python&rsquo;s Built In Dictionaries Implemented</a></li><li><a href=https://hg.python.org/cpython/file/52f68c95e025/Objects/dictobject.c#l33>cpython source code</a></li><li><a href=https://stackoverflow.com/questions/3020514/is-it-possible-to-give-a-python-dict-an-initial-capacity-and-is-it-useful/3020810>Is it possible to give a python dict an initial capacity (and is it useful)</a></li><li><a href=http://www.laurentluce.com/posts/python-dictionary-implementation/>Python dictionary implementation</a></li></ol></div><footer><script src=https://utteranc.es/client.js repo=bebound/bebound.github.io issue-term=pathname label=comment theme=preferred-color-scheme crossorigin=anonymous async></script></footer></article><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous onload='renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})'></script></section></div><footer class=footer><section class=container>©
 2022
 KK
 ·
-Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.
-</section>
-</footer>
-</main>
-<script src=https://www.fromkk.com/js/coder.min.39a51230dce2ac866c049b52573e38bf60666af4bc63c1bdf203b9b2d95b1cd6.js integrity="sha256-OaUSMNzirIZsBJtSVz44v2BmavS8Y8G98gO5stlbHNY="></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-153788833-1','auto'),ga('send','pageview'))</script>
-</body>
-</html>
+Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.</section></footer></main><script src=https://www.fromkk.com/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-153788833-1","auto"),ga("send","pageview"))</script></body></html>
