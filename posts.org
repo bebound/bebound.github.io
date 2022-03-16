@@ -10,7 +10,7 @@
   :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :noauthor true :nocomment true :nodate true :nopaging true :noread true
   :EXPORT_HUGO_SECTION: posts
   :END:
-** Machine Learning                                       :Machine__Learning:
+** Machine Learning                                      :Machine__Learning:
 *** DONE Brief Introduction of Label Propagation Algorithm :Label__Propagation:
 CLOSED: [2017-07-16 Sun 21:45]
    :PROPERTIES:
@@ -873,7 +873,6 @@ Depending on the fingerprints' bit and documents number, you need to find a opti
 1. [[https://moz.com/devblog/near-duplicate-detection][Near-Duplicate Detection]]
 2. [[https://www2007.org/papers/paper215.pdf][Detecting Near-Duplicates for Web Crawling]]
 3. [[https://github.com/seomoz/simhash-py][simhash-py]]
-
 ** Python                                                           :Python:
 *** DONE Create Node Benchmark in Py2neo
 CLOSED: [2018-11-05 Mon 15:55]
@@ -1843,6 +1842,127 @@ Ref:
 2. [[https://code.djangoproject.com/ticket/30077][Djanog - TextField constructor needs a strip=False option]]
 3. [[https://stackoverflow.com/questions/50019009/in-django-rest-control-serializer-does-not-automatically-remove-spaces][StackOverflow - In Django REST control serializer does not automatically remove spaces]]
 4. [[https://www.aaronoellis.com/articles/allow-whitespace-to-be-a-valid-charfield-value-in-django-admin][Allow Whitespace to be a Valid CharField Value in Django Admin]]
+
+*** DONE Memory Leak in Python multiprocessing.Pool
+CLOSED: [2022-03-16 Wed 21:04]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: memory-leak-in-python-multiprocessing-dot-pool
+   :END:
+
+There is a historical memory leak problem in our Django app and I fixed it recently. As time goes by, the memory usage of app keeps growing and so does the CPU usage.
+
+[[file:/images/pool_before.png]]
+
+After some research, I figure out the cause. Some views does not close ~multiprocessing.Pool~ after using it. The problem disappears when I use ~Pool~ with ~with~ statement.
+
+[[file:/images/pool_after.png]]
+
+But I'm still interested in it and wrote some testing code. The script is run in Python 3.6.8 and produce similar result when using ~multiprocessing.ThreadPool~.
+#+begin_src python3
+import time
+from multiprocessing import Pool
+
+
+def func(i):
+    return i
+
+
+def ori():
+    # create many thread as time goes by, when i==300 cpu grow to 300%, run out of 16g ram and stuck I have to kill process
+    p = Pool(4)
+    r.append(p.map(func, range(4)))
+
+
+def with_close():
+    # 100% cpu, 0.1 ram, create 40 thread, takes 41s
+    p = Pool(4)
+    r.append(p.map(func, range(4)))
+    p.close()
+
+
+def with_terminate():
+    # 5% cpu, 0.1 ram, create 4 thread, takes 425s
+    p = Pool(4)
+    r.append(p.map(func, range(4)))
+    p.terminate()
+
+
+def with_with():
+    # same as terminate
+    with Pool(4) as p:
+        r.append(p.map(func, range(4)))
+
+
+r = []
+s = time.time()
+for i in range(4000):
+    ori()
+    # with_close()
+    # with_terminate()
+    # with_with()
+
+    if i % 100 == 0:
+        print(i)
+
+print(f'takes {time.time() - s} seconds')
+#+end_src
+
+As you can see, there are four functions. The ~ori~ function is ~Pool~ with no ~close~ and ~terminate~, the RAM keeps growing and the script stuck. ~with_close~, ~with_terminate~ and ~with_with~ will exit normally but time is different.
+
+**** Why ~close()~ is faster than ~terminate()~
+~Pool.terminate()~ will call ~terminate()~ in each worker. ~Pool.close()~ just change the pool states and each worker will terminate itself. You can find the source code on [[https://github.com/python/cpython/blob/v3.6.8/Lib/multiprocessing/pool.py][GitHub]].
+
+**** Verify Memory Leak
+#+begin_src python3
+import gc
+import time
+import weakref
+
+
+from multiprocessing import Pool
+
+def func(i):
+    return i
+
+
+p = Pool(4)
+wr = weakref.ref(p)
+p.map(func, range(4))
+print(wr())
+print(gc.get_referents(wr()))
+# p.close()
+# p.terminate()
+time.sleep(1)
+del p
+gc.collect()
+print(wr())
+print(gc.get_referents(wr()))
+#+end_src
+
+If not calling ~close~ or ~terminate~, after execution, ~p~ is still referred by some objects:
+#+begin_src
+<multiprocessing.pool.Pool object at 0x7fc0e6db0828>
+[{'_ctx': <multiprocessing.context.ForkContext object at 0x7fc0e6d455c0>, '_inqueue': <multiprocessing.queues.SimpleQueue object at 0x7fc0e6db0860>, '_outqueue': <multiprocessing.queues.SimpleQueue object at 0x7fc0e5babac8>, '_quick_put': <bound method _ConnectionBase.send of <multiprocessing.connection.Connection object at 0x7fc0e620e8d0>>, '_quick_get': <bound method _ConnectionBase.recv of <multiprocessing.connection.Connection object at 0x7fc0e4d241d0>>, '_taskqueue': <queue.Queue object at 0x7fc0e4d24320>, '_cache': {}, '_state': 0, '_maxtasksperchild': None, '_initializer': None, '_initargs': (), '_processes': 4, '_pool': [<ForkProcess(ForkPoolWorker-1, started daemon)>, <ForkProcess(ForkPoolWorker-2, started daemon)>, <ForkProcess(ForkPoolWorker-3, started daemon)>, <ForkProcess(ForkPoolWorker-4, started daemon)>], '_worker_handler': <Thread(Thread-1, started daemon 140466410379008)>, '_task_handler': <Thread(Thread-2, started daemon 140466401986304)>, '_result_handler': <Thread(Thread-3, started daemon 140466393593600)>, '_terminate': <Finalize object, callback=_terminate_pool, args=(<queue.Queue object at 0x7fc0e4d24320>, <multiprocessing.queues.SimpleQueue object at 0x7fc0e6db0860>, <multiprocessing.queues.SimpleQueue object at 0x7fc0e5babac8>, [<ForkProcess(ForkPoolWorker-1, started daemon)>, <ForkProcess(ForkPoolWorker-2, started daemon)>, <ForkProcess(ForkPoolWorker-3, started daemon)>, <ForkProcess(ForkPoolWorker-4, started daemon)>], <Thread(Thread-1, started daemon 140466410379008)>, <Thread(Thread-2, started daemon 140466401986304)>, <Thread(Thread-3, started daemon 140466393593600)>, {}), exitprority=15>}, <class 'multiprocessing.pool.Pool'>]
+<multiprocessing.pool.Pool object at 0x7fc0e6db0828>
+[{'_ctx': <multiprocessing.context.ForkContext object at 0x7fc0e6d455c0>, '_inqueue': <multiprocessing.queues.SimpleQueue object at 0x7fc0e6db0860>, '_outqueue': <multiprocessing.queues.SimpleQueue object at 0x7fc0e5babac8>, '_quick_put': <bound method _ConnectionBase.send of <multiprocessing.connection.Connection object at 0x7fc0e620e8d0>>, '_quick_get': <bound method _ConnectionBase.recv of <multiprocessing.connection.Connection object at 0x7fc0e4d241d0>>, '_taskqueue': <queue.Queue object at 0x7fc0e4d24320>, '_cache': {}, '_state': 0, '_maxtasksperchild': None, '_initializer': None, '_initargs': (), '_processes': 4, '_pool': [<ForkProcess(ForkPoolWorker-1, started daemon)>, <ForkProcess(ForkPoolWorker-2, started daemon)>, <ForkProcess(ForkPoolWorker-3, started daemon)>, <ForkProcess(ForkPoolWorker-4, started daemon)>], '_worker_handler': <Thread(Thread-1, started daemon 140466410379008)>, '_task_handler': <Thread(Thread-2, started daemon 140466401986304)>, '_result_handler': <Thread(Thread-3, started daemon 140466393593600)>, '_terminate': <Finalize object, callback=_terminate_pool, args=(<queue.Queue object at 0x7fc0e4d24320>, <multiprocessing.queues.SimpleQueue object at 0x7fc0e6db0860>, <multiprocessing.queues.SimpleQueue object at 0x7fc0e5babac8>, [<ForkProcess(ForkPoolWorker-1, started daemon)>, <ForkProcess(ForkPoolWorker-2, started daemon)>, <ForkProcess(ForkPoolWorker-3, started daemon)>, <ForkProcess(ForkPoolWorker-4, started daemon)>], <Thread(Thread-1, started daemon 140466410379008)>, <Thread(Thread-2, started daemon 140466401986304)>, <Thread(Thread-3, started daemon 140466393593600)>, {}), exitprority=15>}, <class 'multiprocessing.pool.Pool'>]
+#+end_src
+
+After calling ~close()~ or ~terminate()~, the last two lines become:
+#+begin_src
+None
+[]
+#+end_src
+
+**** Document Update
+The Python3.7 document adds this [[https://docs.python.org/3.7/library/multiprocessing.html#multiprocessing.pool.Pool][warning]]:
+#+begin_quote
+~multiprocessing.pool~ objects have internal resources that need to be properly managed (like any other resource) by using the pool as a context manager or by calling ~close()~ and ~terminate()~ manually. Failure to do this can lead to the process hanging on finalization.
+Note that is not correct to rely on the garbage colletor to destroy the pool as CPython does not assure that the finalizer of the pool will be called (see ~object.__del__()~ for more information).
+#+end_quote
+
+**** The Bug is Fixed in Python 3.8
+In python 3.8.6, the script exits normally and the total execution time also decreases without calling ~close()~. I found this issue is fixed in Python bug tracker: [[https://bugs.python.org/issue34172][multiprocessing.Pool and ThreadPool leak resources after being deleted]].
+
 
 ** Go                                                                   :Go:
 *** DONE Difference between Value and Pointer variable in Defer in Go :Defer:
