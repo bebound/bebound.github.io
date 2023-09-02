@@ -2,7 +2,7 @@
 title = "Emacs Chinese-related Settings"
 author = ["KK"]
 date = 2022-02-17T01:27:00+08:00
-lastmod = 2022-02-17T01:39:06+08:00
+lastmod = 2023-09-02T15:53:55+08:00
 tags = ["Emacs"]
 draft = false
 noauthor = true

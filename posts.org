@@ -3046,14 +3046,14 @@ This setting makes it possible to switch input method based on the context of cu
 I'm using ~sis~ package with this configuration. You may need to install ~macism~ if you're not using ~railwaycat/emacsmacport~. More settings can be found in [[https://github.com/laishulu/emacs-smart-input-source][emacs-smart-input-source]].
 
 #+begin_src elisp
-(sis-ism-lazyman-config
-  "com.apple.keylayout.US"
-  "com.apple.inputmethod.SCIM.ITABC")
+  (sis-ism-lazyman-config
+    "com.apple.keylayout.US"
+    "com.apple.inputmethod.SCIM.ITABC")
 
-(sis-global-cursor-color-mode t)
-(sis-global-respect-mode t)
-(sis-global-context-mode t)
-(sis-global-inline-mode t)
+  (sis-global-cursor-color-mode t)
+  (sis-global-respect-mode t)
+  (sis-global-context-mode t)
+  (sis-global-inline-mode t)
 #+end_src
 
 ***** fcitx
@@ -3085,3 +3085,42 @@ PS: [[https://github.com/casouri/valign][valign]] provides visual alignment for 
 Ref:
 1. [[https://develop.spacemacs.org/layers/+intl/chinese/README.html][Spacemacs - Chinese Layer]]
 2. [[https://blindwith.science/2019/07/443.html/][Emacs 中文环境配置]]
+
+*** DONE How to copy files temporarily in Dockerfile           :dockerfile:
+CLOSED: [2023-08-24 Thu 11:49]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: how-to-copy-files-temporarily-in-dockerfile
+   :END:
+It's very common to copy a local file into the container when build docker image. In general, we use ~COPY~ command. But it creates a new layer and increase the final image size. If this is a temporal file and we don't want users waste their storage space, how can we remove it? Here are some approaches.
+
+**** Download the File Dynamically
+If the file can be download from URL or you can create a local HTTP server to share the file, you can download the file, use it and delete it in one ~RUN~ command. For example:
+#+begin_src dockerfile
+  RUN wget xxxx && unzip xxx && rm xxx
+#+end_src
+
+**** RUN --mount Command
+You can also mount file when build image if your file can't be download from Internet or the file is secret. Use it to bind files or directories to the build container. A bind mount is read-only by default, add ~rw~ parameter to make it writable.
+
+If you bind the directory, the changes in the build container does not reflect to host.
+
+The mounted folder are kept in the image, but the files are gone. Don't forget to delete the empty folder if you want to keep image clean.
+***** Mount folder
+#+begin_src dockerfile
+  RUN --mount=type=bind,target=/target_dir/,source=./source_dir/,rw
+#+end_src
+***** Mount file
+#+begin_src dockerfile
+  RUN --mount=type=bind,target=/azure-cli.rpm,source=./docker/azure-cli.rpm tdnf install ca-certificates /azure-cli.rpm -y && tdnf clean all
+#+end_src
+**** --squash Option
+You can also use ~--squash~ to reduce image size.
+Once the build is complete, Docker creates a new image loading the diffs from each layer into a single new layer and references all the parent's layers. So the extra space created by ~COPY~ command can be freed by ~squash~.
+
+
+Ref:
+1. [[https://docs.docker.com/develop/develop-images/dockerfile_best-practices/][Dockerfile best practice]]
+2. [[https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/reference.md#run---mount][RUN --mount]]
+3. [[https://stackoverflow.com/questions/41764336/how-does-the-new-docker-squash-work][How does the new Docker --squash work]]
+   
+*** TODO Speed up Git speed in WSL
