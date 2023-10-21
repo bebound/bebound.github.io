@@ -2,7 +2,7 @@
 title = "Line Ending in Git"
 author = ["KK"]
 date = 2023-10-21T15:40:00+08:00
-lastmod = 2023-10-21T16:56:41+08:00
+lastmod = 2023-10-21T18:08:11+08:00
 tags = ["Git"]
 draft = false
 noauthor = true
@@ -15,7 +15,7 @@ noread = true
 When working on a project with multiple developers, the line ending can be troublesome. This article will explain how to configure line ending in Git.
 
 
-## Easy configuration {#easy-configuration}
+## Basic configuration {#basic-configuration}
 
 The line ending on Windows is `CRLF`, on Linux is `LF`. To prevent the line ending issue, we can set `core.autocrlf` to `true` on Windows to let git convert `CRLF` to `LF` when commit, and convert `LF` to `CRLF` when checkout. It is automatically configured if you install git on Windows.
 
