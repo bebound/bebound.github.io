@@ -3122,5 +3122,71 @@ Ref:
 1. [[https://docs.docker.com/develop/develop-images/dockerfile_best-practices/][Dockerfile best practice]]
 2. [[https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/reference.md#run---mount][RUN --mount]]
 3. [[https://stackoverflow.com/questions/41764336/how-does-the-new-docker-squash-work][How does the new Docker --squash work]]
-   
+
+*** DONE Line Ending in Git                                           :Git:
+CLOSED: [2023-10-21 Sat 15:40]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: line-ending-in-git
+   :END:
+When working on a project with multiple developers, the line ending can be troublesome. This article will explain how to configure line ending in Git.
+**** Easy configuration
+The line ending on Windows is =CRLF=, on Linux is =LF=. To prevent the line ending issue, we can set =core.autocrlf= to =true= on Windows to let git convert =CRLF= to =LF= when commit, and convert =LF= to =CRLF= when checkout. It is automatically configured if you install git on Windows.
+
+[[https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings?platform=windows][Configuring Git to handle line endings - GitHub Docs]]
+
+#+begin_src powershell
+  # Configure Git to ensure line endings in files you checkout are correct for Windows.
+  # For compatibility, line endings are converted to Unix style when you commit files.
+  $ git config --global core.autocrlf true
+#+end_src
+
+**** Advanced configuration
+You can also use =.gitattributes= to control the line ending in each repository. The =.gitattributes= file is a text file that tells Git how to handle files in the repository. You can specify the line ending of each file type in this file.
+
+***** Auto convert line ending
+With =* text=auto=, Git handles the files in whatever way it thinks is best. This is a good default option.
+
+Use =*.c text= to explicitly declare a file as a text file, so this file is always normalized and converted to native line endings on checkout.
+
+Use =*.png binary= to explicitly declare a file as binary, so Git does not convert it.  (=binray= is an alias for =-text -diff=)
+
+***** Force conversion when checkout:
+You can use =eol= to force conversion when checkout. The following config enforces bat files to be converted to =CRLF= when checkout even on Mac and Linux.
+
+#+begin_src text
+  * text=auto
+  *.bat eol=crlf
+#+end_src
+
+This is the result of =git ls-files --eol= on Windows and Linux:
+
+#+begin_src text
+  git ls-files --eol src/azure-cli/az.bat
+  i/lf    w/crlf  attr/text=auto eol=crlf src/azure-cli/az.bat
+#+end_src
+
+=i= means the index, =w= means the working tree, =attr= means the attribute used when checking out or committing.
+
+You can set =eof= to =crlf= or =lf=. If it's not specified, the line ending will be determined by =core.autocrlf= or =core.eol=. If =text= is set but neither of those variables are set, then the default value is =crlf= on Windows and =lf= on Linux and Mac.
+
+***** Refresh setting
+If you change the =.gitattributes= file, you need to run the following command to refresh the working tree.
+
+#+begin_src shell
+  # Please commit the .gitattributes changes before run this command.
+  git rm -rf --cached .
+  git reset --hard HEAD
+#+end_src
+
+**** Extra
+1. Line endings in tarball also follows the =.gitattributes=. It's identical to Git checkout on Linux machine.
+2. The ~.gitattributes~ settings will only affect new commits. If you want to change the line ending of the files that already in the Git index after changing line ending settings, you can use =git add --renormalize .= to force Git to refresh all tracked files. For example, if the bat file has been add as ~crlf~ in Git index and then you set it as ~text~ in ~.gitattributes~. Running this command asks Git change it to ~lf~ in index.
+
+Ref:
+- [[https://www.git-scm.com/docs/gitattributes#_eol][gitattributes - Defining attributes per path]]
+- [[https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings?platform=windows][Configuring Git to handle line endings - GitHub Docs]]
+- [[https://github.com/Azure/azure-cli/pull/27137][{CI} Enforce LF-only line endings in git #27137 · Azure/azure-cli (github.com)]]
+- [[https://git-scm.com/docs/git-add#Documentation/git-add.txt---renormalize][Git - git-add Documentation --renormalize]]
+
 *** TODO Speed up Git speed in WSL
+The disk performance in WSL is poor, it takes a long time to run ~git status~ in a host's repo in WSL.
