@@ -2,7 +2,7 @@
 title = "How to copy files temporarily in Dockerfile"
 author = ["KK"]
 date = 2023-08-24T11:49:00+08:00
-lastmod = 2023-09-02T15:58:40+08:00
+lastmod = 2023-10-25T21:41:57+08:00
 tags = ["dockerfile"]
 draft = false
 noauthor = true
@@ -24,11 +24,11 @@ RUN wget xxxx && unzip xxx && rm xxx
 ```
 
 
-## RUN --mount Command {#run-mount-command}
+## `RUN --mount` Command {#run-mount-command}
 
-You can also mount file when build image if your file can't be download from Internet or the file is secret. Use it to bind files or directories to the build container. A bind mount is read-only by default, add `rw` parameter to make it writable.
+You can also mount file when build image if your file can't be download from Internet or the file is secret. Use it to bind files or directories to the build container.
 
-If you bind the directory, the changes in the build container does not reflect to host.
+A bind mount is read-only by default, add `rw` parameter to make it writable. The changes during the build are discared after the build is complete.
 
 The mounted folder are kept in the image, but the files are gone. Don't forget to delete the empty folder if you want to keep image clean.
 
@@ -47,7 +47,7 @@ RUN --mount=type=bind,target=/azure-cli.rpm,source=./docker/azure-cli.rpm tdnf i
 ```
 
 
-## --squash Option {#squash-option}
+## `--squash` option in `docker build` {#squash-option-in-docker-build}
 
 You can also use `--squash` to reduce image size.
 Once the build is complete, Docker creates a new image loading the diffs from each layer into a single new layer and references all the parent's layers. So the extra space created by `COPY` command can be freed by `squash`.
