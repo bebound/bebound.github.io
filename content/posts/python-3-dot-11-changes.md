@@ -2,7 +2,7 @@
 title = "Python 3.11 changes"
 author = ["KK"]
 date = 2023-12-10T15:24:00+08:00
-lastmod = 2023-12-10T15:28:00+08:00
+lastmod = 2023-12-11T22:24:40+08:00
 draft = false
 noauthor = true
 nocomment = true
@@ -97,7 +97,13 @@ If you also use `Bar(int, Enum)`, you can replace it with [ReprEnum](https://doc
 
 The `unittest` module replace `unittest.mock._importer` with `pkgutil.resolve_name` in [bpo-44686 replace unittest.mock._importer with pkgutil.resolve_name by graingert · Pull Request #18544 · python/cpython (github.com)](https://github.com/python/cpython/pull/18544), which also introduces some changes.
 
-Previously, it use `__import__` to import the patch target, which does not check the module name. But `pkgutil.resolve_name` will check name first, thus `mock.patch` fails if the target is not a valid Python module name. For example, this statement fails in 3.11: `@mock.patch('azure.cli.command_modules.vm.aaz.2020_09_01_hybrid.network.vnet.List', _mock_network_client_with_existing_vnet_location)` `pkgutil` raises this error as `2020_09_01_hybrid` is not a valid variable name in Python.
+Previously, it use `__import__` to import the patch target, which does not check the module name. But `pkgutil.resolve_name` will check name first, thus `mock.patch` fails if the target is not a valid Python module name. For example, this statement fails in 3.11:
+
+```python
+@mock.patch('azure.cli.command_modules.vm.aaz.2020_09_01_hybrid.network.vnet.List', _mock_network_client_with_existing_vnet_location)
+```
+
+as `2020_09_01_hybrid` is not a valid variable name in Python.
 
 ```python
             _NAME_PATTERN = re.compile(f'^(?P<pkg>{dotted_words})'

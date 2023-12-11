@@ -3280,17 +3280,22 @@ If you also use =Bar(int, Enum)=, you can replace it with [[https://docs.python.
 **** unittest.Mock
 The =unittest= module replace =unittest.mock._importer= with =pkgutil.resolve_name= in [[https://github.com/python/cpython/pull/18544][bpo-44686 replace unittest.mock._importer with pkgutil.resolve_name by graingert · Pull Request #18544 · python/cpython (github.com)]], which also introduces some changes.
 
-Previously, it use =__import__= to import the patch target, which does not check the module name. But =pkgutil.resolve_name= will check name first, thus =mock.patch= fails if the target is not a valid Python module name. For example, this statement fails in 3.11: =@mock.patch('azure.cli.command_modules.vm.aaz.2020_09_01_hybrid.network.vnet.List', _mock_network_client_with_existing_vnet_location)= =pkgutil= raises this error as =2020_09_01_hybrid= is not a valid variable name in Python.
+Previously, it use =__import__= to import the patch target, which does not check the module name. But =pkgutil.resolve_name= will check name first, thus =mock.patch= fails if the target is not a valid Python module name. For example, this statement fails in 3.11:
+#+BEGIN_SRC python
+  @mock.patch('azure.cli.command_modules.vm.aaz.2020_09_01_hybrid.network.vnet.List', _mock_network_client_with_existing_vnet_location)
+#+END_SRC
+
+  as =2020_09_01_hybrid= is not a valid variable name in Python.
 
 #+BEGIN_SRC python
-              _NAME_PATTERN = re.compile(f'^(?P<pkg>{dotted_words})'
-                                         f'(?P<cln>:(?P<obj>{dotted_words})?)?$',
-                                         re.UNICODE)
+                _NAME_PATTERN = re.compile(f'^(?P<pkg>{dotted_words})'
+                                           f'(?P<cln>:(?P<obj>{dotted_words})?)?$',
+                                           re.UNICODE)
 
-          m = _NAME_PATTERN.match(name)
-          if not m:
-  >           raise ValueError(f'invalid format: {name!r}')
-  E           ValueError: invalid format: 'azure.cli.command_modules.vm.aaz.2020_09_01_hybrid.network.vnet'
+            m = _NAME_PATTERN.match(name)
+            if not m:
+    >           raise ValueError(f'invalid format: {name!r}')
+    E           ValueError: invalid format: 'azure.cli.command_modules.vm.aaz.2020_09_01_hybrid.network.vnet'
 #+END_SRC
 
 As a workaround, =mock.patch.object= works.
