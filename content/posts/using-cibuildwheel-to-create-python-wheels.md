@@ -2,7 +2,7 @@
 title = "Using cibuildwheel to Create Python Wheels"
 author = ["KK"]
 date = 2020-07-29T22:53:00+08:00
-lastmod = 2020-07-29T23:14:25+08:00
+lastmod = 2023-12-18T21:38:37+08:00
 tags = ["Python"]
 draft = false
 noauthor = true
@@ -71,7 +71,7 @@ jobs:
 These options can be applied by setting environment variables.
 
 
-### [CIBW\_BUILD / CIBW\_SKIP](https://cibuildwheel.readthedocs.io/en/stable/options/#build-skip) {#cibw-build-cibw-skip}
+### [CIBW_BUILD / CIBW_SKIP](https://cibuildwheel.readthedocs.io/en/stable/options/#build-skip) {#cibw-build-cibw-skip}
 
 Use this options to filter the Python versions to build.
 
@@ -89,7 +89,7 @@ CIBW_SKIP: cp38-macosx_x86_64
 ```
 
 
-### [CIBW\_BEFORE\_BUILD](https://cibuildwheel.readthedocs.io/en/stable/options/#before-build) {#cibw-before-build}
+### [CIBW_BEFORE_BUILD](https://cibuildwheel.readthedocs.io/en/stable/options/#before-build) {#cibw-before-build}
 
 Execute the shell command before wheel building.
 
@@ -101,7 +101,7 @@ Now you can download `wheelhouse.zip` from `Actions` panel on GitHub, and unzip 
 This process can also be done automatically by using CI configuration file. You can find the example configuration files from [official repo](https://github.com/joerick/cibuildwheel/blob/master/examples/).
 
 
-## Ref: {#ref}
+## Ref {#ref}
 
 1.  [Building Python Platform Wheels for Packages with Binary Extensions](https://gertjanvandenburg.com/blog/wheels/)
 2.  [How to include external library with python wheel package](https://stackoverflow.com/questions/23916186/how-to-include-external-library-with-python-wheel-package)

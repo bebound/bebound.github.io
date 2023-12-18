@@ -46,7 +46,7 @@ In short, let the nearest label has larger weight, then calculate each label's n
 #+attr_html: :width 400
 [[file:/images/label_spreading.png]]
 
-**** Ref:
+**** Ref
 1. [[http://mlg.eng.cam.ac.uk/zoubin/papers/CMU-CALD-02-107.pdf][Learning from Labeled and Unlabeled Data with Label Propagation]]
 2. [[http://blog.csdn.net/zouxy09/article/details/49105265][标签传播算法（Label Propagation）及Python实现]]
 
@@ -95,7 +95,7 @@ $z_t$ is update gate, $r_t$ is reset gate, $\tilde{h_t}$ is candidate activation
 
 Compare with LSTM, GRU merge cell state and hidden state to one hidden state, and use $z_t$ to decide how to update the state rather than $f_t$ and $i_t$.
 
-**** Ref:
+**** Ref
 1. [[http://colah.github.io/posts/2015-08-Understanding-LSTMs/][Understanding LSTM Networks]]
 
 *** DONE Models and Architectures in Word2vec                       :word2vec:
@@ -205,7 +205,7 @@ where $\theta$ is the parameters of the model($\upsilon$ and $u$).
 
 I found this two articles pretty useful: [[https://rohanvarma.me/Word2Vec/][Language Models, Word2Vec, and Efficient Softmax Approximations]] and [[https://towardsdatascience.com/word2vec-from-scratch-with-numpy-8786ddd49e72][Word2vec from Scratch with NumPy]].
 
-**** Ref:
+**** Ref
 1. [word2vec 原理推导与代码分析](http://www.hankcs.com/nlp/word2vec.html)
 2. [CS 224D: Deep Learning for NLP Lecture Notes: Part I](http://cs224d.stanford.edu/lecture_notes/notes1.pdf)
 3. [word2vec 中的数学原理详解（一）目录和前言](http://blog.csdn.net/itplus/article/details/37969519)
@@ -253,7 +253,7 @@ $$P(\omega_i)=\frac{{f(\omega_i)}^{{3}/{4}}}{\sum_{j=0}^{n}\left({f(\omega_j)}^{
 
 $f(\omega_j)$ is the frequency of word $\omega_j$.
 
-**** Ref:
+**** Ref
 1. [Word2Vec Tutorial - The Skip-Gram Model](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
 2. [Word2Vec Tutorial Part 2 - Negative Sampling](http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/)
 
@@ -431,7 +431,7 @@ Finally, we can train the model.
 You can found =textcnn.ipynb= on [[https://github.com/bebound/textcnn][GitHub]] or [[https://colab.research.google.com/drive/1iZE5O0aBEOEhkWNpARqK5u151qrlwJq-#scrollTo=qR-sHoABrMg3&uniqifier=2][Colab]].
 
 
-**** Ref:
+**** Ref
 1. [[https://arxiv.org/abs/1408.5882][Convolutional Neural Networks for Sentence Classiﬁcation]]
 2. [[http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nlp/][Understanding Convolutional Neural Networks for NLP]]
 3. [[https://torchtext.readthedocs.io/en/latest/data.html][Torchtext Docs]]
@@ -559,7 +559,7 @@ The lesson I learnt from this project is patience. It takes a long time(maybe hu
 
 I've uploaded code to this [[https://github.com/bebound/flappy-bird-dqn][repo]].
 
-**** Ref:
+**** Ref
 1. [[https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html][PyTorch REINFORCEMENT LEARNING (DQN) TUTORIAL]]
 2. [[https://www.cnblogs.com/pinard/category/1254674.html][强化学习]] (A series of Chinese post about reinforcement learning)
 3. [[http://cs229.stanford.edu/proj2015/362_report.pdf][Deep Reinforcement Learning for Flappy Bird]]
@@ -637,7 +637,7 @@ $v_a$'s shape is =(x,1)=, and $Wa$ 's shape is =(x,x)=. This is similar to a neu
 
 When I doing a slot filling project, I compare these mechanisms. *Concat* attention produce the best result.
 
-**** Ref:
+**** Ref
 1. [[http://cnyah.com/2017/08/01/attention-variants/][Attention Variants]]
 2. [[https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html][Attention? Attention!]]
 3. [[https://towardsdatascience.com/attention-seq2seq-with-pytorch-learning-to-invert-a-sequence-34faf4133e53][Attention Seq2Seq with PyTorch: learning to invert a sequence]]
@@ -728,8 +728,6 @@ The whole procedure looks like this:
 #+attr_html: :width 500
 [[file:/images/transformer_multihead_all.png]]
 
-
-
 ***** Add & Norm
 
 This layer works like this line of code: =norm(x+dropout(sublayer(x)))= or =x+dropout(sublayer(norm(x)))=. The sublayer is Multi-Head Attention or FF Network.
@@ -773,7 +771,7 @@ The animation below illustrates how to apply the Transformer to machine translat
 
 Using a linear layer to predict the output.
 
-**** Ref:
+**** Ref
 1. [[http://nlp.seas.harvard.edu/2018/04/03/attention.html][The Annotated Transformer]]
 2. [[http://jalammar.github.io/illustrated-transformer/][The Illustrated Transformer]]
 3. [[https://mchromiak.github.io/articles/2017/Sep/12/Transformer-Attention-is-all-you-need/#.XMb3ZC97FPs][The Transformer – Attention is all you need]]
@@ -869,7 +867,7 @@ Besides $AB$, $AC$, $AD$, $BC$, $BD$ and $CD$ may also be identical. So you need
 [[file:/images/simhash_query2.png]]
 
 Depending on the fingerprints' bit and documents number, you need to find a optimal number to split the hash value.
-**** Ref:
+**** Ref
 1. [[https://moz.com/devblog/near-duplicate-detection][Near-Duplicate Detection]]
 2. [[https://www2007.org/papers/paper215.pdf][Detecting Near-Duplicates for Web Crawling]]
 3. [[https://github.com/seomoz/simhash-py][simhash-py]]
@@ -1077,7 +1075,7 @@ $.ajaxSetup({
 #+END_SRC
 
 
-**** Ref:
+**** Ref
 1. [[https://docs.djangoproject.com/en/2.1/ref/csrf/][Cross Site Request Forgery protection]]
 2. [[https://github.com/django/django/blob/master/django/middleware/csrf.py][csrf.py]]
 3. [[https://stackoverflow.com/questions/48002861/whats-the-relationship-between-csrfmiddlewaretoken-and-csrftoken][What's the relationship between csrfmiddlewaretoken and csrftoken?]] 
@@ -1291,7 +1289,7 @@ The *real data* become this:
 This saves memory, especially when table load factor is low.
 
 
-**** Ref:
+**** Ref
 1. [[https://stackoverflow.com/questions/327311/how-are-pythons-built-in-dictionaries-implemented][How are Python's Built In Dictionaries Implemented]]
 2. [[https://hg.python.org/cpython/file/52f68c95e025/Objects/dictobject.c#l33][cpython source code]]
 3. [[https://stackoverflow.com/questions/3020514/is-it-possible-to-give-a-python-dict-an-initial-capacity-and-is-it-useful/3020810][Is it possible to give a python dict an initial capacity (and is it useful)]]
@@ -1354,7 +1352,7 @@ In =X.py= line 5, Python add =Y= into =sys.modules= and start execute code in =Y
 - Wrap function call related to other module into =configure= function, call it manually.
 - Dynamic import(use import within a function).
 
-**** Ref:
+**** Ref
 1. [[https://stackabuse.com/python-circular-imports/][Python Circular Imports]]
 2. [[https://stackoverflow.com/questions/22187279/python-circular-importing][Python Cirluar Importing]]
 3. [[https://stackoverflow.com/questions/744373/circular-or-cyclic-imports-in-python][Circular imports in Python]] 
@@ -1553,7 +1551,7 @@ When running this line ~super(C, self).__init__()~, self is =C='s instance, mro 
 
 So it returns =A=, and A will execute ~__init__()~, then calling ~super(A, self).__init__()~, end enter =B='s ~__init__()~. (=C='s instance ~inst~ will pass as =self= in the calling chain.)
 
-**** Ref: 
+**** Ref 
 1. [[https://www.python.org/download/releases/2.3/mro/][The Python 2.3 Method Resolution Order]]
 2. [[https://www.programiz.com/python-programming/multiple-inheritance][Python Multiple Inheritance]]
 3. [[https://www.jianshu.com/p/de7d38c84443][python之理解super及MRO列表]]
@@ -1701,7 +1699,7 @@ Now you can download =wheelhouse.zip= from =Actions= panel on GitHub, and unzip 
 
 This process can also be done automatically by using CI configuration file. You can find the example configuration files from [[https://github.com/joerick/cibuildwheel/blob/master/examples/][official repo]].
 
-**** Ref:
+**** Ref
 1. [[https://gertjanvandenburg.com/blog/wheels/][Building Python Platform Wheels for Packages with Binary Extensions]]
 2. [[https://stackoverflow.com/questions/23916186/how-to-include-external-library-with-python-wheel-package][How to include external library with python wheel package]]
 3. [[https://github.com/joerick/cibuildwheel][cibuildwheel]]
@@ -1753,13 +1751,14 @@ class ProductSerializer(serializers.ModelSerializer):
 
 (You do not need to do this when using =django-jsonfield-backport=, everything just works.)
 
-**** Ref:
+**** Ref
 1. [[https://github.com/laymonage/django-jsonfield-backport][GitHub - django-jsonfield-backport]]
 2. [[https://librenepal.com/article/use-jsonfield-with-django-rest-framework/][Use JSONField with Django Rest Framework]]
 3. [[https://www.geeksforgeeks.org/jsonfield-in-serializers-django-rest-framework/][JSONField in serializers – Django REST Framework]]
 4. [[https://www.django-rest-framework.org/api-guide/fields/#jsonfield][Django REST framework - jsonfield]]
 
-*** How to disable auto strip in Charfield in Django               :Django:
+*** DONE How to disable auto strip in Charfield in Django          :Django:
+CLOSED: [2021-12-19 Mon 21:20]
    :PROPERTIES:
    :EXPORT_FILE_NAME: how-to-disable-auto-strip-in-charfield-in-django
    :END:
@@ -1837,7 +1836,7 @@ class TestSerializer(serializers.HyperlinkedModelSerializer):
                         "text": {"trim_whitespace": False}}
 #+end_src
 
-Ref:
+**** Ref
 1. [[https://stackoverflow.com/questions/38995764/django-textfield-and-charfield-is-stripping-spaces-and-blank-lines][StackOverflow - Django TextField and CharField is stripping spaces and blank lines]]
 2. [[https://code.djangoproject.com/ticket/30077][Djanog - TextField constructor needs a strip=False option]]
 3. [[https://stackoverflow.com/questions/50019009/in-django-rest-control-serializer-does-not-automatically-remove-spaces][StackOverflow - In Django REST control serializer does not automatically remove spaces]]
@@ -1963,6 +1962,149 @@ Note that is not correct to rely on the garbage colletor to destroy the pool as 
 **** The Bug is Fixed in Python 3.8
 In python 3.8.6, the script exits normally and the total execution time also decreases without calling ~close()~. I found this issue is fixed in Python bug tracker: [[https://bugs.python.org/issue34172][multiprocessing.Pool and ThreadPool leak resources after being deleted]].
 
+*** DONE Python 3.11 changes
+CLOSED: [2023-12-10 Sun 15:24]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: python-3-dot-11-changes
+   :END:
+In [[https://github.com/Azure/azure-cli/pull/26923][[Packaging] Support Python 3.11 by bebound · Pull Request #26923 · Azure/azure-cli (github.com)]] , I bumped azure-cli to use Python 3.11. We've bump the dependency in other PRs, I thought it should be a small PR, but in the end, a lot of changes are made.
+
+**** ~args.getargspec~
+=getargspec= is dropped in 3.11. You can easily replaced it with [[https://docs.python.org/3/library/inspect.html#inspect.getfullargspec][=getfullargspec=]] . It returns =FullArgSpec(args, varargs, varkw, defaults, kwonlyargs, kwonlydefaults, annotations)= instead of =ArgSpec(args, varargs, keywords, defaults)= So =args, _, kw, _ = inspect.getargspec(fn)= can be replaced by =args, _, kw, *_ = inspect.getfullargspec(fn)= However, =getfullargspec= is retained primarily for use in code that needs to maintain compatibility with the Python 2 =inspect= module API.
+
+#+BEGIN_QUOTE
+  Note that [[https://docs.python.org/3.11/library/inspect.html#inspect.signature][=signature()=]] and [[https://docs.python.org/3.11/library/inspect.html#inspect-signature-object][Signature Object]] provide the recommended API for callable introspection, and support additional behaviours (like positional-only arguments) that are sometimes encountered in extension module APIs. This function is retained primarily for use in code that needs to maintain compatibility with the Python 2 =inspect= module API. --[[https://docs.python.org/3.11/library/inspect.html#inspect.getfullargspec][inspect --- Inspect live objects --- Python 3.11.4 documentation]]
+#+END_QUOTE
+
+The modern =signature= function provides the similar result but needs more modification:
+
+#+BEGIN_SRC python
+  import inspect
+  def testfunc(a, /, b=1, c=2, *args, kk, **kwargs):
+      pass
+
+  print(inspect.getfullargspec(testfunc))
+  print(inspect.signature(testfunc).parameters)
+
+  for i, j in inspect.signature(testfunc).parameters.items():
+      print(i, type(i), j, type(j), j.kind)
+
+  args, _, kw, *_ = inspect.getfullargspec(testfunc)
+  print(args, kw)
+
+  from inspect import Parameter
+
+  parameters = inspect.signature(testfunc).parameters
+  args = [k for k, v in parameters.items() if v.kind in {Parameter.POSITIONAL_OR_KEYWORD, Parameter.POSITIONAL_ONLY}]
+  kw = next(iter([k for k, v in parameters.items() if v.kind == Parameter.VAR_KEYWORD]), None)
+  print(args, kw)
+#+END_SRC
+
+#+BEGIN_SRC
+  FullArgSpec(args=['a', 'b', 'c'], varargs='args', varkw='kwargs', defaults=(1, 2), kwonlyargs=['kk'], kwonlydefaults=None, annotations={})
+  OrderedDict([('a', <Parameter "a">), ('b', <Parameter "b=1">), ('c', <Parameter "c=2">), ('args', <Parameter "*args">), ('kk', <Parameter "kk">), ('kwargs', <Parameter "**kwargs">)])
+
+  a <class 'str'> a <class 'inspect.Parameter'> POSITIONAL_ONLY
+  b <class 'str'> b=1 <class 'inspect.Parameter'> POSITIONAL_OR_KEYWORD
+  c <class 'str'> c=2 <class 'inspect.Parameter'> POSITIONAL_OR_KEYWORD
+  args <class 'str'> *args <class 'inspect.Parameter'> VAR_POSITIONAL
+  kk <class 'str'> kk <class 'inspect.Parameter'> KEYWORD_ONLY
+  kwargs <class 'str'> **kwargs <class 'inspect.Parameter'> VAR_KEYWORD
+
+  ['a', 'b', 'c'] kwargs
+  ['a', 'b', 'c'] kwargs
+#+END_SRC
+
+**** Enum =__format__= change
+There is some custom classes in azure-cli, which makes =Foo.BAR=='bar'=. In 3.11, the [[https://docs.python.org/3/whatsnew/3.11.html#enum][Enum]] =__format__()= changes, it returns the enum and member name (ex: =Color.RED=). (The =__str__= method is the same as Python 3.10)
+
+#+BEGIN_QUOTE
+  Changed [[https://docs.python.org/3/library/enum.html#enum.Enum.__format__][=Enum.__format__()=]] (the default for [[https://docs.python.org/3/library/functions.html#format][=format()=]], [[https://docs.python.org/3/library/stdtypes.html#str.format][=str.format()=]] and [[https://docs.python.org/3/glossary.html#term-f-string][f-string]]s) to always produce the same result as =Enum.__str__()=: for enums inheriting from [[https://docs.python.org/3/library/enum.html#enum.ReprEnum][=ReprEnum=]] it will be the member's value; for all other enums it will be the enum and member name (e.g. =Color.RED=). --[[https://docs.python.org/3/whatsnew/3.11.html#enum][What's New In Python 3.11]]
+#+END_QUOTE
+
+#+BEGIN_SRC python
+  from enum import Enum
+  class Foo(str, Enum):
+      BAR = "bar"
+
+  # Python 3.10
+  f"{Foo.BAR}"  # > bar
+  str(Foo.BAR)  # > Foo.BAR
+
+  # Python 3.11
+  f"{Foo.BAR}"  # > Foo.BAR
+  str(Foo.BAR)  # > Foo.BAR
+#+END_SRC
+
+The standard way to replace Foo class is [[https://docs.python.org/3.11/library/enum.html#enum.StrEnum][StrEnum]]
+
+#+BEGIN_SRC python
+  class Foo(StrEnum):
+      BAR = "bar"
+
+  # Python 3.11
+  f"{Foo.BAR}"  # > bar
+#+END_SRC
+
+If you also use =Bar(int, Enum)=, you can replace it with [[https://docs.python.org/3.11/library/enum.html#enum.ReprEnum][ReprEnum]]: =Bar(int, ReprEnum)=.
+
+**** unittest.Mock
+The =unittest= module replace =unittest.mock._importer= with =pkgutil.resolve_name= in [[https://github.com/python/cpython/pull/18544][bpo-44686 replace unittest.mock._importer with pkgutil.resolve_name by graingert · Pull Request #18544 · python/cpython (github.com)]], which also introduces some changes.
+
+Previously, it use =__import__= to import the patch target, which does not check the module name. But =pkgutil.resolve_name= will check name first, thus =mock.patch= fails if the target is not a valid Python module name. For example, this statement fails in 3.11:
+#+BEGIN_SRC python
+  @mock.patch('azure.cli.command_modules.vm.aaz.2020_09_01_hybrid.network.vnet.List', _mock_network_client_with_existing_vnet_location)
+#+END_SRC
+
+  as =2020_09_01_hybrid= is not a valid variable name in Python.
+
+#+BEGIN_SRC python
+                _NAME_PATTERN = re.compile(f'^(?P<pkg>{dotted_words})'
+                                           f'(?P<cln>:(?P<obj>{dotted_words})?)?$',
+                                           re.UNICODE)
+
+            m = _NAME_PATTERN.match(name)
+            if not m:
+    >           raise ValueError(f'invalid format: {name!r}')
+    E           ValueError: invalid format: 'azure.cli.command_modules.vm.aaz.2020_09_01_hybrid.network.vnet'
+#+END_SRC
+
+As a workaround, =mock.patch.object= works.
+
+#+BEGIN_SRC python
+  vnet = import_module('azure.cli.command_modules.vm.aaz.2018_03_01_hybrid.network.vnet')
+  with mock.patch.object(vnet, 'List', _mock_network_client_with_existing_vnet):
+#+END_SRC
+
+The ultimate solution is fix module name.
+
+**** argparse.ArgumentError
+[[https://github.com/python/cpython/pull/18605][bpo-39716: Raise on conflicting subparser names. by anntzer · Pull Request #18605 · python/cpython (github.com)]] Raise an ArgumentError when the same subparser name is added twice.
+
+#+BEGIN_SRC python
+  import argparse
+
+  parser = argparse.ArgumentParser()
+  t = parser.add_subparsers()
+  t.add_parser('a')
+  t.add_parser('a')
+#+END_SRC
+
+The above code works on 3.10 but raises this error in 3.11:
+
+#+BEGIN_SRC
+  Traceback (most recent call last):
+    File "C:\Users\kk\Developer\azure-cli\p.py", line 6, in <module>
+      t.add_parser('a')
+    File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.1264.0_x64__qbz5n2kfra8p0\Lib\argparse.py", line 1192, in add_parser
+      raise ArgumentError(self, _('conflicting subparser: %s') % name)
+  argparse.ArgumentError: argument {a}: conflicting subparser: a
+#+END_SRC
+
+**** Ref
+- [[https://blog.pecar.me/python-enum][Enum with =str= or =int= Mixin Breaking Change in Python 3.11 (pecar.me)]]
+- [[https://github.com/python/cpython/issues/100458][Enum with =str= or =int= Mixin Breaking Change in Python 3.11 · Issue #100458 · python/cpython (github.com)]]
+- [[https://docs.python.org/3/whatsnew/3.11.html][What's New In Python 3.11 --- Python 3.11.4 documentation]]
 
 ** Go                                                                   :Go:
 *** DONE Difference between Value and Pointer variable in Defer in Go :Defer:
@@ -2087,7 +2229,7 @@ Exit causes the current program to exit with the given status code. Conventional
 from [[https://golang.org/pkg/os/#Exit][godoc]]
 #+end_quote
 
-**** Ref:
+**** Ref
 1. [[https://draveness.me/golang/keyword/golang-defer.html][面向信仰编程 defer]]
 2. [[https://stackoverflow.com/questions/28893586/golang-defer-clarification][Golang defer clarification]]
 3. [[https://stackoverflow.com/questions/27629380/how-to-exit-a-go-program-honoring-deferred-calls/39755730][How to exit a go program honoring deferred calls?]]
@@ -2095,7 +2237,7 @@ from [[https://golang.org/pkg/os/#Exit][godoc]]
 5. [[https://golang.org/pkg/runtime/#Goexit][Golang Runtime]]
 6. [[https://tachingchen.com/tw/blog/go-defer-and-os-exit/][Go defer 遇上 os.Exit 時失效]]
 ** Misc
-*** DONE Some Useful Shell Tools                                      :Shell:
+*** DONE Some Useful Shell Tools                                    :Shell:
 CLOSED: [2017-05-07 Sun 15:34]
    :PROPERTIES:
    :EXPORT_FILE_NAME: some-useful-shell-tools
@@ -2371,7 +2513,7 @@ If you want a free app, I suggest [[http://cocoacake.net/apps/fiery/][Fiery Feed
 You can find the latest document [[https://ttrss.henry.wang][here]].
 
 
-**** Ref:
+**** Ref
 1. [[https://henry.wang/2018/04/25/ttrss-docker-plugins-guide.html][A ttrss setup guide - Start your own RSS aggregator today]]
 *** DONE Jaeger Code Structure                                     :Jaeger:
 CLOSED: [2019-09-22 Sun 17:07]
@@ -2482,7 +2624,7 @@ Here is another example, =every 5s for 10s group by time(10s)=
 
 I guess the reason why start time is always >= selected start time is to prevent pollute previous data. If the aggregated data is not enough, it will overwrite the correct data generated before. If there is not enough data in end time clause, it will be correct in the future.
 
-**** Ref:
+**** Ref
 1. [[https://docs.influxdata.com/influxdb/v1.7/query_language/data_exploration/#basic-group-by-time-syntax][group by time syntax]]
 2. [[https://docs.influxdata.com/influxdb/v1.7/query_language/continuous_queries/#advanced-syntax][continuous queries advanced syntax]]
 
@@ -2762,7 +2904,7 @@ All of these methods should work
 - Set JVM property by code =System.setProperty("user.timezone", "Asia/Shanghai")=
 - Set timezone manually in Calendar =Calendar.getInstance(TimeZone.getTimeZone("Asia/Shanghai"))=
 
-**** Ref:
+**** Ref
 1. [[https://www.baeldung.com/java-jvm-time-zone][How to Set the JVM Time Zone]]
 2. [[https://cloud.tencent.com/developer/article/1175487][jvm linux 时区设置]]
 3. [[http://kaiwangchen.github.io/2018/09/30/java-timezone-revisited.html][Java default timezone detection, revisited]]
@@ -2860,7 +3002,7 @@ How to choose compression type? According to cloudflare's test result in [[https
 
 These are common configurations, you can find more from the official document contains such as =max.in.flight.requests.per.connection=.
 
-Ref:
+**** Ref
 1. [[https://kafka.apache.org/documentation/#messageformat][Kafka message format]]
 2. [[https://juejin.cn/post/6844903632521920519][Kafka高性能探秘]]
 3. [[https://medium.com/swlh/exploit-apache-kafkas-message-format-to-save-storage-and-bandwidth-7e0c533edf26][Exploit Apache Kafka’s Message Format to Save Storage and Bandwidth]]
@@ -2951,11 +3093,11 @@ I tried these methods, but none of them works.
 
 Later, =RedHatDude='s answer in [[https://discussions.apple.com/thread/252924363?login=true][this post]] gives me a clue, it looks like a iCloud sync problem. I tried to delete the account on my 3 MacBooks together. Thank goodness! It does not show up again.
 
-Ref:
+**** Ref
 1. [[https://community.jamf.com/t5/jamf-pro/removing-accounts-from-internet-accounts/td-p/179654][Removing Accounts from Internet Accounts]]
 2. [[https://www.twit.community/t/every-time-i-delete-an-internet-account-it-comes-back/9914][Every time I delete an internet account it comes back]]
 3. [[https://discussions.apple.com/thread/252924363?login=true][Gmail account keeps coming back after delete]]
-
+   
 *** DONE QNAP TS-453Dmini Review                                      :NAS:
 CLOSED: [2022-01-19 Wed 00:17]
    :PROPERTIES:
@@ -3082,7 +3224,7 @@ If you enable the ~chinese~ layer in Spacemacs, it provides a more convenient fu
 
 PS: [[https://github.com/casouri/valign][valign]] provides visual alignment for Org Mode and Markdown without changing fonts.
 
-Ref:
+**** Ref
 1. [[https://develop.spacemacs.org/layers/+intl/chinese/README.html][Spacemacs - Chinese Layer]]
 2. [[https://blindwith.science/2019/07/443.html/][Emacs 中文环境配置]]
 
@@ -3118,11 +3260,11 @@ You can also use ~--squash~ to reduce image size.
 Once the build is complete, Docker creates a new image loading the diffs from each layer into a single new layer and references all the parent's layers. So the extra space created by ~COPY~ command can be freed by ~squash~.
 
 
-Ref:
+**** Ref
 1. [[https://docs.docker.com/develop/develop-images/dockerfile_best-practices/][Dockerfile best practice]]
 2. [[https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/reference.md#run---mount][RUN --mount]]
 3. [[https://stackoverflow.com/questions/41764336/how-does-the-new-docker-squash-work][How does the new Docker --squash work]]
-
+   
 *** DONE Line Ending in Git                                           :Git:
 CLOSED: [2023-10-21 Sat 15:40]
    :PROPERTIES:
@@ -3182,156 +3324,33 @@ If you change the =.gitattributes= file, you need to run the following command t
 1. Line endings in tarball also follows the =.gitattributes=. It's identical to Git checkout on Linux machine.
 2. The ~.gitattributes~ settings will only affect new commits. If you want to change the line ending of the files that already in the Git index after changing line ending settings, you can use =git add --renormalize .= to force Git to refresh all tracked files. For example, if the bat file has been add as ~crlf~ in Git index and then you set it as ~text~ in ~.gitattributes~. Running this command asks Git change it to ~lf~ in index.
 
-Ref:
+**** Ref
 - [[https://www.git-scm.com/docs/gitattributes#_eol][gitattributes - Defining attributes per path]]
 - [[https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings?platform=windows][Configuring Git to handle line endings - GitHub Docs]]
 - [[https://github.com/Azure/azure-cli/pull/27137][{CI} Enforce LF-only line endings in git #27137 · Azure/azure-cli (github.com)]]
 - [[https://git-scm.com/docs/git-add#Documentation/git-add.txt---renormalize][Git - git-add Documentation --renormalize]]
 
-*** TODO Speed up Git speed in WSL
-The disk performance in WSL is poor, it takes a long time to run ~git status~ in a host's repo in WSL.
-
-*** DONE Python 3.11 changes
-CLOSED: [2023-12-10 Sun 15:24]
+*** TODO Improve Git speed in WSL
    :PROPERTIES:
-   :EXPORT_FILE_NAME: python-3-dot-11-changes
+   :EXPORT_FILE_NAME: speed-up-git-speed-in-wsl
    :END:
-In [[https://github.com/Azure/azure-cli/pull/26923][[Packaging] Support Python 3.11 by bebound · Pull Request #26923 · Azure/azure-cli (github.com)]] , I bumped azure-cli to use Python 3.11. We've bump the dependency in other PRs, I thought it should be a small PR, but in the end, a lot of changes are made.
+The disk performance in WSL2 is poor, it takes a long time to run ~git status~ in a host's repo. Moreover, if you set a fancy shell prompt, it will take a long time to show the prompt. This article will introduce how to speed up Git in WSL2.
 
-**** args.getargspec
-=getargspec= is dropped in 3.11. You can easily replaced it with [[https://docs.python.org/3/library/inspect.html#inspect.getfullargspec][=getfullargspec=]] . It returns =FullArgSpec(args, varargs, varkw, defaults, kwonlyargs, kwonlydefaults, annotations)= instead of =ArgSpec(args, varargs, keywords, defaults)= So =args, _, kw, _ = inspect.getargspec(fn)= can be replaced by =args, _, kw, *_ = inspect.getfullargspec(fn)= However, =getfullargspec= is retained primarily for use in code that needs to maintain compatibility with the Python 2 =inspect= module API.
+**** How to speed up Git Command
+The solution is to call ~git.exe~ when run ~git~ command in Windows folder. You can add this into your ~bashrc~:
+#+begin_src bash
+  function git() {
+  if $(pwd -P | grep -q "^\/mnt\/c\/*"); then
+    git.exe "$@"
+  else
+    command git "$@"
+  fi
+}
+#+end_src
 
-#+BEGIN_QUOTE
-  Note that [[https://docs.python.org/3.11/library/inspect.html#inspect.signature][=signature()=]] and [[https://docs.python.org/3.11/library/inspect.html#inspect-signature-object][Signature Object]] provide the recommended API for callable introspection, and support additional behaviours (like positional-only arguments) that are sometimes encountered in extension module APIs. This function is retained primarily for use in code that needs to maintain compatibility with the Python 2 =inspect= module API. --[[https://docs.python.org/3.11/library/inspect.html#inspect.getfullargspec][inspect --- Inspect live objects --- Python 3.11.4 documentation]]
-#+END_QUOTE
 
-The modern =signature= function provides the similar result but needs more modification:
 
-#+BEGIN_SRC python
-  import inspect
-  def testfunc(a, /, b=1, c=2, *args, kk, **kwargs):
-      pass
-
-  print(inspect.getfullargspec(testfunc))
-  print(inspect.signature(testfunc).parameters)
-
-  for i, j in inspect.signature(testfunc).parameters.items():
-      print(i, type(i), j, type(j), j.kind)
-
-  args, _, kw, *_ = inspect.getfullargspec(testfunc)
-  print(args, kw)
-
-  from inspect import Parameter
-
-  parameters = inspect.signature(testfunc).parameters
-  args = [k for k, v in parameters.items() if v.kind in {Parameter.POSITIONAL_OR_KEYWORD, Parameter.POSITIONAL_ONLY}]
-  kw = next(iter([k for k, v in parameters.items() if v.kind == Parameter.VAR_KEYWORD]), None)
-  print(args, kw)
-#+END_SRC
-
-#+BEGIN_SRC
-  FullArgSpec(args=['a', 'b', 'c'], varargs='args', varkw='kwargs', defaults=(1, 2), kwonlyargs=['kk'], kwonlydefaults=None, annotations={})
-  OrderedDict([('a', <Parameter "a">), ('b', <Parameter "b=1">), ('c', <Parameter "c=2">), ('args', <Parameter "*args">), ('kk', <Parameter "kk">), ('kwargs', <Parameter "**kwargs">)])
-
-  a <class 'str'> a <class 'inspect.Parameter'> POSITIONAL_ONLY
-  b <class 'str'> b=1 <class 'inspect.Parameter'> POSITIONAL_OR_KEYWORD
-  c <class 'str'> c=2 <class 'inspect.Parameter'> POSITIONAL_OR_KEYWORD
-  args <class 'str'> *args <class 'inspect.Parameter'> VAR_POSITIONAL
-  kk <class 'str'> kk <class 'inspect.Parameter'> KEYWORD_ONLY
-  kwargs <class 'str'> **kwargs <class 'inspect.Parameter'> VAR_KEYWORD
-
-  ['a', 'b', 'c'] kwargs
-  ['a', 'b', 'c'] kwargs
-#+END_SRC
-
-**** Enum =__format__= change
-There is some custom classes in azure-cli, which makes =Foo.BAR=='bar'=. In 3.11, the [[https://docs.python.org/3/whatsnew/3.11.html#enum][Enum]] =__format__()= changes, it returns the enum and member name (ex: =Color.RED=). (The =__str__= method is the same as Python 3.10)
-
-#+BEGIN_QUOTE
-  Changed [[https://docs.python.org/3/library/enum.html#enum.Enum.__format__][=Enum.__format__()=]] (the default for [[https://docs.python.org/3/library/functions.html#format][=format()=]], [[https://docs.python.org/3/library/stdtypes.html#str.format][=str.format()=]] and [[https://docs.python.org/3/glossary.html#term-f-string][f-string]]s) to always produce the same result as =Enum.__str__()=: for enums inheriting from [[https://docs.python.org/3/library/enum.html#enum.ReprEnum][=ReprEnum=]] it will be the member's value; for all other enums it will be the enum and member name (e.g. =Color.RED=). --[[https://docs.python.org/3/whatsnew/3.11.html#enum][What's New In Python 3.11]]
-#+END_QUOTE
-
-#+BEGIN_SRC python
-  from enum import Enum
-  class Foo(str, Enum):
-      BAR = "bar"
-
-  # Python 3.10
-  f"{Foo.BAR}"  # > bar
-  str(Foo.BAR)  # > Foo.BAR
-
-  # Python 3.11
-  f"{Foo.BAR}"  # > Foo.BAR
-  str(Foo.BAR)  # > Foo.BAR
-#+END_SRC
-
-The standard way to replace Foo class is [[https://docs.python.org/3.11/library/enum.html#enum.StrEnum][StrEnum]]
-
-#+BEGIN_SRC python
-  class Foo(StrEnum):
-      BAR = "bar"
-
-  # Python 3.11
-  f"{Foo.BAR}"  # > bar
-#+END_SRC
-
-If you also use =Bar(int, Enum)=, you can replace it with [[https://docs.python.org/3.11/library/enum.html#enum.ReprEnum][ReprEnum]]: =Bar(int, ReprEnum)=.
-
-**** unittest.Mock
-The =unittest= module replace =unittest.mock._importer= with =pkgutil.resolve_name= in [[https://github.com/python/cpython/pull/18544][bpo-44686 replace unittest.mock._importer with pkgutil.resolve_name by graingert · Pull Request #18544 · python/cpython (github.com)]], which also introduces some changes.
-
-Previously, it use =__import__= to import the patch target, which does not check the module name. But =pkgutil.resolve_name= will check name first, thus =mock.patch= fails if the target is not a valid Python module name. For example, this statement fails in 3.11:
-#+BEGIN_SRC python
-  @mock.patch('azure.cli.command_modules.vm.aaz.2020_09_01_hybrid.network.vnet.List', _mock_network_client_with_existing_vnet_location)
-#+END_SRC
-
-  as =2020_09_01_hybrid= is not a valid variable name in Python.
-
-#+BEGIN_SRC python
-                _NAME_PATTERN = re.compile(f'^(?P<pkg>{dotted_words})'
-                                           f'(?P<cln>:(?P<obj>{dotted_words})?)?$',
-                                           re.UNICODE)
-
-            m = _NAME_PATTERN.match(name)
-            if not m:
-    >           raise ValueError(f'invalid format: {name!r}')
-    E           ValueError: invalid format: 'azure.cli.command_modules.vm.aaz.2020_09_01_hybrid.network.vnet'
-#+END_SRC
-
-As a workaround, =mock.patch.object= works.
-
-#+BEGIN_SRC python
-  vnet = import_module('azure.cli.command_modules.vm.aaz.2018_03_01_hybrid.network.vnet')
-  with mock.patch.object(vnet, 'List', _mock_network_client_with_existing_vnet):
-#+END_SRC
-
-The ultimate solution is fix module name.
-
-**** argparse.ArgumentError
-[[https://github.com/python/cpython/pull/18605][bpo-39716: Raise on conflicting subparser names. by anntzer · Pull Request #18605 · python/cpython (github.com)]] Raise an ArgumentError when the same subparser name is added twice.
-
-#+BEGIN_SRC python
-  import argparse
-
-  parser = argparse.ArgumentParser()
-  t = parser.add_subparsers()
-  t.add_parser('a')
-  t.add_parser('a')
-#+END_SRC
-
-The above code works on 3.10 but raises this error in 3.11:
-
-#+BEGIN_SRC
-  Traceback (most recent call last):
-    File "C:\Users\kk\Developer\azure-cli\p.py", line 6, in <module>
-      t.add_parser('a')
-    File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.1264.0_x64__qbz5n2kfra8p0\Lib\argparse.py", line 1192, in add_parser
-      raise ArgumentError(self, _('conflicting subparser: %s') % name)
-  argparse.ArgumentError: argument {a}: conflicting subparser: a
-#+END_SRC
-
-Ref:
-- [[https://blog.pecar.me/python-enum][Enum with =str= or =int= Mixin Breaking Change in Python 3.11 (pecar.me)]]
-- [[https://github.com/python/cpython/issues/100458][Enum with =str= or =int= Mixin Breaking Change in Python 3.11 · Issue #100458 · python/cpython (github.com)]]
-- [[https://docs.python.org/3/whatsnew/3.11.html][What's New In Python 3.11 --- Python 3.11.4 documentation]]
+**** Ref
+- [[https://github.com/romkatv/powerlevel10k/issues/1039][Git status and checkout very slow on some repository]]
+- [[https://markentier.tech/posts/2020/10/faster-git-under-wsl2/][Faster git status under WSL2]]
 

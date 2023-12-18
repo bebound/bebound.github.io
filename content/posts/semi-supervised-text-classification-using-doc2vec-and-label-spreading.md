@@ -1,9 +1,9 @@
 +++
-title = "Semi-supervised Text Classification Using doc2vec and Label Spreading"
+title = "Semi-supervised text classification using doc2vec and label spreading"
 author = ["KK"]
 date = 2017-09-10T15:29:00+08:00
-lastmod = 2020-04-02T21:09:25+08:00
-tags = ["Machine Learning", "doc2vec", "word2vec"]
+lastmod = 2023-12-18T21:38:36+08:00
+tags = ["Machine Learning", "doc2vec"]
 draft = false
 noauthor = true
 nocomment = true
@@ -26,8 +26,8 @@ Keyword based classification is a simple but effective method. Extracting the ta
 
 1.  Find some most common words to classify the text.
 2.  Use this equation to calculate the score of each word appears in the text.
-    \\[ score(i) = \frac{count(i)}{all\\_count(i)^{0.3}}\\]
-    where \\(all\\_count(i)\\) is the word \\(i\\)'s word count in all corpus, and \\(count(i)\\) is the word \\(i\\)'s word count in positive corpus.
+    \\[ score(i) = \frac{count(i)}{all\\\_count(i)^{0.3}}\\]
+    where \\(all\\\_count(i)\\) is the word \\(i\\)'s word count in all corpus, and \\(count(i)\\) is the word \\(i\\)'s word count in positive corpus.
 3.  Check the top words, add it to the final keyword list. Repeat this process.
 
 Finally, we can use the keywords to classify the text and get the train data.

@@ -1,8 +1,8 @@
 +++
-title = "Time Boundary in InfluxDB Group by Time Statement"
+title = "Time boundary in InfluxDB Group by Time Statement"
 author = ["KK"]
 date = 2020-03-29T22:30:00+08:00
-lastmod = 2020-04-02T21:07:35+08:00
+lastmod = 2023-12-18T21:38:38+08:00
 tags = ["InfluxDB"]
 draft = false
 noauthor = true
@@ -17,7 +17,7 @@ These days I  use InfluxDB to save some time series data. I love these features 
 
 #### High Performance {#high-performance}
 
-According to to it's [hardware guide](https://docs.influxdata.com/influxdb/v1.7/guides/hardware%5Fsizing/#single-node-or-cluster), a single node will support more than 750k point write per second, 100 moderate queries per second and 10M series cardinality.
+According to to it's [hardware guide](https://docs.influxdata.com/influxdb/v1.7/guides/hardware_sizing/#single-node-or-cluster), a single node will support more than 750k point write per second, 100 moderate queries per second and 10M series cardinality.
 
 
 #### Continuous Queries {#continuous-queries}
@@ -32,7 +32,7 @@ If you submit a new point with same measurements, tag set and timestamp, the new
 
 ## Preset Time Boundary {#preset-time-boundary}
 
-InfluxDB is well documented, but the [group by time](https://docs.influxdata.com/influxdb/v1.7/query%5Flanguage/data%5Fexploration/#basic-group-by-time-syntax) section is not very clear. It says it will group data by `=preset time boundary`. But the example it use is too simple and doesn't explain it very well.
+InfluxDB is well documented, but the [group by time](https://docs.influxdata.com/influxdb/v1.7/query_language/data_exploration/#basic-group-by-time-syntax) section is not very clear. It says it will group data by `=preset time boundary`. But the example it use is too simple and doesn't explain it very well.
 
 In the official example, when using `group by time(12m)=`, the time boundary is `00:12`, `00:24`. When using `group by time(30m)`, the time boundary becomes `00:00`, `00:30`. It seems that the time boundary start from the nearest hour plus x times time interval, that's **not** correct. If you using `group by time(7m)`, the returned time boundary is **not** `00:07`, `00:14`
 
@@ -68,12 +68,12 @@ So when you use `group by time` statement, you'd better use `30s`, `1m`, `5m`, `
 
 Some times you want to calculate the sum of last recent 5m data every minute, by using `group by time(5m)`, you only get 1 result every 5 minute. To achieve this, you can use the `offset` parameter in `group by time` statement. For example, `group by time(5m,1m)` with move the time boundary 1 minute forward, the result will be `xx:01`, `xx:06`. you can create 5 continuous queries with offset from 0 to 4.
 
-More example can be found in this [repo](https://github.com/bebound/influx%5Ftime%5Fboundary).
+More example can be found in this [repo](https://github.com/bebound/influx_time_boundary).
 
 
 ## Group by in Continuous Queries {#group-by-in-continuous-queries}
 
-By reading the [official resample document](https://docs.influxdata.com/influxdb/v1.7/query%5Flanguage/continuous%5Fqueries/#advanced-syntax), the `resample every <interval> for <interval>` can override the continuous queries execute interval and the time range of query statement.
+By reading the [official resample document](https://docs.influxdata.com/influxdb/v1.7/query_language/continuous_queries/#advanced-syntax), the `resample every <interval> for <interval>` can override the continuous queries execute interval and the time range of query statement.
 
 The example in official document the interval is always a multiple of `group by time(m)`. I tries different values, here is the result.
 
@@ -99,7 +99,7 @@ Here is a simple example, `every 10 s for 45s group by time(20s)`
 | 16:00:50     | 16:00:05            | 16:00:50          | 16:00:20        | 16:01:00      |
 | 16:01:00     | 16:00:15            | 16:01:00          | 16:00:20        | 16:01:00      |
 
-We can see that, the execute interval is always 10s, but the start time and end time in CQ not equals to `now()-45s`-`now()`. It still based on `group by time`'s time boundary, but the start time must >= selected start time and end time is also >= selected end time.
+We can see that, the execute interval is always 10s, but the start time and end time in CQ not equals to `now()-45s`-`now()`. It still based on `group by time`'s time boundary, but the start time must &gt;= selected start time and end time is also &gt;= selected end time.
 
 {{< figure src="/images/influx_time_boundary.png" >}}
 
@@ -112,10 +112,10 @@ Here is another example, `every 5s for 10s group by time(10s)`
 | 16:00:10     | 16:00:00            | 16:00:10          | 16:00:00        | 16:00:10      |
 | 16:00:15     | 16:00:05            | 16:00:15          | 16:00:10        | 16:00:20      |
 
-I guess the reason why start time is always >= selected start time is to prevent pollute previous data. If the aggregated data is not enough, it will overwrite the correct data generated before. If there is not enough data in end time clause, it will be correct in the future.
+I guess the reason why start time is always &gt;= selected start time is to prevent pollute previous data. If the aggregated data is not enough, it will overwrite the correct data generated before. If there is not enough data in end time clause, it will be correct in the future.
 
 
-## Ref: {#ref}
+## Ref {#ref}
 
-1.  [group by time syntax](https://docs.influxdata.com/influxdb/v1.7/query%5Flanguage/data%5Fexploration/#basic-group-by-time-syntax)
-2.  [continuous queries advanced syntax](https://docs.influxdata.com/influxdb/v1.7/query%5Flanguage/continuous%5Fqueries/#advanced-syntax)
+1.  [group by time syntax](https://docs.influxdata.com/influxdb/v1.7/query_language/data_exploration/#basic-group-by-time-syntax)
+2.  [continuous queries advanced syntax](https://docs.influxdata.com/influxdb/v1.7/query_language/continuous_queries/#advanced-syntax)

@@ -2,7 +2,7 @@
 title = "Some Useful Shell Tools"
 author = ["KK"]
 date = 2017-05-07T15:34:00+08:00
-lastmod = 2022-01-06T21:23:36+08:00
+lastmod = 2023-12-18T21:38:38+08:00
 tags = ["Shell"]
 draft = false
 noauthor = true
@@ -38,7 +38,7 @@ vim `f rc conf`  =>     vim /etc/rc.conf
 ```
 
 
-## [pt](https://github.com/monochromegane/the%5Fplatinum%5Fsearcher) {#pt}
+## [pt](https://github.com/monochromegane/the_platinum_searcher) {#pt}
 
 A fast code search tool similar to `ack`.
 

@@ -2,7 +2,7 @@
 title = "Using JSONField before Django 3.1"
 author = ["KK"]
 date = 2021-09-11T21:12:00+08:00
-lastmod = 2021-09-11T21:15:12+08:00
+lastmod = 2023-12-18T21:38:37+08:00
 tags = ["Python", "Django"]
 draft = false
 noauthor = true
@@ -17,7 +17,7 @@ In Django 3.1, Django support save python data into database as JSON encoded dat
 
 ## django-jsonfield-backport {#django-jsonfield-backport}
 
-This package save data as JSON in database and also support JSON query. If your database meet the requirements (MySQL > 5.7, PG > 9.5, MariaDB > 10.2 or SQLite > 3.9 with [JSON1](https://docs.djangoproject.com/en/3.1/ref/databases/#sqlite-json1) extension), you can use JSONField like Django's native implementation.
+This package save data as JSON in database and also support JSON query. If your database meet the requirements (MySQL &gt; 5.7, PG &gt; 9.5, MariaDB &gt; 10.2 or SQLite &gt; 3.9 with [JSON1](https://docs.djangoproject.com/en/3.1/ref/databases/#sqlite-json1) extension), you can use JSONField like Django's native implementation.
 
 ```python3
 from django.db import models
@@ -62,7 +62,7 @@ class ProductSerializer(serializers.ModelSerializer):
 (You do not need to do this when using `django-jsonfield-backport`, everything just works.)
 
 
-## Ref: {#ref}
+## Ref {#ref}
 
 1.  [GitHub - django-jsonfield-backport](https://github.com/laymonage/django-jsonfield-backport)
 2.  [Use JSONField with Django Rest Framework](https://librenepal.com/article/use-jsonfield-with-django-rest-framework/)

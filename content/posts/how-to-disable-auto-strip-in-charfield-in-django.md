@@ -1,7 +1,8 @@
 +++
 title = "How to disable auto strip in Charfield in Django"
 author = ["KK"]
-lastmod = 2021-12-19T22:15:59+08:00
+date = 2021-12-19T21:20:00+08:00
+lastmod = 2023-12-18T21:38:37+08:00
 tags = ["Python", "Django"]
 draft = false
 noauthor = true
@@ -97,7 +98,8 @@ class TestSerializer(serializers.HyperlinkedModelSerializer):
                         "text": {"trim_whitespace": False}}
 ```
 
-Ref:
+
+## Ref {#ref}
 
 1.  [StackOverflow - Django TextField and CharField is stripping spaces and blank lines](https://stackoverflow.com/questions/38995764/django-textfield-and-charfield-is-stripping-spaces-and-blank-lines)
 2.  [Djanog - TextField constructor needs a strip=False option](https://code.djangoproject.com/ticket/30077)

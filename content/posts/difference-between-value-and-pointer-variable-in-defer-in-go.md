@@ -2,7 +2,7 @@
 title = "Difference between Value and Pointer variable in Defer in Go"
 author = ["KK"]
 date = 2019-12-19T22:33:00+08:00
-lastmod = 2020-08-01T00:39:56+08:00
+lastmod = 2023-12-18T21:38:38+08:00
 tags = ["Go", "Defer"]
 draft = false
 noauthor = true
@@ -57,7 +57,7 @@ func main() {
 
 The output is:
 
-{{< highlight text "linenos=table, linenostart=1" >}}
+```text { linenos=true, linenostart=1 }
 Pointer-Closing Pointer-X2 Second
 Pointer-Closing Pointer-X2 First
 Value-Closing Pointer-X Second
@@ -66,9 +66,9 @@ Pointer-Closing Value-X2 Second
 Pointer-Closing Value-X2 Second
 Value-Closing Value-X Second
 Value-Closing Value-X First
-{{< /highlight >}}
+```
 
-Take a look at line 5-6, why `Pointer-Closing Value-X2 Second` was printed twice? According to [Effective Go](https://golang.org/doc/effective%5Fgo.html#defer), "**The arguments to the deferred function (which include the receiver if the function is a method) are evaluated when the defer executes, not when the call executes.**". And the function's parameters will **saved anew** when evaluated.
+Take a look at line 5-6, why `Pointer-Closing Value-X2 Second` was printed twice? According to [Effective Go](https://golang.org/doc/effective_go.html#defer), "**The arguments to the deferred function (which include the receiver if the function is a method) are evaluated when the defer executes, not when the call executes.**". And the function's parameters will **saved anew** when evaluated.
 
 As `x2` is value and the defer function `CloseP`'s receiver is a pointer, once `defer` executes, it will create a pointer which points to `x2` as function's caller. In the following defer, it will create a pointer which point to `x2` again. Although `x2.S` change to "Second", `x2`'s address never changes. Finally, when these two defer is called, the same log was printed again.
 
@@ -130,11 +130,11 @@ The defer code in main goroutine are executed, but those in `subGoroutine` will 
 > from [godoc](https://golang.org/pkg/os/#Exit)
 
 
-## Ref: {#ref}
+## Ref {#ref}
 
 1.  [面向信仰编程 defer](https://draveness.me/golang/keyword/golang-defer.html)
 2.  [Golang defer clarification](https://stackoverflow.com/questions/28893586/golang-defer-clarification)
 3.  [How to exit a go program honoring deferred calls?](https://stackoverflow.com/questions/27629380/how-to-exit-a-go-program-honoring-deferred-calls/39755730)
-4.  [Effective Go](https://golang.org/doc/effective%5Fgo.html#defer)
+4.  [Effective Go](https://golang.org/doc/effective_go.html#defer)
 5.  [Golang Runtime](https://golang.org/pkg/runtime/#Goexit)
 6.  [Go defer 遇上 os.Exit 時失效](https://tachingchen.com/tw/blog/go-defer-and-os-exit/)

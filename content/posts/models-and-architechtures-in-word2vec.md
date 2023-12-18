@@ -2,7 +2,7 @@
 title = "Models and Architectures in Word2vec"
 author = ["KK"]
 date = 2018-01-05T15:14:00+08:00
-lastmod = 2020-04-04T23:14:59+08:00
+lastmod = 2023-12-18T21:38:36+08:00
 tags = ["Machine Learning", "word2vec"]
 draft = false
 noauthor = true
@@ -41,9 +41,9 @@ For perfect prediction, \\(H(\hat{y},y)=-1\log(1)=0\\)
 According to this, we can create this loss function:
 
 \\[\begin{aligned}
-minimize\ J &=-\log P(\omega\_c\lvert \omega\_{c-m},...,\omega\_{c-1},...,\omega\_{c+m}) \\\\\\
-&= -\log P(u\_c \lvert \hat{\upsilon}) \\\\\\
-&= -\log \frac{\exp(u\_c^T\hat{\upsilon})}{\sum\_{j=1}^{\lvert V \rvert}\exp (u\_j^T\hat{\upsilon})} \\\\\\
+minimize\ J &=-\log P(\omega\_c\lvert \omega\_{c-m},...,\omega\_{c-1},...,\omega\_{c+m}) \\\\
+&= -\log P(u\_c \lvert \hat{\upsilon}) \\\\
+&= -\log \frac{\exp(u\_c^T\hat{\upsilon})}{\sum\_{j=1}^{\lvert V \rvert}\exp (u\_j^T\hat{\upsilon})} \\\\
 &= -u\_c^T\hat{\upsilon}+\log \sum\_{j=1}^{\lvert V \rvert}\exp (u\_j^T\hat{\upsilon})
 \end{aligned}\\]
 
@@ -60,10 +60,10 @@ Use current word to predict its context.
 4.  We desire probabilities \\(\hat{y}\\) match the true probabilities \\(y\\).
 
 \\[\begin{aligned}
-minimize J &=-\log P(\omega\_{c-m},...,\omega\_{c-1},\omega\_{c+1},...\omega\_{c+m}\lvert \omega\_c)\\\\\\
-&=-\log \prod\_{j=0,j\ne m}^{2m}P(\omega\_{c-m+j}\lvert \omega\_c)\\\\\\
-&=-\log \prod\_{j=0,j\ne m}^{2m}P(u\_{c-m+j}\lvert \upsilon\_c)\\\\\\
-&=-\log \prod\_{j=0,j\ne m}^{2m}\frac{\exp (u^T\_{c-m+j}\upsilon\_c)}{\sum\_{k=1}^{\lvert V \rvert}{\exp (u^T\_k \upsilon\_c)}}\\\\\\
+minimize J &=-\log P(\omega\_{c-m},...,\omega\_{c-1},\omega\_{c+1},...\omega\_{c+m}\lvert \omega\_c)\\\\
+&=-\log \prod\_{j=0,j\ne m}^{2m}P(\omega\_{c-m+j}\lvert \omega\_c)\\\\
+&=-\log \prod\_{j=0,j\ne m}^{2m}P(u\_{c-m+j}\lvert \upsilon\_c)\\\\
+&=-\log \prod\_{j=0,j\ne m}^{2m}\frac{\exp (u^T\_{c-m+j}\upsilon\_c)}{\sum\_{k=1}^{\lvert V \rvert}{\exp (u^T\_k \upsilon\_c)}}\\\\
 &=-\sum\_{j=0,j\ne m}^{2m}{u^T\_{c-m+j}\upsilon\_c+2m\log \sum\_{k=1}^{\lvert V \rvert} \exp(u^T\_k \upsilon\_c)}
 \end{aligned}\\]
 
@@ -85,10 +85,10 @@ Then the probability of negative classification is
 `足球`'s Huffman code is \\(1001\\), then it's probability in each node are
 
 \\[\begin{aligned}
-p(d\_2^\omega\lvert X\_\omega,\theta^\omega\_1&=1-\sigma(X^T\_\omega \theta^\omega\_1))\\\\\\
-p(d^\omega\_3\lvert X\_\omega,\theta^\omega\_2&=\sigma(X^T\_\omega \theta^\omega\_2))\\\\\\
-p(d^\omega\_4\lvert X\_\omega,\theta^\omega\_3&=\sigma(X^T\_\omega \theta^\omega\_3))\\\\\\
-p(d^\omega\_5\lvert X\_\omega,\theta^\omega\_4&=1-\sigma(X^T\_\omega \theta^\omega\_4))\\\\\\
+p(d\_2^\omega\lvert X\_\omega,\theta^\omega\_1&=1-\sigma(X^T\_\omega \theta^\omega\_1))\\\\
+p(d^\omega\_3\lvert X\_\omega,\theta^\omega\_2&=\sigma(X^T\_\omega \theta^\omega\_2))\\\\
+p(d^\omega\_4\lvert X\_\omega,\theta^\omega\_3&=\sigma(X^T\_\omega \theta^\omega\_3))\\\\
+p(d^\omega\_5\lvert X\_\omega,\theta^\omega\_4&=1-\sigma(X^T\_\omega \theta^\omega\_4))\\\\
 \end{aligned}\\]
 
 where \\(\theta\\) is parameter in the node.
@@ -119,8 +119,8 @@ where \\(\theta\\) is the parameters of the model(\\(\upsilon\\) and \\(u\\)).
 I found this two articles pretty useful: [Language Models, Word2Vec, and Efficient Softmax Approximations](https://rohanvarma.me/Word2Vec/) and [Word2vec from Scratch with NumPy](https://towardsdatascience.com/word2vec-from-scratch-with-numpy-8786ddd49e72).
 
 
-## Ref: {#ref}
+## Ref {#ref}
 
-1.  [word2vec原理推导与代码分析](<http://www.hankcs.com/nlp/word2vec.html>)
-2.  [CS 224D: Deep Learning for NLP Lecture Notes: Part I](<http://cs224d.stanford.edu/lecture%5Fnotes/notes1.pdf>)
+1.  [word2vec 原理推导与代码分析](<http://www.hankcs.com/nlp/word2vec.html>)
+2.  [CS 224D: Deep Learning for NLP Lecture Notes: Part I](<http://cs224d.stanford.edu/lecture_notes/notes1.pdf>)
 3.  [word2vec 中的数学原理详解（一）目录和前言](<http://blog.csdn.net/itplus/article/details/37969519>)

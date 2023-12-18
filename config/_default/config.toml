@@ -1,0 +1,13 @@
+# -- Site Configuration --
+# Refer to the theme docs for more details about each of these parameters.
+# https://jpanther.github.io/congo/docs/getting-started/
+
+baseURL="Https://www.fromkk.com"
+defaultContentLanguage = "en"
+
+enableRobotsTXT = true
+paginate = 10
+summaryLength = 40
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]

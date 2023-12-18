@@ -1,8 +1,8 @@
 +++
-title = "Different Types of Attention"
+title = "Different types of Attention"
 author = ["KK"]
 date = 2019-07-15T00:16:00+08:00
-lastmod = 2020-04-02T21:08:18+08:00
+lastmod = 2023-12-18T21:38:37+08:00
 tags = ["Machine Learning"]
 draft = false
 noauthor = true
@@ -15,7 +15,7 @@ noread = true
 \\(s\_t\\) and \\(h\_i\\) are source hidden states and target hidden state, the shape is `(n,1)`. \\(c\_t\\) is the final context vector, and \\(\alpha\_{t,s}\\) is alignment score.
 
 \\[\begin{aligned}
-c\_t&=\sum\_{i=1}^n \alpha\_{t,s}h\_i \\\\\\
+c\_t&=\sum\_{i=1}^n \alpha\_{t,s}h\_i \\\\
 \alpha\_{t,s}&= \frac{\exp(score(s\_t,h\_i))}{\sum\_{i=1}^n \exp(score(s\_t,h\_i))}
 \end{aligned}\\]
 
@@ -64,7 +64,7 @@ where n is the vectors dimension. Google's Transformer model has similar scaling
 When I doing a slot filling project, I compare these mechanisms. **Concat** attention produce the best result.
 
 
-## Ref: {#ref}
+## Ref {#ref}
 
 1.  [Attention Variants](http://cnyah.com/2017/08/01/attention-variants/)
 2.  [Attention? Attention!](https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html)

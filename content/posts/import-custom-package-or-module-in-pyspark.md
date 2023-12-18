@@ -2,7 +2,7 @@
 title = "Import custom package or module in PySpark"
 author = ["KK"]
 date = 2020-04-02T22:24:00+08:00
-lastmod = 2020-05-10T22:26:12+08:00
+lastmod = 2023-12-18T21:38:37+08:00
 tags = ["Python", "Spark"]
 draft = false
 noauthor = true

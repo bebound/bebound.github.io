@@ -2,7 +2,7 @@
 title = "C3 Linearization and Python MRO(Method Resolution Order)"
 author = ["KK"]
 date = 2020-03-14T17:37:00+08:00
-lastmod = 2022-01-06T21:24:31+08:00
+lastmod = 2023-12-18T21:38:37+08:00
 tags = ["Python", "MRO"]
 draft = false
 noauthor = true
@@ -145,10 +145,10 @@ When running this line `super(C, self).__init__()`, self is `C`'s instance, mro 
 So it returns `A`, and A will execute `__init__()`, then calling `super(A, self).__init__()`, end enter `B`'s `__init__()`. (`C`'s instance `inst` will pass as `self` in the calling chain.)
 
 
-## Ref: {#ref}
+## Ref {#ref}
 
 1.  [The Python 2.3 Method Resolution Order](https://www.python.org/download/releases/2.3/mro/)
 2.  [Python Multiple Inheritance](https://www.programiz.com/python-programming/multiple-inheritance)
 3.  [python之理解super及MRO列表](https://www.jianshu.com/p/de7d38c84443)
 4.  [Python的MRO以及C3线性化算法](https://www.cnblogs.com/miyauchi-renge/p/10922092.html)
-5.  [C3 linearization](https://en.wikipedia.org/wiki/C3%5Flinearization)
+5.  [C3 linearization](https://en.wikipedia.org/wiki/C3_linearization)

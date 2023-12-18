@@ -2,7 +2,7 @@
 title = "Fix Error: Cask 'java' is unavailable in Homebrew"
 author = ["KK"]
 date = 2021-03-07T00:10:00+08:00
-lastmod = 2021-05-28T01:03:10+08:00
+lastmod = 2023-12-18T21:38:38+08:00
 tags = ["Homebrew"]
 draft = false
 noauthor = true

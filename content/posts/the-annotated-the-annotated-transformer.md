@@ -2,7 +2,7 @@
 title = "The Annotated The Annotated Transformer"
 author = ["KK"]
 date = 2019-09-01T16:00:00+08:00
-lastmod = 2021-05-10T21:19:26+08:00
+lastmod = 2023-12-18T21:38:37+08:00
 tags = ["Machine Learning", "Transformer"]
 draft = false
 noauthor = true
@@ -35,7 +35,7 @@ The transformer model does not contains recurrence and convolution. In order to 
 PE will generate a 512 dimension vector for each position:
 
 \\[\begin{align\*}
-    PE\_{(pos,2i)} = sin(pos / 10000^{2i/d\_{model}}) \\\\\\
+    PE\_{(pos,2i)} = sin(pos / 10000^{2i/d\_{model}}) \\\\
     PE\_{(pos,2i+1)} = cos(pos / 10000^{2i/d\_{model}})
 \end{align\*}\\]
 The even and odd dimension use `sin` and `cos` function respectively.
@@ -47,14 +47,14 @@ The value range of PE is `(-1,1)`, and each position's PE is slight different, a
 For even dimension, let \\(10000^{2i/d\_{model}}\\) be \\(\alpha\\), for even dimension:
 
 \\[\begin{aligned}
-PE\_{pos+k}&=sin((pos+k)/\alpha) \\\\\\
-&=sin(pos/\alpha)cos(k/\alpha)+cos(pos/\alpha)sin(k/\alpha)\\\\\\
-&=PE\_{pos\\_even}K\_1+PE\_{pos\\_odd}K\_2
+PE\_{pos+k}&=sin((pos+k)/\alpha) \\\\
+&=sin(pos/\alpha)cos(k/\alpha)+cos(pos/\alpha)sin(k/\alpha)\\\\
+&=PE\_{pos\\\_even}K\_1+PE\_{pos\\\_odd}K\_2
 \end{aligned}\\]
 
 {{< figure src="/images/transformer_pe1.png" width="500" >}}
 
-The PE implementation in [tensor2tensor](https://github.com/tensorflow/tensor2tensor/blob/5bfe69a7d68b7d61d51fac36c6088f94b9d6fdc6/tensor2tensor/layers/common%5Fattention.py#L457) use `sin` in first half of dimension and `cos` in the rest part of dimension.
+The PE implementation in [tensor2tensor](https://github.com/tensorflow/tensor2tensor/blob/5bfe69a7d68b7d61d51fac36c6088f94b9d6fdc6/tensor2tensor/layers/common_attention.py#L457) use `sin` in first half of dimension and `cos` in the rest part of dimension.
 
 {{< figure src="/images/transformer_pe2.png" width="500" >}}
 
@@ -89,7 +89,7 @@ The whole procedure looks like this:
 {{< figure src="/images/transformer_multihead_all.png" width="500" >}}
 
 
-### Add & Norm {#add-and-norm}
+### Add &amp; Norm {#add-and-norm}
 
 This layer works like this line of code: `norm(x+dropout(sublayer(x)))` or `x+dropout(sublayer(norm(x)))`. The sublayer is Multi-Head Attention or FF Network.
 
@@ -137,7 +137,7 @@ The animation below illustrates how to apply the Transformer to machine translat
 Using a linear layer to predict the output.
 
 
-## Ref: {#ref}
+## Ref {#ref}
 
 1.  [The Annotated Transformer](http://nlp.seas.harvard.edu/2018/04/03/attention.html)
 2.  [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/)
@@ -147,5 +147,5 @@ Using a linear layer to predict the output.
 6.  [How to code The Transformer in Pytorch](https://towardsdatascience.com/how-to-code-the-transformer-in-pytorch-24db27c8f9ec)
 7.  [Deconstructing BERT, Part 2: Visualizing the Inner Workings of Attention](https://towardsdatascience.com/deconstructing-bert-part-2-visualizing-the-inner-workings-of-attention-60a16d86b5c1)
 8.  [Transformer: A Novel Neural Network Architecture for Language Understanding](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)
-9.  [Dive into Deep Learning - 10.3 Transformer](https://d2l.ai/chapter%5Fattention-mechanisms/transformer.html)
+9.  [Dive into Deep Learning - 10.3 Transformer](https://d2l.ai/chapter_attention-mechanisms/transformer.html)
 10. [10分钟带你深入理解Transformer原理及实现](https://zhuanlan.zhihu.com/p/80986272)

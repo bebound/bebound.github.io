@@ -2,7 +2,7 @@
 title = "Near-duplicate with SimHash"
 author = ["KK"]
 date = 2019-12-04T00:16:00+08:00
-lastmod = 2020-05-30T22:22:51+08:00
+lastmod = 2023-12-18T21:38:37+08:00
 tags = ["Machine Learning", "SimHash"]
 draft = false
 noauthor = true
@@ -62,7 +62,7 @@ For a set of input hashes, **SimHash** will generate a fingerprint(f-bits vector
 
 The calculation of **SimHash** is quiet simple. Given a set of features extracted from the document and their weights, we'll maintain f-bits vector \\(V\\), and initialize it to zero. Each feature will also hash to f-bit value \\(V\_i\\). Then each dimension of \\(V\_i\\) will multiply by it's weight \\(W\_i\\) and add this new value to \\(V\\). If i-th bits if 1, then \\(V\\) is incremented by the weight of that feature. Otherwise \\(V\\) is decremented by the weight. When all features have been processed, \\(V\\) contains positive and negative dimension. Mapping positive values to `1` and negative numbers to `0` to get the final hash value.
 
-\\[V = zero\\_or\\_one(\sum{W\_i\*inc\\_or\\_dec(V\_i)})\\]
+\\[V = zero\\\_or\\\_one(\sum{W\_i\*inc\\\_or\\\_dec(V\_i)})\\]
 
 
 ### How to generate features from document {#how-to-generate-features-from-document}
@@ -97,7 +97,7 @@ Besides \\(AB\\), \\(AC\\), \\(AD\\), \\(BC\\), \\(BD\\) and \\(CD\\) may also b
 Depending on the fingerprints' bit and documents number, you need to find a optimal number to split the hash value.
 
 
-## Ref: {#ref}
+## Ref {#ref}
 
 1.  [Near-Duplicate Detection](https://moz.com/devblog/near-duplicate-detection)
 2.  [Detecting Near-Duplicates for Web Crawling](https://www2007.org/papers/paper215.pdf)

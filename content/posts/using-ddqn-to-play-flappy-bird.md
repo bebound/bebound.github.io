@@ -2,7 +2,7 @@
 title = "Using Dueling DQN to Play Flappy Bird"
 author = ["KK"]
 date = 2019-04-14T17:10:00+08:00
-lastmod = 2020-04-04T23:12:56+08:00
+lastmod = 2023-12-18T21:38:37+08:00
 tags = ["Machine Learning"]
 draft = false
 noauthor = true
@@ -36,7 +36,7 @@ Here is the model architecture:
 
 Here is a trained result:
 
-{{< youtube NV82ZUQynuQ >}}
+{{&lt; youtube NV82ZUQynuQ &gt;}}
 
 1.  Dueling DQN
 
@@ -102,9 +102,9 @@ The lesson I learnt from this project is patience. It takes a long time(maybe hu
 
 Here are something may help with this task.
 
--   [TensorBoard](https://www.tensorflow.org/guide/summaries%5Fand%5Ftensorboard)
+-   [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard)
 
-    It's a visualization tool made by TensorFlow Team. It's more convenient to use it rather than generate graph manually by matplotlib. Besides `reward` and `mean_q`, these variable are also useful when debugging: TD-error, loss and action\_distribution, avg\_priority.
+    It's a visualization tool made by TensorFlow Team. It's more convenient to use it rather than generate graph manually by matplotlib. Besides `reward` and `mean_q`, these variable are also useful when debugging: TD-error, loss and action_distribution, avg_priority.
 
 -   Advanced image pre-processing
 
@@ -127,11 +127,11 @@ Here are something may help with this task.
 I've uploaded code to this [repo](https://github.com/bebound/flappy-bird-dqn).
 
 
-## Ref: {#ref}
+## Ref {#ref}
 
-1.  [PyTorch REINFORCEMENT LEARNING (DQN) TUTORIAL](https://pytorch.org/tutorials/intermediate/reinforcement%5Fq%5Flearning.html)
+1.  [PyTorch REINFORCEMENT LEARNING (DQN) TUTORIAL](https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html)
 2.  [强化学习](https://www.cnblogs.com/pinard/category/1254674.html) (A series of Chinese post about reinforcement learning)
-3.  [Deep Reinforcement Learning for Flappy Bird](http://cs229.stanford.edu/proj2015/362%5Freport.pdf)
+3.  [Deep Reinforcement Learning for Flappy Bird](http://cs229.stanford.edu/proj2015/362_report.pdf)
 4.  [Flappy-Bird-Double-DQN-Pytorch](https://github.com/ttaoREtw/Flappy-Bird-Double-DQN-Pytorch)
 5.  [DeepRL-Tutorials](https://github.com/qfettes/DeepRL-Tutorials)
 6.  [Speeding up DQN on PyTorch: how to solve Pong in 30 minutes](https://medium.com/mlreview/speeding-up-dqn-on-pytorch-solving-pong-in-30-minutes-81a1bd2dff55)

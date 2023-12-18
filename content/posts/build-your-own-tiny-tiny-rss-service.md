@@ -2,7 +2,7 @@
 title = "Build Your Own Tiny Tiny RSS Service"
 author = ["KK"]
 date = 2019-06-10T00:25:00+08:00
-lastmod = 2022-01-19T22:43:58+08:00
+lastmod = 2023-12-18T21:38:38+08:00
 draft = false
 noauthor = true
 nocomment = true
@@ -173,6 +173,6 @@ If you want a free app, I suggest [Fiery Feeds](http://cocoacake.net/apps/fiery/
 You can find the latest document [here](https://ttrss.henry.wang).
 
 
-## Ref: {#ref}
+## Ref {#ref}
 
 1.  [A ttrss setup guide - Start your own RSS aggregator today](https://henry.wang/2018/04/25/ttrss-docker-plugins-guide.html)

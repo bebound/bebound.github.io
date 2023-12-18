@@ -2,7 +2,7 @@
 title = "Dynamic Allocate Executors when Executing Jobs in Spark"
 author = ["KK"]
 date = 2021-07-18T16:52:00+08:00
-lastmod = 2022-01-15T14:25:28+08:00
+lastmod = 2023-12-18T21:38:38+08:00
 tags = ["Spark"]
 draft = false
 noauthor = true

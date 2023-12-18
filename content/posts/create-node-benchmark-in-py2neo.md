@@ -2,7 +2,7 @@
 title = "Create Node Benchmark in Py2neo"
 author = ["KK"]
 date = 2018-11-05T15:55:00+08:00
-lastmod = 2019-11-29T00:29:06+08:00
+lastmod = 2023-12-18T21:38:37+08:00
 tags = ["Python"]
 draft = false
 noauthor = true
@@ -79,6 +79,7 @@ def bench_create3():
     print(time.time() - start)
     print(count_label('test'))
     delete_label('test')
+
 
 
 def bench_create4():

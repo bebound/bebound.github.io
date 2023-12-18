@@ -2,7 +2,7 @@
 title = "Python Dictionary Implementation"
 author = ["KK"]
 date = 2019-02-17T21:48:00+08:00
-lastmod = 2020-05-31T23:52:58+08:00
+lastmod = 2023-12-18T21:38:37+08:00
 tags = ["Python"]
 draft = false
 noauthor = true
@@ -59,7 +59,7 @@ CPython 3.6 use a compact representation to save entries, and "The memory usage 
 
 ### Compact Hash Table {#compact-hash-table}
 
-As mentioned before, entries saved in the form of `<hash,key,value>`. This will takes 3B on 64 bit machine. And no matter how much item is added into the dictionary, the memory usage is the same(3B\*table\_size).
+As mentioned before, entries saved in the form of `<hash,key,value>`. This will takes 3B on 64 bit machine. And no matter how much item is added into the dictionary, the memory usage is the same(3B\*table_size).
 
 After 3.6, CPython use two structure to save data. One is **index**, another is the **real data**.
 
@@ -89,7 +89,7 @@ The **real data** become this:
 This saves memory, especially when table load factor is low.
 
 
-## Ref: {#ref}
+## Ref {#ref}
 
 1.  [How are Python's Built In Dictionaries Implemented](https://stackoverflow.com/questions/327311/how-are-pythons-built-in-dictionaries-implemented)
 2.  [cpython source code](https://hg.python.org/cpython/file/52f68c95e025/Objects/dictobject.c#l33)

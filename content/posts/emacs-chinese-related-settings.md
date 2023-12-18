@@ -2,7 +2,7 @@
 title = "Emacs Chinese-related Settings"
 author = ["KK"]
 date = 2022-02-17T01:27:00+08:00
-lastmod = 2023-09-02T15:53:55+08:00
+lastmod = 2023-12-18T21:38:38+08:00
 tags = ["Emacs"]
 draft = false
 noauthor = true
@@ -50,8 +50,8 @@ dotspacemacs-default-font '("Menlo"
 
 ;; add into dotspacemacs/user-config()
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
-   (set-fontset-font (frame-parameter nil 'font)
-                     charset (font-spec :family "PingFang SC"
+  (set-fontset-font (frame-parameter nil 'font)
+                    charset (font-spec :family "PingFang SC"
                                         :size 16)))
 ```
 
@@ -63,7 +63,8 @@ If you enable the `chinese` layer in Spacemacs, it provides a more convenient fu
 
 PS: [valign](https://github.com/casouri/valign) provides visual alignment for Org Mode and Markdown without changing fonts.
 
-Ref:
+
+## Ref {#ref}
 
 1.  [Spacemacs - Chinese Layer](https://develop.spacemacs.org/layers/+intl/chinese/README.html)
 2.  [Emacs 中文环境配置](https://blindwith.science/2019/07/443.html/)

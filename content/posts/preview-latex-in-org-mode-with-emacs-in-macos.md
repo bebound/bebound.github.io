@@ -2,7 +2,7 @@
 title = "Preview LaTeX in Org Mode with Emacs in MacOS"
 author = ["KK"]
 date = 2019-05-12T20:26:00+08:00
-lastmod = 2020-04-04T23:13:36+08:00
+lastmod = 2023-12-18T21:38:38+08:00
 tags = ["Emacs", "Org Mode", "LaTeX"]
 draft = false
 noauthor = true

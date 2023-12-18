@@ -2,7 +2,8 @@
 title = "Python 3.11 changes"
 author = ["KK"]
 date = 2023-12-10T15:24:00+08:00
-lastmod = 2023-12-11T22:24:40+08:00
+lastmod = 2023-12-18T21:38:38+08:00
+tags = ["Python"]
 draft = false
 noauthor = true
 nocomment = true
@@ -14,7 +15,7 @@ noread = true
 In [[Packaging] Support Python 3.11 by bebound · Pull Request #26923 · Azure/azure-cli (github.com)](https://github.com/Azure/azure-cli/pull/26923) , I bumped azure-cli to use Python 3.11. We've bump the dependency in other PRs, I thought it should be a small PR, but in the end, a lot of changes are made.
 
 
-## args.getargspec {#args-dot-getargspec}
+## `args.getargspec` {#args-dot-getargspec}
 
 `getargspec` is dropped in 3.11. You can easily replaced it with [`getfullargspec`](https://docs.python.org/3/library/inspect.html#inspect.getfullargspec) . It returns `FullArgSpec(args, varargs, varkw, defaults, kwonlyargs, kwonlydefaults, annotations)` instead of `ArgSpec(args, varargs, keywords, defaults)` So `args, _, kw, _ = inspect.getargspec(fn)` can be replaced by `args, _, kw, *_ = inspect.getfullargspec(fn)` However, `getfullargspec` is retained primarily for use in code that needs to maintain compatibility with the Python 2 `inspect` module API.
 
@@ -150,7 +151,8 @@ Traceback (most recent call last):
 argparse.ArgumentError: argument {a}: conflicting subparser: a
 ```
 
-Ref:
+
+## Ref {#ref}
 
 -   [Enum with `str` or `int` Mixin Breaking Change in Python 3.11 (pecar.me)](https://blog.pecar.me/python-enum)
 -   [Enum with `str` or `int` Mixin Breaking Change in Python 3.11 · Issue #100458 · python/cpython (github.com)](https://github.com/python/cpython/issues/100458)

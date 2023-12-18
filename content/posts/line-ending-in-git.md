@@ -2,7 +2,7 @@
 title = "Line Ending in Git"
 author = ["KK"]
 date = 2023-10-21T15:40:00+08:00
-lastmod = 2023-10-21T18:08:11+08:00
+lastmod = 2023-12-18T21:38:39+08:00
 tags = ["Git"]
 draft = false
 noauthor = true
@@ -79,7 +79,8 @@ git reset --hard HEAD
 1.  Line endings in tarball also follows the `.gitattributes`. It's identical to Git checkout on Linux machine.
 2.  The `.gitattributes` settings will only affect new commits. If you want to change the line ending of the files that already in the Git index after changing line ending settings, you can use `git add --renormalize .` to force Git to refresh all tracked files. For example, if the bat file has been add as `crlf` in Git index and then you set it as `text` in `.gitattributes`. Running this command asks Git change it to `lf` in index.
 
-Ref:
+
+## Ref {#ref}
 
 -   [gitattributes - Defining attributes per path](https://www.git-scm.com/docs/gitattributes#_eol)
 -   [Configuring Git to handle line endings - GitHub Docs](https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings?platform=windows)

@@ -2,7 +2,7 @@
 title = "How to copy files temporarily in Dockerfile"
 author = ["KK"]
 date = 2023-08-24T11:49:00+08:00
-lastmod = 2023-10-25T21:41:57+08:00
+lastmod = 2023-12-18T21:38:38+08:00
 tags = ["dockerfile"]
 draft = false
 noauthor = true
@@ -52,7 +52,8 @@ RUN --mount=type=bind,target=/azure-cli.rpm,source=./docker/azure-cli.rpm tdnf i
 You can also use `--squash` to reduce image size.
 Once the build is complete, Docker creates a new image loading the diffs from each layer into a single new layer and references all the parent's layers. So the extra space created by `COPY` command can be freed by `squash`.
 
-Ref:
+
+## Ref {#ref}
 
 1.  [Dockerfile best practice](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
 2.  [RUN --mount](https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/reference.md#run---mount)

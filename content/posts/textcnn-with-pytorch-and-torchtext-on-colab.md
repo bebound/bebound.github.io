@@ -2,7 +2,7 @@
 title = "TextCNN with PyTorch and Torchtext on Colab"
 author = ["KK"]
 date = 2018-12-03T15:47:00+08:00
-lastmod = 2020-03-26T21:22:08+08:00
+lastmod = 2023-12-18T21:38:37+08:00
 tags = ["Machine Learning", "TextCNN"]
 draft = false
 noauthor = true
@@ -81,11 +81,11 @@ train_iter, val_iter, test_iter = data.BucketIterator.splits(
 
 > sequential – Whether the datatype represents sequential data. If False, no tokenization is applied. Default: True.
 >
-> use\_vocab – Whether to use a Vocab object. If False, the data in this field should already be numerical. Default: True.
+> use_vocab – Whether to use a Vocab object. If False, the data in this field should already be numerical. Default: True.
 >
 > preprocessing – The Pipeline that will be applied to examples using this field after tokenizing but before numericalizing. Many Datasets replace this attribute with a custom preprocessor. Default: None.
 >
-> batch\_first – Whether to produce tensors with the batch dimension first. Default: False.
+> batch_first – Whether to produce tensors with the batch dimension first. Default: False.
 
 `datasets.SST.splits` will load the `SST` datasets, and split into train, validation, and test Dataset objects.
 
@@ -144,7 +144,7 @@ for epoch in range(1, args['epochs']+1):
 You can found `textcnn.ipynb` on [GitHub](https://github.com/bebound/textcnn) or [Colab](https://colab.research.google.com/drive/1iZE5O0aBEOEhkWNpARqK5u151qrlwJq-#scrollTo=qR-sHoABrMg3&uniqifier=2).
 
 
-## Ref: {#ref}
+## Ref {#ref}
 
 1.  [Convolutional Neural Networks for Sentence Classiﬁcation](https://arxiv.org/abs/1408.5882)
 2.  [Understanding Convolutional Neural Networks for NLP](http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nlp/)

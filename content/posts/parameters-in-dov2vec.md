@@ -2,7 +2,7 @@
 title = "Parameters in doc2vec"
 author = ["KK"]
 date = 2017-08-03T15:20:00+08:00
-lastmod = 2020-04-04T23:28:56+08:00
+lastmod = 2023-12-18T21:38:36+08:00
 tags = ["Machine Learning", "doc2vec", "word2vec"]
 draft = false
 noauthor = true
@@ -24,7 +24,7 @@ In `skip-gram` model, if the window size is 2, the training samples will be this
 {{< figure src="/images/doc2vec_window.png" width="400" >}}
 
 
-### min\_count {#min-count}
+### min_count {#min-count}
 
 If the word appears less than this value, it will be skipped
 
@@ -57,7 +57,7 @@ The probability of selecting word \\(\omega\_i\\) is \\(P(\omega\_i)\\):
 \\(f(\omega\_j)\\) is the frequency of word \\(\omega\_j\\).
 
 
-## Ref: {#ref}
+## Ref {#ref}
 
 1.  [Word2Vec Tutorial - The Skip-Gram Model](<http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/>)
 2.  [Word2Vec Tutorial Part 2 - Negative Sampling](<http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/>)

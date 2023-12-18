@@ -2,7 +2,7 @@
 title = "Improve Kafka throughput"
 author = ["KK"]
 date = 2021-05-28T00:57:00+08:00
-lastmod = 2021-12-27T00:06:05+08:00
+lastmod = 2023-12-18T21:38:38+08:00
 tags = ["Kafka"]
 draft = false
 noauthor = true
@@ -105,7 +105,8 @@ How to choose compression type? According to cloudflare's test result in [Squeez
 
 These are common configurations, you can find more from the official document contains such as `max.in.flight.requests.per.connection`.
 
-Ref:
+
+## Ref {#ref}
 
 1.  [Kafka message format](https://kafka.apache.org/documentation/#messageformat)
 2.  [Kafka高性能探秘](https://juejin.cn/post/6844903632521920519)

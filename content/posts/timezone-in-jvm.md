@@ -2,7 +2,7 @@
 title = "Timezone in JVM"
 author = ["KK"]
 date = 2020-10-18T23:49:00+08:00
-lastmod = 2020-10-19T00:00:15+08:00
+lastmod = 2023-12-18T21:38:38+08:00
 tags = ["Java", "Scala"]
 draft = false
 noauthor = true
@@ -48,7 +48,7 @@ All of the code can be found in this function: `private static synchronized Time
 }
 ```
 
-First, it will check whether JVM has `user.timezone` property. If not, it will call this native method `getSystemTimeZoneID`, it was implemented in [java.base/share/native/libjava/TimeZone.c](https://github.com/AdoptOpenJDK/openjdk-jdk9u-backup-03-sep-2018/blob/master/jdk/src/java.base/share/native/libjava/TimeZone.c), and the main logic is in [java.base/unix/native/libjava/TimeZone\_md.c](https://github.com/AdoptOpenJDK/openjdk-jdk9u-backup-03-sep-2018/blob/17007f6a09f553801fd424d3c71382717975f66d/jdk/src/java.base/unix/native/libjava/TimeZone%5Fmd.c).
+First, it will check whether JVM has `user.timezone` property. If not, it will call this native method `getSystemTimeZoneID`, it was implemented in [java.base/share/native/libjava/TimeZone.c](https://github.com/AdoptOpenJDK/openjdk-jdk9u-backup-03-sep-2018/blob/master/jdk/src/java.base/share/native/libjava/TimeZone.c), and the main logic is in [java.base/unix/native/libjava/TimeZone_md.c](https://github.com/AdoptOpenJDK/openjdk-jdk9u-backup-03-sep-2018/blob/17007f6a09f553801fd424d3c71382717975f66d/jdk/src/java.base/unix/native/libjava/TimeZone_md.c).
 
 In `Timezone_md.c`, it will find timezone by following steps, it will return the timezone immediately once found.
 
@@ -92,7 +92,7 @@ All of these methods should work
 -   Set timezone manually in Calendar `Calendar.getInstance(TimeZone.getTimeZone("Asia/Shanghai"))`
 
 
-## Ref: {#ref}
+## Ref {#ref}
 
 1.  [How to Set the JVM Time Zone](https://www.baeldung.com/java-jvm-time-zone)
 2.  [jvm linux 时区设置](https://cloud.tencent.com/developer/article/1175487)

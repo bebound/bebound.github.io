@@ -2,7 +2,7 @@
 title = "Circular Import in Python"
 author = ["KK"]
 date = 2019-03-10T10:59:00+08:00
-lastmod = 2019-12-18T00:11:20+08:00
+lastmod = 2023-12-18T21:38:37+08:00
 tags = ["Python"]
 draft = false
 noauthor = true
@@ -16,7 +16,7 @@ Recently, I found a really good example code for Python circular import, and I'd
 
 Here is the code:
 
-{{< highlight python3 "linenos=table, linenostart=1" >}}
+```python3 { linenos=true, linenostart=1 }
 # X.py
 def X1():
     return "x1"
@@ -25,9 +25,9 @@ from Y import Y2
 
 def X2():
     return "x2"
-{{< /highlight >}}
+```
 
-{{< highlight python3 "linenos=table, linenostart=1" >}}
+```python3 { linenos=true, linenostart=1 }
 # Y.py
 def Y1():
     return "y1"
@@ -36,7 +36,7 @@ from X import X1
 
 def Y2():
     return "y2"
-{{< /highlight >}}
+```
 
 Guess what will happen if you run `python X.py` and `python Y.py`?
 
@@ -72,7 +72,7 @@ In `X.py` line 5, Python add `Y` into `sys.modules` and start execute code in `Y
 -   Dynamic import(use import within a function).
 
 
-## Ref: {#ref}
+## Ref {#ref}
 
 1.  [Python Circular Imports](https://stackabuse.com/python-circular-imports/)
 2.  [Python Cirluar Importing](https://stackoverflow.com/questions/22187279/python-circular-importing)
