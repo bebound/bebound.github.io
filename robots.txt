@@ -1,1 +1,3 @@
 User-agent: *
+Allow: /
+Sitemap: https://www.fromkk.com/sitemap.xml
