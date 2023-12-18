@@ -2,7 +2,7 @@
 title = "Python 3.11 changes"
 author = ["KK"]
 date = 2023-12-10T15:24:00+08:00
-lastmod = 2023-12-18T21:38:38+08:00
+lastmod = 2023-12-18T21:52:10+08:00
 tags = ["Python"]
 draft = false
 noauthor = true
@@ -94,7 +94,7 @@ f"{Foo.BAR}"  # > bar
 If you also use `Bar(int, Enum)`, you can replace it with [ReprEnum](https://docs.python.org/3.11/library/enum.html#enum.ReprEnum): `Bar(int, ReprEnum)`.
 
 
-## unittest.Mock {#unittest-dot-mock}
+## `unittest.Mock` {#unittest-dot-mock}
 
 The `unittest` module replace `unittest.mock._importer` with `pkgutil.resolve_name` in [bpo-44686 replace unittest.mock._importer with pkgutil.resolve_name by graingert · Pull Request #18544 · python/cpython (github.com)](https://github.com/python/cpython/pull/18544), which also introduces some changes.
 
@@ -127,7 +127,7 @@ with mock.patch.object(vnet, 'List', _mock_network_client_with_existing_vnet):
 The ultimate solution is fix module name.
 
 
-## argparse.ArgumentError {#argparse-dot-argumenterror}
+## `argparse.ArgumentError` {#argparse-dot-argumenterror}
 
 [bpo-39716: Raise on conflicting subparser names. by anntzer · Pull Request #18605 · python/cpython (github.com)](https://github.com/python/cpython/pull/18605) Raise an ArgumentError when the same subparser name is added twice.
 
