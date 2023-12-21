@@ -3,14 +3,14 @@ languageName = "English"
 languageDirection = "ltr"
 weight = 1
 
-title = "KK's Blog"
+title = "KK's Blog (fromkk)"
 # copyright = "Copy, _right?_ :thinking_face:"
 
 [params]
   dateFormat = "2 January 2006"
 
   # mainSections = ["section1", "section2"]
-  description = "KK's personal blog, fromkk"
+  description = "fromkk.com is my personal blog, Explore insightful posts on Python, machine learning, and other stuff. keyword: python, machine learning, programming"
 
 [author]
   name = "KK"
