@@ -2,7 +2,7 @@
 title = "Improve Git speed in WSL"
 author = ["KK"]
 date = 2023-12-26T11:16:00+08:00
-lastmod = 2023-12-26T11:16:43+08:00
+lastmod = 2023-12-26T14:11:04+08:00
 tags = ["Git"]
 draft = false
 noauthor = true
@@ -38,7 +38,7 @@ The first one is disable git status in prompt. You may edit the `.p10k.zsh` file
 The second way is to disable untraced file check. You can run this command to disable it:
 
 ```bash
-# disable checking for unstaged and staged changes
+# stop checking for unstaged and staged changes
 git config bash.showdirtystate false
 # stop checking for untracked files
 git config bash.showuntrackedfiles false
