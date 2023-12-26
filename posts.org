@@ -2048,7 +2048,7 @@ The standard way to replace Foo class is [[https://docs.python.org/3.11/library/
 
 If you also use =Bar(int, Enum)=, you can replace it with [[https://docs.python.org/3.11/library/enum.html#enum.ReprEnum][ReprEnum]]: =Bar(int, ReprEnum)=.
 
-**** unittest.Mock
+**** ~unittest.Mock~
 The =unittest= module replace =unittest.mock._importer= with =pkgutil.resolve_name= in [[https://github.com/python/cpython/pull/18544][bpo-44686 replace unittest.mock._importer with pkgutil.resolve_name by graingert · Pull Request #18544 · python/cpython (github.com)]], which also introduces some changes.
 
 Previously, it use =__import__= to import the patch target, which does not check the module name. But =pkgutil.resolve_name= will check name first, thus =mock.patch= fails if the target is not a valid Python module name. For example, this statement fails in 3.11:
@@ -2078,7 +2078,7 @@ As a workaround, =mock.patch.object= works.
 
 The ultimate solution is fix module name.
 
-**** argparse.ArgumentError
+**** ~argparse.ArgumentError~
 [[https://github.com/python/cpython/pull/18605][bpo-39716: Raise on conflicting subparser names. by anntzer · Pull Request #18605 · python/cpython (github.com)]] Raise an ArgumentError when the same subparser name is added twice.
 
 #+BEGIN_SRC python
@@ -3330,14 +3330,15 @@ If you change the =.gitattributes= file, you need to run the following command t
 - [[https://github.com/Azure/azure-cli/pull/27137][{CI} Enforce LF-only line endings in git #27137 · Azure/azure-cli (github.com)]]
 - [[https://git-scm.com/docs/git-add#Documentation/git-add.txt---renormalize][Git - git-add Documentation --renormalize]]
 
-*** TODO Improve Git speed in WSL
+*** DONE Improve Git speed in WSL                                     :Git:
+CLOSED: [2023-12-26 Tue 11:16]
    :PROPERTIES:
    :EXPORT_FILE_NAME: speed-up-git-speed-in-wsl
    :END:
 The disk performance in WSL2 is poor, it takes a long time to run ~git status~ in a host's repo. Moreover, if you set a fancy shell prompt, it will take a long time to show the prompt. This article will introduce how to speed up Git in WSL2.
 
 **** How to speed up Git Command
-The solution is to call ~git.exe~ when run ~git~ command in Windows folder. You can add this into your ~bashrc~:
+The performance of file system in WSL2 is poor, it takes a long time to run ~git status~ in a host's repo. The solution is to use ~git.exe~ in Windows folder. You can add this into your ~bashrc~:
 #+begin_src bash
   function git() {
   if $(pwd -P | grep -q "^\/mnt\/c\/*"); then
@@ -3348,9 +3349,86 @@ The solution is to call ~git.exe~ when run ~git~ command in Windows folder. You 
 }
 #+end_src
 
+**** How to speed up Shell Prompt
+If you have configured a fancy shell prompt, powerlevel10k for example, it will automatically get the git status when you enter a git repo. It will take a long time to show the prompt inside a host's repo. You can accelerate it with two methods.
+The first one is disable git status in prompt. You may edit the ~.p10k.zsh~ file and comment the ~vcs~ prompt element. Therefor, it will not get git status when enter a git repo. However, you can't see the git status though you are in WSL repo.
 
+The second way is to disable untraced file check. You can run this command to disable it:
+#+begin_src bash
+  # disable checking for unstaged and staged changes
+  git config bash.showdirtystate false
+  # stop checking for untracked files
+  git config bash.showuntrackedfiles false
+#+end_src
+In this way, you can still see other git status such as branch name and staged files with a instant response.
 
 **** Ref
 - [[https://github.com/romkatv/powerlevel10k/issues/1039][Git status and checkout very slow on some repository]]
 - [[https://markentier.tech/posts/2020/10/faster-git-under-wsl2/][Faster git status under WSL2]]
 
+*** DONE iPod Video Review                                           :iPod:
+CLOSED: [2023-12-26 Tue 11:16]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: ipod-video-review
+   :END:
+I bought a iPod Video 5.5th Gen 80G recently. It's only 200 Yuan (about $30) and I'm satisfied with it.
+
+**** Rockbox
+The original firmware supports few audio format, it even can't play FLAC. I install rockbox on it, which support FLAC and other format and I can transfer music without using iTunes or Finder. It also support theme and plugin, which makes it more powerful.
+
+***** MacPod error
+If you restore the iPod on macOS, it raises =Warning: This is a MacPod, Rockbox only runs on WinPods. See http://www.rockbox.org/wiki/IpodConversionToFAT32= during installation. The easiest way to fix this is to restore it on Windows.
+
+***** Permission denied error
+When I tried to install rockbox 1.5.1 on macOS, it raised ~could not open ipod permission denied~ when I clicked install. Using ~sudo /Applications/RockboxUtility.app/Contents/MacOS/RockboxUtility~ can fix this issue. Some said using 1.4.1 on other OS can fix this issue, but I haven't tried it.
+
+***** Hangs on ~Waiting for system to remount player~
+My iPod hangs on =Waiting for system to remount player= when I install rockbox. After timeout, I disconnected iPod and restart again. The startup screen shows =Can't load rockbox.ipod: file not found=. I connect iPod to computer and use rockbox utility to install rockbox again. I unselected the =bootloader=, and only install =rockbox=, =fonts= and =Plugin Data=. The error is gone.
+
+***** Theme
+There are many themes in rockbox. I prefer [[https://themes.rockbox.org/index.php?themeid=3133&target=ipodvideo][fresh os light]] and [[https://themes.rockbox.org/index.php?themeid=3407&target=ipodvideo][adwaitapod Simplified]]. They also provide the dark version.
+
+***** Custom font
+See https://d00k.net/wiki/rockbox_advanced/font_combining/
+
+**** Replace SSD
+The original HDD is small, slow and fragile comparing with SSD, you can replace it with a SSD.
+
+***** Different Adapters
+- CE to m2 adapter (chip: JMB20330) and a 2242 m.2 SATA SSD (Recommended)
+- CE/SIF SSD (The product discontinued)
+- CE to TF card adaptor
+
+***** SSD Size
+Not all iPod OS can support large SSD. It has the maximum track limit and SSD size limit in default OS. The track limitation stems from the RAM size, the large capacity model comes with more RAM and higher track threshold. For IPC 6th and 6.5th, if you release a SSD which is larger than 128G, iTunes only recongnize 128G. This is due to the LBA28 Limitation. Both Limitations can be eliminated by rockbox. If you want to stay in the original OS, I recommend you buying a 5.5th Gen 80GB or 7th Gen.
+
+| Model Description | Model No.                             | iTunes Storage Limit (see note below)                                                   |
+| 5th Gen 30Gb      | MA002 / MA146 / PA002 / PA146         | ~20000 Tracks                                                                           |
+| 5th Gen 60Gb      | MA003 / MA147 / PA003 / PA147         | ~50000 Tracks                                                                           |
+| 5.5th Gen 30Gb    | MA444 / MA446 / PA444 / PA446 / MA664 | ~20000 Tracks                                                                           |
+| 5.5th Gen 80Gb    | MA448 / MA450 / PA448 / PA450         | ~50000 Tracks                                                                           |
+| 6th Gen 80Gb      | MB029 / MB147 / PB029                 | 128Gb / ~50000 Tracks                                                                   |
+| 6th Gen 160Gb     | MB145 / MB150 / PB145 / PB150         | 128Gb / ~50000 Tracks / *[[https://www.iflash.xyz/store/hdd-ribbon/][Requires Ribbon]]* |
+| 6.5th Gen 120Gb   | MB565 / PB565 / MB562 / PB562         | 128Gb / ~50000 Tracks                                                                   |
+| 7th Gen 160Gb     | PC297 / MC297 / PC293 / MC293         | ~50000 Tracks                                                                           |
+
+Source: https://www.iflash.xyz/store/iflash-compatibility/
+
+***** Guide
+[[https://www.ifixit.com/Guide/iPod+5th+Generation+(Video)+Hard+Drive+Replacement/607][iPod 5th Generation (Video) Hard Drive Replacement]]
+
+**** Replace battery
+iPod comes with a [[https://www.ifixit.com/products/ipod-classic-thin-replacement-battery?pk_vid=fb5c5f8766d880f516955682907df708][580 mah]] or [[https://www.ifixit.com/products/ipod-classic-thick-replacement-battery?pk_vid=fb5c5f8766d880f516955683667df708][850 mah]] battery base on the thin or thick back cover of your iPod.
+
+After replace the SSD, there is a bigger space for battery. You can replace a larger battery to get longer battery life. Here is the guide: https://zh.ifixit.com/Guide/iPod++Classic+%E7%94%B5%E6%B1%A0%E6%9B%B4%E6%8D%A2/561.
+
+Some seller even provide a 3000 mah battery, I'm not sure whether your iPod has enough space for it, please as the seller before buying it. Some said the 3000 mah battery is fake, it's actually a 1800 mah battery. Source: [[https://www.iflash.xyz/3rd-party-extended-battery-guide/][3rd party
+extended Battery guide]]
+
+***** Guide
+[[https://www.ifixit.com/Guide/iPod+5th+Generation+(Video)+Hard+Drive+Replacement/607][iPod 5th Generation (Video) Hard Drive Replacement]]
+
+**** Ref
+- [[https://forums.rockbox.org/index.php?topic=52281.0][Topic: iPod classic 6th Gen LBA28 how to exceed 128gb limit?]]
+- [[https://www.amazon.com/Classic-MK8010GAH-MK8022GAA-MK1634GAL-MK1231GAL/dp/B085F2XB1W#immersive-view_1695293331435][SELLTOONE 128GB SSD for iPod Classic 6th 7th iPod Video 5Gen 5.5th Replace HS081HA MK8010GAH MK8022GAA MK1634GAL MK1231GAL ZIF CE Solid State Drive (128GB)]]
+- [[https://www.reddit.com/r/IpodClassic/comments/15ei366/ipod_665_gen_iflash_and_rockbox_limitations/][iPod 6/6.5 gen iFlash and Rockbox limitations?]]
