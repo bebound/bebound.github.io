@@ -2,7 +2,7 @@
 title = "iPod Video Review"
 author = ["KK"]
 date = 2023-12-26T11:16:00+08:00
-lastmod = 2023-12-26T11:17:32+08:00
+lastmod = 2024-01-01T18:26:22+08:00
 tags = ["iPod"]
 draft = false
 noauthor = true
@@ -52,9 +52,12 @@ The original HDD is small, slow and fragile comparing with SSD, you can replace 
 
 ### Different Adapters {#different-adapters}
 
--   CE to m2 adapter (chip: JMB20330) and a 2242 m.2 SATA SSD (Recommended)
--   CE/SIF SSD (The product discontinued)
--   CE to TF card adaptor
+-   CE to m2 adaptor (chip: JMB20330) and a 2242 m.2 SATA SSD (Recommended)
+    ![](/images/ipod_m2.jpg)
+-   CE to TF card adaptor (adaptor is expensive but longer battery life)
+    ![](/images/ipod_tf.jpg)
+-   CE/ZIF SSD (The product discontinued)
+    ![](/images/ipod_zif.jpg)
 
 
 ### SSD Size {#ssd-size}
@@ -84,10 +87,12 @@ Source: <https://www.iflash.xyz/store/iflash-compatibility/>
 
 iPod comes with a [580 mah](https://www.ifixit.com/products/ipod-classic-thin-replacement-battery?pk_vid=fb5c5f8766d880f516955682907df708) or [850 mah](https://www.ifixit.com/products/ipod-classic-thick-replacement-battery?pk_vid=fb5c5f8766d880f516955683667df708) battery base on the thin or thick back cover of your iPod.
 
-After replace the SSD, there is a bigger space for battery. You can replace a larger battery to get longer battery life. Here is the guide: <https://zh.ifixit.com/Guide/iPod++Classic+%E7%94%B5%E6%B1%A0%E6%9B%B4%E6%8D%A2/561>.
+After replace the SSD, there is a bigger space for battery. You can replace a larger battery to get longer battery life. Here is the guide: <https://www.ifixit.com/Guide/iPod+Classic+Battery+Replacement/561>.
 
 Some seller even provide a 3000 mah battery, I'm not sure whether your iPod has enough space for it, please as the seller before buying it. Some said the 3000 mah battery is fake, it's actually a 1800 mah battery. Source: [3rd party
 extended Battery guide](https://www.iflash.xyz/3rd-party-extended-battery-guide/)
+
+{{< figure src="/images/ipod_battery.jpg" >}}
 
 
 ### Guide {#guide}

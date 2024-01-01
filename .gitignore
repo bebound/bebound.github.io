@@ -2,3 +2,4 @@ public/
 resources/
 ltximg/
 .hugo_build.lock
+.#posts.org
