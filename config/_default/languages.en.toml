@@ -12,7 +12,7 @@ title = "KK's Blog (fromkk)"
   # mainSections = ["section1", "section2"]
   description = "fromkk.com is my personal blog, Explore insightful posts on Python, machine learning, and other stuff. keyword: python, machine learning, programming"
 
-[author]
+[params.author]
   name = "KK"
   image = "images/avatar.png"
   headline = "~ Happy Coding ~"
