@@ -2,7 +2,7 @@
 title = "Some Useful Shell Tools"
 author = ["KK"]
 date = 2017-05-07T15:34:00+08:00
-lastmod = 2023-12-18T21:38:38+08:00
+lastmod = 2024-04-09T19:32:47+08:00
 tags = ["Shell"]
 draft = false
 noauthor = true
@@ -12,7 +12,7 @@ nopaging = true
 noread = true
 +++
 
-Here are some shell tools I use, which can boost your productivity.
+Here are some shell tools I use, which can boost your productivity. [Mordern-unix](https://github.com/johnalanwoods/maintained-modern-unix) is a great repo that list lots of modern unix tools.
 
 
 ## [Prezto](https://github.com/sorin-ionescu/prezto) {#prezto}
@@ -96,15 +96,12 @@ zmodule ohmyzsh/ohmyzsh --use degit --source 'plugins/fasd/fasd.plugin.zsh'
 ---
 
 -   update 18/11/19
-
     Add tldr
-
     [powerlevel10k](https://github.com/romkatv/powerlevel10k) theme is a fancy ZSH theme
 
 -   update 29/12/21
-
     Add rg, bat, fd
-
 -   update 06/01/22
-
     Add Zim
+-   update 01/04/24
+    Add maintained-modern-unix repo

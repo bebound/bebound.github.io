@@ -2331,7 +2331,7 @@ CLOSED: [2017-05-07 Sun 15:34]
    :PROPERTIES:
    :EXPORT_FILE_NAME: some-useful-shell-tools
    :END:
-Here are some shell tools I use, which can boost your productivity.
+Here are some shell tools I use, which can boost your productivity. [[https://github.com/johnalanwoods/maintained-modern-unix][Mordern-unix]] is a great repo that list lots of modern unix tools.
 **** [[https://github.com/sorin-ionescu/prezto][Prezto]] 
 A zsh configuration framework. Provides auto completion, prompt theme and lots of modules to work with other useful tools. I extremely love the =agnoster= theme.
 #+attr_html: :width 400
@@ -2394,19 +2394,16 @@ zmodule ohmyzsh/ohmyzsh --use degit --source 'plugins/fasd/fasd.plugin.zsh'
 
 ---
 - update 18/11/19
-  
   Add tldr
-  
   [[https://github.com/romkatv/powerlevel10k][powerlevel10k]] theme is a fancy ZSH theme
 
 - update 29/12/21
-
   Add rg, bat, fd
-
 - update 06/01/22
-
   Add Zim
-  
+- update 01/04/24
+  Add maintained-modern-unix repo
+ 
 *** DONE Start
 CLOSED: [2017-04-18 Tue 15:46]
    :PROPERTIES:
