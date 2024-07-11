@@ -27,7 +27,7 @@
 
 [[main]]
   name = "RSS"
-  url = "https://fromkk.com/posts/index.xml"
+  url = "/posts/index.xml"
   weight = 50
 
 [[main]]

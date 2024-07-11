@@ -2,7 +2,7 @@
 title = "TextCNN with PyTorch and Torchtext on Colab"
 author = ["KK"]
 date = 2018-12-03T15:47:00+08:00
-lastmod = 2023-12-18T21:38:37+08:00
+lastmod = 2024-07-11T14:33:38+08:00
 tags = ["Machine Learning", "TextCNN"]
 draft = false
 noauthor = true
@@ -18,9 +18,9 @@ noread = true
 
 [Google Colab](https://colab.research.google.com) is a Jupyter notebook environment host by Google, you can use free GPU and TPU to run your modal.
 
-Here is a simple tuturial to build a TextCNN modal and run it on Colab.
+Here is a simple tutorial to build a TextCNN modal and run it on Colab.
 
-The [TextCNN paper](https://arxiv.org/abs/1408.5882) was published by Kim in 2014. The model's idea is pretty simple, but the performance is impressive. If you trying to solve the text classificaton problem, this model is a good choice to start with.
+The [TextCNN paper](https://arxiv.org/abs/1408.5882) was published by Kim in 2014. The model's idea is pretty simple, but the performance is impressive. If you trying to solve the text classification problem, this model is a good choice to start with.
 
 The main architecture is shown below:
 

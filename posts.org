@@ -301,9 +301,9 @@ CLOSED: [2018-12-03 Mon 15:47]
 
 [[https://colab.research.google.com][Google Colab]] is a Jupyter notebook environment host by Google, you can use free GPU and TPU to run your modal.
 
-Here is a simple tuturial to build a TextCNN modal and run it on Colab.
+Here is a simple tutorial to build a TextCNN modal and run it on Colab.
 
-The [[https://arxiv.org/abs/1408.5882][TextCNN paper]] was published by Kim in 2014. The model's idea is pretty simple, but the performance is impressive. If you trying to solve the text classificaton problem, this model is a good choice to start with.
+The [[https://arxiv.org/abs/1408.5882][TextCNN paper]] was published by Kim in 2014. The model's idea is pretty simple, but the performance is impressive. If you trying to solve the text classification problem, this model is a good choice to start with.
 
 The main architecture is shown below:
 
@@ -877,7 +877,7 @@ CLOSED: [2018-11-05 Mon 15:55]
    :PROPERTIES:
    :EXPORT_FILE_NAME: create-node-benchmark-in-py2neo
    :END:
-Recently, I'm working on a neo4j project. I use =Py2neo= to interact with graph db. Alghough =Py2neo= is a very pythonic and easy to use, its performance is really poor. Sometimes I have to manually write cypher statement by myself if I can't bear with the slow excution. Here is a small script which I use to compare the performance of 4 diffrent ways to insert nodes.
+Recently, I'm working on a neo4j project. I use =Py2neo= to interact with graph db. Although =Py2neo= is a very Pythonic and easy to use, its performance is really poor. Sometimes I have to manually write cypher statement by myself if I can't bear with the slow execution. Here is a small script which I use to compare the performance of 4 different ways to insert nodes.
 
 #+BEGIN_SRC python
 import time
@@ -989,7 +989,7 @@ Using unwind
 100000
 #+END_SRC
 
-The above result is based on =http= protocol. A very interesting result is that, =bolt= protocol will decrease the time of the first method, but double the time of sencond method. That's wired, maybe =py2neo= has some special opitimization when doing batch insert on =bolt= protocol? But I have no idea why insert one by one with cypher is 2x slower. Here is the result of =bolt= protocol.
+The above result is based on =http= protocol. A very interesting result is that, =bolt= protocol will decrease the time of the first method, but double the time of second method. That's wired, maybe =py2neo= has some special optimization when doing batch insert on =bolt= protocol? But I have no idea why insert one by one with cypher is 2x slower. Here is the result of =bolt= protocol.
 #+BEGIN_SRC text
 testing create
 Using py2neo one by one
@@ -1019,7 +1019,7 @@ Each web framework has different approach to do CSRF protection. In Django, the 
 
 1. When user login for the first time, Django generate a =csrf_secret=, add random salt and encrypt it as A, save A to cookie =csrftoken=.
 2. When Django processing tag ={{ csrf_token }}= or ={% csrf_token %}=, it read =csrftoken= cookie A, reverse it to =csrf_secret=, add random salt and encrypt it as B, return corresponding HTML.
-3. When Django receive POST request, it will retrive cookie =csrftoken= as A, and tries to get =csrfmiddlewaretoken= value B from POST data, if it does not exist, it will get header =X-CSRFToken= value as B. Then A and B will be reversed to =csrf_secret=. If the values are identical, the validation is passed. Otherwise, a 403 error will raise.
+3. When Django receive POST request, it will retrieve cookie =csrftoken= as A, and tries to get =csrfmiddlewaretoken= value B from POST data, if it does not exist, it will get header =X-CSRFToken= value as B. Then A and B will be reversed to =csrf_secret=. If the values are identical, the validation is passed. Otherwise, a 403 error will raise.
 
 **** Django CSRF Usage
 
@@ -1956,7 +1956,7 @@ None
 The Python3.7 document adds this [[https://docs.python.org/3.7/library/multiprocessing.html#multiprocessing.pool.Pool][warning]]:
 #+begin_quote
 ~multiprocessing.pool~ objects have internal resources that need to be properly managed (like any other resource) by using the pool as a context manager or by calling ~close()~ and ~terminate()~ manually. Failure to do this can lead to the process hanging on finalization.
-Note that is not correct to rely on the garbage colletor to destroy the pool as CPython does not assure that the finalizer of the pool will be called (see ~object.__del__()~ for more information).
+Note that is not correct to rely on the garbage collector to destroy the pool as CPython does not assure that the finalizer of the pool will be called (see ~object.__del__()~ for more information).
 #+end_quote
 
 **** The Bug is Fixed in Python 3.8
@@ -3469,7 +3469,7 @@ If you restore the iPod on macOS, it raises =Warning: This is a MacPod, Rockbox 
 When I tried to install rockbox 1.5.1 on macOS, it raised ~could not open ipod permission denied~ when I clicked install. Using ~sudo /Applications/RockboxUtility.app/Contents/MacOS/RockboxUtility~ can fix this issue. Some said using 1.4.1 on other OS can fix this issue, but I haven't tried it.
 
 ***** Hangs on ~Waiting for system to remount player~
-My iPod hangs on =Waiting for system to remount player= when I install rockbox. After timeout, I disconnected iPod and restart again. The startup screen shows =Can't load rockbox.ipod: file not found=. I connect iPod to computer and use rockbox utility to install rockbox again. I unselected the =bootloader=, and only install =rockbox=, =fonts= and =Plugin Data=. The error is gone.
+My iPod hangs on =Waiting for system to remount player= when I install rockbox. After timeout, I disconnected iPod and restart again. The startup screen shows =Can't load rockbox.ipod: file not found=. I connect iPod to computer and use rockbox utility to install rockbox again. I unchecked the =bootloader=, and only install =rockbox=, =fonts= and =Plugin Data=. The error is gone.
 
 ***** Theme
 There are many themes in rockbox. I prefer [[https://themes.rockbox.org/index.php?themeid=3133&target=ipodvideo][fresh os light]] and [[https://themes.rockbox.org/index.php?themeid=3407&target=ipodvideo][adwaitapod Simplified]]. They also provide the dark version.
@@ -3489,7 +3489,7 @@ The original HDD is small, slow and fragile comparing with SSD, you can replace 
   [[/images/ipod_zif.jpg]]
 
 ***** SSD Size
-Not all iPod OS can support large SSD. It has the maximum track limit and SSD size limit in default OS. The track limitation stems from the RAM size, the large capacity model comes with more RAM and higher track threshold. For IPC 6th and 6.5th, if you release a SSD which is larger than 128G, iTunes only recongnize 128G. This is due to the LBA28 Limitation. Both Limitations can be eliminated by rockbox. If you want to stay in the original OS, I recommend you buying a 5.5th Gen 80GB or 7th Gen.
+Not all iPod OS can support large SSD. It has the maximum track limit and SSD size limit in default OS. The track limitation stems from the RAM size, the large capacity model comes with more RAM and higher track threshold. For IPC 6th and 6.5th, if you release a SSD which is larger than 128G, iTunes only recognizes 128G. This is due to the LBA28 Limitation. Both Limitations can be eliminated by rockbox. If you want to stay in the original OS, I recommend you buying a 5.5th Gen 80GB or 7th Gen.
 
 | Model Description | Model No.                             | iTunes Storage Limit (see note below)                                                   |
 | 5th Gen 30Gb      | MA002 / MA146 / PA002 / PA146         | ~20000 Tracks                                                                           |

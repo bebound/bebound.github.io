@@ -2,7 +2,7 @@
 title = "iPod Video Review"
 author = ["KK"]
 date = 2023-12-26T11:16:00+08:00
-lastmod = 2024-01-01T18:26:22+08:00
+lastmod = 2024-07-11T14:40:40+08:00
 tags = ["iPod"]
 draft = false
 noauthor = true
@@ -32,7 +32,7 @@ When I tried to install rockbox 1.5.1 on macOS, it raised `could not open ipod p
 
 ### Hangs on `Waiting for system to remount player` {#hangs-on-waiting-for-system-to-remount-player}
 
-My iPod hangs on `Waiting for system to remount player` when I install rockbox. After timeout, I disconnected iPod and restart again. The startup screen shows `Can't load rockbox.ipod: file not found`. I connect iPod to computer and use rockbox utility to install rockbox again. I unselected the `bootloader`, and only install `rockbox`, `fonts` and `Plugin Data`. The error is gone.
+My iPod hangs on `Waiting for system to remount player` when I install rockbox. After timeout, I disconnected iPod and restart again. The startup screen shows `Can't load rockbox.ipod: file not found`. I connect iPod to computer and use rockbox utility to install rockbox again. I unchecked the `bootloader`, and only install `rockbox`, `fonts` and `Plugin Data`. The error is gone.
 
 
 ### Theme {#theme}
@@ -62,7 +62,7 @@ The original HDD is small, slow and fragile comparing with SSD, you can replace 
 
 ### SSD Size {#ssd-size}
 
-Not all iPod OS can support large SSD. It has the maximum track limit and SSD size limit in default OS. The track limitation stems from the RAM size, the large capacity model comes with more RAM and higher track threshold. For IPC 6th and 6.5th, if you release a SSD which is larger than 128G, iTunes only recongnize 128G. This is due to the LBA28 Limitation. Both Limitations can be eliminated by rockbox. If you want to stay in the original OS, I recommend you buying a 5.5th Gen 80GB or 7th Gen.
+Not all iPod OS can support large SSD. It has the maximum track limit and SSD size limit in default OS. The track limitation stems from the RAM size, the large capacity model comes with more RAM and higher track threshold. For IPC 6th and 6.5th, if you release a SSD which is larger than 128G, iTunes only recognizes 128G. This is due to the LBA28 Limitation. Both Limitations can be eliminated by rockbox. If you want to stay in the original OS, I recommend you buying a 5.5th Gen 80GB or 7th Gen.
 
 | Model Description | Model No.                             | iTunes Storage Limit (see note below)                                                   |
 |-------------------|---------------------------------------|-----------------------------------------------------------------------------------------|

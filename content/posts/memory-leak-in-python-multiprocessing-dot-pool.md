@@ -2,7 +2,7 @@
 title = "Memory Leak in Python multiprocessing.Pool"
 author = ["KK"]
 date = 2022-03-16T21:04:00+08:00
-lastmod = 2023-12-18T21:38:38+08:00
+lastmod = 2024-07-11T14:38:12+08:00
 tags = ["Python"]
 draft = false
 noauthor = true
@@ -129,7 +129,7 @@ None
 The Python3.7 document adds this [warning](https://docs.python.org/3.7/library/multiprocessing.html#multiprocessing.pool.Pool):
 
 > `multiprocessing.pool` objects have internal resources that need to be properly managed (like any other resource) by using the pool as a context manager or by calling `close()` and `terminate()` manually. Failure to do this can lead to the process hanging on finalization.
-> Note that is not correct to rely on the garbage colletor to destroy the pool as CPython does not assure that the finalizer of the pool will be called (see `object.__del__()` for more information).
+> Note that is not correct to rely on the garbage collector to destroy the pool as CPython does not assure that the finalizer of the pool will be called (see `object.__del__()` for more information).
 
 
 ## The Bug is Fixed in Python 3.8 {#the-bug-is-fixed-in-python-3-dot-8}

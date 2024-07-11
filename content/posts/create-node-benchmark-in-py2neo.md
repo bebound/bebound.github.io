@@ -2,7 +2,7 @@
 title = "Create Node Benchmark in Py2neo"
 author = ["KK"]
 date = 2018-11-05T15:55:00+08:00
-lastmod = 2023-12-18T21:38:37+08:00
+lastmod = 2024-07-11T14:41:05+08:00
 tags = ["Python"]
 draft = false
 noauthor = true
@@ -12,7 +12,7 @@ nopaging = true
 noread = true
 +++
 
-Recently, I'm working on a neo4j project. I use `Py2neo` to interact with graph db. Alghough `Py2neo` is a very pythonic and easy to use, its performance is really poor. Sometimes I have to manually write cypher statement by myself if I can't bear with the slow excution. Here is a small script which I use to compare the performance of 4 diffrent ways to insert nodes.
+Recently, I'm working on a neo4j project. I use `Py2neo` to interact with graph db. Although `Py2neo` is a very Pythonic and easy to use, its performance is really poor. Sometimes I have to manually write cypher statement by myself if I can't bear with the slow execution. Here is a small script which I use to compare the performance of 4 different ways to insert nodes.
 
 ```python
 import time
@@ -125,7 +125,7 @@ Using unwind
 100000
 ```
 
-The above result is based on `http` protocol. A very interesting result is that, `bolt` protocol will decrease the time of the first method, but double the time of sencond method. That's wired, maybe `py2neo` has some special opitimization when doing batch insert on `bolt` protocol? But I have no idea why insert one by one with cypher is 2x slower. Here is the result of `bolt` protocol.
+The above result is based on `http` protocol. A very interesting result is that, `bolt` protocol will decrease the time of the first method, but double the time of second method. That's wired, maybe `py2neo` has some special optimization when doing batch insert on `bolt` protocol? But I have no idea why insert one by one with cypher is 2x slower. Here is the result of `bolt` protocol.
 
 ```text
 testing create
