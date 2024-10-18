@@ -2258,6 +2258,8 @@ The path is slightly different from what the document states. The ~site-packages
 '/opt/homebrew/opt/python@3.12/Frameworks/Python.framework/Versions/3.12'
 #+end_src
 
+The doc also does not eplain why `/opt/homebrew/lib/python3.12/site-packages` is in the path. I believe the doc is out-of-date: https://discuss.python.org/t/the-document-on-pythonhome-might-be-wrong/19614
+
 Here is the output on my Ubuntu server:
 #+begin_src 
 sys.path = [

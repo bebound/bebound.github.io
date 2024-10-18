@@ -2,7 +2,7 @@
 title = "sys.path in Python"
 author = ["KK"]
 date = 2024-08-11T15:56:00+08:00
-lastmod = 2024-08-11T16:09:22+08:00
+lastmod = 2024-10-18T11:00:15+08:00
 tags = ["Python"]
 draft = false
 noauthor = true
@@ -105,6 +105,8 @@ USER_BASE: '/home/kk/.local' (exists)
 USER_SITE: '/home/kk/.local/lib/python3.8/site-packages' (exists)
 ENABLE_USER_SITE: True
 ```
+
+The doc also does not explain why \`/opt/homebrew/lib/python3.12/site-packages\` is in the path. This doc is somewhat out-of-date: <https://discuss.python.org/t/the-document-on-pythonhome-might-be-wrong/19614>
 
 Ref:
 
