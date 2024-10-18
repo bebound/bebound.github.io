@@ -1,2 +1,28 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Matplotlib on KK's Blog (fromkk)</title><link>https://www.fromkk.com/tags/matplotlib/</link><description>Recent content in Matplotlib on KK's Blog (fromkk)</description><generator>Hugo</generator><language>en</language><lastBuildDate>Mon, 18 Dec 2023 21:38:37 +0800</lastBuildDate><atom:link href="https://www.fromkk.com/tags/matplotlib/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Chinese Characters in Matplotlib</title><link>https://www.fromkk.com/posts/using-chinese-characters-in-matplotlib/</link><pubDate>Thu, 04 Oct 2018 15:53:00 +0800</pubDate><guid>https://www.fromkk.com/posts/using-chinese-characters-in-matplotlib/</guid><description>After searching from Google, here is easiest solution. This should also works on other languages:
-import matplotlib.pyplot as plt %matplotlib inline %config InlineBackend.figure_format = &amp;#39;retina&amp;#39; import matplotlib.font_manager as fm f = &amp;#34;/System/Library/Fonts/PingFang.ttc&amp;#34; prop = fm.FontProperties(fname=f) plt.title(&amp;#34;你好&amp;#34;,fontproperties=prop) plt.show() Output:</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Matplotlib on KK's Blog (fromkk)</title><link>https://www.fromkk.com/tags/matplotlib/</link><description>Recent content in Matplotlib on KK's Blog (fromkk)</description><generator>Hugo</generator><language>en</language><lastBuildDate>Mon, 18 Dec 2023 21:38:37 +0800</lastBuildDate><atom:link href="https://www.fromkk.com/tags/matplotlib/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Chinese Characters in Matplotlib</title><link>https://www.fromkk.com/posts/using-chinese-characters-in-matplotlib/</link><pubDate>Thu, 04 Oct 2018 15:53:00 +0800</pubDate><guid>https://www.fromkk.com/posts/using-chinese-characters-in-matplotlib/</guid><description>&lt;p>After searching from Google, here is easiest solution. This should also works on other languages:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">matplotlib.pyplot&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">plt&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">%&lt;/span>&lt;span class="n">matplotlib&lt;/span> &lt;span class="n">inline&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">%&lt;/span>&lt;span class="n">config&lt;/span> &lt;span class="n">InlineBackend&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">figure_format&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;retina&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">matplotlib.font_manager&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">fm&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">f&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;/System/Library/Fonts/PingFang.ttc&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">prop&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">fm&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">FontProperties&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">fname&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">f&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">title&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;你好&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">fontproperties&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">prop&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">show&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Output:&lt;/p>
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ &lt;figure>
+ &lt;img src="https://www.fromkk.com/images/matplot_chinese.png" alt="" class=""/>
+ 
+ &lt;/figure></description></item></channel></rss>
