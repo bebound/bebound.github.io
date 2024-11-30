@@ -22,7 +22,7 @@
  
  
  
- &lt;figure>
- &lt;img src="https://www.fromkk.com/images/matplot_chinese.png" alt="" class=""/>
+ &lt;figure class="mx-auto my-0 rounded-md">
+ &lt;img src="https://www.fromkk.com/images/matplot_chinese.png" alt="" class="mx-auto my-0 rounded-md"/>
  
  &lt;/figure></description></item></channel></rss>

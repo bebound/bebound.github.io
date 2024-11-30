@@ -17,8 +17,8 @@
  
  
  
- &lt;figure>
- &lt;img src="https://www.fromkk.com/images/pool_before.png" alt="" class=""/>
+ &lt;figure class="mx-auto my-0 rounded-md">
+ &lt;img src="https://www.fromkk.com/images/pool_before.png" alt="" class="mx-auto my-0 rounded-md"/>
  
  &lt;/figure>
 
@@ -58,8 +58,8 @@
  
  
  
- &lt;figure>
- &lt;img src="https://www.fromkk.com/images/jaeger.svg" alt="" class=""/>
+ &lt;figure class="mx-auto my-0 rounded-md">
+ &lt;img src="https://www.fromkk.com/images/jaeger.svg" alt="" class="mx-auto my-0 rounded-md"/>
  
  &lt;/figure>
 
@@ -153,8 +153,8 @@ brew install emacs-mac
  
  
  
- &lt;figure>
- &lt;img src="https://www.fromkk.com/images/matplot_chinese.png" alt="" class=""/>
+ &lt;figure class="mx-auto my-0 rounded-md">
+ &lt;img src="https://www.fromkk.com/images/matplot_chinese.png" alt="" class="mx-auto my-0 rounded-md"/>
  
  &lt;/figure></description></item><item><title>LSTM and GRU</title><link>https://www.fromkk.com/posts/lstm-and-gru/</link><pubDate>Sun, 22 Apr 2018 14:39:00 +0800</pubDate><guid>https://www.fromkk.com/posts/lstm-and-gru/</guid><description>&lt;h2 id="lstm" class="relative group">LSTM &lt;span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100">&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#lstm" aria-label="Anchor">#&lt;/a>&lt;/span>&lt;/h2>&lt;p>The avoid the problem of vanishing gradient and exploding gradient in vanilla RNN, LSTM was published, which can remember information for longer periods of time.&lt;/p>
 &lt;p>Here is the structure of LSTM:&lt;/p></description></item><item><title>Models and Architectures in Word2vec</title><link>https://www.fromkk.com/posts/models-and-architechtures-in-word2vec/</link><pubDate>Fri, 05 Jan 2018 15:14:00 +0800</pubDate><guid>https://www.fromkk.com/posts/models-and-architechtures-in-word2vec/</guid><description>&lt;p>Generally, &lt;code>word2vec&lt;/code> is a language model to predict the words probability based on the context. When build the model, it create word embedding for each word, and word embedding is widely used in many NLP tasks.&lt;/p>
