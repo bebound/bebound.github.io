@@ -2,7 +2,7 @@
 title = "__import__ in Python"
 author = ["KK"]
 date = 2024-04-07T15:58:00+08:00
-lastmod = 2024-04-07T16:01:59+08:00
+lastmod = 2024-11-30T20:36:57+08:00
 tags = ["Python"]
 draft = false
 noauthor = true
@@ -33,34 +33,34 @@ This is an advanced function that is not needed in everyday Python programming, 
 Here is an example of how `__import__` is called:
 
 ```python
-old_import = __import__
+  old_import = __import__
 
-def noisy_importer(name, globals=None, locals=None, fromlist=None, level=0):
-    print(f'name: {name!r}')
-    print(f'fromlist: {fromlist}')
-    print(f'level: {level}')
-    print('-' * 80)
-    return old_import(name, locals, globals, fromlist, level)
+  def noisy_importer(name, globals=None, locals=None, fromlist=None, level=0):
+      print(f'name: {name!r}')
+      print(f'fromlist: {fromlist}')
+      print(f'level: {level}')
+      print('-' * 80)
+      return old_import(name, locals, globals, fromlist, level)
 
-import builtins
-builtins.__import__ = noisy_importer
+  import builtins
+  builtins.__import__ = noisy_importer
 
-print('import math')
-import math
-print('from math import sqrt')
-from math import sqrt
+  print('import math')
+  import math
+  print('from math import sqrt')
+  from math import sqrt
 
->>>
-import math
-name: 'math'
-fromlist: None
-level: 0
---------------------------------------------------------------------------------
-from math import sqrt
-name: 'math'
-fromlist: ('sqrt',)
-level: 0
---------------------------------------------------------------------------------
+  >>>
+  import math
+  name: 'math'
+  fromlist: None
+  level: 0
+  --------------------------------------------------------------------------------
+  from math import sqrt
+  name: 'math'
+  fromlist: ('sqrt',)
+  level: 0
+  --------------------------------------------------------------------------------
 ```
 
 As we mentioned earlier, the `__import__` returns the top level module.
@@ -97,7 +97,8 @@ def skip_imports(name, globals=None, locals=None, fromlist=None, level=0):
 builtins.__import__ = skip_imports
 ```
 
-Ref:
+
+### Ref: {#ref}
 
 -   [Built-in Functions — Python 3.12.1 documentation](https://docs.python.org/3/library/functions.html#import__)
 -   [Python - How to use the <span class="underline"><span class="underline">import</span></span> function to import a name from a submodule? - Stack Overflow](https://stackoverflow.com/questions/9806963/how-to-use-the-import-function-to-import-a-name-from-a-submodule)

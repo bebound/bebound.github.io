@@ -2191,7 +2191,7 @@ builtins.__import__ = skip_imports
 #+end_src
 
 
-Ref:
+***** Ref:
 - [[https://docs.python.org/3/library/functions.html#import__][Built-in Functions — Python 3.12.1 documentation]]
 - [[https://stackoverflow.com/questions/9806963/how-to-use-the-import-function-to-import-a-name-from-a-submodule][Python - How to use the __import__ function to import a name from a submodule? - Stack Overflow]]
 
@@ -2258,7 +2258,6 @@ The path is slightly different from what the document states. The ~site-packages
 '/opt/homebrew/opt/python@3.12/Frameworks/Python.framework/Versions/3.12'
 #+end_src
 
-The doc also does not eplain why `/opt/homebrew/lib/python3.12/site-packages` is in the path. I believe the doc is out-of-date: https://discuss.python.org/t/the-document-on-pythonhome-might-be-wrong/19614
 
 Here is the output on my Ubuntu server:
 #+begin_src 
@@ -2277,10 +2276,100 @@ USER_SITE: '/home/kk/.local/lib/python3.8/site-packages' (exists)
 ENABLE_USER_SITE: True
 #+end_src
 
-Ref:
+The doc also does not explain why `/opt/homebrew/lib/python3.12/site-packages` is in the path. This doc is somewhat out-of-date: https://discuss.python.org/t/the-document-on-pythonhome-might-be-wrong/19614
+
+***** Ref:
 - [[https://docs.python.org/3/library/sys.html#sys.path][sys — System-specific parameters and functions]]
 - [[https://docs.python.org/3/library/sys_path_init.html][The initialization of the sys.path module search path]]
 - [[https://docs.python.org/3/library/sys_path_init.html#pth-files][_pth files]]
+
+*** DONE Modern pip build process (--use-pep517)                      :pip:
+CLOSED: [2024-11-24 Sun 20:49]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: modern-pip-build-process-use-pep517
+   :END:
+Nowadays, ~pyproject.toml~ becomes the standard configuration file for packaging. Compare with the old ~setup.py~, it adds two feature pep517 and pep518.
+
+[[https://peps.python.org/pep-0517/][pep517]] defines two hooks: ~build_wheel~ and ~build_sdist~, which is required to build the package from source. Each build backend must implement these two hooks. It makes it possible to create other build backend such as ~flit~ or ~poetry~.
+#+begin_src toml
+[build-system]
+# Defined by PEP 518:
+requires = ["flit"]
+# Defined by this PEP:
+build-backend = "local_backend"
+backend-path = ["backend"]
+#+end_src
+~setuptools~, there are some other build back-end such as ~hatchling~ and ~flit~. You can find the example here: [[https://packaging.python.org/en/latest/tutorials/packaging-projects/#choosing-a-build-backend][Python Packaging Uer Guide - Choosing a build backend]]
+
+[[https://peps.python.org/pep-0518/][pep518]] defines the format of ~pyproject.toml~, where you can specify you build dependencies, ensuring the necessary tools will be installed when building project. For example:
+#+begin_src toml
+[build-system]
+requires = ["setuptools ~= 58.0", "cython ~= 0.29.0"]
+#+end_src
+
+**** Is `setup.py` deprecated
+According to [[https://packaging.python.org/en/latest/discussions/setup-py-deprecated/][python packaging doc]], it is still the valid configuration file for ~setuptools~, but use ~setup.py~ in command is depracetd:
+
+| Deprecated                  | Replacement      |
+|-----------------------------+------------------|
+| python setup.py install     | pip install .    |
+| python setup.py develop     | pip install -e . |
+| python setup.py sdist       | python -m build  |
+| python setup.py bdist_wheel | python -m build  |
+
+[[https://build.pypa.io/en/stable/][Build]] is a pep 517 compatible build fontend, it calls build backend to generate the source and wheel distribution. It's the recommended way to build the package.
+
+**** When ~--use-pep517~ is activated?
+
+If the source distribution contains ~pyproject.toml~, ~pip~ will use ~pep517~ to build the package.
+
+If the current env does not have ~setuptools`~ or ~wheel~, ~pip~ will use ~pep517~ to build the package: [[https://github.com/pypa/pip/blob/ec5faeac4ef6bae97df0e779566ceb2b0de89d3f/src/pip/_internal/pyproject.py#L107][pip source code]]
+
+You can also force ~pip~ to use ~pep517~ with ~--use-pep517~, or disable it and use the legacy behavior with ~--no-use-pep517~.
+
+**** What's the difference between ~--use-pep517~ and legacy behavior?
+
+This is a typical log which uses ~--use-pep517~:
+#+begin_src text
+  root@427314aff523:/# pip install requests --no-binary :all: --no-deps
+Collecting requests
+  Using cached requests-2.32.3.tar.gz (131 kB)
+  Installing build dependencies ... done
+  Getting requirements to build wheel ... done
+  Preparing metadata (pyproject.toml) ... done
+Building wheels for collected packages: requests
+  Building wheel for requests (pyproject.toml) ... done
+  Created wheel for requests: filename=requests-2.32.3-py3-none-any.whl size=64922 sha256=9ee1e853d3d86a8b484cf10c2920601befe81bfad4bd0c3319274b67143ac266
+#+end_src
+
+This is the one which uses the legacy behavior:
+#+begin_src text
+  Processing d:\a\_work\1\s\src\azure-cli
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Building wheels for collected packages: azure-cli
+  Building wheel for azure-cli (setup.py): started
+  Building wheel for azure-cli (setup.py): finished with status 'done'
+#+end_src
+
+The main difference is that ~--use-pep517~ will create a temp build env and build the package in it. The build env is totally fresh, it has to install the build dependencies such as ~setuptools~ first, then call the backend to build the wheel pacakge. Finally, it will install the wheel package.
+
+In legacy behavior, ~pip~ use the current env's ~pip~, ~setuptools~ and ~wheel~ to build the package with ~python setup.py bdist_wheel~, then install the wheel package.
+
+**** A weird issue related to ~--use-pep517~
+When bump Python 3.12 in Azure CLI, the ~get-pip.py~ does not install ~setuptools~ by default, as well as ~wheel~. So the ~pip~ tries to use ~pep517~ to build azure-cli.
+
+However, the runner agent is using Python 3.12.6 and the embedded Python is 3.12.7. They have a compatibility issue. In the build env, the ~python -m pip~ fails with code 57005, because it tries to load modules in 3.12.6. I have to use ~python -Im pip~ to install the package. However, in the build env, the ~-I~ param is not honored, the command still fails. I've created an [[https://github.com/pypa/pip/issues/13023][issue]] in pip repo. The workaround is so complicated, so I have to install ~setuptools~ and ~wheel~ to let ~pip~ use the legacy behavior, which use the env's ~pip~ to build the package.
+
+The details can be found in the [[https://github.com/Azure/azure-cli/pull/29887#discussion_r1802648918][PR]]
+
+***** Ref:
+- [[https://github.com/pypa/pip/blob/ec5faeac4ef6bae97df0e779566ceb2b0de89d3f/src/pip/_internal/build_env.py#L227-L248][pip build_env.py source code]]
+- [[https://github.com/Azure/azure-cli/pull/29887#discussion_r1802648918][original issue when bump Python 3.12]]
+- [[https://pip.pypa.io/en/latest/reference/build-system/pyproject-toml/][pip build process for pyproject.toml]]
+- [[https://chadsmith-software.medium.com/pep-517-and-518-in-plain-english-47208ca8b7a6][PEP 517 and 518 in Plain English]]
+- [[https://packaging.python.org/en/latest/guides/writing-pyproject-toml/][Writing your pyproject.toml]]
+
 ** Go                                                                   :Go:
 *** DONE Difference between Value and Pointer variable in Defer in Go :Defer:
 CLOSED: [2019-12-19 Thu 22:33]
@@ -3233,7 +3322,7 @@ The Spark program's RAM usage can be obtained from =sc.getExecutorMemoryStatus=.
 
 *IDs of Running Executors*
 
-IDs is required when calling =sc.killExecutors=. This can be found in [[eww:https://spark.apache.org/docs/latest/monitoring.html#rest-api][Spark REST API]]. The executors information such as ID, cores and tasks is record in =/applications/[app-id]/executors=.
+IDs is required when calling =sc.killExecutors=. This can be found in [[https://spark.apache.org/docs/latest/monitoring.html#rest-api][Spark REST API]]. The executors information such as ID, cores and tasks is record in =/applications/[app-id]/executors=.
 
 With the help of =sc.requestExecutors=, we can create as many executors as we want in one request. But the pod create time is still too long. To eliminate the pod create request, I used these strategies:
 
