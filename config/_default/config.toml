@@ -6,7 +6,7 @@ baseURL="Https://www.fromkk.com"
 defaultContentLanguage = "en"
 
 enableRobotsTXT = true
-paginate = 10
+pagerSize = 10
 summaryLength = 40
 
 [outputs]
