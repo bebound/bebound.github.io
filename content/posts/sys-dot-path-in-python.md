@@ -2,7 +2,7 @@
 title = "sys.path in Python"
 author = ["KK"]
 date = 2024-08-11T15:56:00+08:00
-lastmod = 2024-10-18T11:00:15+08:00
+lastmod = 2025-03-17T20:52:48+08:00
 tags = ["Python"]
 draft = false
 noauthor = true
@@ -62,7 +62,7 @@ The site module also tries to add `USER_SITE` folder into `sys.path`. Default va
 
 ## Example {#example}
 
-We can use \`python3 -m site\` to quickly check `sys.path` and user site. Here is the output on my mac:
+We can use `python3 -m site` to quickly check `sys.path` and user site. Here is the output on my mac:
 
 ```nil
 sys.path = [
@@ -108,7 +108,8 @@ ENABLE_USER_SITE: True
 
 The doc also does not explain why \`/opt/homebrew/lib/python3.12/site-packages\` is in the path. This doc is somewhat out-of-date: <https://discuss.python.org/t/the-document-on-pythonhome-might-be-wrong/19614>
 
-Ref:
+
+### Ref: {#ref}
 
 -   [sys — System-specific parameters and functions](https://docs.python.org/3/library/sys.html#sys.path)
 -   [The initialization of the sys.path module search path](https://docs.python.org/3/library/sys_path_init.html)
