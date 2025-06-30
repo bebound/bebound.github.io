@@ -3722,3 +3722,4 @@ After using Synology for a while, I found the Synology OS is more user-friendly 
 
 **** Ref:
 - [[https://www.v2ex.com/t/1135848][除了 synology drive，还有支持选择性同步的本地部署云盘吗 ]]
+- [[https://post.smzdm.com/p/adm3qxen/][保姆级安装黑威联通]]

@@ -2,7 +2,7 @@
 title = "Run Synology in QNAP NAS with PVE"
 author = ["KK"]
 date = 2025-06-29T20:53:00+08:00
-lastmod = 2025-06-29T22:56:51+08:00
+lastmod = 2025-06-30T19:46:55+08:00
 tags = ["NAS"]
 draft = false
 noauthor = true
@@ -43,3 +43,4 @@ After using Synology for a while, I found the Synology OS is more user-friendly 
 ## Ref: {#ref}
 
 -   [除了 synology drive，还有支持选择性同步的本地部署云盘吗 ](https://www.v2ex.com/t/1135848)
+-   [保姆级安装黑威联通](https://post.smzdm.com/p/adm3qxen/)
