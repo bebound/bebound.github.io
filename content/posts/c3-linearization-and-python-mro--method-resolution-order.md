@@ -76,8 +76,8 @@ L[M(B,A,Z)]=[M]+merge(L[B],L[A],L[Z],[B,A,Z])
          # Y is in the tail of [X,Y,obj], use X as H
          =[M,B,A,X]+merge([Y,Z,obj],[Y,obj],[Z,obj],[Z])
          =[M,B,A,X,Y]+merge([Z,obj],[obj],[Z,obj],[Z])
-         =[M,B,A,X,Y,X]+merge([obj],[obj],[obj])
-         =[M,B,A,X,Y,X,obj]
+         =[M,B,A,X,Y,Z]+merge([obj],[obj],[obj])
+         =[M,B,A,X,Y,Z,obj]
 ```
 
 
