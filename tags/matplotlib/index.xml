@@ -1,28 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Matplotlib on KK's Blog (fromkk)</title><link>https://fromkk.com/tags/matplotlib/</link><description>Recent content in Matplotlib on KK's Blog (fromkk)</description><generator>Hugo</generator><language>en</language><lastBuildDate>Mon, 18 Dec 2023 21:38:37 +0800</lastBuildDate><atom:link href="https://fromkk.com/tags/matplotlib/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Chinese Characters in Matplotlib</title><link>https://fromkk.com/posts/using-chinese-characters-in-matplotlib/</link><pubDate>Thu, 04 Oct 2018 15:53:00 +0800</pubDate><guid>https://fromkk.com/posts/using-chinese-characters-in-matplotlib/</guid><description>&lt;p>After searching from Google, here is easiest solution. This should also works on other languages:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">matplotlib.pyplot&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">plt&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">%&lt;/span>&lt;span class="n">matplotlib&lt;/span> &lt;span class="n">inline&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">%&lt;/span>&lt;span class="n">config&lt;/span> &lt;span class="n">InlineBackend&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">figure_format&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;retina&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">matplotlib.font_manager&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">fm&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">f&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;/System/Library/Fonts/PingFang.ttc&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">prop&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">fm&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">FontProperties&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">fname&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">f&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">title&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;你好&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">fontproperties&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">prop&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">show&lt;/span>&lt;span class="p">()&lt;/span>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Matplotlib on KK's Blog (fromkk)</title><link>https://fromkk.com/tags/matplotlib/</link><description>Recent content in Matplotlib on KK's Blog (fromkk)</description><generator>Hugo</generator><language>en</language><managingEditor>bebound@gmail.com (KK)</managingEditor><webMaster>bebound@gmail.com (KK)</webMaster><lastBuildDate>Fri, 18 Jul 2025 19:07:21 +0800</lastBuildDate><atom:link href="https://fromkk.com/tags/matplotlib/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Chinese Characters in Matplotlib</title><link>https://fromkk.com/posts/using-chinese-characters-in-matplotlib/</link><pubDate>Thu, 04 Oct 2018 15:53:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/using-chinese-characters-in-matplotlib/</guid><description>&lt;p>After searching from Google, here is easiest solution. This should also works on other languages:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> matplotlib.pyplot &lt;span style="color:#66d9ef">as&lt;/span> plt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">%&lt;/span>matplotlib inline
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">%&lt;/span>config InlineBackend&lt;span style="color:#f92672">.&lt;/span>figure_format &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;retina&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> matplotlib.font_manager &lt;span style="color:#66d9ef">as&lt;/span> fm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>f &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/System/Library/Fonts/PingFang.ttc&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>prop &lt;span style="color:#f92672">=&lt;/span> fm&lt;span style="color:#f92672">.&lt;/span>FontProperties(fname&lt;span style="color:#f92672">=&lt;/span>f)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>title(&lt;span style="color:#e6db74">&amp;#34;你好&amp;#34;&lt;/span>,fontproperties&lt;span style="color:#f92672">=&lt;/span>prop)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>show()
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Output:&lt;/p>
-
- 
- 
- 
- 
- 
-
- 
- 
- 
- 
- 
- &lt;figure class="mx-auto my-0 rounded-md">
- &lt;img src="https://fromkk.com/images/matplot_chinese.png" alt="" class="mx-auto my-0 rounded-md"/>
- 
- &lt;/figure></description></item></channel></rss>
+&lt;figure class="image-size-s">&lt;img src="https://fromkk.com/images/matplot_chinese.png">
+&lt;/figure></description></item></channel></rss>

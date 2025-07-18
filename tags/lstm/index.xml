@@ -1,2 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>LSTM on KK's Blog (fromkk)</title><link>https://fromkk.com/tags/lstm/</link><description>Recent content in LSTM on KK's Blog (fromkk)</description><generator>Hugo</generator><language>en</language><lastBuildDate>Mon, 18 Dec 2023 21:38:36 +0800</lastBuildDate><atom:link href="https://fromkk.com/tags/lstm/index.xml" rel="self" type="application/rss+xml"/><item><title>LSTM and GRU</title><link>https://fromkk.com/posts/lstm-and-gru/</link><pubDate>Sun, 22 Apr 2018 14:39:00 +0800</pubDate><guid>https://fromkk.com/posts/lstm-and-gru/</guid><description>&lt;h2 id="lstm" class="relative group">LSTM &lt;span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100">&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#lstm" aria-label="Anchor">#&lt;/a>&lt;/span>&lt;/h2>&lt;p>The avoid the problem of vanishing gradient and exploding gradient in vanilla RNN, LSTM was published, which can remember information for longer periods of time.&lt;/p>
-&lt;p>Here is the structure of LSTM:&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>LSTM on KK's Blog (fromkk)</title><link>https://fromkk.com/tags/lstm/</link><description>Recent content in LSTM on KK's Blog (fromkk)</description><generator>Hugo</generator><language>en</language><managingEditor>bebound@gmail.com (KK)</managingEditor><webMaster>bebound@gmail.com (KK)</webMaster><lastBuildDate>Fri, 18 Jul 2025 19:07:21 +0800</lastBuildDate><atom:link href="https://fromkk.com/tags/lstm/index.xml" rel="self" type="application/rss+xml"/><item><title>LSTM and GRU</title><link>https://fromkk.com/posts/lstm-and-gru/</link><pubDate>Sun, 22 Apr 2018 14:39:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/lstm-and-gru/</guid><description>&lt;h2 id="lstm">LSTM&lt;/h2>
+&lt;p>The avoid the problem of vanishing gradient and exploding gradient in vanilla RNN, LSTM was published, which can remember information for longer periods of time.&lt;/p>
+&lt;p>Here is the structure of LSTM:&lt;/p>
+&lt;figure class="image-size-s">&lt;img src="https://fromkk.com/images/LSTM_LSTM.png">
+&lt;/figure>
+
+&lt;p>The calculate procedure are:&lt;/p>
+&lt;p>\[\begin{aligned}
+f_t&amp;amp;=\sigma(W_f\cdot[h_{t-1},x_t]+b_f)\\
+i_t&amp;amp;=\sigma(W_i\cdot[h_{t-1},x_t]+b_i)\\
+o_t&amp;amp;=\sigma(W_o\cdot[h_{t-1},x_t]+b_o)\\
+\tilde{C_t}&amp;amp;=tanh(W_C\cdot[h_{t-1},x_t]+b_C)\\
+C_t&amp;amp;=f_t\ast C_{t-1}+i_t\ast \tilde{C_t}\\
+h_t&amp;amp;=o_t \ast tanh(C_t)
+\end{aligned}\]&lt;/p>
+&lt;p>\(f_t\),\(i_t\),\(o_t\) are forget gate, input gate and output gate respectively. \(\tilde{C_t}\) is the new memory content. \(C_t\) is cell state. \(h_t\) is the output.&lt;/p></description></item></channel></rss>
