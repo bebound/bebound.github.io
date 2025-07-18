@@ -1,11 +1,11 @@
 +++
 title = "TextCNN with PyTorch and Torchtext on Colab"
-author = ["KK"]
 date = 2018-12-03T15:47:00+08:00
-lastmod = 2024-07-11T14:33:38+08:00
+lastmod = 2025-07-18T19:07:21+08:00
 tags = ["Machine Learning", "TextCNN"]
+categories = ["Machine-Learning"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true
@@ -24,7 +24,7 @@ The [TextCNN paper](https://arxiv.org/abs/1408.5882) was published by Kim in 201
 
 The main architecture is shown below:
 
-{{< figure src="/images/textcnn.png" width="400" >}}
+{{< figure src="/images/textcnn.png" class="image-size-s" >}}
 
 It uses different kernels to extract text features, then use the softmax regression to classify text base on the features.
 

@@ -1,11 +1,11 @@
 +++
 title = "The Annotated The Annotated Transformer"
-author = ["KK"]
 date = 2019-09-01T16:00:00+08:00
-lastmod = 2023-12-18T21:38:37+08:00
+lastmod = 2025-07-18T19:07:21+08:00
 tags = ["Machine Learning", "Transformer"]
+categories = ["Machine-Learning"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true
@@ -16,7 +16,7 @@ Thanks for the articles I list at the end of this post, I understand how transfo
 
 First, this is the graph that was referenced by almost all of the post related to Transformer.
 
-{{< figure src="/images/transformer_main.png" width="400" >}}
+{{< figure src="/images/transformer_main.png" class="image-size-s" >}}
 
 Transformer consists of these parts: Input, Encoder\*N, Output Input, Decoder\*N, Output. I'll explain them step by step.
 

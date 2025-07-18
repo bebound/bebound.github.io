@@ -1,11 +1,11 @@
 +++
 title = "CSRF in Django"
-author = ["KK"]
 date = 2018-11-07T13:58:00+08:00
-lastmod = 2023-12-18T21:38:37+08:00
+lastmod = 2025-07-18T19:07:21+08:00
 tags = ["Python", "Django"]
+categories = ["Programming"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true
@@ -21,7 +21,7 @@ Each web framework has different approach to do CSRF protection. In Django, the 
 
 1.  When user login for the first time, Django generate a `csrf_secret`, add random salt and encrypt it as A, save A to cookie `csrftoken`.
 2.  When Django processing tag `{{ csrf_token }}` or `{% csrf_token %}`, it read `csrftoken` cookie A, reverse it to `csrf_secret`, add random salt and encrypt it as B, return corresponding HTML.
-3.  When Django receive POST request, it will retrive cookie `csrftoken` as A, and tries to get `csrfmiddlewaretoken` value B from POST data, if it does not exist, it will get header `X-CSRFToken` value as B. Then A and B will be reversed to `csrf_secret`. If the values are identical, the validation is passed. Otherwise, a 403 error will raise.
+3.  When Django receive POST request, it will retrieve cookie `csrftoken` as A, and tries to get `csrfmiddlewaretoken` value B from POST data, if it does not exist, it will get header `X-CSRFToken` value as B. Then A and B will be reversed to `csrf_secret`. If the values are identical, the validation is passed. Otherwise, a 403 error will raise.
 
 
 ## Django CSRF Usage {#django-csrf-usage}

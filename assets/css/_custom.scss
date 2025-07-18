@@ -1,0 +1,29 @@
+.highlight pre {
+  overflow-x: auto;  /* 自动显示横向滚动条 */
+  white-space: pre;  /* 保留所有空白符，禁止换行 */
+  word-wrap: normal; /* 禁止长单词自动换行 */
+}
+
+.single .content figure.image-size-s {
+  // 设置figure容器的宽度为400px，并居中
+  width: 400px;
+  max-width: 100%; // 确保在小屏幕上不会溢出
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.single .content figure.image-size-m {
+  // 设置figure容器的宽度为400px，并居中
+  width: 600px;
+  max-width: 100%; // 确保在小屏幕上不会溢出
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.single .content figure.image-size-l {
+  // 设置figure容器的宽度为400px，并居中
+  width: 800px;
+  max-width: 100%; // 确保在小屏幕上不会溢出
+  margin-left: auto;
+  margin-right: auto;
+}

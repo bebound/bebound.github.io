@@ -1,11 +1,11 @@
 +++
 title = "Torchtext snippets"
-author = ["KK"]
 date = 2019-07-01T21:28:00+08:00
-lastmod = 2023-12-18T21:38:37+08:00
+lastmod = 2025-07-18T19:07:21+08:00
 tags = ["Python", "torchtext", "PyTorch"]
+categories = ["Programming"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true

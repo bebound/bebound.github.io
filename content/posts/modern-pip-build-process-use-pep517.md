@@ -1,11 +1,11 @@
 +++
 title = "Modern pip build process (–use-pep517)"
-author = ["KK"]
 date = 2024-11-24T20:49:00+08:00
-lastmod = 2024-11-30T20:40:14+08:00
+lastmod = 2025-07-18T19:07:21+08:00
 tags = ["Python", "pip"]
+categories = ["Programming"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true

@@ -1,11 +1,11 @@
 +++
 title = "C3 Linearization and Python MRO(Method Resolution Order)"
-author = ["KK"]
 date = 2020-03-14T17:37:00+08:00
-lastmod = 2023-12-18T21:38:37+08:00
+lastmod = 2025-07-18T19:07:21+08:00
 tags = ["Python", "MRO"]
+categories = ["Programming"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true
@@ -25,7 +25,7 @@ class B(Y,Z):pass
 class M(B,A,Z):pass
 ```
 
-{{< figure src="/images/python_mro.png" width="400" >}}
+{{< figure src="/images/python_mro.png" class="image-size-s" >}}
 
 The answer is: `M, B, A, X, Y, Z, object`
 

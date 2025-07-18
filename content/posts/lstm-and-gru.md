@@ -1,11 +1,11 @@
 +++
 title = "LSTM and GRU"
-author = ["KK"]
 date = 2018-04-22T14:39:00+08:00
-lastmod = 2023-12-18T21:38:36+08:00
+lastmod = 2025-07-18T19:07:21+08:00
 tags = ["Machine Learning", "LSTM", "GRU"]
+categories = ["Machine-Learning"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true
@@ -18,7 +18,7 @@ The avoid the problem of vanishing gradient and exploding gradient in vanilla RN
 
 Here is the structure of LSTM:
 
-{{< figure src="/images/LSTM_LSTM.png" width="400" >}}
+{{< figure src="/images/LSTM_LSTM.png" class="image-size-s" >}}
 
 The calculate procedure are:
 
@@ -38,7 +38,7 @@ Use \\(f\_t\\) and \\(i\_t\\) to update \\(C\_t\\), use \\(o\_t\\) to decide whi
 
 ## GRU {#gru}
 
-{{< figure src="/images/LSTM_GRU.png" width="400" >}}
+{{< figure src="/images/LSTM_GRU.png" class="image-size-s" >}}
 
 \\[\begin{aligned}
 z\_t&=\sigma(W\_z\cdot[h\_{t-1},x\_t])\\\\

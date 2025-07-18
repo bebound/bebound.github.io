@@ -1,11 +1,11 @@
 +++
 title = "Parameters in doc2vec"
-author = ["KK"]
 date = 2017-08-03T15:20:00+08:00
-lastmod = 2023-12-18T21:38:36+08:00
+lastmod = 2025-07-18T19:07:21+08:00
 tags = ["Machine Learning", "doc2vec", "word2vec"]
+categories = ["Machine-Learning"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true
@@ -21,7 +21,7 @@ window is the maximum distance between the predicted word and context words used
 
 In `skip-gram` model, if the window size is 2, the training samples will be this:(the blue word is the input word)
 
-{{< figure src="/images/doc2vec_window.png" width="400" >}}
+{{< figure src="/images/doc2vec_window.png" class="image-size-s" >}}
 
 
 ### min_count {#min-count}
@@ -39,7 +39,7 @@ where \\(z(w\_i)\\) is the frequency of the word and \\(s\\) is the sample rate.
 
 This is the plot when `sample` is 1e-3.
 
-{{< figure src="/images/doc2vec_negative_sample.png" width="400" >}}
+{{< figure src="/images/doc2vec_negative_sample.png" class="image-size-s" >}}
 
 
 ### negative {#negative}

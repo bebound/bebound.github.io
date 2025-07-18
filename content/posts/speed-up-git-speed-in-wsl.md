@@ -1,11 +1,11 @@
 +++
 title = "Improve Git speed in WSL"
-author = ["KK"]
 date = 2023-12-26T11:16:00+08:00
-lastmod = 2024-02-27T16:49:33+08:00
+lastmod = 2025-07-18T19:07:22+08:00
 tags = ["Git"]
+categories = ["Misc"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true

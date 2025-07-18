@@ -1,0 +1,213 @@
+# -- Site Configuration --
+# Refer to the theme docs for more details about each of these parameters.
+# https://jpanther.github.io/congo/docs/getting-started/
+
+baseURL="Https://fromkk.com"
+defaultContentLanguage = "en"
+languageCode = "en"
+languageName = "English"
+hasCJKLanguage = true
+
+title = "KK's Blog (fromkk)"
+
+enableRobotsTXT = true
+
+[pagination]
+  disableAliases = false
+  pagerSize = 10
+  path = "page"
+
+[taxonomies]
+  category = 'categories'
+  tag = 'tags'
+
+[params]
+  # site default theme ["auto", "light", "dark"]
+  defaultTheme = "auto"
+  # public git repo url only then enableGitInfo is true
+  gitRepo = ""
+  # LoveIt NEW | 0.1.1 which hash function used for SRI, when empty, no SRI is used
+  # ["sha256", "sha384", "sha512", "md5"]
+  fingerprint = ""
+  # LoveIt NEW | 0.2.0 date format
+  dateFormat = "2006-01-02"
+  # website title for Open Graph and Twitter Cards
+  title = "KK's Blog (fromkk)"
+  # website description for RSS, SEO, Open Graph and Twitter Cards
+  description = "fromkk.com is my personal blog, Explore insightful posts on Python, machine learning, and other stuff. keyword: python, machine learning, programming"
+  # website images for Open Graph and Twitter Cards
+  images = ["/images/avatar.png"]
+  customCSS = [" <style> .highlight pre { overflow-x: auto;  /* 自动显示横向滚动条 */ white-space: pre;  /* 保留所有空白符，禁止换行 */ word-wrap: normal; /* 禁止长单词自动换行 */ } </style> "]
+
+
+[params.author]
+    name = "KK"
+    email = "bebound@gmail.com"
+    link = ""
+
+[params.header]
+    # desktop header mode ["fixed", "normal", "auto"]
+    desktopMode = "fixed"
+    # mobile header mode ["fixed", "normal", "auto"]
+    mobileMode = "auto"
+    # LoveIt NEW | 0.2.0 Header title config
+    [params.header.title]
+      # URL of the LOGO
+      # logo = "/images/avatar.png"
+      # title name
+      name = "KK's Blog (fromkk)"
+      # you can add extra information before the name (HTML format is supported), such as icons
+      pre = "<img class='logo lazyautosizes ls-is-cached lazyloaded' src='/images/avatar.png'>"
+      # you can add extra information after the name (HTML format is supported), such as icons
+      post = ""
+      # LoveIt NEW | 0.2.5 whether to use typeit animation for title name
+      typeit = false
+
+  # Footer config
+  [params.footer]
+    enable = true
+    # LoveIt NEW | 0.2.0 Custom content (HTML format is supported)
+    custom = ''
+    # LoveIt NEW | 0.2.0 whether to show Hugo and theme info
+    hugo = true
+    # LoveIt NEW | 0.2.0 whether to show copyright info
+    copyright = true
+    # LoveIt NEW | 0.2.0 whether to show the author
+    author = true
+    # Site creation time
+    since = 2017
+    # ICP info only in China (HTML format is supported)
+    icp = ""
+    # license info (HTML format is supported)
+    license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+  
+  [params.home]
+    # LoveIt NEW | 0.2.0 amount of RSS pages
+    rss = 100
+    # Home page profile
+    [params.home.profile]
+      enable = true
+      # Gravatar Email for preferred avatar in home page
+      gravatarEmail = ""
+      # URL of avatar shown in home page
+      avatarURL = "/images/avatar.png"
+      # LoveIt CHANGED | 0.2.7 title shown in home page (HTML format is supported)
+      title = ""
+      # subtitle shown in home page (HTML format is supported)
+      subtitle = "~ Happy Coding ~"
+      # whether to use typeit animation for subtitle
+      typeit = true
+      # whether to show social links
+      social = true
+      # LoveIt NEW | 0.2.0 disclaimer (HTML format is supported)
+      disclaimer = ""
+    # Home page posts
+    [params.home.posts]
+      enable = true
+      # special amount of posts in each home posts page
+      paginate = 6
+      # LoveIt DELETED | 0.2.0 replaced with hiddenFromHomePage in params.page
+      # default behavior when you don't set "hiddenFromHomePage" in front matter
+      defaultHiddenFromHomePage = false
+
+ [params.social]
+    Email = "bebound@gmail.com"
+    GitHub = "bebound"
+    Stackoverflow = "2251785"
+    RSS = true 
+
+  [params.search]
+  enable = true
+  # type of search engine ["lunr", "algolia"]
+  type = "lunr"
+  # max index length of the chunked content
+  contentLength = 4000
+  # placeholder of the search bar
+  placeholder = ""
+  # max number of results length
+  maxResultLength = 10
+  # snippet length of the result
+  snippetLength = 30
+  # HTML tag name of the highlight part in results
+  highlightTag = "em"
+  # whether to use the absolute URL based on the baseURL in search index
+  absoluteURL = false
+  [params.search.algolia]
+    index = ""
+    appID = ""
+    searchKey = ""
+  
+  [params.page.comment]
+    enable = true
+    # utterances comment config (https://utteranc.es/)
+    [params.page.comment.utterances]
+      enable = true
+      # owner/repo
+      repo = "bebound/bebound.github.io"
+      issueTerm = "pathname"
+      label = "utterances"
+      lightTheme = "github-light"
+      darkTheme = "github-dark"
+  
+  [params.page.math]
+      enable = true
+      # LoveIt CHANGED | 0.2.11 default inline delimiter is $ ... $ and \( ... \)
+      inlineLeftDelimiter = ""
+      inlineRightDelimiter = ""
+      # LoveIt CHANGED | 0.2.11 default block delimiter is $$ ... $$, \[ ... \], \begin{equation} ... \end{equation} and some other functions
+      blockLeftDelimiter = ""
+      blockRightDelimiter = ""
+      # KaTeX extension copy_tex
+      copyTex = true
+      # KaTeX extension mhchem
+      mhchem = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+
+[menu]
+  [[menu.main]]
+    weight = 1
+    identifier = "posts"
+    # you can add extra information before the name (HTML format is supported), such as icons
+    pre = ""
+    # you can add extra information after the name (HTML format is supported), such as icons
+    post = ""
+    name = "Posts"
+    url = "/posts/"
+    # title will be shown when you hover on this menu link
+    title = ""
+  [[menu.main]]
+    weight = 2
+    identifier = "categories"
+    pre = ""
+    post = ""
+    name = "Categories"
+    url = "/categories/"
+    title = ""
+  [[menu.main]]
+    weight = 3
+    identifier = "tags"
+    pre = ""
+    post = ""
+    name = "Tags"
+    url = "/tags/"
+    title = ""
+  [[menu.main]]
+    weight = 4
+    identifier = "about"
+    pre = ""
+    post = ""
+    name = "About"
+    url = "/about/"
+    title = ""
+  [[menu.main]]
+    weight = 5
+    identifier = "github"
+    pre = "<i class='fab fa-github fa-fw' aria-hidden='true'></i>"
+    post = ""
+    name = ""
+    url = "https://github.com/bebound/bebound.github.io"
+    title = "GitHub"
+

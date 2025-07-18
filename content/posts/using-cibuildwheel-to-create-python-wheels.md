@@ -1,11 +1,11 @@
 +++
 title = "Using cibuildwheel to Create Python Wheels"
-author = ["KK"]
 date = 2020-07-29T22:53:00+08:00
-lastmod = 2023-12-18T21:38:37+08:00
+lastmod = 2025-07-18T19:07:21+08:00
 tags = ["Python"]
+categories = ["Programming"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true

@@ -1,11 +1,11 @@
 +++
 title = "Brief Introduction of Label Propagation Algorithm"
-author = ["KK"]
 date = 2017-07-16T21:45:00+08:00
-lastmod = 2023-12-18T21:38:36+08:00
+lastmod = 2025-07-18T19:07:21+08:00
 tags = ["Machine Learning", "Label Propagation"]
+categories = ["Machine-Learning"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true
@@ -37,7 +37,7 @@ Larger weight allow labels to travel through easier.
 
 In short, let the nearest label has larger weight, then calculate each label's new label, reset labeled data's label, repeat.
 
-{{< figure src="/images/label_spreading.png" width="400" >}}
+{{< figure src="/images/label_spreading.png" class="image-size-s" >}}
 
 
 ## Ref {#ref}

@@ -1,11 +1,11 @@
 +++
 title = "How to copy files temporarily in Dockerfile"
-author = ["KK"]
 date = 2023-08-24T11:49:00+08:00
-lastmod = 2023-12-18T21:38:38+08:00
+lastmod = 2025-07-18T19:07:22+08:00
 tags = ["dockerfile"]
+categories = ["Misc"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true

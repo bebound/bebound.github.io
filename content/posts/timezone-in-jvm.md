@@ -1,11 +1,11 @@
 +++
 title = "Timezone in JVM"
-author = ["KK"]
 date = 2020-10-18T23:49:00+08:00
-lastmod = 2023-12-18T21:38:38+08:00
+lastmod = 2025-07-18T19:07:22+08:00
 tags = ["Java", "Scala"]
+categories = ["Misc"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true

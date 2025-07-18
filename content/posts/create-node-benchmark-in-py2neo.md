@@ -1,11 +1,11 @@
 +++
 title = "Create Node Benchmark in Py2neo"
-author = ["KK"]
 date = 2018-11-05T15:55:00+08:00
-lastmod = 2024-07-11T14:41:05+08:00
+lastmod = 2025-07-18T19:07:21+08:00
 tags = ["Python"]
+categories = ["Programming"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true

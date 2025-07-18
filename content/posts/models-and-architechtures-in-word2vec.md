@@ -1,11 +1,11 @@
 +++
 title = "Models and Architectures in Word2vec"
-author = ["KK"]
 date = 2018-01-05T15:14:00+08:00
-lastmod = 2023-12-18T21:38:36+08:00
+lastmod = 2025-07-18T19:07:21+08:00
 tags = ["Machine Learning", "word2vec"]
+categories = ["Machine-Learning"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true
@@ -22,7 +22,7 @@ Generally, `word2vec` is a language model to predict the words probability based
 
 Use the context to predict the probability of current word. (In the picture, the word is encoded with one-hot encoding, \\(W\_{V\*N}\\) is word embedding, and \\(W\_{V\*N}^{'}\\), the output weight matrix in hidden layer, is same as \\(\hat{\upsilon}\\) in following equations)
 
-{{< figure src="/images/doc2vec_cbow.png" width="400" >}}
+{{< figure src="/images/doc2vec_cbow.png" class="image-size-s" >}}
 
 1.  Context words' vectors are \\(\upsilon\_{c-n} ... \upsilon\_{c+m}\\) (\\(m\\) is the window size)
 2.  Context vector \\(\hat{\upsilon}=\frac{\upsilon\_{c-m}+\upsilon\_{c-m+1}+...+\upsilon\_{c+m}}{2m}\\)
@@ -52,7 +52,7 @@ minimize\ J &=-\log P(\omega\_c\lvert \omega\_{c-m},...,\omega\_{c-1},...,\omega
 
 Use current word to predict its context.
 
-{{< figure src="/images/doc2vec_skip-gram.png" width="400" >}}
+{{< figure src="/images/doc2vec_skip-gram.png" class="image-size-s" >}}
 
 1.  We get the input word's vector \\(\upsilon\_c\\)
 2.  Generate \\(2m\\) score vectors, \\(u\_{c-m},...,u\_{c-1},...,u\_{c+m}\\).
@@ -81,7 +81,8 @@ Encode words into a huffman tree, then each word has a Huffman code. The probabi
 Then the probability of negative classification is
 \\[1-\sigma(X^T\_\omega \theta)\\]
 
-<img src="/images/doc2vec_hierarchical_softmax.png" alt="doc2vec_hierarchical_softmax.png" width="400" />
+{{< figure src="/images/doc2vec_hierarchical_softmax.png" class="image-size-s" >}}
+
 `足球`'s Huffman code is \\(1001\\), then it's probability in each node are
 
 \\[\begin{aligned}

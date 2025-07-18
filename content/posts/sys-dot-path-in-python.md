@@ -1,11 +1,11 @@
 +++
 title = "sys.path in Python"
-author = ["KK"]
 date = 2024-08-11T15:56:00+08:00
-lastmod = 2025-03-17T20:52:48+08:00
+lastmod = 2025-07-18T19:07:21+08:00
 tags = ["Python"]
+categories = ["Programming"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true

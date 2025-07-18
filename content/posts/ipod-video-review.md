@@ -1,11 +1,11 @@
 +++
 title = "iPod Video Review"
-author = ["KK"]
 date = 2023-12-26T11:16:00+08:00
-lastmod = 2024-07-11T14:40:40+08:00
+lastmod = 2025-07-18T19:07:22+08:00
 tags = ["iPod"]
+categories = ["Misc"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true
@@ -53,11 +53,16 @@ The original HDD is small, slow and fragile comparing with SSD, you can replace 
 ### Different Adapters {#different-adapters}
 
 -   CE to m2 adaptor (chip: JMB20330) and a 2242 m.2 SATA SSD (Recommended)
-    ![](/images/ipod_m2.jpg)
+
+{{< figure src="/images/ipod_m2.jpg" class="image-size-s" >}}
+
 -   CE to TF card adaptor (adaptor is expensive but longer battery life)
-    ![](/images/ipod_tf.jpg)
+
+{{< figure src="/images/ipod_tf.jpg" class="image-size-s" >}}
+
 -   CE/ZIF SSD (The product discontinued)
-    ![](/images/ipod_zif.jpg)
+
+{{< figure src="/images/ipod_zif.jpg" class="image-size-s" >}}
 
 
 ### SSD Size {#ssd-size}
@@ -92,7 +97,7 @@ After replace the SSD, there is a bigger space for battery. You can replace a la
 Some seller even provide a 3000 mah battery, I'm not sure whether your iPod has enough space for it, please as the seller before buying it. Some said the 3000 mah battery is fake, it's actually a 1800 mah battery. Source: [3rd party
 extended Battery guide](https://www.iflash.xyz/3rd-party-extended-battery-guide/)
 
-{{< figure src="/images/ipod_battery.jpg" >}}
+{{< figure src="/images/ipod_battery.jpg" class="image-size-s" >}}
 
 
 ### Guide {#guide}

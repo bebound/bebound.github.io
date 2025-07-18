@@ -1,11 +1,11 @@
 +++
 title = "Line Ending in Git"
-author = ["KK"]
 date = 2023-10-21T15:40:00+08:00
-lastmod = 2023-12-18T21:38:39+08:00
+lastmod = 2025-07-18T19:07:22+08:00
 tags = ["Git"]
+categories = ["Misc"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true

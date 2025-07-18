@@ -1,11 +1,11 @@
 +++
 title = "Emacs Chinese-related Settings"
-author = ["KK"]
 date = 2022-02-17T01:27:00+08:00
-lastmod = 2023-12-18T21:38:38+08:00
+lastmod = 2025-07-18T19:07:22+08:00
 tags = ["Emacs"]
+categories = ["Misc"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true

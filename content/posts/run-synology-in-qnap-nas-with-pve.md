@@ -1,11 +1,11 @@
 +++
 title = "Run Synology in QNAP NAS with PVE"
-author = ["KK"]
 date = 2025-06-29T20:53:00+08:00
-lastmod = 2025-06-30T19:46:55+08:00
+lastmod = 2025-07-18T19:07:22+08:00
 tags = ["NAS"]
+categories = ["Misc"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true

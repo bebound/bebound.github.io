@@ -1,11 +1,11 @@
 +++
 title = "Using Dueling DQN to Play Flappy Bird"
-author = ["KK"]
 date = 2019-04-14T17:10:00+08:00
-lastmod = 2023-12-18T21:38:37+08:00
+lastmod = 2025-07-18T19:07:21+08:00
 tags = ["Machine Learning"]
+categories = ["Machine-Learning"]
 draft = false
-noauthor = true
+author = "KK"
 nocomment = true
 nodate = true
 nopaging = true
@@ -16,7 +16,7 @@ PyTorch provide a simple DQN implementation to solve the cartpole game. However,
 
 The official code's training data is below, it's high score is about 50 and finally diverges.
 
-{{< figure src="/images/ddqn_official.png" width="400" >}}
+{{< figure src="/images/ddqn_official.png" class="image-size-s" >}}
 
 There are many reason that lead to divergence.
 
@@ -26,7 +26,7 @@ Second, small replay memory. If the memory is too small, the agent will forget t
 
 Third, the parameters. `learning_rate`, `target_update_interval` may cause fluctuation. Here is a example on [Stack Overflow](https://stackoverflow.com/questions/49837204/performance-fluctuates-as-it-is-trained-with-dqn). I also met this problem when training cartpole agent. The reward stops growing after 1000 episode.
 
-{{< figure src="/images/ddqn_cartpole_fluctuate.png" width="400" >}}
+{{< figure src="/images/ddqn_cartpole_fluctuate.png" class="image-size-s" >}}
 
 After doing some research on the cartpole DNQ code, I managed to made a model to play the flappy bird. Here are the changes from the original cartpole code. Most of the technology can be found in these two papers: [Playing Atari with Deep Reinforcement Learning](https://arxiv.org/abs/1312.5602) and [Rainbow: Combining Improvements in Deep Reinforcement Learning](https://arxiv.org/abs/1710.02298).
 
@@ -58,7 +58,7 @@ Here is a trained result:
 
     `x=val+adv-adv.mean(1,keepdim=True)`
 
-    {{< figure src="/images/ddqn_duel_dqn.png" width="400" >}}
+    {{< figure src="/images/ddqn_duel_dqn.png" class="image-size-s" >}}
 
     In this project, I use dueling DQN.
 
@@ -122,7 +122,7 @@ Here are something may help with this task.
 
     [Rainbow](https://arxiv.org/abs/1710.02298) introduce many other extensions to enhance DQN, some of them have been discussed in this post.
 
-    {{< figure src="/images/ddqn_rainbow.png" width="400" >}}
+    {{< figure src="/images/ddqn_rainbow.png" class="image-size-s" >}}
 
 I've uploaded code to this [repo](https://github.com/bebound/flappy-bird-dqn).
 
