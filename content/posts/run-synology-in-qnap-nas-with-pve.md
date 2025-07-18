@@ -1,7 +1,7 @@
 +++
 title = "Run Synology in QNAP NAS with PVE"
 date = 2025-06-29T20:53:00+08:00
-lastmod = 2025-07-18T19:07:22+08:00
+lastmod = 2025-07-18T20:47:38+08:00
 tags = ["NAS"]
 categories = ["Misc"]
 draft = false
@@ -30,7 +30,8 @@ It's pretty easy to install Synology on PVE, there are many guides in the Intern
 ## Install QNAP on PVE {#install-qnap-on-pve}
 
 I have one SSD and one HDD. The SSD is used for PVE and Synology, but I don't have another disk to move the data to Synology. So I still need to run QNAP on PVE. Although the QNAP is not as popular as Synology, there is still a way to run it on PVE. I just followed [this guide](https://post.smzdm.com/p/adm3qxen/) to install QNAP on PVE. To pass-through the HDD, just run `ls -l /dev/disk/by-id/` to show all device and `` qm set {qnap vm id} -sata0 /dev/disk/by-id/{hdd_id}` `` to pass-through the HDD to QNAP VM. When restart the QNAP VM, it will ask you whether to load the OS from HDD, reset OS (but keep the data) or init the OS.
-![](/images/qnap_recover.png)
+
+{{< figure src="/images/qnap_recover.png" class="image-size-m" >}}
 
 However, when I choose load the OS, it reboot and back to the same screen. I guess it might be a compatibility issue. Reset OS may work. For me, I create a new disk for the QNAP VM an install the QNAP OS, then I pass-through the HDD to the QNAP VM. Then in the `Storage and Snapshot` app, under `Storage-Disks/VJOBD`, on the right corner, click the `More` button and choose `Recover`. I managed to recover the data in the HDD. After that, I can use the QNAP as usual.
 

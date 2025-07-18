@@ -3352,7 +3352,19 @@ I tried these methods, but none of them works.
 + Delete related items in Keychain Access app.
 
 
-Later, =RedHatDude='s answer in [[https://discussions.apple.com/thread/252924363?login=true][this post]] gives me a clue, it looks like a iCloud sync problem. I tried to delete the account on my 3 MacBooks together. Thank goodness! It does not show up again.
+Later, =RedHatDude='s answer gives me a clue, it looks like a iCloud sync problem. I tried to delete the account on my 3 MacBooks together. Thank goodness! It does not show up again.
+
+#+begin_quote
+I managed to fix this issue today. Here is what I did:
+
+1. Turn off keychain sync on all of my Apple devices (in the iCloud preferences). This included 2 Macs, an iPad and iPhone.
+2. On each device I removed the accounts I no longer wanted
+3. Then I turned keychain sync back on
+
+This worked and all of my old/duplicate accounts are now gone.
+
+-- [[https://discussions.apple.com/thread/252924363?login=true&sortBy=rank][Gmail account keeps coming back after delete]]
+#+end_quote
 
 **** Ref
 1. [[https://community.jamf.com/t5/jamf-pro/removing-accounts-from-internet-accounts/td-p/179654][Removing Accounts from Internet Accounts]]
@@ -3718,6 +3730,8 @@ It's pretty easy to install Synology on PVE, there are many guides in the Intern
 
 **** Install QNAP on PVE
 I have one SSD and one HDD. The SSD is used for PVE and Synology, but I don't have another disk to move the data to Synology. So I still need to run QNAP on PVE. Although the QNAP is not as popular as Synology, there is still a way to run it on PVE. I just followed [[https://post.smzdm.com/p/adm3qxen/][this guide]] to install QNAP on PVE. To pass-through the HDD, just run ~ls -l /dev/disk/by-id/~ to show all device and ~qm set {qnap vm id} -sata0 /dev/disk/by-id/{hdd_id}`~ to pass-through the HDD to QNAP VM. When restart the QNAP VM, it will ask you whether to load the OS from HDD, reset OS (but keep the data) or init the OS.
+
+#+attr_html: :class image-size-m
 [[file:/images/qnap_recover.png]]
 
 However, when I choose load the OS, it reboot and back to the same screen. I guess it might be a compatibility issue. Reset OS may work. For me, I create a new disk for the QNAP VM an install the QNAP OS, then I pass-through the HDD to the QNAP VM. Then in the ~Storage and Snapshot~ app, under ~Storage-Disks/VJOBD~, on the right corner, click the ~More~ button and choose ~Recover~. I managed to recover the data in the HDD. After that, I can use the QNAP as usual.
