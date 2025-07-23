@@ -2300,7 +2300,7 @@ requires = ["flit"]
 build-backend = "local_backend"
 backend-path = ["backend"]
 #+end_src
-~setuptools~, there are some other build back-end such as ~hatchling~ and ~flit~. You can find the example here: [[https://packaging.python.org/en/latest/tutorials/packaging-projects/#choosing-a-build-backend][Python Packaging Uer Guide - Choosing a build backend]]
+Besides ~setuptools~, there are some other build back-end such as ~hatchling~ and ~flit~. You can find the example here: [[https://packaging.python.org/en/latest/tutorials/packaging-projects/#choosing-a-build-backend][Python Packaging Uer Guide - Choosing a build backend]]
 
 [[https://peps.python.org/pep-0518/][pep518]] defines the format of ~pyproject.toml~, where you can specify you build dependencies, ensuring the necessary tools will be installed when building project. For example:
 #+begin_src toml
@@ -2308,7 +2308,7 @@ backend-path = ["backend"]
 requires = ["setuptools ~= 58.0", "cython ~= 0.29.0"]
 #+end_src
 
-**** Is `setup.py` deprecated
+**** Is ~setup.py~ deprecated
 According to [[https://packaging.python.org/en/latest/discussions/setup-py-deprecated/][python packaging doc]], it is still the valid configuration file for ~setuptools~, but use ~setup.py~ in command is depracetd:
 
 | Deprecated                  | Replacement      |
