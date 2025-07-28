@@ -1,8 +1,8 @@
 +++
 title = "Difference between Value and Pointer variable in Defer in Go"
 date = 2019-12-19T22:33:00+08:00
-lastmod = 2025-07-18T19:07:22+08:00
-tags = ["Python", "Defer", "Go"]
+lastmod = 2025-07-28T19:08:09+08:00
+tags = ["GO", "Defer"]
 categories = ["Programming"]
 draft = false
 author = "KK"

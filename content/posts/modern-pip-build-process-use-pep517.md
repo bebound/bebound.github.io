@@ -1,7 +1,7 @@
 +++
 title = "Modern pip build process (–use-pep517)"
 date = 2024-11-24T20:49:00+08:00
-lastmod = 2025-07-18T19:07:21+08:00
+lastmod = 2025-07-28T19:00:02+08:00
 tags = ["Python", "pip"]
 categories = ["Programming"]
 draft = false
@@ -25,7 +25,7 @@ build-backend = "local_backend"
 backend-path = ["backend"]
 ```
 
-`setuptools`, there are some other build back-end such as `hatchling` and `flit`. You can find the example here: [Python Packaging Uer Guide - Choosing a build backend](https://packaging.python.org/en/latest/tutorials/packaging-projects/#choosing-a-build-backend)
+Besides `setuptools`, there are some other build back-end such as `hatchling` and `flit`. You can find the example here: [Python Packaging Uer Guide - Choosing a build backend](https://packaging.python.org/en/latest/tutorials/packaging-projects/#choosing-a-build-backend)
 
 [pep518](https://peps.python.org/pep-0518/) defines the format of `pyproject.toml`, where you can specify you build dependencies, ensuring the necessary tools will be installed when building project. For example:
 
@@ -35,7 +35,7 @@ requires = ["setuptools ~= 58.0", "cython ~= 0.29.0"]
 ```
 
 
-## Is \`setup.py\` deprecated {#is-setup-dot-py-deprecated}
+## Is `setup.py` deprecated {#is-setup-dot-py-deprecated}
 
 According to [python packaging doc](https://packaging.python.org/en/latest/discussions/setup-py-deprecated/), it is still the valid configuration file for `setuptools`, but use `setup.py` in command is depracetd:
 
