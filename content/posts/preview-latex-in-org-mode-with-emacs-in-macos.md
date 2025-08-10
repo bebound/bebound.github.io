@@ -1,7 +1,6 @@
 +++
 title = "Preview LaTeX in Org Mode with Emacs in MacOS"
 date = 2019-05-12T20:26:00+08:00
-lastmod = 2025-08-10T18:44:06+08:00
 tags = ["Emacs", "Org Mode", "LaTeX"]
 categories = ["Misc"]
 draft = false

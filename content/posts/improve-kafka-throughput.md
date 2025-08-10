@@ -1,7 +1,6 @@
 +++
 title = "Improve Kafka throughput"
 date = 2021-05-28T00:57:00+08:00
-lastmod = 2025-08-10T18:44:06+08:00
 tags = ["Kafka"]
 categories = ["Misc"]
 draft = false

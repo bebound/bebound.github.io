@@ -1,7 +1,6 @@
 +++
 title = "How to Copy Files Temporarily in Dockerfile"
 date = 2023-08-24T11:49:00+08:00
-lastmod = 2025-08-10T18:44:06+08:00
 tags = ["dockerfile"]
 categories = ["Misc"]
 draft = false

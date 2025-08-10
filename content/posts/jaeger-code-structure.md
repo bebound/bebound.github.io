@@ -1,7 +1,6 @@
 +++
 title = "Jaeger Code Structure"
 date = 2019-09-22T17:07:00+08:00
-lastmod = 2025-08-10T18:44:06+08:00
 tags = ["Jaeger"]
 categories = ["Misc"]
 draft = false
@@ -14,7 +13,7 @@ noread = true
 
 Here is the main logic for jaeger agent and jaeger collector. (Based on [jaeger](https://github.com/jaegertracing/jaeger) 1.13.1)
 
-{{< figure src="/images/jaeger.svg" width="600" >}}
+{{< figure src="/images/jaeger.svg" class="image-size-m" >}}
 
 
 ## Jaeger Agent {#jaeger-agent}

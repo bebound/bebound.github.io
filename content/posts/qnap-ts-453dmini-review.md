@@ -1,7 +1,6 @@
 +++
 title = "QNAP TS-453Dmini Review"
 date = 2022-01-19T00:17:00+08:00
-lastmod = 2025-08-10T18:44:06+08:00
 tags = ["NAS"]
 categories = ["Misc"]
 draft = false
