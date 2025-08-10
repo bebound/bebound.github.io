@@ -1,7 +1,7 @@
 +++
 title = "C3 Linearization and Python MRO(Method Resolution Order)"
 date = 2020-03-14T17:37:00+08:00
-lastmod = 2025-07-18T19:07:21+08:00
+lastmod = 2025-08-10T18:44:05+08:00
 tags = ["Python", "MRO"]
 categories = ["Programming"]
 draft = false

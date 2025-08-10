@@ -1,7 +1,7 @@
 +++
 title = "Circular Import in Python"
 date = 2019-03-10T10:59:00+08:00
-lastmod = 2025-07-18T19:07:21+08:00
+lastmod = 2025-08-10T18:44:05+08:00
 tags = ["Python"]
 categories = ["Programming"]
 draft = false

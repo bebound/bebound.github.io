@@ -1,7 +1,7 @@
 +++
 title = "Emacs Chinese-related Settings"
 date = 2022-02-17T01:27:00+08:00
-lastmod = 2025-07-18T19:07:22+08:00
+lastmod = 2025-08-10T18:44:06+08:00
 tags = ["Emacs"]
 categories = ["Misc"]
 draft = false

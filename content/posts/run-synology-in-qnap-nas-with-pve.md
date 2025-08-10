@@ -1,7 +1,7 @@
 +++
 title = "Run Synology in QNAP NAS with PVE"
 date = 2025-06-29T20:53:00+08:00
-lastmod = 2025-07-18T20:47:38+08:00
+lastmod = 2025-08-10T18:44:06+08:00
 tags = ["NAS"]
 categories = ["Misc"]
 draft = false

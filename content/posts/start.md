@@ -1,7 +1,7 @@
 +++
 title = "Start"
 date = 2017-04-18T15:46:00+08:00
-lastmod = 2025-07-18T19:07:22+08:00
+lastmod = 2025-08-10T18:44:06+08:00
 categories = ["Misc"]
 draft = false
 author = "KK"

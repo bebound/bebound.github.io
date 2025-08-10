@@ -1,7 +1,7 @@
 +++
 title = "TextCNN with PyTorch and Torchtext on Colab"
 date = 2018-12-03T15:47:00+08:00
-lastmod = 2025-07-18T19:07:21+08:00
+lastmod = 2025-08-10T18:44:05+08:00
 tags = ["Machine Learning", "TextCNN"]
 categories = ["Machine-Learning"]
 draft = false

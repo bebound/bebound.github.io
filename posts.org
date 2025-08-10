@@ -872,7 +872,7 @@ Depending on the fingerprints' bit and documents number, you need to find a opti
 1. [[https://moz.com/devblog/near-duplicate-detection][Near-Duplicate Detection]]
 2. [[https://www2007.org/papers/paper215.pdf][Detecting Near-Duplicates for Web Crawling]]
 3. [[https://github.com/seomoz/simhash-py][simhash-py]]
-** Programming                                         :Python:@Programming:
+** Programming                                                :@Programming:
 *** DONE Create Node Benchmark in Py2neo
 CLOSED: [2018-11-05 Mon 15:55]
    :PROPERTIES:
@@ -1007,80 +1007,6 @@ Using unwind
 100000
 #+END_SRC
 
-*** DONE CSRF in Django                                              :Django:
-CLOSED: [2018-11-07 Wed 13:58]
-   :PROPERTIES:
-   :EXPORT_FILE_NAME: csrf-in-django
-   :END:
-CSRF(Cross-site request forgery) is a way to generate fake user request to target website. For example, on a malicious website A, there is a button, click it will send request to www.B.com/logout. When the user click this button, he will logout from website B unconsciously. Logout is not a big problem, but malicious website can generate more dangerous request like money transfer.
-
-**** Django CSRF protection
-
-Each web framework has different approach to do CSRF protection. In Django, the  validation process is below:
-
-1. When user login for the first time, Django generate a =csrf_secret=, add random salt and encrypt it as A, save A to cookie =csrftoken=.
-2. When Django processing tag ={{ csrf_token }}= or ={% csrf_token %}=, it read =csrftoken= cookie A, reverse it to =csrf_secret=, add random salt and encrypt it as B, return corresponding HTML.
-3. When Django receive POST request, it will retrieve cookie =csrftoken= as A, and tries to get =csrfmiddlewaretoken= value B from POST data, if it does not exist, it will get header =X-CSRFToken= value as B. Then A and B will be reversed to =csrf_secret=. If the values are identical, the validation is passed. Otherwise, a 403 error will raise.
-
-**** Django CSRF Usage
-
-***** Form
-#+BEGIN_SRC html
-<form>
-    {% csrf_token %}
-</form>
-#+END_SRC
-
-***** Single AJAX request
-
-#+BEGIN_SRC js
-$.ajax({
-    data: {
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-    },
-#+END_SRC
-
-***** Multiple AJAX request
-
-Extracting =csrftoken= from cookie and add it to header for each =ajax= request.
-
-#+BEGIN_SRC js
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-var csrftoken = getCookie('csrftoken');
-
-function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
-$.ajaxSetup({
-    beforeSend: function(xhr, settings) {
-        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        }
-    }
-});
-#+END_SRC
-
-
-**** Ref
-1. [[https://docs.djangoproject.com/en/2.1/ref/csrf/][Cross Site Request Forgery protection]]
-2. [[https://github.com/django/django/blob/master/django/middleware/csrf.py][csrf.py]]
-3. [[https://stackoverflow.com/questions/48002861/whats-the-relationship-between-csrfmiddlewaretoken-and-csrftoken][What's the relationship between csrfmiddlewaretoken and csrftoken?]] 
-
 *** DONE Deploy Nikola Org Mode on Travis                :Nikola:Org__Mode:
 CLOSED: [2018-11-03 Sun 21:20]
    :PROPERTIES:
@@ -1174,6 +1100,7 @@ And here is the =conf.el=:
 (add-to-list 'load-path "~/emacs-htmlize/")
 (require 'htmlize)
 #+END_SRC
+
 *** DONE Enable C Extension for gensim on Windows
 CLOSED: [2017-06-10 Sat 14:43]
    :PROPERTIES:
@@ -1221,6 +1148,240 @@ Output:
 
 #+attr_html: :class image-size-s
 [[file:/images/matplot_chinese.png]]
+
+*** DONE Program Crash Caused by CPU Instruction                    :Spark:
+CLOSED: [2020-05-17 Sun 17:36]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: program-crash-caused-by-cpu-instruction
+   :END:
+It's inevitable to dealing with bugs in coding career. The main part of coding are implementing new features, fixing bugs and improving performance. For me, there are two kinds of bugs that is difficult to tackle: those are hard to reproduce, and those occur in code not wrote by you.
+
+Recently, I met a bug which has both features mentioned before. I write a Spark program to analyse the log and cluster them. Last week I update the code, use Facebook's [[https://github.com/facebookresearch/faiss][faiss]] library to accelerate the process of find similar vector. After I push the new code to spark, the program crashed. I found this log on Spark driver:
+
+#+begin_src 
+java.io.EOFException
+ERROR PythonRunner: Python worker exited unexpectedly (crashed).
+#+end_src
+
+Because the Python Worker is created by Spark JVM, I can't get the internal state of Python Worker. By inserting log into Code, I get the rough position of crash code. But the code looks good.
+
+I have tested the code on my develop environment. My develop machine is Using Spark 2.4. but the Spark platform is using Spark 3.0. I guess maybe there is some compatible problem on Spark 3.0. So I use the same docker images as Spark platform to run the code. The code works as expected without crash. That's wired, the docker has isolate the environment, how could same docker image produce different output?
+
+I search the error from google, some said it's because spark is running out of memory. This doesn't seem correct, this update shouldn't increase the RAM usage. I still gave it a try and no luck.
+
+Alright, this update add faiss to the code, maybe faiss lead to the crash, as Python doesn't raise any other. If the crash is caused by the C code in faiss, this makes sense. First, I write a code with spark and faiss, the program crashed. Then I wrote a code only contains faiss, it still crashed. So I can confirm that the crash is cause by faiss and Spark is innocent. Even stranger, when running on Spark platform, sometimes the script crashes, sometimes not.
+
+But why faiss only crash on the Spark Platform? I ask the colleague to know the detail of the failed job and know that the docker's exit code is 132. =132= means illegal instruction. I search illegal instruction on faiss's GitHub issue. I found this issue: [[https://github.com/facebookresearch/faiss/issues/426][Illegal instruction (core dumped)]].
+
+By compare the host server's CPU instruction. The crashed ones lack of =avx2= instruction. =avx2= is added after the Intel Fourth generation core (Haswell). The develop server is using sixth generation CPU, and some platform server is too to support this instruction. By adding a parameter to enforce the script scheduling on new server, the crash disappears.
+
+PS: Running faiss code =index.add(xx)= will not trigger the crash, but calling =faiss.search(xx)= does. When I trying to locate the code which cause the crash, the =faiss= package was imported correctly and the index is built normally. This mislead me to believe that faiss code is working.
+
+*** DONE Difference between Value and Pointer variable in Defer in Go :Defer:Go:
+CLOSED: [2019-12-19 Thu 22:33]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: difference-between-value-and-pointer-variable-in-defer-in-go
+   :END:
+
+=defer= is a useful function to do cleanup, as it will execute in LIFO order before the surrounding function returns. If you don't know how it works, sometimes the execution result may confuse you.
+
+**** How it Works and Why Value or Pointer Receiver Matters
+
+I found an interesting code on [[https://stackoverflow.com/questions/28893586/golang-defer-clarification][Stack Overflow]]:
+
+#+begin_src go
+type X struct {
+    S string
+}
+
+func (x X) Close() {
+    fmt.Println("Value-Closing", x.S)
+}
+
+func (x *X) CloseP() {
+    fmt.Println("Pointer-Closing", x.S)
+}
+
+func main() {
+    x := X{"Value-X First"}
+    defer x.Close()
+    x = X{"Value-X Second"}
+    defer x.Close()
+
+    x2 := X{"Value-X2 First"}
+    defer x2.CloseP()
+    x2 = X{"Value-X2 Second"}
+    defer x2.CloseP()
+
+    xp := &X{"Pointer-X First"}
+    defer xp.Close()
+    xp = &X{"Pointer-X Second"}
+    defer xp.Close()
+
+    xp2 := &X{"Pointer-X2 First"}
+    defer xp2.CloseP()
+    xp2 = &X{"Pointer-X2 Second"}
+    defer xp2.CloseP()
+}
+#+end_src
+
+The output is:
+
+#+begin_src text -n
+Pointer-Closing Pointer-X2 Second
+Pointer-Closing Pointer-X2 First
+Value-Closing Pointer-X Second
+Value-Closing Pointer-X First
+Pointer-Closing Value-X2 Second
+Pointer-Closing Value-X2 Second
+Value-Closing Value-X Second
+Value-Closing Value-X First
+#+end_src
+
+Take a look at line 5-6, why =Pointer-Closing Value-X2 Second= was printed twice? According to [[https://golang.org/doc/effective_go.html#defer][Effective Go]], "*The arguments to the deferred function (which include the receiver if the function is a method) are evaluated when the defer executes, not when the call executes.*". And the function's parameters will *saved anew* when evaluated.
+
+As =x2= is value and the defer function =CloseP='s receiver is a pointer, once =defer= executes, it will create a pointer which points to =x2= as function's caller. In the following defer, it will create a pointer which point to =x2= again. Although =x2.S= change to "Second", =x2='s address never changes. Finally, when these two defer is called, the same log was printed again.
+
+**** How to Exit Program and Run all Defer
+
+From [[https://golang.org/pkg/runtime/#Goexit][Golang Runtime]]:
+#+begin_quote
+~runtime.Goexit()~ terminates the goroutine that calls it. No other goroutine is affected. Goexit runs all deferred calls before terminating the goroutine. Because Goexit is not a panic, any recover calls in those deferred functions will return nil.
+
+Calling Goexit from the main goroutine terminates that goroutine without func main returning. Since func main has not returned, the program continues execution of other goroutines. If all other goroutines exit, the program crashes.
+#+end_quote
+
+If you want the program to exit normally, just add ~defer os.Exit(0)~ at the top of =main= function. Here is the example code:
+#+begin_src go
+package main
+
+import (
+	"fmt"
+	"os"
+	"runtime"
+	"time"
+)
+
+func subGoroutine() {
+	defer fmt.Println("exit sub routine")
+	for {
+		fmt.Println("sub goroutine running")
+		time.Sleep(1 * time.Second)
+	}
+}
+
+func main() {
+	defer os.Exit(0)
+	defer fmt.Println("calling os.Exit")
+
+	go subGoroutine()
+
+	time.Sleep(2 * time.Second)
+	runtime.Goexit()
+}
+#+end_src
+
+Output:
+#+begin_src
+sub goroutine running
+sub goroutine running
+sub goroutine running
+calling os.Exit
+
+Process finished with exit code 0
+#+end_src
+
+The defer code in main goroutine are executed, but those in =subGoroutine= will not be executed. As =os.Exit= will 
+
+#+begin_quote
+Exit causes the current program to exit with the given status code. Conventionally, code zero indicates success, non-zero an error. The program terminates immediately; deferred functions are not run.
+
+from [[https://golang.org/pkg/os/#Exit][godoc]]
+#+end_quote
+
+**** Ref
+1. [[https://draveness.me/golang/keyword/golang-defer.html][面向信仰编程 defer]]
+2. [[https://stackoverflow.com/questions/28893586/golang-defer-clarification][Golang defer clarification]]
+3. [[https://stackoverflow.com/questions/27629380/how-to-exit-a-go-program-honoring-deferred-calls/39755730][How to exit a go program honoring deferred calls?]]
+4. [[https://golang.org/doc/effective_go.html#defer][Effective Go]]
+5. [[https://golang.org/pkg/runtime/#Goexit][Golang Runtime]]
+6. [[https://tachingchen.com/tw/blog/go-defer-and-os-exit/][Go defer 遇上 os.Exit 時失效]]
+
+** Python                                              :Python:@Programming:
+*** DONE CSRF in Django                                            :Django:
+CLOSED: [2018-11-07 Wed 13:58]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: csrf-in-django
+   :END:
+CSRF(Cross-site request forgery) is a way to generate fake user request to target website. For example, on a malicious website A, there is a button, click it will send request to www.B.com/logout. When the user click this button, he will logout from website B unconsciously. Logout is not a big problem, but malicious website can generate more dangerous request like money transfer.
+
+**** Django CSRF protection
+
+Each web framework has different approach to do CSRF protection. In Django, the  validation process is below:
+
+1. When user login for the first time, Django generate a =csrf_secret=, add random salt and encrypt it as A, save A to cookie =csrftoken=.
+2. When Django processing tag ={{ csrf_token }}= or ={% csrf_token %}=, it read =csrftoken= cookie A, reverse it to =csrf_secret=, add random salt and encrypt it as B, return corresponding HTML.
+3. When Django receive POST request, it will retrieve cookie =csrftoken= as A, and tries to get =csrfmiddlewaretoken= value B from POST data, if it does not exist, it will get header =X-CSRFToken= value as B. Then A and B will be reversed to =csrf_secret=. If the values are identical, the validation is passed. Otherwise, a 403 error will raise.
+
+**** Django CSRF Usage
+
+***** Form
+#+BEGIN_SRC html
+<form>
+    {% csrf_token %}
+</form>
+#+END_SRC
+
+***** Single AJAX request
+
+#+BEGIN_SRC js
+$.ajax({
+    data: {
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+    },
+#+END_SRC
+
+***** Multiple AJAX request
+
+Extracting =csrftoken= from cookie and add it to header for each =ajax= request.
+
+#+BEGIN_SRC js
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+#+END_SRC
+
+
+**** Ref
+1. [[https://docs.djangoproject.com/en/2.1/ref/csrf/][Cross Site Request Forgery protection]]
+2. [[https://github.com/django/django/blob/master/django/middleware/csrf.py][csrf.py]]
+3. [[https://stackoverflow.com/questions/48002861/whats-the-relationship-between-csrfmiddlewaretoken-and-csrftoken][What's the relationship between csrfmiddlewaretoken and csrftoken?]] 
+
 *** DONE Python Dictionary Implementation
 CLOSED: [2019-02-17 Sun 21:48]
    :PROPERTIES:
@@ -1585,34 +1746,6 @@ This utilize Python's zip import feature. For more information, check this link:
 You can also upload zip file to hdfs, and using ~sc.addPyFile('hdfs://kk.zip')~ after =SparkContext= is initialized.
 
 This has the same effect as =--py-files=, but your import statement must be after this line.
-
-*** DONE Program Crash Caused by CPU Instruction                    :Spark:
-CLOSED: [2020-05-17 Sun 17:36]
-   :PROPERTIES:
-   :EXPORT_FILE_NAME: program-crash-caused-by-cpu-instruction
-   :END:
-It's inevitable to dealing with bugs in coding career. The main part of coding are implementing new features, fixing bugs and improving performance. For me, there are two kinds of bugs that is difficult to tackle: those are hard to reproduce, and those occur in code not wrote by you.
-
-Recently, I met a bug which has both features mentioned before. I write a Spark program to analyse the log and cluster them. Last week I update the code, use Facebook's [[https://github.com/facebookresearch/faiss][faiss]] library to accelerate the process of find similar vector. After I push the new code to spark, the program crashed. I found this log on Spark driver:
-
-#+begin_src 
-java.io.EOFException
-ERROR PythonRunner: Python worker exited unexpectedly (crashed).
-#+end_src
-
-Because the Python Worker is created by Spark JVM, I can't get the internal state of Python Worker. By inserting log into Code, I get the rough position of crash code. But the code looks good.
-
-I have tested the code on my develop environment. My develop machine is Using Spark 2.4. but the Spark platform is using Spark 3.0. I guess maybe there is some compatible problem on Spark 3.0. So I use the same docker images as Spark platform to run the code. The code works as expected without crash. That's wired, the docker has isolate the environment, how could same docker image produce different output?
-
-I search the error from google, some said it's because spark is running out of memory. This doesn't seem correct, this update shouldn't increase the RAM usage. I still gave it a try and no luck.
-
-Alright, this update add faiss to the code, maybe faiss lead to the crash, as Python doesn't raise any other. If the crash is caused by the C code in faiss, this makes sense. First, I write a code with spark and faiss, the program crashed. Then I wrote a code only contains faiss, it still crashed. So I can confirm that the crash is cause by faiss and Spark is innocent. Even stranger, when running on Spark platform, sometimes the script crashes, sometimes not.
-
-But why faiss only crash on the Spark Platform? I ask the colleague to know the detail of the failed job and know that the docker's exit code is 132. =132= means illegal instruction. I search illegal instruction on faiss's GitHub issue. I found this issue: [[https://github.com/facebookresearch/faiss/issues/426][Illegal instruction (core dumped)]].
-
-By compare the host server's CPU instruction. The crashed ones lack of =avx2= instruction. =avx2= is added after the Intel Fourth generation core (Haswell). The develop server is using sixth generation CPU, and some platform server is too to support this instruction. By adding a parameter to enforce the script scheduling on new server, the crash disappears.
-
-PS: Running faiss code =index.add(xx)= will not trigger the crash, but calling =faiss.search(xx)= does. When I trying to locate the code which cause the crash, the =faiss= package was imported correctly and the index is built normally. This mislead me to believe that faiss code is working.
 
 *** DONE Using cibuildwheel to Create Python Wheels
 CLOSED: [2020-07-29 Wed 22:53]
@@ -2371,135 +2504,86 @@ The details can be found in the [[https://github.com/Azure/azure-cli/pull/29887#
 - [[https://chadsmith-software.medium.com/pep-517-and-518-in-plain-english-47208ca8b7a6][PEP 517 and 518 in Plain English]]
 - [[https://packaging.python.org/en/latest/guides/writing-pyproject-toml/][Writing your pyproject.toml]]
 
-*** DONE Difference between Value and Pointer variable in Defer in Go :Defer:Go:
-CLOSED: [2019-12-19 Thu 22:33]
+*** DONE Namespace Package in Python
+CLOSED: [2025-08-10 Sun 18:04]
    :PROPERTIES:
-   :EXPORT_FILE_NAME: difference-between-value-and-pointer-variable-in-defer-in-go
+   :EXPORT_FILE_NAME: namespace-package-in-python
    :END:
+Recently, there is a [[https://github.com/Azure/azure-cli/issues/31843#issuecomment-3125269740][GitHub issue]] about namespace package in Azure CLI. I think it is a good time to write down the knowledge about namespace package.
 
-=defer= is a useful function to do cleanup, as it will execute in LIFO order before the surrounding function returns. If you don't know how it works, sometimes the execution result may confuse you.
+**** What is Namespace Package
+If several packages share the same root folder, then the root folder is a namespace package. ~subpackageA~ and ~subpackageb~ can be installed separately, even in different Python path, but they can be imported as importing a single package: ~import root~.
+**** How to create namespace Package
+There are three ways to create namespace package in Python, you can find the details in [[https://packaging.python.org/en/latest/guides/packaging-namespace-packages/][Packaging namespace packages]].
 
-**** How it Works and Why Value or Pointer Receiver Matters
+***** Native namespace packages
+Don't need to create ~__init__.py~ in root folder, and use ~include = ["mynamespace.subpackage_a"]~ in ~pyproject.toml~.
 
-I found an interesting code on [[https://stackoverflow.com/questions/28893586/golang-defer-clarification][Stack Overflow]]:
+After installation, the root folder does not contain ~__init__.py~, so Python treats it as an implicit because of [[https://peps.python.org/pep-0420/][PEP 420]].
 
-#+begin_src go
-type X struct {
-    S string
-}
-
-func (x X) Close() {
-    fmt.Println("Value-Closing", x.S)
-}
-
-func (x *X) CloseP() {
-    fmt.Println("Pointer-Closing", x.S)
-}
-
-func main() {
-    x := X{"Value-X First"}
-    defer x.Close()
-    x = X{"Value-X Second"}
-    defer x.Close()
-
-    x2 := X{"Value-X2 First"}
-    defer x2.CloseP()
-    x2 = X{"Value-X2 Second"}
-    defer x2.CloseP()
-
-    xp := &X{"Pointer-X First"}
-    defer xp.Close()
-    xp = &X{"Pointer-X Second"}
-    defer xp.Close()
-
-    xp2 := &X{"Pointer-X2 First"}
-    defer xp2.CloseP()
-    xp2 = &X{"Pointer-X2 Second"}
-    defer xp2.CloseP()
-}
+***** Legacy method: pkgutil-style namespace packages
+The only reason to use this method is to support Python2. You need to create this ~__init__.py~ in root folder:
+#+begin_src python
+  __path__ = __import__('pkgutil').extend_path(__path__, __name__)
 #+end_src
 
-The output is:
+After installation, the ~__init__.py~ is also kept in the root folder.
 
-#+begin_src text -n
-Pointer-Closing Pointer-X2 Second
-Pointer-Closing Pointer-X2 First
-Value-Closing Pointer-X Second
-Value-Closing Pointer-X First
-Pointer-Closing Value-X2 Second
-Pointer-Closing Value-X2 Second
-Value-Closing Value-X Second
-Value-Closing Value-X First
+***** Legacy method: pkg_resource-style namespace packages
+This method relies on ~setuptools~. After Python 3.12, ~setuptools~ is not installed by default, and now it's also deprecated in ~setuptools~. Currently, it shows this warning:
+#+begin_src text
+UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 #+end_src
+So I don't recommend using this method.
 
-Take a look at line 5-6, why =Pointer-Closing Value-X2 Second= was printed twice? According to [[https://golang.org/doc/effective_go.html#defer][Effective Go]], "*The arguments to the deferred function (which include the receiver if the function is a method) are evaluated when the defer executes, not when the call executes.*". And the function's parameters will *saved anew* when evaluated.
-
-As =x2= is value and the defer function =CloseP='s receiver is a pointer, once =defer= executes, it will create a pointer which points to =x2= as function's caller. In the following defer, it will create a pointer which point to =x2= again. Although =x2.S= change to "Second", =x2='s address never changes. Finally, when these two defer is called, the same log was printed again.
-
-**** How to Exit Program and Run all Defer
-
-From [[https://golang.org/pkg/runtime/#Goexit][Golang Runtime]]:
-#+begin_quote
-~runtime.Goexit()~ terminates the goroutine that calls it. No other goroutine is affected. Goexit runs all deferred calls before terminating the goroutine. Because Goexit is not a panic, any recover calls in those deferred functions will return nil.
-
-Calling Goexit from the main goroutine terminates that goroutine without func main returning. Since func main has not returned, the program continues execution of other goroutines. If all other goroutines exit, the program crashes.
-#+end_quote
-
-If you want the program to exit normally, just add ~defer os.Exit(0)~ at the top of =main= function. Here is the example code:
-#+begin_src go
-package main
-
-import (
-	"fmt"
-	"os"
-	"runtime"
-	"time"
-)
-
-func subGoroutine() {
-	defer fmt.Println("exit sub routine")
-	for {
-		fmt.Println("sub goroutine running")
-		time.Sleep(1 * time.Second)
-	}
-}
-
-func main() {
-	defer os.Exit(0)
-	defer fmt.Println("calling os.Exit")
-
-	go subGoroutine()
-
-	time.Sleep(2 * time.Second)
-	runtime.Goexit()
-}
+You need to create this ~__init__.py~ in root folder, and declare the namespace package in ~setup.py~: ~namespace_packages=['mynamespace']~.
+#+begin_src python
+__import__('pkg_resources').declare_namespace(__name__)
 #+end_src
+After installation, the ~__init__.py~ is not kept in the root folder.
 
-Output:
-#+begin_src
-sub goroutine running
-sub goroutine running
-sub goroutine running
-calling os.Exit
+If you forget to declare the namespace package in ~setup.py~, ~__init__.py~ is kept in the root folder, and the root folder become a normal package. You will get trouble if you install subpackages in different Python path.
 
-Process finished with exit code 0
-#+end_src
+**** Difference between these three styles
 
-The defer code in main goroutine are executed, but those in =subGoroutine= will not be executed. As =os.Exit= will 
+The main difference is whether there is a ~__init__.py~ in the root folder after installation. If there is, then it is a imported as regular package, otherwise it is a namespace package.
+
+~pkgutil~ style will include a ~__init__.py~ in the root folder.
+
+Another difference is that if it's a namespace package, then if you change the ~sys.path~, the namespace package will be updated. If it's a regular package, then it will not be updated. For example, if you update the ~sys.path~ and there is new subpackage in the added path, the namespace package will be updated to include the new subpackages. But if it's a regular package, it will not be updated, and you will get ~ModuleNotFoundError~ when you try to import the new subpackages.
+
+We encountered this issue in the development of Azure CLI. We use the pkgutls style namespace package, and we installed the CLI in editable mode. So we're not able to load `azure-xxx` packages installed by the extension. As ~azure~ is treated as a regular package, and the extension dependencies are added to the ~sys.path~ after ~azure~ is imported.
+
+**** Mix use of different style namespace packages
+
+You should avoid mixing different style namespace packages, but if you're working with legacy code, you may encounter this situation. (It get even worse that some packages' packaging is wrong. For example, they forget to declare the namespace package in ~setup.py~ in pkg_resource-style namespace packages, then the root folder becomes a normal package.)
+
+Let's see the Python's import mechanism first:
 
 #+begin_quote
-Exit causes the current program to exit with the given status code. Conventionally, code zero indicates success, non-zero an error. The program terminates immediately; deferred functions are not run.
+If ~<directory>/foo/__init__.py~ is found, a regular package is If ~<directory>/foo/__init__.py~ is found, a regular package is imported and returned.
 
-from [[https://golang.org/pkg/os/#Exit][godoc]]
+If not, but ~<directory>/foo.{py,pyc,so,pyd}~ is found, a module is imported and returned. The exact list of extension varies by platform and whether the -O flag is specified. The list here is representative.
+
+If not, but ~<directory>/foo~ is found and is a directory, it is recorded and the scan continues with the next directory in the parent path.
+Otherwise the scan continues with the next directory in the parent path.
+
+--[[https://peps.python.org/pep-0420/#specification][PEP 420 Specification]]
 #+end_quote
 
-**** Ref
-1. [[https://draveness.me/golang/keyword/golang-defer.html][面向信仰编程 defer]]
-2. [[https://stackoverflow.com/questions/28893586/golang-defer-clarification][Golang defer clarification]]
-3. [[https://stackoverflow.com/questions/27629380/how-to-exit-a-go-program-honoring-deferred-calls/39755730][How to exit a go program honoring deferred calls?]]
-4. [[https://golang.org/doc/effective_go.html#defer][Effective Go]]
-5. [[https://golang.org/pkg/runtime/#Goexit][Golang Runtime]]
-6. [[https://tachingchen.com/tw/blog/go-defer-and-os-exit/][Go defer 遇上 os.Exit 時失效]]
+As you can see, if the ~__init__.py~ is found, the process stops and a regular package is imported. When you use the ~pkgutil~ style, it will also returns a normal package, even though it has tries to import the packages from all ~sys.path~.
+
+For example, if you use the [[https://github.com/pypa/sample-namespace-packages][pypa sample-namespace-packages]] to test the namespace package. In the ~pkgutil~ style package, ~import example_pkg~ returns a regular package: ~<module 'example_pkg' from '/Users/kk/Developer/sample-namespace-packages/pkgutil/pkg_a/example_pkg/__init__.py'>~. In other two styles, it's a namespace package: ~<<module 'example_pkg' (namespace) from ['/Users/kk/Developer/sample-namespace-packages/native/pkg_a/example_pkg']>~.
+
+So, it's okay to mix these three styles, as all subpackages should be imported. But if some invalid package (not following these three styles, only a normal package) is also installed, the import might be interrupted by the invalid package.
+
+If you use the native style or pkg_resource style, Python only returns the normal package. The namespace package is ignored. That's why in the [[https://github.com/Azure/azure-cli/issues/31843][#31843 issue]], the ~azure.cli~ is found.
+
+If a normal package and the pkgutil style namespace package are installed, if the pkgutil package loads first, then all subpackages are imported. If the normal package loads first, then only the normal package will be returned.
+
+In conclusion, if you want to use namespace package, then use the native styles and make sure each subpackages are packaged correctly. Otherwise, you may encounter some module not found error.
+
+
 ** Misc                                                              :@Misc:
 *** DONE Some Useful Shell Tools                                    :Shell:
 CLOSED: [2017-05-07 Sun 15:34]

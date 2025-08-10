@@ -1,7 +1,7 @@
 +++
 title = "Retrieve Large Dataset in Elasticsearch"
 date = 2020-06-21T20:33:00+08:00
-lastmod = 2025-07-18T19:07:22+08:00
+lastmod = 2025-08-10T18:44:06+08:00
 tags = ["Elasticsearch"]
 categories = ["Misc"]
 draft = false

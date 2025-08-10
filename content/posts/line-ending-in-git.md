@@ -1,7 +1,7 @@
 +++
 title = "Line Ending in Git"
 date = 2023-10-21T15:40:00+08:00
-lastmod = 2025-07-18T19:07:22+08:00
+lastmod = 2025-08-10T18:44:06+08:00
 tags = ["Git"]
 categories = ["Misc"]
 draft = false

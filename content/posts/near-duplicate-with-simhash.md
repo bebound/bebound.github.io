@@ -1,7 +1,7 @@
 +++
 title = "Near-duplicate with SimHash"
 date = 2019-12-04T00:16:00+08:00
-lastmod = 2025-07-18T19:07:21+08:00
+lastmod = 2025-08-10T18:44:05+08:00
 tags = ["Machine Learning", "SimHash"]
 categories = ["Machine-Learning"]
 draft = false

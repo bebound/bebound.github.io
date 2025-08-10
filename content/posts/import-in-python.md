@@ -1,7 +1,7 @@
 +++
 title = "__import__ in Python"
 date = 2024-04-07T15:58:00+08:00
-lastmod = 2025-07-18T19:07:21+08:00
+lastmod = 2025-08-10T18:44:06+08:00
 tags = ["Python"]
 categories = ["Programming"]
 draft = false

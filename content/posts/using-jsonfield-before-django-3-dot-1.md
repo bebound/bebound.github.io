@@ -1,7 +1,7 @@
 +++
 title = "Using JSONField before Django 3.1"
 date = 2021-09-11T21:12:00+08:00
-lastmod = 2025-07-18T19:07:21+08:00
+lastmod = 2025-08-10T18:44:05+08:00
 tags = ["Python", "Django"]
 categories = ["Programming"]
 draft = false

@@ -1,7 +1,7 @@
 +++
 title = "Parameters in doc2vec"
 date = 2017-08-03T15:20:00+08:00
-lastmod = 2025-07-18T19:07:21+08:00
+lastmod = 2025-08-10T18:44:05+08:00
 tags = ["Machine Learning", "doc2vec", "word2vec"]
 categories = ["Machine-Learning"]
 draft = false
