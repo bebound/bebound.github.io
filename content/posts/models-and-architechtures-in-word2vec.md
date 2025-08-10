@@ -1,7 +1,6 @@
 +++
 title = "Models and Architectures in Word2vec"
 date = 2018-01-05T15:14:00+08:00
-lastmod = 2025-08-10T18:44:05+08:00
 tags = ["Machine Learning", "word2vec"]
 categories = ["Machine-Learning"]
 draft = false

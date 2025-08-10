@@ -1,7 +1,6 @@
 +++
 title = "Memory Leak in Python multiprocessing.Pool"
 date = 2022-03-16T21:04:00+08:00
-lastmod = 2025-08-10T18:44:05+08:00
 tags = ["Python"]
 categories = ["Programming"]
 draft = false

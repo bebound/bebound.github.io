@@ -1,7 +1,6 @@
 +++
 title = "Import custom package or module in PySpark"
 date = 2020-04-02T22:24:00+08:00
-lastmod = 2025-08-10T18:44:05+08:00
 tags = ["Python", "Spark"]
 categories = ["Programming"]
 draft = false

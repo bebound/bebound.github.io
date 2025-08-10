@@ -1,7 +1,6 @@
 +++
 title = "Torchtext snippets"
 date = 2019-07-01T21:28:00+08:00
-lastmod = 2025-08-10T18:44:05+08:00
 tags = ["Python", "torchtext", "PyTorch"]
 categories = ["Programming"]
 draft = false

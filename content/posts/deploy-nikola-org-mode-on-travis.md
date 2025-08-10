@@ -1,7 +1,6 @@
 +++
 title = "Deploy Nikola Org Mode on Travis"
 date = 2018-11-03T21:20:00+08:00
-lastmod = 2025-08-10T18:44:05+08:00
 tags = ["Nikola", "Org Mode"]
 categories = ["Programming"]
 draft = false
