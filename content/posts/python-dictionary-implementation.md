@@ -1,7 +1,6 @@
 +++
 title = "Python Dictionary Implementation"
 date = 2019-02-17T21:48:00+08:00
-lastmod = 2025-08-25T21:31:20+08:00
 tags = ["Python"]
 categories = ["Programming"]
 draft = false
