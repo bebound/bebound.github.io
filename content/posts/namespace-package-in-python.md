@@ -1,7 +1,7 @@
 +++
 title = "Namespace Package in Python"
 date = 2025-08-10T18:04:00+08:00
-lastmod = 2025-08-10T18:44:06+08:00
+lastmod = 2025-08-25T21:44:40+08:00
 tags = ["Python"]
 categories = ["Programming"]
 draft = false
@@ -66,13 +66,11 @@ If you forget to declare the namespace package in `setup.py`, `__init__.py` is k
 
 ## Difference between these three styles {#difference-between-these-three-styles}
 
-The main difference is whether there is a `__init__.py` in the root folder after installation. If there is, then it is a imported as regular package, otherwise it is a namespace package.
-
-`pkgutil` style will include a `__init__.py` in the root folder.
+The main difference is whether there is a `__init__.py` in the root folder after installation. If there is, then it is a imported as regular package, otherwise it is a namespace package. `pkgutil` style will include a `__init__.py` in the root folder.
 
 Another difference is that if it's a namespace package, then if you change the `sys.path`, the namespace package will be updated. If it's a regular package, then it will not be updated. For example, if you update the `sys.path` and there is new subpackage in the added path, the namespace package will be updated to include the new subpackages. But if it's a regular package, it will not be updated, and you will get `ModuleNotFoundError` when you try to import the new subpackages.
 
-We encountered this issue in the development of Azure CLI. We use the pkgutls style namespace package, and we installed the CLI in editable mode. So we're not able to load \`azure-xxx\` packages installed by the extension. As `azure` is treated as a regular package, and the extension dependencies are added to the `sys.path` after `azure` is imported.
+I encountered this issue in the development of Azure CLI. `azure-cli` and `azure-cli-core` still use the `pkgutls` style namespace package. After installing them in editable mode, the extensions' `azure-xxxx` dependency fails to load. Because there is a `__init__.py` in source code, and `azure` folder is treated as a regular package. The extension dependencies are added to the `sys.path` after `azure` is imported so the new `azure=xxx` package is ignored. (Maybe deleting `azure` from `sys.moudule` and importing again can fix this but I haven't tried this.)
 
 
 ## Mix use of different style namespace packages {#mix-use-of-different-style-namespace-packages}

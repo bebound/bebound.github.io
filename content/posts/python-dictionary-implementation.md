@@ -1,7 +1,7 @@
 +++
 title = "Python Dictionary Implementation"
 date = 2019-02-17T21:48:00+08:00
-lastmod = 2025-08-10T18:44:05+08:00
+lastmod = 2025-08-25T21:31:20+08:00
 tags = ["Python"]
 categories = ["Programming"]
 draft = false
@@ -89,9 +89,14 @@ The **real data** become this:
 This saves memory, especially when table load factor is low.
 
 
+### Order preserving {#order-preserving}
+
+Since the index table records the order of items, so the entries order is preserved. This feature is now part of the language spec since Python 3.7.
+
+
 ## Ref {#ref}
 
 1.  [How are Python's Built In Dictionaries Implemented](https://stackoverflow.com/questions/327311/how-are-pythons-built-in-dictionaries-implemented)
-2.  [cpython source code](https://hg.python.org/cpython/file/52f68c95e025/Objects/dictobject.c#l33)
+2.  [cpython source code](https://github.com/python/cpython/blob/0f56adb8d74e703974811620559d96c999334547/Objects/dictobject.c#L33)
 3.  [Is it possible to give a python dict an initial capacity (and is it useful)](https://stackoverflow.com/questions/3020514/is-it-possible-to-give-a-python-dict-an-initial-capacity-and-is-it-useful/3020810)
 4.  [Python dictionary implementation](http://www.laurentluce.com/posts/python-dictionary-implementation/)
