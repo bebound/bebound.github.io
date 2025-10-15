@@ -3458,7 +3458,7 @@ This worked and all of my old/duplicate accounts are now gone.
 *** DONE QNAP TS-453Dmini Review                                      :NAS:
 CLOSED: [2022-01-19 Wed 00:17]
    :PROPERTIES:
-   :EXPORT_FILE_NAME: qnap-ts-453bmini-review
+   :EXPORT_FILE_NAME: qnap-ts-453dmini-review
    :END:
 My first NAS is Synology DS120j, which is ARM based entry level product. It's okay to use it for downloading and backup, but not power enough for running docker and virtual machine.
 
