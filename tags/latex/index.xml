@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>LaTeX on KK's Blog (fromkk)</title><link>https://fromkk.com/tags/latex/</link><description>Recent content in LaTeX on KK's Blog (fromkk)</description><generator>Hugo</generator><language>en</language><managingEditor>bebound@gmail.com (KK)</managingEditor><webMaster>bebound@gmail.com (KK)</webMaster><lastBuildDate>Sun, 10 Aug 2025 18:44:06 +0800</lastBuildDate><atom:link href="https://fromkk.com/tags/latex/index.xml" rel="self" type="application/rss+xml"/><item><title>Preview LaTeX in Org Mode with Emacs in MacOS</title><link>https://fromkk.com/posts/preview-latex-in-org-mode-with-emacs-in-macos/</link><pubDate>Sun, 12 May 2019 20:26:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/preview-latex-in-org-mode-with-emacs-in-macos/</guid><description>&lt;h2 id="using-the-right-emacs-version">Using the right Emacs Version&lt;/h2>
-&lt;p>I failed to preview LaTeX with &lt;code>emacs-plus&lt;/code>. If you have installed &lt;code>d12frosted/emacs-plus&lt;/code>, uninstall it and use &lt;code>emacs-mac&lt;/code>.&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-nil" data-lang="nil">brew tap railwaycat/emacsmacport
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>LaTeX on KK's Blog (fromkk)</title><link>https://fromkk.com/tags/latex/</link><description>Recent content in LaTeX on KK's Blog (fromkk)</description><generator>Hugo</generator><language>en</language><managingEditor>bebound@gmail.com (KK)</managingEditor><webMaster>bebound@gmail.com (KK)</webMaster><lastBuildDate>Sun, 10 Aug 2025 18:44:06 +0800</lastBuildDate><atom:link href="https://fromkk.com/tags/latex/index.xml" rel="self" type="application/rss+xml"/><item><title>Preview LaTeX in Org Mode with Emacs in MacOS</title><link>https://fromkk.com/posts/preview-latex-in-org-mode-with-emacs-in-macos/</link><pubDate>Sun, 12 May 2019 20:26:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/preview-latex-in-org-mode-with-emacs-in-macos/</guid><description>&lt;h2 id="using-the-right-emacs-version"&gt;Using the right Emacs Version&lt;/h2&gt;
+&lt;p&gt;I failed to preview LaTeX with &lt;code&gt;emacs-plus&lt;/code&gt;. If you have installed &lt;code&gt;d12frosted/emacs-plus&lt;/code&gt;, uninstall it and use &lt;code&gt;emacs-mac&lt;/code&gt;.&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-nil" data-lang="nil"&gt;brew tap railwaycat/emacsmacport
 brew install emacs-mac
-&lt;/code>&lt;/pre>&lt;p>If you like the fancy spacemacs icon, install it with cask: &lt;code>brew cask install emacs-mac-spacemacs-icon&lt;/code>&lt;/p>
-&lt;h2 id="install-tex">Install Tex&lt;/h2>
-&lt;ul>
-&lt;li>Download and install BasicTeX.pkg &lt;a href="http://www.tug.org/mactex/morepackages.html" target="_blank" rel="noopener noreffer ">here&lt;/a>.&lt;/li>
-&lt;li>Add &lt;code>/Library/TeX/texbin&lt;/code> to PATH.&lt;/li>
-&lt;li>Install &lt;code>dvisvgm&lt;/code> by &lt;code>sudo tlmgr update --self &amp;amp;&amp;amp; sudo tlmgr install dvisvgm collection-fontsrecommended&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;h2 id="emacs-settings">Emacs settings&lt;/h2>
-&lt;ul>
-&lt;li>Add TeX related bin to path: &lt;code>(setenv &amp;quot;PATH&amp;quot; (concat (getenv &amp;quot;PATH&amp;quot;) &amp;quot;:/Library/TeX/texbin&amp;quot;))&lt;/code>&lt;/li>
-&lt;li>Tell Org Mode to create svg images: &lt;code>(setq org-latex-create-formula-image-program 'dvisvgm)&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;p>Now you can see the rendered LaTeX equation by calling &lt;code>org-preview-latex-fragment&lt;/code> or using shortcut &lt;code>,Tx&lt;/code>.&lt;/p></description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If you like the fancy spacemacs icon, install it with cask: &lt;code&gt;brew cask install emacs-mac-spacemacs-icon&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id="install-tex"&gt;Install Tex&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Download and install BasicTeX.pkg &lt;a href="http://www.tug.org/mactex/morepackages.html" target="_blank" rel="noopener noreffer "&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;/Library/TeX/texbin&lt;/code&gt; to PATH.&lt;/li&gt;
+&lt;li&gt;Install &lt;code&gt;dvisvgm&lt;/code&gt; by &lt;code&gt;sudo tlmgr update --self &amp;amp;&amp;amp; sudo tlmgr install dvisvgm collection-fontsrecommended&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="emacs-settings"&gt;Emacs settings&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Add TeX related bin to path: &lt;code&gt;(setenv &amp;quot;PATH&amp;quot; (concat (getenv &amp;quot;PATH&amp;quot;) &amp;quot;:/Library/TeX/texbin&amp;quot;))&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Tell Org Mode to create svg images: &lt;code&gt;(setq org-latex-create-formula-image-program 'dvisvgm)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now you can see the rendered LaTeX equation by calling &lt;code&gt;org-preview-latex-fragment&lt;/code&gt; or using shortcut &lt;code&gt;,Tx&lt;/code&gt;.&lt;/p&gt;</description></item></channel></rss>

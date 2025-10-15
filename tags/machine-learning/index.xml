@@ -1,69 +1,69 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Machine Learning on KK's Blog (fromkk)</title><link>https://fromkk.com/tags/machine-learning/</link><description>Recent content in Machine Learning on KK's Blog (fromkk)</description><generator>Hugo</generator><language>en</language><managingEditor>bebound@gmail.com (KK)</managingEditor><webMaster>bebound@gmail.com (KK)</webMaster><lastBuildDate>Sun, 10 Aug 2025 18:44:05 +0800</lastBuildDate><atom:link href="https://fromkk.com/tags/machine-learning/index.xml" rel="self" type="application/rss+xml"/><item><title>Near-duplicate with SimHash</title><link>https://fromkk.com/posts/near-duplicate-with-simhash/</link><pubDate>Wed, 04 Dec 2019 00:16:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/near-duplicate-with-simhash/</guid><description>&lt;p>Before talking about &lt;strong>SimHash&lt;/strong>, let&amp;rsquo;s review some other methods which can also identify duplication.&lt;/p>
-&lt;h2 id="longest-common-subsequence--lcs">Longest Common Subsequence(LCS)&lt;/h2>
-&lt;p>This is the algorithm used by &lt;code>diff&lt;/code> command. It is also &lt;strong>edit distance&lt;/strong> with insertion and deletion as the only two edit operations.&lt;/p>
-&lt;p>This works good for short strings. However, the algorithm&amp;rsquo;s time complexity is \(O(m*n)\), if two strings&amp;rsquo; lengths are \(m\) and \(n\) respectively. So it&amp;rsquo;s not suitable for large corpus. Also, if two corpus consists of same paragraph but the order is not same. LCS treat them as different corpus, and that&amp;rsquo;s not we expected.&lt;/p></description></item><item><title>The Annotated The Annotated Transformer</title><link>https://fromkk.com/posts/the-annotated-the-annotated-transformer/</link><pubDate>Sun, 01 Sep 2019 16:00:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/the-annotated-the-annotated-transformer/</guid><description>&lt;p>Thanks for the articles I list at the end of this post, I understand how transformers works. These posts are comprehensive, but there are some points that confused me.&lt;/p>
-&lt;p>First, this is the graph that was referenced by almost all of the post related to Transformer.&lt;/p>
-&lt;figure class="image-size-s">&lt;img src="https://fromkk.com/images/transformer_main.png">
-&lt;/figure>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Machine Learning on KK's Blog (fromkk)</title><link>https://fromkk.com/tags/machine-learning/</link><description>Recent content in Machine Learning on KK's Blog (fromkk)</description><generator>Hugo</generator><language>en</language><managingEditor>bebound@gmail.com (KK)</managingEditor><webMaster>bebound@gmail.com (KK)</webMaster><lastBuildDate>Sun, 10 Aug 2025 18:44:05 +0800</lastBuildDate><atom:link href="https://fromkk.com/tags/machine-learning/index.xml" rel="self" type="application/rss+xml"/><item><title>Near-duplicate with SimHash</title><link>https://fromkk.com/posts/near-duplicate-with-simhash/</link><pubDate>Wed, 04 Dec 2019 00:16:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/near-duplicate-with-simhash/</guid><description>&lt;p&gt;Before talking about &lt;strong&gt;SimHash&lt;/strong&gt;, let&amp;rsquo;s review some other methods which can also identify duplication.&lt;/p&gt;
+&lt;h2 id="longest-common-subsequence--lcs"&gt;Longest Common Subsequence(LCS)&lt;/h2&gt;
+&lt;p&gt;This is the algorithm used by &lt;code&gt;diff&lt;/code&gt; command. It is also &lt;strong&gt;edit distance&lt;/strong&gt; with insertion and deletion as the only two edit operations.&lt;/p&gt;
+&lt;p&gt;This works good for short strings. However, the algorithm&amp;rsquo;s time complexity is \(O(m*n)\), if two strings&amp;rsquo; lengths are \(m\) and \(n\) respectively. So it&amp;rsquo;s not suitable for large corpus. Also, if two corpus consists of same paragraph but the order is not same. LCS treat them as different corpus, and that&amp;rsquo;s not we expected.&lt;/p&gt;</description></item><item><title>The Annotated The Annotated Transformer</title><link>https://fromkk.com/posts/the-annotated-the-annotated-transformer/</link><pubDate>Sun, 01 Sep 2019 16:00:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/the-annotated-the-annotated-transformer/</guid><description>&lt;p&gt;Thanks for the articles I list at the end of this post, I understand how transformers works. These posts are comprehensive, but there are some points that confused me.&lt;/p&gt;
+&lt;p&gt;First, this is the graph that was referenced by almost all of the post related to Transformer.&lt;/p&gt;
+&lt;figure class="image-size-s"&gt;&lt;img src="https://fromkk.com/images/transformer_main.png"&gt;
+&lt;/figure&gt;
 
-&lt;p>Transformer consists of these parts: Input, Encoder*N, Output Input, Decoder*N, Output. I&amp;rsquo;ll explain them step by step.&lt;/p>
-&lt;h2 id="input">Input&lt;/h2>
-&lt;p>The input word will map to 512 dimension vector. Then generate Positional Encoding(PE) and add it to the original embeddings.&lt;/p></description></item><item><title>Different types of Attention</title><link>https://fromkk.com/posts/different-types-of-attention/</link><pubDate>Mon, 15 Jul 2019 00:16:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/different-types-of-attention/</guid><description>&lt;p>\(s_t\) and \(h_i\) are source hidden states and target hidden state, the shape is &lt;code>(n,1)&lt;/code>. \(c_t\) is the final context vector, and \(\alpha_{t,s}\) is alignment score.&lt;/p>
-&lt;p>\[\begin{aligned}
+&lt;p&gt;Transformer consists of these parts: Input, Encoder*N, Output Input, Decoder*N, Output. I&amp;rsquo;ll explain them step by step.&lt;/p&gt;
+&lt;h2 id="input"&gt;Input&lt;/h2&gt;
+&lt;p&gt;The input word will map to 512 dimension vector. Then generate Positional Encoding(PE) and add it to the original embeddings.&lt;/p&gt;</description></item><item><title>Different types of Attention</title><link>https://fromkk.com/posts/different-types-of-attention/</link><pubDate>Mon, 15 Jul 2019 00:16:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/different-types-of-attention/</guid><description>&lt;p&gt;\(s_t\) and \(h_i\) are source hidden states and target hidden state, the shape is &lt;code&gt;(n,1)&lt;/code&gt;. \(c_t\) is the final context vector, and \(\alpha_{t,s}\) is alignment score.&lt;/p&gt;
+&lt;p&gt;\[\begin{aligned}
 c_t&amp;amp;=\sum_{i=1}^n \alpha_{t,s}h_i \\
 \alpha_{t,s}&amp;amp;= \frac{\exp(score(s_t,h_i))}{\sum_{i=1}^n \exp(score(s_t,h_i))}
-\end{aligned}\]&lt;/p>
-&lt;h2 id="global--soft--vs-local--hard">Global(Soft) VS Local(Hard)&lt;/h2>
-&lt;p>Global Attention takes all source hidden states into account, and local attention only use part of the source hidden states.&lt;/p>
-&lt;h2 id="content-based-vs-location-based">Content-based VS Location-based&lt;/h2>
-&lt;p>Content-based Attention uses both source hidden states and target hidden states, but location-based attention only use source hidden states.&lt;/p></description></item><item><title>Using Dueling DQN to Play Flappy Bird</title><link>https://fromkk.com/posts/using-ddqn-to-play-flappy-bird/</link><pubDate>Sun, 14 Apr 2019 17:10:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/using-ddqn-to-play-flappy-bird/</guid><description>&lt;p>PyTorch provide a simple DQN implementation to solve the cartpole game. However, the code is incorrect, it diverges after training (It has been discussed &lt;a href="https://discuss.pytorch.org/t/dqn-example-from-pytorch-diverged/4123" target="_blank" rel="noopener noreffer ">here&lt;/a>).&lt;/p>
-&lt;p>The official code&amp;rsquo;s training data is below, it&amp;rsquo;s high score is about 50 and finally diverges.&lt;/p>
-&lt;figure class="image-size-s">&lt;img src="https://fromkk.com/images/ddqn_official.png">
-&lt;/figure>
+\end{aligned}\]&lt;/p&gt;
+&lt;h2 id="global--soft--vs-local--hard"&gt;Global(Soft) VS Local(Hard)&lt;/h2&gt;
+&lt;p&gt;Global Attention takes all source hidden states into account, and local attention only use part of the source hidden states.&lt;/p&gt;
+&lt;h2 id="content-based-vs-location-based"&gt;Content-based VS Location-based&lt;/h2&gt;
+&lt;p&gt;Content-based Attention uses both source hidden states and target hidden states, but location-based attention only use source hidden states.&lt;/p&gt;</description></item><item><title>Using Dueling DQN to Play Flappy Bird</title><link>https://fromkk.com/posts/using-ddqn-to-play-flappy-bird/</link><pubDate>Sun, 14 Apr 2019 17:10:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/using-ddqn-to-play-flappy-bird/</guid><description>&lt;p&gt;PyTorch provide a simple DQN implementation to solve the cartpole game. However, the code is incorrect, it diverges after training (It has been discussed &lt;a href="https://discuss.pytorch.org/t/dqn-example-from-pytorch-diverged/4123" target="_blank" rel="noopener noreffer "&gt;here&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;The official code&amp;rsquo;s training data is below, it&amp;rsquo;s high score is about 50 and finally diverges.&lt;/p&gt;
+&lt;figure class="image-size-s"&gt;&lt;img src="https://fromkk.com/images/ddqn_official.png"&gt;
+&lt;/figure&gt;
 
-&lt;p>There are many reason that lead to divergence.&lt;/p>
-&lt;p>First it use the difference of two frame as input in the tutorial, not only it loss the cart&amp;rsquo;s absolute information(This information is useful, as game will terminate if cart moves too far from centre), but also confused the agent when difference is the same but the state is varied.&lt;/p></description></item><item><title>TextCNN with PyTorch and Torchtext on Colab</title><link>https://fromkk.com/posts/textcnn-with-pytorch-and-torchtext-on-colab/</link><pubDate>Mon, 03 Dec 2018 15:47:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/textcnn-with-pytorch-and-torchtext-on-colab/</guid><description>&lt;p>&lt;a href="https://pytorch.org" target="_blank" rel="noopener noreffer ">PyTorch&lt;/a> is a really powerful framework to build the machine learning models. Although some features is missing when compared with TensorFlow (For example, the early stop function, History to draw plot), its code style is more intuitive.&lt;/p>
-&lt;p>&lt;a href="https://github.com/pytorch/text" target="_blank" rel="noopener noreffer ">Torchtext&lt;/a> is a NLP package which is also made by &lt;code>pytorch&lt;/code> team. It provide a way to read text, processing and iterate the texts.&lt;/p>
-&lt;p>&lt;a href="https://colab.research.google.com" target="_blank" rel="noopener noreffer ">Google Colab&lt;/a> is a Jupyter notebook environment host by Google, you can use free GPU and TPU to run your modal.&lt;/p></description></item><item><title>LSTM and GRU</title><link>https://fromkk.com/posts/lstm-and-gru/</link><pubDate>Sun, 22 Apr 2018 14:39:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/lstm-and-gru/</guid><description>&lt;h2 id="lstm">LSTM&lt;/h2>
-&lt;p>The avoid the problem of vanishing gradient and exploding gradient in vanilla RNN, LSTM was published, which can remember information for longer periods of time.&lt;/p>
-&lt;p>Here is the structure of LSTM:&lt;/p>
-&lt;figure class="image-size-s">&lt;img src="https://fromkk.com/images/LSTM_LSTM.png">
-&lt;/figure>
+&lt;p&gt;There are many reason that lead to divergence.&lt;/p&gt;
+&lt;p&gt;First it use the difference of two frame as input in the tutorial, not only it loss the cart&amp;rsquo;s absolute information(This information is useful, as game will terminate if cart moves too far from centre), but also confused the agent when difference is the same but the state is varied.&lt;/p&gt;</description></item><item><title>TextCNN with PyTorch and Torchtext on Colab</title><link>https://fromkk.com/posts/textcnn-with-pytorch-and-torchtext-on-colab/</link><pubDate>Mon, 03 Dec 2018 15:47:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/textcnn-with-pytorch-and-torchtext-on-colab/</guid><description>&lt;p&gt;&lt;a href="https://pytorch.org" target="_blank" rel="noopener noreffer "&gt;PyTorch&lt;/a&gt; is a really powerful framework to build the machine learning models. Although some features is missing when compared with TensorFlow (For example, the early stop function, History to draw plot), its code style is more intuitive.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/pytorch/text" target="_blank" rel="noopener noreffer "&gt;Torchtext&lt;/a&gt; is a NLP package which is also made by &lt;code&gt;pytorch&lt;/code&gt; team. It provide a way to read text, processing and iterate the texts.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://colab.research.google.com" target="_blank" rel="noopener noreffer "&gt;Google Colab&lt;/a&gt; is a Jupyter notebook environment host by Google, you can use free GPU and TPU to run your modal.&lt;/p&gt;</description></item><item><title>LSTM and GRU</title><link>https://fromkk.com/posts/lstm-and-gru/</link><pubDate>Sun, 22 Apr 2018 14:39:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/lstm-and-gru/</guid><description>&lt;h2 id="lstm"&gt;LSTM&lt;/h2&gt;
+&lt;p&gt;The avoid the problem of vanishing gradient and exploding gradient in vanilla RNN, LSTM was published, which can remember information for longer periods of time.&lt;/p&gt;
+&lt;p&gt;Here is the structure of LSTM:&lt;/p&gt;
+&lt;figure class="image-size-s"&gt;&lt;img src="https://fromkk.com/images/LSTM_LSTM.png"&gt;
+&lt;/figure&gt;
 
-&lt;p>The calculate procedure are:&lt;/p>
-&lt;p>\[\begin{aligned}
+&lt;p&gt;The calculate procedure are:&lt;/p&gt;
+&lt;p&gt;\[\begin{aligned}
 f_t&amp;amp;=\sigma(W_f\cdot[h_{t-1},x_t]+b_f)\\
 i_t&amp;amp;=\sigma(W_i\cdot[h_{t-1},x_t]+b_i)\\
 o_t&amp;amp;=\sigma(W_o\cdot[h_{t-1},x_t]+b_o)\\
 \tilde{C_t}&amp;amp;=tanh(W_C\cdot[h_{t-1},x_t]+b_C)\\
 C_t&amp;amp;=f_t\ast C_{t-1}+i_t\ast \tilde{C_t}\\
 h_t&amp;amp;=o_t \ast tanh(C_t)
-\end{aligned}\]&lt;/p>
-&lt;p>\(f_t\),\(i_t\),\(o_t\) are forget gate, input gate and output gate respectively. \(\tilde{C_t}\) is the new memory content. \(C_t\) is cell state. \(h_t\) is the output.&lt;/p></description></item><item><title>Models and Architectures in Word2vec</title><link>https://fromkk.com/posts/models-and-architechtures-in-word2vec/</link><pubDate>Fri, 05 Jan 2018 15:14:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/models-and-architechtures-in-word2vec/</guid><description>&lt;p>Generally, &lt;code>word2vec&lt;/code> is a language model to predict the words probability based on the context. When build the model, it create word embedding for each word, and word embedding is widely used in many NLP tasks.&lt;/p>
-&lt;h2 id="models">Models&lt;/h2>
-&lt;h3 id="cbow--continuous-bag-of-words">CBOW (Continuous Bag of Words)&lt;/h3>
-&lt;p>Use the context to predict the probability of current word. (In the picture, the word is encoded with one-hot encoding, \(W_{V*N}\) is word embedding, and \(W_{V*N}^{&amp;rsquo;}\), the output weight matrix in hidden layer, is same as \(\hat{\upsilon}\) in following equations)&lt;/p></description></item><item><title>Semi-supervised text classification using doc2vec and label spreading</title><link>https://fromkk.com/posts/semi-supervised-text-classification-using-doc2vec-and-label-spreading/</link><pubDate>Sun, 10 Sep 2017 15:29:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/semi-supervised-text-classification-using-doc2vec-and-label-spreading/</guid><description>&lt;p>Here is a simple way to classify text without much human effort and get a impressive performance.&lt;/p>
-&lt;p>It can be divided into two steps:&lt;/p>
-&lt;ol>
-&lt;li>Get train data by using keyword classification&lt;/li>
-&lt;li>Generate a more accurate classification model by using doc2vec and label spreading&lt;/li>
-&lt;/ol>
-&lt;h2 id="keyword-based-classification">Keyword-based Classification&lt;/h2>
-&lt;p>Keyword based classification is a simple but effective method. Extracting the target keyword is a monotonous work. I use this method to automatic extract keyword candidate.&lt;/p></description></item><item><title>Parameters in doc2vec</title><link>https://fromkk.com/posts/parameters-in-dov2vec/</link><pubDate>Thu, 03 Aug 2017 15:20:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/parameters-in-dov2vec/</guid><description>&lt;p>Here are some parameter in &lt;code>gensim&lt;/code>&amp;rsquo;s &lt;code>doc2vec&lt;/code> class.&lt;/p>
-&lt;h3 id="window">window&lt;/h3>
-&lt;p>window is the maximum distance between the predicted word and context words used for prediction within a document. It will look behind and ahead.&lt;/p>
-&lt;p>In &lt;code>skip-gram&lt;/code> model, if the window size is 2, the training samples will be this:(the blue word is the input word)&lt;/p>
-&lt;figure class="image-size-s">&lt;img src="https://fromkk.com/images/doc2vec_window.png">
-&lt;/figure>
+\end{aligned}\]&lt;/p&gt;
+&lt;p&gt;\(f_t\),\(i_t\),\(o_t\) are forget gate, input gate and output gate respectively. \(\tilde{C_t}\) is the new memory content. \(C_t\) is cell state. \(h_t\) is the output.&lt;/p&gt;</description></item><item><title>Models and Architectures in Word2vec</title><link>https://fromkk.com/posts/models-and-architechtures-in-word2vec/</link><pubDate>Fri, 05 Jan 2018 15:14:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/models-and-architechtures-in-word2vec/</guid><description>&lt;p&gt;Generally, &lt;code&gt;word2vec&lt;/code&gt; is a language model to predict the words probability based on the context. When build the model, it create word embedding for each word, and word embedding is widely used in many NLP tasks.&lt;/p&gt;
+&lt;h2 id="models"&gt;Models&lt;/h2&gt;
+&lt;h3 id="cbow--continuous-bag-of-words"&gt;CBOW (Continuous Bag of Words)&lt;/h3&gt;
+&lt;p&gt;Use the context to predict the probability of current word. (In the picture, the word is encoded with one-hot encoding, \(W_{V*N}\) is word embedding, and \(W_{V*N}^{&amp;rsquo;}\), the output weight matrix in hidden layer, is same as \(\hat{\upsilon}\) in following equations)&lt;/p&gt;</description></item><item><title>Semi-supervised text classification using doc2vec and label spreading</title><link>https://fromkk.com/posts/semi-supervised-text-classification-using-doc2vec-and-label-spreading/</link><pubDate>Sun, 10 Sep 2017 15:29:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/semi-supervised-text-classification-using-doc2vec-and-label-spreading/</guid><description>&lt;p&gt;Here is a simple way to classify text without much human effort and get a impressive performance.&lt;/p&gt;
+&lt;p&gt;It can be divided into two steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Get train data by using keyword classification&lt;/li&gt;
+&lt;li&gt;Generate a more accurate classification model by using doc2vec and label spreading&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="keyword-based-classification"&gt;Keyword-based Classification&lt;/h2&gt;
+&lt;p&gt;Keyword based classification is a simple but effective method. Extracting the target keyword is a monotonous work. I use this method to automatic extract keyword candidate.&lt;/p&gt;</description></item><item><title>Parameters in doc2vec</title><link>https://fromkk.com/posts/parameters-in-dov2vec/</link><pubDate>Thu, 03 Aug 2017 15:20:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/parameters-in-dov2vec/</guid><description>&lt;p&gt;Here are some parameter in &lt;code&gt;gensim&lt;/code&gt;&amp;rsquo;s &lt;code&gt;doc2vec&lt;/code&gt; class.&lt;/p&gt;
+&lt;h3 id="window"&gt;window&lt;/h3&gt;
+&lt;p&gt;window is the maximum distance between the predicted word and context words used for prediction within a document. It will look behind and ahead.&lt;/p&gt;
+&lt;p&gt;In &lt;code&gt;skip-gram&lt;/code&gt; model, if the window size is 2, the training samples will be this:(the blue word is the input word)&lt;/p&gt;
+&lt;figure class="image-size-s"&gt;&lt;img src="https://fromkk.com/images/doc2vec_window.png"&gt;
+&lt;/figure&gt;
 
-&lt;h3 id="min-count">min_count&lt;/h3>
-&lt;p>If the word appears less than this value, it will be skipped&lt;/p>
-&lt;h3 id="sample">sample&lt;/h3>
-&lt;p>High frequency word like &lt;code>the&lt;/code> is useless for training. &lt;code>sample&lt;/code> is a threshold for deleting these higher-frequency words. The probability of keeping the word \(w_i\) is:&lt;/p></description></item><item><title>Brief Introduction of Label Propagation Algorithm</title><link>https://fromkk.com/posts/brief-introduction-of-label-propagation-algorithm/</link><pubDate>Sun, 16 Jul 2017 21:45:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/brief-introduction-of-label-propagation-algorithm/</guid><description>&lt;p>As I said before, I&amp;rsquo;m working on a text classification project. I use &lt;code>doc2vec&lt;/code> to convert text into vectors, then I use LPA to classify the vectors.&lt;/p>
-&lt;p>LPA is a simple, effective semi-supervised algorithm. It can use the density of unlabeled data to find a hyperplane to split the data.&lt;/p>
-&lt;p>Here are the main stop of the algorithm:&lt;/p>
-&lt;ol>
-&lt;li>Let $ (x_1,y1)&amp;hellip;(x_l,y_l)$ be labeled data, $Y_L = \{y_1&amp;hellip;y_l\} $ are the class labels. Let \((x_{l+1},y_{l+u})\) be unlabeled data where \(Y_U = \{y_{l+1}&amp;hellip;y_{l+u}\}\) are unobserved, usually \(l \ll u\). Let \(X=\{x_1&amp;hellip;x_{l+u}\}\) where \(x_i\in R^D\). The problem is to estimate \(Y_U\) for \(X\) and \(Y_L\).&lt;/li>
-&lt;li>Calculate the similarity of the data points. The most simple metric is Euclidean distance. Use a parameter \(\sigma\) to control the weights.&lt;/li>
-&lt;/ol>
-&lt;p>\[w_{ij}= exp(-\frac{d^2_{ij}}{\sigma^2})=exp(-\frac{\sum^D_{d=1}{(x^d_i-x^d_j})^2}{\sigma^2})\]&lt;/p></description></item></channel></rss>
+&lt;h3 id="min-count"&gt;min_count&lt;/h3&gt;
+&lt;p&gt;If the word appears less than this value, it will be skipped&lt;/p&gt;
+&lt;h3 id="sample"&gt;sample&lt;/h3&gt;
+&lt;p&gt;High frequency word like &lt;code&gt;the&lt;/code&gt; is useless for training. &lt;code&gt;sample&lt;/code&gt; is a threshold for deleting these higher-frequency words. The probability of keeping the word \(w_i\) is:&lt;/p&gt;</description></item><item><title>Brief Introduction of Label Propagation Algorithm</title><link>https://fromkk.com/posts/brief-introduction-of-label-propagation-algorithm/</link><pubDate>Sun, 16 Jul 2017 21:45:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/brief-introduction-of-label-propagation-algorithm/</guid><description>&lt;p&gt;As I said before, I&amp;rsquo;m working on a text classification project. I use &lt;code&gt;doc2vec&lt;/code&gt; to convert text into vectors, then I use LPA to classify the vectors.&lt;/p&gt;
+&lt;p&gt;LPA is a simple, effective semi-supervised algorithm. It can use the density of unlabeled data to find a hyperplane to split the data.&lt;/p&gt;
+&lt;p&gt;Here are the main stop of the algorithm:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Let $ (x_1,y1)&amp;hellip;(x_l,y_l)$ be labeled data, $Y_L = \{y_1&amp;hellip;y_l\} $ are the class labels. Let \((x_{l+1},y_{l+u})\) be unlabeled data where \(Y_U = \{y_{l+1}&amp;hellip;y_{l+u}\}\) are unobserved, usually \(l \ll u\). Let \(X=\{x_1&amp;hellip;x_{l+u}\}\) where \(x_i\in R^D\). The problem is to estimate \(Y_U\) for \(X\) and \(Y_L\).&lt;/li&gt;
+&lt;li&gt;Calculate the similarity of the data points. The most simple metric is Euclidean distance. Use a parameter \(\sigma\) to control the weights.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;\[w_{ij}= exp(-\frac{d^2_{ij}}{\sigma^2})=exp(-\frac{\sum^D_{d=1}{(x^d_i-x^d_j})^2}{\sigma^2})\]&lt;/p&gt;</description></item></channel></rss>

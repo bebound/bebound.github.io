@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jaeger on KK's Blog (fromkk)</title><link>https://fromkk.com/tags/jaeger/</link><description>Recent content in Jaeger on KK's Blog (fromkk)</description><generator>Hugo</generator><language>en</language><managingEditor>bebound@gmail.com (KK)</managingEditor><webMaster>bebound@gmail.com (KK)</webMaster><lastBuildDate>Sun, 10 Aug 2025 18:44:06 +0800</lastBuildDate><atom:link href="https://fromkk.com/tags/jaeger/index.xml" rel="self" type="application/rss+xml"/><item><title>Jaeger Code Structure</title><link>https://fromkk.com/posts/jaeger-code-structure/</link><pubDate>Sun, 22 Sep 2019 17:07:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/jaeger-code-structure/</guid><description>&lt;p>Here is the main logic for jaeger agent and jaeger collector. (Based on &lt;a href="https://github.com/jaegertracing/jaeger" target="_blank" rel="noopener noreffer ">jaeger&lt;/a> 1.13.1)&lt;/p>
-&lt;figure>&lt;img src="https://fromkk.com/images/jaeger.svg" width="600">
-&lt;/figure>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jaeger on KK's Blog (fromkk)</title><link>https://fromkk.com/tags/jaeger/</link><description>Recent content in Jaeger on KK's Blog (fromkk)</description><generator>Hugo</generator><language>en</language><managingEditor>bebound@gmail.com (KK)</managingEditor><webMaster>bebound@gmail.com (KK)</webMaster><lastBuildDate>Sun, 10 Aug 2025 18:44:06 +0800</lastBuildDate><atom:link href="https://fromkk.com/tags/jaeger/index.xml" rel="self" type="application/rss+xml"/><item><title>Jaeger Code Structure</title><link>https://fromkk.com/posts/jaeger-code-structure/</link><pubDate>Sun, 22 Sep 2019 17:07:00 +0800</pubDate><author>bebound@gmail.com (KK)</author><guid>https://fromkk.com/posts/jaeger-code-structure/</guid><description>&lt;p&gt;Here is the main logic for jaeger agent and jaeger collector. (Based on &lt;a href="https://github.com/jaegertracing/jaeger" target="_blank" rel="noopener noreffer "&gt;jaeger&lt;/a&gt; 1.13.1)&lt;/p&gt;
+&lt;figure&gt;&lt;img src="https://fromkk.com/images/jaeger.svg" width="600"&gt;
+&lt;/figure&gt;
 
-&lt;h2 id="jaeger-agent">Jaeger Agent&lt;/h2>
-&lt;p>Collect UDP packet from 6831 port, convert it to &lt;code>model.Span&lt;/code>, send to collector by gRPC&lt;/p>
-&lt;h2 id="jaeger-collector">Jaeger Collector&lt;/h2>
-&lt;p>Process gRPC or process packet from Zipkin(port 9411).&lt;/p>
-&lt;h2 id="jaeger-query">Jaeger Query&lt;/h2>
-&lt;p>Listen gRPC and HTTP request from 16686.&lt;/p></description></item></channel></rss>
+&lt;h2 id="jaeger-agent"&gt;Jaeger Agent&lt;/h2&gt;
+&lt;p&gt;Collect UDP packet from 6831 port, convert it to &lt;code&gt;model.Span&lt;/code&gt;, send to collector by gRPC&lt;/p&gt;
+&lt;h2 id="jaeger-collector"&gt;Jaeger Collector&lt;/h2&gt;
+&lt;p&gt;Process gRPC or process packet from Zipkin(port 9411).&lt;/p&gt;
+&lt;h2 id="jaeger-query"&gt;Jaeger Query&lt;/h2&gt;
+&lt;p&gt;Listen gRPC and HTTP request from 16686.&lt;/p&gt;</description></item></channel></rss>
