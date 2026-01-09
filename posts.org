@@ -3829,3 +3829,31 @@ After using Synology for a while, I found the Synology OS is more user-friendly 
 **** Ref:
 - [[https://www.v2ex.com/t/1135848][除了 synology drive，还有支持选择性同步的本地部署云盘吗 ]]
 - [[https://post.smzdm.com/p/adm3qxen/][保姆级安装黑威联通]]
+
+*** DONE Kindle Paperwhite 5 Review                                :Kindle:
+CLOSED: [2026-01-09 Fri 21:49]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: kindle-paperwhite-5-review
+   :END:
+
+I bought a Kindle Paperwhite 1 in 2013, when I still in the university. I like it very much and I've read many programming books with it. It still works fine after 10 years, but I want to tries the new model with larger screen and faster fresh speed. So I bought a used Kindle Paperwhite 5 signature version for only 620 Yuan (about $90) recently. Here is my review.
+
+The Kindle Paperwhite 5 has a 6.8 inch screen with 300 PPI, the screen size and the PPI both increase comparing with the previous model. The Kindle Paperwhite 6 has a larger 7 inch screen, and a double RM(1G) than Paperwhite 5(512M). You can buy a 16G model for 850 Yuan (about $120). I think the overall experience is good enough for reading books, so I choose PKW5.
+
+The signature edition has a 32G storage, wireless charging and auto adjust light sensor. I haven't used the wireless charging. I don't think it's necessary as the battery life is so long and I hardly need to charge it. The auto adjust light is not noticeable as well. For the storage, I think 8G is big enough if you don't read manga.
+
+The biggist difference between PKW5 and PKW1 is response speed. The KPW5 is much faster when openning books or click UI buttons. The page turning speed is also significantly improved.
+
+Overall, I'm satisfied with the new model. If you want to buy a Kindle, I recommend you buying the KPW5 or KPW6, as a larger screen is worthy.
+
+**** Kindle Jailbreak
+If you want to read PDF on Kindle, KOReader is a must-have app. You can follow the [[https://kindlemodding.org/][Kindle Modding]] guide to jailbreak your Kindle and install KOReader.
+
+There are some plugins I recommend:
+1. [[https://github.com/guo-yong-zhi/kindle-filebrowser][Kindle FileBrowser]]: You can transfer books through wifi without using USB cable.
+2. [[https://github.com/yparitcher/KUAL_Booklet/][KOL]]: Open KOReader from main UI.
+3. [[https://www.mobileread.com/forums//showpost.php?p=4539994&postcount=33][Cover Setter]]: Set a better cover for KUAL/KOL/HOTFIX
+
+**** Ref:
+1. [[https://kindlemodding.org/][Kindle Modding Wiki]]
+2. [[https://bookfere.com/category/skills/jailbreak][书伴 越狱专题]]
