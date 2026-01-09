@@ -1,7 +1,7 @@
 +++
 title = "Using Dueling DQN to Play Flappy Bird"
 date = 2019-04-14T17:10:00+08:00
-lastmod = 2025-08-10T18:44:05+08:00
+lastmod = 2026-01-09T20:40:39+08:00
 tags = ["Machine Learning"]
 categories = ["Machine-Learning"]
 draft = false
@@ -36,53 +36,53 @@ Here is the model architecture:
 
 Here is a trained result:
 
-{{&lt; youtube NV82ZUQynuQ &gt;}}
+{{< youtube NV82ZUQynuQ >}}
 
 1.  Dueling DQN
 
     The vanilla DQN has the overestimate problem. As the `max` function will accumulate the noise when training. This leads to converging at suboptimal point. Two following architectures are submitted to solve this problem.
 
-    \\[ Q(s, a) = r + \gamma \max\_{a'}[Q(s', a')] \\]
+\\[ Q(s, a) = r + \gamma \max\_{a'}[Q(s', a')] \\]
 
-    Double DQN was published two year later DQN. It has two value function, one is used to choose the action with max Q value, another one is used to calculate the Q value of this action.
+Double DQN was published two year later DQN. It has two value function, one is used to choose the action with max Q value, another one is used to calculate the Q value of this action.
 
-    \\[ a^{max}(S'\_j, w) = \arg\max\_{a'}Q(\phi(S'\_j),a,w) \\]
+\\[ a^{max}(S'\_j, w) = \arg\max\_{a'}Q(\phi(S'\_j),a,w) \\]
 
-    \\[ Q(s,a) = r + \gamma Q'(\phi(S'\_j),a^{max}(S'\_j, w),w') \\]
+\\[ Q(s,a) = r + \gamma Q'(\phi(S'\_j),a^{max}(S'\_j, w),w') \\]
 
-    Dueling DQN is another solution. It has two estimator, one estimates the score of current state, another estimates the action score.
+Dueling DQN is another solution. It has two estimator, one estimates the score of current state, another estimates the action score.
 
-    \\[Q(s, a) = r + \gamma( \max\_{a’}[A(s',a')+V(s')]\\]
+\\[Q(s, a) = r + \gamma( \max\_{a’}[A(s',a')+V(s')]\\]
 
-    In order to distinguish the score of the actions, the return the Q-value will minus the mean action score:
+In order to distinguish the score of the actions, the return the Q-value will minus the mean action score:
 
-    `x=val+adv-adv.mean(1,keepdim=True)`
+`x=val+adv-adv.mean(1,keepdim=True)`
 
-    {{< figure src="/images/ddqn_duel_dqn.png" class="image-size-s" >}}
+{{< figure src="/images/ddqn_duel_dqn.png" class="image-size-s" >}}
 
-    In this project, I use dueling DQN.
+In this project, I use dueling DQN.
 
-2.  Image processing
+1.  Image processing
 
     I grayscale and crop the image.
 
-3.  Stack frames
+2.  Stack frames
 
     I use the last 4 frame as the input. This should help the agent to know the change of environment.
 
-4.  Extra FC before last layer
+3.  Extra FC before last layer
 
     I add a FC between the image features and the FC for calculate Q-Value.
 
-5.  Frame Skipping
+4.  Frame Skipping
 
     Frame-skipping means agent sees and selects actions on every k frame instead of every frame, the last action is repeated on skipped frames. This method will accelerate the training procedure. In this project, I use `frame_skipping=2`, as the more the frame skipping is, the more the bird is likely to hit the pipe. And this method did help the agent to converge faster. More details can be found in this [post](https://danieltakeshi.github.io/2016/11/25/frame-skipping-and-preprocessing-for-deep-q-networks-on-atari-2600-games/).
 
-6.  Prioritized Experience Replay
+5.  Prioritized Experience Replay
 
     This idea was published [here](https://arxiv.org/abs/1511.05952). It's a very simple idea: replay high TD error experience more frequently. My code implementation is not efficient. But in cartpole game, this technology help the agent converge faster.
 
-7.  Colab and Kaggle Kernel
+6.  Colab and Kaggle Kernel
 
     My MacBook doesn't support CUDA, so I use these two website to train the model. Here are the comparison of them. During training, Kaggle seems more stable, Colab usually disconnected after 1h.
 
@@ -110,11 +110,11 @@ Here are something may help with this task.
 
     In this project, I just grayscalize the image. A more advance technology such as binarize should help agent to filter unimportant detail of game output.
 
-    {{< figure src="/images/ddqn_binary_preprocessing.png" width="100" >}}
+    {{< figure src="/images/ddqn_binary_preprocessing.png" class="image-size-s" >}}
 
     In [Flappy Bird RL](https://sarvagyavaish.github.io/FlappyBirdRL/), the author extract the vertical distance from lower pipe and horizontal distance from next pair of pipes as state. The trained agent can achieve 3000 score.
 
-    {{< figure src="/images/ddqn_extract_feature.png" width="200" >}}
+    {{< figure src="/images/ddqn_extract_feature.png" class="image-size-s" >}}
 
 <!--listend-->
 
@@ -125,20 +125,6 @@ Here are something may help with this task.
     {{< figure src="/images/ddqn_rainbow.png" class="image-size-s" >}}
 
 I've uploaded code to this [repo](https://github.com/bebound/flappy-bird-dqn).
-
-
-## Ref {#ref}
-
-1.  [PyTorch REINFORCEMENT LEARNING (DQN) TUTORIAL](https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html)
-2.  [强化学习](https://www.cnblogs.com/pinard/category/1254674.html) (A series of Chinese post about reinforcement learning)
-3.  [Deep Reinforcement Learning for Flappy Bird](http://cs229.stanford.edu/proj2015/362_report.pdf)
-4.  [Flappy-Bird-Double-DQN-Pytorch](https://github.com/ttaoREtw/Flappy-Bird-Double-DQN-Pytorch)
-5.  [DeepRL-Tutorials](https://github.com/qfettes/DeepRL-Tutorials)
-6.  [Speeding up DQN on PyTorch: how to solve Pong in 30 minutes](https://medium.com/mlreview/speeding-up-dqn-on-pytorch-solving-pong-in-30-minutes-81a1bd2dff55)
-7.  [Frame Skipping and Pre-Processing for Deep Q-Networks on Atari 2600 Games](https://danieltakeshi.github.io/2016/11/25/frame-skipping-and-preprocessing-for-deep-q-networks-on-atari-2600-games/)
-8.  [OpenAI Baselines: DQN](https://openai.com/blog/openai-baselines-dqn/)
-9.  [Deep-Reinforcement-Learning-Hands-On](https://github.com/susantamoh84/Deep-Reinforcement-Learning-Hands-On/)
-10. [DQN solution results peak at ~35 reward](https://github.com/dennybritz/reinforcement-learning/issues/30)
 
 ---
 
@@ -157,3 +143,17 @@ I've uploaded code to this [repo](https://github.com/bebound/flappy-bird-dqn).
 -   Update 13-08-19
 
     Upload video, update code.
+
+
+## Ref {#ref}
+
+1.  [PyTorch REINFORCEMENT LEARNING (DQN) TUTORIAL](https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html)
+2.  [强化学习](https://www.cnblogs.com/pinard/category/1254674.html) (A series of Chinese post about reinforcement learning)
+3.  [Deep Reinforcement Learning for Flappy Bird](http://cs229.stanford.edu/proj2015/362_report.pdf)
+4.  [Flappy-Bird-Double-DQN-Pytorch](https://github.com/ttaoREtw/Flappy-Bird-Double-DQN-Pytorch)
+5.  [DeepRL-Tutorials](https://github.com/qfettes/DeepRL-Tutorials)
+6.  [Speeding up DQN on PyTorch: how to solve Pong in 30 minutes](https://medium.com/mlreview/speeding-up-dqn-on-pytorch-solving-pong-in-30-minutes-81a1bd2dff55)
+7.  [Frame Skipping and Pre-Processing for Deep Q-Networks on Atari 2600 Games](https://danieltakeshi.github.io/2016/11/25/frame-skipping-and-preprocessing-for-deep-q-networks-on-atari-2600-games/)
+8.  [OpenAI Baselines: DQN](https://openai.com/blog/openai-baselines-dqn/)
+9.  [Deep-Reinforcement-Learning-Hands-On](https://github.com/susantamoh84/Deep-Reinforcement-Learning-Hands-On/)
+10. [DQN solution results peak at ~35 reward](https://github.com/dennybritz/reinforcement-learning/issues/30)
