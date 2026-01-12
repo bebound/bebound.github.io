@@ -1,7 +1,6 @@
 +++
 title = "Namespace Package in Python"
 date = 2025-08-10T18:04:00+08:00
-lastmod = 2026-01-12T17:36:53+08:00
 tags = ["Python"]
 categories = ["Programming"]
 draft = false
