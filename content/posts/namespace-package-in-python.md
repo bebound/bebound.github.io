@@ -1,7 +1,7 @@
 +++
 title = "Namespace Package in Python"
 date = 2025-08-10T18:04:00+08:00
-lastmod = 2026-01-06T10:09:37+08:00
+lastmod = 2026-01-12T17:36:53+08:00
 tags = ["Python"]
 categories = ["Programming"]
 draft = false
@@ -94,7 +94,7 @@ For example, if you use the [pypa sample-namespace-packages](https://github.com/
 
 So, it's okay to mix these three styles, as all subpackages should be imported. But if some invalid package (not following these three styles, only a normal package) is also installed, the import might be interrupted by the invalid package.
 
-If you use the native style or pkg_resource style but there is a normal `__init__.py` in `sys.path`. Although the namespace package has been imported, Python still only returns the normal package and ignored the namespace package. That's why in the [#31843 issue](https://github.com/Azure/azure-cli/issues/31843), the `azure.cli` is found.
+If you use the native style or pkg_resource style but there is a normal `__init__.py` in `sys.path`. Although the namespace package has been imported, Python still only returns the normal package and ignored the namespace package. That's why in the [#31843 issue](https://github.com/Azure/azure-cli/issues/31843), the `azure.cli` is not found.
 
 If a normal package and the pkgutil style namespace package are installed, if the `pkgutil` package loads first, then all subpackages are imported. If the normal package loads first, then only the normal package will be returned.
 
