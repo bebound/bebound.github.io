@@ -2,7 +2,7 @@
 &lt;p&gt;This setting makes it possible to switch input method based on the context of cursor when entering insert mode.&lt;/p&gt;
 &lt;h3 id="sis"&gt;sis&lt;/h3&gt;
 &lt;p&gt;I&amp;rsquo;m using &lt;code&gt;sis&lt;/code&gt; package with this configuration. You may need to install &lt;code&gt;macism&lt;/code&gt; if you&amp;rsquo;re not using &lt;code&gt;railwaycat/emacsmacport&lt;/code&gt;. More settings can be found in &lt;a href="https://github.com/laishulu/emacs-smart-input-source" target="_blank" rel="noopener noreffer "&gt;emacs-smart-input-source&lt;/a&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-elisp" data-lang="elisp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;(sis-ism-lazyman-config
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-elisp" data-lang="elisp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;(sis-ism-lazyman-config
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;com.apple.keylayout.US&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;com.apple.inputmethod.SCIM.ITABC&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
