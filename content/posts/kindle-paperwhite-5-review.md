@@ -1,7 +1,7 @@
 +++
 title = "Kindle Paperwhite 5 Review"
 date = 2026-01-09T21:49:00+08:00
-lastmod = 2026-01-09T21:55:06+08:00
+lastmod = 2026-02-06T21:02:53+08:00
 tags = ["Kindle"]
 categories = ["Misc"]
 draft = false
@@ -32,6 +32,14 @@ There are some plugins I recommend:
 1.  [Kindle FileBrowser](https://github.com/guo-yong-zhi/kindle-filebrowser): You can transfer books through wifi without using USB cable.
 2.  [KOL](https://github.com/yparitcher/KUAL_Booklet/): Open KOReader from main UI.
 3.  [Cover Setter](https://www.mobileread.com/forums//showpost.php?p=4539994&postcount=33): Set a better cover for KUAL/KOL/HOTFIX
+
+
+## Kindle software {#kindle-software}
+
+Besides the must have Calibre, there are two tools I recommend for Kindle users:
+
+1.  [kaf-cli](https://github.com/ystyle/kaf-cli): A CLI tool to convert txt to epub, with a orly style cover.
+2.  [Kindle Comic Converter](https://github.com/ciromattia/kcc): A tool to convert manga to mobi, which can be read on Kindle with full screen.
 
 
 ## Ref: {#ref}

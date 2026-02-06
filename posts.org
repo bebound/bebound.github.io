@@ -3853,6 +3853,11 @@ There are some plugins I recommend:
 2. [[https://github.com/yparitcher/KUAL_Booklet/][KOL]]: Open KOReader from main UI.
 3. [[https://www.mobileread.com/forums//showpost.php?p=4539994&postcount=33][Cover Setter]]: Set a better cover for KUAL/KOL/HOTFIX
 
+**** Kindle software
+Besides the must have Calibre, there are two tools I recommend for Kindle users:
+1. [[https://github.com/ystyle/kaf-cli][kaf-cli]]: A CLI tool to convert txt to epub, with a orly style cover.
+2. [[https://github.com/ciromattia/kcc][Kindle Comic Converter]]: A tool to convert manga to mobi, which can be read on Kindle with full screen.
+
 **** Ref:
 1. [[https://kindlemodding.org/][Kindle Modding Wiki]]
 2. [[https://bookfere.com/category/skills/jailbreak][书伴 越狱专题]]
