@@ -1,7 +1,7 @@
 +++
 title = "Near-duplicate with SimHash"
 date = 2019-12-04T00:16:00+08:00
-lastmod = 2025-08-10T18:44:05+08:00
+lastmod = 2026-04-17T17:11:11+08:00
 tags = ["Machine Learning", "SimHash"]
 categories = ["Machine-Learning"]
 draft = false
@@ -82,7 +82,7 @@ Suppose we only get these first 3 sub-string and their hash values are `1001`, `
 
 ### How to find similar document {#how-to-find-similar-document}
 
-Iterating over all document and compare with target simhash value is a time consuming operation. Is there any smart way to accomplish this task? In Google's paper, they published a very neat algorithm.
+Iterating over all document and compare with target SimHash value is a time consuming operation. Is there any smart way to accomplish this task? In Google's paper, they published a very neat algorithm.
 
 If the hash value is a 64-bit vector, and we want to find the document which is 2-bit differs with the target. Then we can divided the vector to 4 part: \\(A\\), \\(B\\), \\(C\\) and \\(D\\). Then we know that at least two part should be the identical.
 
@@ -95,6 +95,26 @@ Besides \\(AB\\), \\(AC\\), \\(AD\\), \\(BC\\), \\(BD\\) and \\(CD\\) may also b
 {{< figure src="/images/simhash_query2.png" >}}
 
 Depending on the fingerprints' bit and documents number, you need to find a optimal number to split the hash value.
+
+
+## How to Use SimHash for Logs classification {#how-to-use-simhash-for-logs-classification}
+
+As you can see, **SimHash** is designed for large corpus. If you want to use it for small corpus like logs, the generated hash value may be vary even if there is only two different user id in the log. How to make the generate hash value more stable? Here is my solution.
+
+
+### Clean the known variable {#clean-the-known-variable}
+
+You need to replace the `user id`, `url`, `timestamp` and other known variables with placeholders.
+
+
+### Add custom features in Text {#add-custom-features-in-text}
+
+For example, you can add `has user id`, `has url` as features. You can also use placeholders' index and counts as features. For example, `has 2 user id` or `time index is 2` as features. Then you can give these features higher weight to make sure the log generate by same template will have close hash value.
+
+
+### Use average hash value as template's hash value {#use-average-hash-value-as-template-s-hash-value}
+
+As time goes, the log template may change. You can sample 10000 recent log for each type of log, then calculate the average hash value as the template's hash value. Then you can compare the new log's hash value with template's hash value to find the most similar template.
 
 
 ## Ref {#ref}
