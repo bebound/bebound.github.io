@@ -3868,6 +3868,10 @@ There are some plugins I recommend:
 2. [[https://github.com/yparitcher/KUAL_Booklet/][KOL]]: Open KOReader from main UI.
 3. [[https://www.mobileread.com/forums//showpost.php?p=4539994&postcount=33][Cover Setter]]: Set a better cover for KUAL/KOL/HOTFIX
 
+For KOReader, here are the plugins I recommend:
+1. [[https://github.com/doctorhetfield-cmd/simpleui.koplugin][SimpleUI]]: Improve home screen UI.
+2. [[https://github.com/kristianpennacchia/zzz-readermenuredesign.koplugin][ReaderMenuRedesign]]: Improve the Lookup menu and highligh menu.
+
 **** Kindle software
 Besides the must have Calibre, there are two tools I recommend for Kindle users:
 1. [[https://github.com/ystyle/kaf-cli][kaf-cli]]: A CLI tool to convert txt to epub, with a orly style cover.

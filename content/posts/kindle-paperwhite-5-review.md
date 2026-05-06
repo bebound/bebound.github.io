@@ -1,7 +1,7 @@
 +++
 title = "Kindle Paperwhite 5 Review"
 date = 2026-01-09T21:49:00+08:00
-lastmod = 2026-02-06T21:02:53+08:00
+lastmod = 2026-05-06T22:12:40+08:00
 tags = ["Kindle"]
 categories = ["Misc"]
 draft = false
@@ -32,6 +32,11 @@ There are some plugins I recommend:
 1.  [Kindle FileBrowser](https://github.com/guo-yong-zhi/kindle-filebrowser): You can transfer books through wifi without using USB cable.
 2.  [KOL](https://github.com/yparitcher/KUAL_Booklet/): Open KOReader from main UI.
 3.  [Cover Setter](https://www.mobileread.com/forums//showpost.php?p=4539994&postcount=33): Set a better cover for KUAL/KOL/HOTFIX
+
+For KOReader, here are the plugins I recommend:
+
+1.  [SimpleUI](https://github.com/doctorhetfield-cmd/simpleui.koplugin): Improve home screen UI.
+2.  [ReaderMenuRedesign](https://github.com/kristianpennacchia/zzz-readermenuredesign.koplugin): Improve the Lookup menu and highligh menu.
 
 
 ## Kindle software {#kindle-software}
