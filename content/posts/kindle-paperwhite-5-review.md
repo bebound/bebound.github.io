@@ -1,7 +1,6 @@
 +++
 title = "Kindle Paperwhite 5 Review"
 date = 2026-01-09T21:49:00+08:00
-lastmod = 2026-05-06T22:12:40+08:00
 tags = ["Kindle"]
 categories = ["Misc"]
 draft = false
