@@ -1,7 +1,7 @@
 +++
 title = "sys.path in Python"
 date = 2024-08-11T15:56:00+08:00
-lastmod = 2026-06-04T20:23:42+08:00
+lastmod = 2026-06-04T20:30:04+08:00
 tags = ["Python"]
 categories = ["Programming"]
 draft = false
@@ -62,14 +62,14 @@ The site module also tries to add `USER_SITE` folder into `sys.path`. Default va
 
 ## `_pth` file {#pth-file}
 
-If there is a `pythohn._pth` or `python314._pth` in the same directory as Python executable, the isolated mode is enabled. Which is the same as `python3 -I` mode: the environment and registry variable are ignored, the `site` module is not imported and the [unsafe path](https://docs.python.org/3/using/cmdline.html#cmdoption-P) is not added to `sys.path`. Only the path in the `_pth` file is added into `sys.path`. This is a special use case for embedding Python. Here is an example of `python._pth` file in embed Python 3.14:
+If there is a `pythohn._pth` or `python314._pth` in the same directory as Python executable, the isolated mode is enabled and `site` module is not imported. Isolated mode is the same as `python3 -I`: the environment and registry variable are ignored, the `site` module is not imported and the [unsafe path](https://docs.python.org/3/using/cmdline.html#cmdoption-P) and [USER_SITE](https://docs.python.org/3/library/site.html#site.USER_SITE) are not added to `sys.path`. After adding this file, only the path in the `_pth` file is added into `sys.path`. This is a special use case for embedding Python. Here is the `python314._pth` file in embed Python 3.14:
 
 ```nil
 python314.zip
 .
 
 # Uncomment to run site.main() automatically
-#import site
+# import site
 ```
 
 
