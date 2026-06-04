@@ -1,7 +1,7 @@
 +++
 title = "sys.path in Python"
 date = 2024-08-11T15:56:00+08:00
-lastmod = 2025-08-10T18:44:06+08:00
+lastmod = 2026-06-04T20:23:42+08:00
 tags = ["Python"]
 categories = ["Programming"]
 draft = false
@@ -55,9 +55,22 @@ Finding `site-packages` folder is easy. It can be guessed by `prefix` and `exec_
 
 ### .pth files {#dot-pth-files}
 
-If a `name.pth` file exits in the `site-packages` folder, its content are additional items to be added into `sys.path`. Each line is a relative path.
+If a `name.pth` file exits in the `site-packages` folder, its content are additional items to be added into `sys.path`. Each line is a relative path. This process is done by the `site` module when `import site` is specifed.
 
 The site module also tries to add `USER_SITE` folder into `sys.path`. Default value is `~/.local/lib/pythonX.Y/site-packages` for UNIX and non-framework macOS builds, `~/Library/Python/X.Y/lib/python/site-packages` for macOS framework builds, and `%APPDATA%\Python\PythonXY\site-packages` on Windows.
+
+
+## `_pth` file {#pth-file}
+
+If there is a `pythohn._pth` or `python314._pth` in the same directory as Python executable, the isolated mode is enabled. Which is the same as `python3 -I` mode: the environment and registry variable are ignored, the `site` module is not imported and the [unsafe path](https://docs.python.org/3/using/cmdline.html#cmdoption-P) is not added to `sys.path`. Only the path in the `_pth` file is added into `sys.path`. This is a special use case for embedding Python. Here is an example of `python._pth` file in embed Python 3.14:
+
+```nil
+python314.zip
+.
+
+# Uncomment to run site.main() automatically
+#import site
+```
 
 
 ## Example {#example}
