@@ -1,7 +1,6 @@
 +++
 title = "sys.path in Python"
 date = 2024-08-11T15:56:00+08:00
-lastmod = 2026-06-04T20:30:04+08:00
 tags = ["Python"]
 categories = ["Programming"]
 draft = false
