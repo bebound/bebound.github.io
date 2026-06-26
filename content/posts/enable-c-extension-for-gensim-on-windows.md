@@ -1,7 +1,7 @@
 +++
 title = "Enable C Extension for gensim on Windows"
 date = 2017-06-10T14:43:00+08:00
-lastmod = 2025-08-10T18:44:05+08:00
+lastmod = 2026-06-26T19:06:22+08:00
 categories = ["Programming"]
 draft = false
 author = "KK"
@@ -17,7 +17,7 @@ When using gensim, it shows this warning message:
 
 `C extension not loaded for Word2Vec, training will be slow.`
 
-I search this on Internet and found that gensim has rewrite some part of the code using `cython` rather than `numpy` to get better performance. A compiler is required to enable this feature.
+I searched this from Internet and found that gensim has rewrite some part of the code using `cython` rather than `numpy` to get better performance. A compiler is required to enable this feature.
 
 I tried to install mingw and add it into the path, but it's not working.
 

@@ -1,7 +1,7 @@
 +++
 title = "Using Chinese Characters in Matplotlib"
 date = 2018-10-04T15:53:00+08:00
-lastmod = 2025-08-10T18:44:05+08:00
+lastmod = 2026-06-26T19:06:18+08:00
 tags = ["Matplotlib"]
 categories = ["Programming"]
 draft = false
@@ -12,7 +12,7 @@ nopaging = true
 noread = true
 +++
 
-After searching from Google, here is easiest solution. This should also works on other languages:
+After searching from Google, here is the easiest solution. This should also works on other languages:
 
 ```python
 import matplotlib.pyplot as plt
