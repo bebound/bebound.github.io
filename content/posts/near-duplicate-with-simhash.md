@@ -1,7 +1,7 @@
 +++
 title = "Near-duplicate with SimHash"
 date = 2019-12-04T00:16:00+08:00
-lastmod = 2026-06-26T19:00:40+08:00
+lastmod = 2026-06-26T19:03:15+08:00
 tags = ["Machine Learning", "SimHash"]
 categories = ["Machine-Learning"]
 draft = false
@@ -71,12 +71,7 @@ There are many ways to generate features from document. The easiest way to gener
 
 You may also use a window to get sub-string from document. For each sub-string, using the hash value of string as features, and the count of this string as weight.
 
-For example, if we has this sentence: `kk really rocks!`.
-
-First, pre-processing this sentence to `kkreallyrocks`.
-
-Then using a window of 4 to generate sub-string from the sentence. We'll get the sub-string and their count: `(kkre, 1), (krea, 1)`, `(real, 1)` etc.
-
+For example, if we has this sentence: `kk really rocks!`. First, pre-processing this sentence to `kkreallyrocks`. Then using a window of 4 to generate sub-string from the sentence. We'll get the sub-string and their count: `(kkre, 1), (krea, 1)`, `(real, 1)` etc.
 Suppose we only get these first 3 sub-string and their hash values are `1001`, `0101` and `1101` respectively. Then the final \\(V\\) should be `1101`
 
 Here is an example of using the words, word number and longest work length as features.
