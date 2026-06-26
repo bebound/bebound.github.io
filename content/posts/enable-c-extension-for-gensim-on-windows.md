@@ -1,7 +1,6 @@
 +++
 title = "Enable C Extension for gensim on Windows"
 date = 2017-06-10T14:43:00+08:00
-lastmod = 2026-06-26T19:06:22+08:00
 categories = ["Programming"]
 draft = false
 author = "KK"
