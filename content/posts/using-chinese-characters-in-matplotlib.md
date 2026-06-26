@@ -1,7 +1,6 @@
 +++
 title = "Using Chinese Characters in Matplotlib"
 date = 2018-10-04T15:53:00+08:00
-lastmod = 2026-06-26T19:06:18+08:00
 tags = ["Matplotlib"]
 categories = ["Programming"]
 draft = false
