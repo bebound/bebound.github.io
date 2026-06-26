@@ -1,7 +1,7 @@
 +++
 title = "Near-duplicate with SimHash"
 date = 2019-12-04T00:16:00+08:00
-lastmod = 2026-04-17T17:11:11+08:00
+lastmod = 2026-06-26T19:00:40+08:00
 tags = ["Machine Learning", "SimHash"]
 categories = ["Machine-Learning"]
 draft = false
@@ -67,7 +67,9 @@ The calculation of **SimHash** is quiet simple. Given a set of features extracte
 
 ### How to generate features from document {#how-to-generate-features-from-document}
 
-One easy way to do this is to use a window to get sub-string from document. For each sub-string, using the hash value of string as features, and the count of this string as weight.
+There are many ways to generate features from document. The easiest way to generate feature is to use words in the document. You can also use phrases or n-grams as features.
+
+You may also use a window to get sub-string from document. For each sub-string, using the hash value of string as features, and the count of this string as weight.
 
 For example, if we has this sentence: `kk really rocks!`.
 
@@ -76,6 +78,8 @@ First, pre-processing this sentence to `kkreallyrocks`.
 Then using a window of 4 to generate sub-string from the sentence. We'll get the sub-string and their count: `(kkre, 1), (krea, 1)`, `(real, 1)` etc.
 
 Suppose we only get these first 3 sub-string and their hash values are `1001`, `0101` and `1101` respectively. Then the final \\(V\\) should be `1101`
+
+Here is an example of using the words, word number and longest work length as features.
 
 {{< figure src="/images/simhash.png" width="500" >}}
 
@@ -109,7 +113,7 @@ You need to replace the `user id`, `url`, `timestamp` and other known variables 
 
 ### Add custom features in Text {#add-custom-features-in-text}
 
-For example, you can add `has user id`, `has url` as features. You can also use placeholders' index and counts as features. For example, `has 2 user id` or `time index is 2` as features. Then you can give these features higher weight to make sure the log generate by same template will have close hash value.
+For example, you can add `has user id`, `has url` as features. You can also use placeholders' index and counts as features. For example, `has 2 user id` or `time index is 2` as features. In addition, you should assign high weights for these features to make sure the log generate by same template will have close hash value.
 
 
 ### Use average hash value as template's hash value {#use-average-hash-value-as-template-s-hash-value}
