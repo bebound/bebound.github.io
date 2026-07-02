@@ -1,7 +1,6 @@
 +++
 title = "Improve Git Speed in WSL"
 date = 2023-12-26T11:16:00+08:00
-lastmod = 2026-07-02T16:02:42+08:00
 tags = ["Git"]
 categories = ["Misc"]
 draft = false
