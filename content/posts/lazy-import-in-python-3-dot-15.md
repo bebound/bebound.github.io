@@ -1,7 +1,7 @@
 +++
 title = "Lazy Import in Python 3.15"
 date = 2026-06-26T21:49:00+08:00
-lastmod = 2026-07-02T16:05:24+08:00
+lastmod = 2026-07-02T16:11:52+08:00
 tags = ["Python"]
 categories = ["Programming"]
 draft = false
@@ -29,7 +29,7 @@ p = Path(".")  # pathlib loads here
 
 The syntax is pertty easy, just add the `lazy` keyword before `import` or `from`. After this, the module will be loaded when it's first used. But you can't use `lazy` in star import or `future` import. For example, `lazy from module import *` and `from __future__ import xxx` are not allowed.
 
-Please note that the lazy import only works in module level, so you can't use it inside function.
+Please note that the lazy import only works in module level, so you can't use it inside function, class body or try/except/finally block.
 
 
 ## How to enable lazy import globally {#how-to-enable-lazy-import-globally}
