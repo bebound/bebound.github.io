@@ -1,7 +1,6 @@
 +++
 title = "Modern Pip Build Process (–use-pep517)"
 date = 2024-11-24T20:49:00+08:00
-lastmod = 2026-07-02T16:05:50+08:00
 tags = ["Python", "pip"]
 categories = ["Programming"]
 draft = false
