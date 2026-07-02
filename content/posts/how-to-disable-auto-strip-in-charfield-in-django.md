@@ -1,7 +1,6 @@
 +++
 title = "How to Disable Auto Strip in Charfield in Django"
 date = 2021-12-19T21:20:00+08:00
-lastmod = 2026-07-02T16:03:51+08:00
 tags = ["Python", "Django"]
 categories = ["Programming"]
 draft = false
