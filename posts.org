@@ -1911,7 +1911,7 @@ class ProductSerializer(serializers.ModelSerializer):
 3. [[https://www.geeksforgeeks.org/jsonfield-in-serializers-django-rest-framework/][JSONField in serializers – Django REST Framework]]
 4. [[https://www.django-rest-framework.org/api-guide/fields/#jsonfield][Django REST framework - jsonfield]]
 
-*** DONE How to disable auto strip in Charfield in Django          :Django:
+*** DONE How to Disable Auto Strip in Charfield in Django          :Django:
 CLOSED: [2021-12-19 Mon 21:20]
    :PROPERTIES:
    :EXPORT_FILE_NAME: how-to-disable-auto-strip-in-charfield-in-django
@@ -2116,7 +2116,7 @@ Note that is not correct to rely on the garbage collector to destroy the pool as
 **** The Bug is Fixed in Python 3.8
 In python 3.8.6, the script exits normally and the total execution time also decreases without calling ~close()~. I found this issue is fixed in Python bug tracker: [[https://bugs.python.org/issue34172][multiprocessing.Pool and ThreadPool leak resources after being deleted]].
 
-*** DONE Python 3.11 changes
+*** DONE Python 3.11 Changes
 CLOSED: [2023-12-10 Sun 15:24]
    :PROPERTIES:
    :EXPORT_FILE_NAME: python-3-dot-11-changes
@@ -2449,7 +2449,7 @@ The doc also does not explain why `/opt/homebrew/lib/python3.12/site-packages` i
 - [[https://docs.python.org/3/library/sys_path_init.html][The initialization of the sys.path module search path]]
 - [[https://docs.python.org/3/library/sys_path_init.html#pth-files][_pth files]]
 
-*** DONE Modern pip build process (--use-pep517)                      :pip:
+*** DONE Modern Pip Build Process (--use-pep517)                      :pip:
 CLOSED: [2024-11-24 Sun 20:49]
    :PROPERTIES:
    :EXPORT_FILE_NAME: modern-pip-build-process-use-pep517
@@ -2613,7 +2613,7 @@ If a normal package and the pkgutil style namespace package are installed, if th
 
 In conclusion, if you want to use namespace package, then use the native styles and make sure each subpackages are packaged correctly. Otherwise, you may encounter some module not found error.
 
-*** DONE lazy import in Python 3.15
+*** DONE Lazy Import in Python 3.15
 CLOSED: [2026-06-26 Fri 21:49]
    :PROPERTIES:
    :EXPORT_FILE_NAME: lazy-import-in-python-3-dot-15
@@ -3676,7 +3676,7 @@ PS: [[https://github.com/casouri/valign][valign]] provides visual alignment for 
 1. [[https://develop.spacemacs.org/layers/+intl/chinese/README.html][Spacemacs - Chinese Layer]]
 2. [[https://blindwith.science/2019/07/443.html/][Emacs 中文环境配置]]
 
-*** DONE How to copy files temporarily in Dockerfile           :dockerfile:
+*** DONE How to Copy Files Temporarily in Dockerfile           :dockerfile:
 CLOSED: [2023-08-24 Thu 11:49]
    :PROPERTIES:
    :EXPORT_FILE_NAME: how-to-copy-files-temporarily-in-dockerfile
@@ -3778,7 +3778,7 @@ If you change the =.gitattributes= file, you need to run the following command t
 - [[https://github.com/Azure/azure-cli/pull/27137][{CI} Enforce LF-only line endings in git #27137 · Azure/azure-cli (github.com)]]
 - [[https://git-scm.com/docs/git-add#Documentation/git-add.txt---renormalize][Git - git-add Documentation --renormalize]]
 
-*** DONE Improve Git speed in WSL                                     :Git:
+*** DONE Improve Git Speed in WSL                                     :Git:
 CLOSED: [2023-12-26 Tue 11:16]
    :PROPERTIES:
    :EXPORT_FILE_NAME: speed-up-git-speed-in-wsl

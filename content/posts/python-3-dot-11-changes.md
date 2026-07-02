@@ -1,7 +1,7 @@
 +++
-title = "Python 3.11 changes"
+title = "Python 3.11 Changes"
 date = 2023-12-10T15:24:00+08:00
-lastmod = 2025-08-10T18:44:05+08:00
+lastmod = 2026-07-02T16:03:10+08:00
 tags = ["Python"]
 categories = ["Programming"]
 draft = false
