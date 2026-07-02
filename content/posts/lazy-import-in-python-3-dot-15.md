@@ -1,7 +1,6 @@
 +++
 title = "Lazy Import in Python 3.15"
 date = 2026-06-26T21:49:00+08:00
-lastmod = 2026-07-02T16:11:52+08:00
 tags = ["Python"]
 categories = ["Programming"]
 draft = false
