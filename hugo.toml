@@ -4,7 +4,7 @@
 
 baseURL="Https://fromkk.com"
 defaultContentLanguage = "en"
-languageCode = "en"
+locale = "en"
 languageName = "English"
 hasCJKLanguage = true
 
