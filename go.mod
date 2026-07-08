@@ -2,4 +2,6 @@ module github.com/bebound/bebound.github.io
 
 go 1.20
 
-require github.com/dillonzq/LoveIt v0.3.1 // indirect
+require (
+	github.com/hugo-fixit/FixIt v0.4.5 // indirect
+)
