@@ -8,14 +8,17 @@ It's getting hot in summer, the hard disks in my QNAP NAS are overheating. Since
 
 First, install the 8528 kernel module to get the fan speed information. In Linux, you can install the `lm-sensors` package to get the CPU and HDD temperature. You can run `sensors` command to see the temperature. However, the fan speed information is not shown. As the QNAP uses a ITE8528 embedded controller to control the fan speed, the `lm-sensors` package does not support it.
 
-\##### Install with DKMS
+
+### Option 1: Install with DKMS {#option-1-install-with-dkms}
 
 [qnap8528](https://github.com/0xgiddi/qnap8528) provides a kernel module to support this controller. It contains the instruction to install with DKMS and [autoload module on startup with systemd](https://github.com/0xgiddi/qnap8528#autoload-module-on-startup-with-systemd). Don't forget to install the pre-requisite packages: `apt install build-essential pve-headers dkms`. You may need to install `proxmox-headers-$(uname -r)` if the kernel is not the latest version.
 
 This methods automatically rebuild the kernel module when the kernel is updated.
 
-\##### Build module in Docker
-Gzxiexl created a [a more conventient script](https://github.com/gzxiexl/qnap8528) to build, install and automatically load the kernel module. This script does not support PVE 9 currently, but I've created a [PR](https://github.com/gzxiexl/qnap8528/pull/1). Before it's merged, you need to install the kernel headers with `apt install proxmox-headers-$(uname -r)` and edit the `Dockerfile` to use `debian:13` as base image. Then you can run the `sudo build.sh`.
+
+### Option 2: Build module in Docker {#option-2-build-module-in-docker}
+
+Gzxiexl created [a more conventient script](https://github.com/gzxiexl/qnap8528) to build, install and automatically load the kernel module. This script does not support PVE 9 currently, but I've created a [PR](https://github.com/gzxiexl/qnap8528/pull/1). Before it's merged, you need to install the kernel headers with `apt install proxmox-headers-$(uname -r)` and edit the `Dockerfile` to use `debian:13` as base image. Then you can run the `sudo build.sh`.
 
 This methods is more convenient, but you need to rebuild the kernel module when the kernel is updated.
 
