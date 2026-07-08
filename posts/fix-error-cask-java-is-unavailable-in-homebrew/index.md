@@ -1,0 +1,15 @@
+# Fix Error: Cask 'Java' Is Unavailable in Homebrew
+
+
+After update brew to latest version, when calling `cask` related command, it always outputs `Error: Cask 'java' is unavailable: No Cask with this name exists.`, such as `brew list --cask`. However, the `brew` command works.
+
+After doing some research, I found [Java has been moved to homebrew/core](https://github.com/Homebrew/homebrew-cask/pull/72284). This makes sense now. I installed java by cask, but it's not available now and cask throw this error. If I uninstall java from cask, the error should disappear.
+
+This is not easy as cask is broken. Finally, I found this issue: [brew cask upgrade fails with "No Cask with this name exists"](https://github.com/Homebrew/homebrew-cask/issues/72562). After running `rm -rf "$(brew --prefix)/Caskroom/java`, cask is back.
+
+
+---
+
+> Author: KK  
+> URL: https://fromkk.com/posts/fix-error-cask-java-is-unavailable-in-homebrew/  
+
