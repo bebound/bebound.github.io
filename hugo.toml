@@ -137,7 +137,7 @@ identifier = "github"
 pre = ""
 post = ""
 name = "GitHub"
-url = "https://github.com/bebound/bebound.github.io"
+url = "https://github.com/bebound/"
 title = "GitHub"
 weight = 5
 
@@ -954,145 +954,12 @@ Trello = false
 Mix = false
 
 # Comment config
-[params.comment]
-enable = false
+[params.page.comment]
+enable = true
 
-# Artalk comment config (https://artalk.js.org/)
-[params.comment.artalk]
-enable = false
-server = "https://yourdomain"
-site = "默认站点"
-# prefer remote (backend) configuration over local
-# If true, remote config takes priority; if false (default), local config overrides remote
-prefer_remote_conf = false
-placeholder = ""
-no_comment = ""
-send_btn = ""
-editor_travel = true
-flat_mode = "auto"
-# enable lightgallery support
-lightgallery = false
-locale = ""
-emoticons = ""
-nest_max = 2
-nest_sort = "DATE_ASC" # ["DATE_ASC", "DATE_DESC", "VOTE_UP_DESC"]
-vote = true
-vote_down = false
-ua_badge = true
-list_sort = true
-list_unread_highlight = false
-img_upload = true
-img_lazy_load = false # false | "native" | "data-src"
-preview = true
-version_check = true
-# request timeout in milliseconds
-req_timeout = 15000
-# page view increment on comment list load
-pv_add = true
-
-# pagination config
-[params.comment.artalk.pagination]
-page_size = 20
-read_more = true
-auto_load = true
-
-# height limit config
-[params.comment.artalk.height_limit]
-content = 300
-children = 400
-scrollable = false
-
-# Disqus comment config (https://disqus.com)
-[params.comment.disqus]
-enable = false
-# Disqus shortname to use Disqus in posts
-shortname = ""
-
-# Gitalk comment config (https://github.com/gitalk/gitalk)
-[params.comment.gitalk]
-enable = false
-owner = ""
-repo = ""
-client_id = ""
-client_secret = ""
-
-# Valine comment config (https://github.com/xCss/Valine)
-[params.comment.valine]
-enable = false
-app_id = ""
-app_key = ""
-placeholder = ""
-avatar = "mp"
-meta = [
-  'nick',
-  'mail',
-  'link'
-]
-required_fields = []
-page_size = 10
-lang = ""
-visitor = true
-record_ip = true
-highlight = true
-enable_qq = false
-server_urls = ""
-# emoji data file name, default is "google.yml"
-# ["apple.yml", "google.yml", "facebook.yml", "twitter.yml"]
-# located in "themes/FixIt/assets/lib/valine/emoji/" directory
-# you can store your own data files in the same path under your project:
-# "assets/lib/valine/emoji/"
-emoji = ""
-comment_count = true
-
-# Waline comment config (https://waline.js.org)
-[params.comment.waline]
-enable = false
-server_url = ""
-pageview = false
-emoji = [ "//unpkg.com/@waline/emojis@1.1.0/weibo" ]
-meta = [
-  "nick",
-  "mail",
-  "link"
-]
-required_meta = []
-login = "enable"
-word_limit = 0
-page_size = 10
-image_uploader = false
-highlighter = false
-comment = false
-tex_renderer = false
-search = false
-recaptcha_v3_key = ""
-turnstile_key = ""
-reaction = false
-
-# Facebook comment config (https://developers.facebook.com/docs/plugins/comments)
-[params.comment.facebook]
-enable = false
-width = "100%"
-num_posts = 10
-app_id = ""
-language_code = ""
-
-# Telegram comments config (https://comments.app)
-[params.comment.telegram]
-enable = false
-site_id = ""
-limit = 5
-height = ""
-color = ""
-colorful = true
-dislikes = false
-outlined = false
-
-# Commento comment config (https://commento.io)
-[params.comment.commento]
-enable = false
 
 # Utterances comment config (https://utteranc.es)
-[params.comment.utterances]
+[params.page.comment.utterances]
 enable = true
 # owner/repo
 repo = "bebound/bebound.github.io"
@@ -1100,40 +967,6 @@ issueTerm = "pathname"
 label = "utterances"
 lightTheme = "github-light"
 darkTheme = "github-dark"
-
-# Twikoo comment config (https://twikoo.js.org/)
-[params.comment.twikoo]
-enable = false
-env_id = ""
-region = ""
-path = ""
-visitor = true
-comment_count = true
-lang = ""
-# enable lightgallery support
-lightgallery = false
-# enable Katex support
-katex = false
-
-# Giscus comments config
-[params.comment.giscus]
-enable = false
-repo = ""
-repo_id = ""
-category = ""
-category_id = ""
-mapping = ""
-# Or set it to your self-hosted domain
-origin = "https://giscus.app"
-strict = "0"
-term = ""
-reactions_enabled = "1"
-emit_metadata = "0"
-input_position = "bottom" # ["top", "bottom"]
-lang = ""
-light_theme = "light"
-dark_theme = "dark"
-lazy_load = true
 
 # Third-party library config
 [params.library]
