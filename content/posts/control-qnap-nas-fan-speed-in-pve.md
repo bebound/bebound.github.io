@@ -1,7 +1,7 @@
 +++
 title = "Control QNAP NAS Fan Speed in PVE"
 date = 2026-07-07T21:16:00+08:00
-lastmod = 2026-07-07T21:46:50+08:00
+lastmod = 2026-07-08T13:07:24+08:00
 tags = ["NAS"]
 categories = ["Misc"]
 draft = false
@@ -15,7 +15,7 @@ noread = true
 It's getting hot in summer, the hard disks in my QNAP NAS are overheating. Since I'm using PVE, I can't control the fan speed. Luckily, somebody has already solved this problem. Here is the guide.
 
 
-## Installing the 8528 Kernel Module {#installing-the-8528-kernel-module}
+## Install the 8528 Kernel Module {#install-the-8528-kernel-module}
 
 First, install the 8528 kernel module to get the fan speed information. In Linux, you can install the `lm-sensors` package to get the CPU and HDD temperature. You can run `sensors` command to see the temperature. However, the fan speed information is not shown. As the QNAP uses a ITE8528 embedded controller to control the fan speed, the `lm-sensors` package does not support it. [qnap8528](https://github.com/0xgiddi/qnap8528) provides a kernel module to support this controller. Gzxiexl created a [a more conventient script](https://github.com/gzxiexl/qnap8528) to build, install and automatically load the kernel module. This script does not support PVE 9 currently, but I've created a [PR](https://github.com/gzxiexl/qnap8528/pull/1). Before it's merged, you need to install the kernel headers with `apt install proxmox-headers-$(uname -r)` and edit the `Dockerfile` to use `debian:13` as base image. Then you can run the `sudo build.sh`.
 

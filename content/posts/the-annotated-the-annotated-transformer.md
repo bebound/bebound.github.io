@@ -1,7 +1,7 @@
 +++
 title = "The Annotated The Annotated Transformer"
 date = 2019-09-01T16:00:00+08:00
-lastmod = 2025-08-10T18:44:05+08:00
+lastmod = 2026-07-08T14:39:27+08:00
 tags = ["Machine Learning", "Transformer"]
 categories = ["Machine-Learning"]
 draft = false
@@ -34,10 +34,10 @@ The transformer model does not contains recurrence and convolution. In order to 
 
 PE will generate a 512 dimension vector for each position:
 
-\\[\begin{align\*}
+\\[ \begin{aligned}
     PE\_{(pos,2i)} = sin(pos / 10000^{2i/d\_{model}}) \\\\
     PE\_{(pos,2i+1)} = cos(pos / 10000^{2i/d\_{model}})
-\end{align\*}\\]
+\end{aligned} \\]
 The even and odd dimension use `sin` and `cos` function respectively.
 
 For example, the second word's PE should be: \\(sin(2 / 10000^{0 / 512}), cos(2 / 10000^{0 / 512}), sin(2 / 10000^{2 / 512}), cos(2 / 10000^{2 / 512})\text{...}\\)

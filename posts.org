@@ -676,10 +676,10 @@ The transformer model does not contains recurrence and convolution. In order to 
 
 PE will generate a 512 dimension vector for each position:
 
-$$\begin{align*}
+$$ \begin{aligned}
     PE_{(pos,2i)} = sin(pos / 10000^{2i/d_{model}}) \\
     PE_{(pos,2i+1)} = cos(pos / 10000^{2i/d_{model}})
-\end{align*}$$
+\end{aligned} $$
 The even and odd dimension use =sin= and =cos= function respectively.
 
 For example, the second word's PE should be: $sin(2 / 10000^{0 / 512}), cos(2 / 10000^{0 / 512}), sin(2 / 10000^{2 / 512}), cos(2 / 10000^{2 / 512})\text{...}$
@@ -3992,7 +3992,7 @@ CLOSED: [2026-07-07 Tue 21:16]
 
 It's getting hot in summer, the hard disks in my QNAP NAS are overheating. Since I'm using PVE, I can't control the fan speed. Luckily, somebody has already solved this problem. Here is the guide.
 
-**** Installing the 8528 Kernel Module
+**** Install the 8528 Kernel Module
 First, install the 8528 kernel module to get the fan speed information. In Linux, you can install the ~lm-sensors~ package to get the CPU and HDD temperature. You can run ~sensors~ command to see the temperature. However, the fan speed information is not shown. As the QNAP uses a ITE8528 embedded controller to control the fan speed, the ~lm-sensors~ package does not support it. [[https://github.com/0xgiddi/qnap8528][qnap8528]] provides a kernel module to support this controller. Gzxiexl created a [[https://github.com/gzxiexl/qnap8528][a more conventient script]] to build, install and automatically load the kernel module. This script does not support PVE 9 currently, but I've created a [[https://github.com/gzxiexl/qnap8528/pull/1][PR]]. Before it's merged, you need to install the kernel headers with ~apt install proxmox-headers-$(uname -r)~ and edit the ~Dockerfile~ to use ~debian:13~ as base image. Then you can run the ~sudo build.sh~.
 
 After install the kernel module, the fan speed and NAS temperature appear in the ~sensors~ output.
