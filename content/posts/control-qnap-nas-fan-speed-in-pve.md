@@ -1,7 +1,6 @@
 +++
 title = "Control QNAP NAS Fan Speed in PVE"
 date = 2026-07-07T21:16:00+08:00
-lastmod = 2026-07-08T16:57:11+08:00
 tags = ["NAS"]
 categories = ["Misc"]
 draft = false
