@@ -1469,11 +1469,11 @@ logo_url = ""
 
 # Analytics config
 [params.analytics]
-enable = false
+enable = true
 
 # Google Analytics
 [params.analytics.google]
-id = ""
+id = "G-L0BDGPWEMG"
 # whether to anonymize IP
 anonymize_ip = true
 
