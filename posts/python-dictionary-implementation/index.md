@@ -11,7 +11,7 @@
 
 ## Resizing {#resizing}
 
-When elements size is below 50000, the table size will increase by a factor of 4 based on used slots. Otherwise, it will increase by a factor of 2. The dictionary size is always \\(2^{n}\\).
+When elements size is below 50000, the table size will increase by a factor of 4 based on used slots. Otherwise, it will increase by a factor of 2. The dictionary size is always \(2^{n}\).
 
 | dict size | resize when elements in dict | new table size |
 |-----------|------------------------------|----------------|

@@ -20,11 +20,11 @@ If the word appears less than this value, it will be skipped
 
 ### sample {#sample}
 
-High frequency word like `the` is useless for training. `sample` is a threshold for deleting these higher-frequency words. The probability of keeping the word \\(w\_i\\) is:
+High frequency word like `the` is useless for training. `sample` is a threshold for deleting these higher-frequency words. The probability of keeping the word \(w_i\) is:
 
-\\[P(w\_i) = (\sqrt{\frac{z(\omega\_i)}{s}} + 1) \cdot \frac{s}{z(\omega\_i)}\\]
+\[P(w_i) = (\sqrt{\frac{z(\omega_i)}{s}} + 1) \cdot \frac{s}{z(\omega_i)}\]
 
-where \\(z(w\_i)\\) is the frequency of the word and \\(s\\) is the sample rate.
+where \(z(w_i)\) is the frequency of the word and \(s\) is the sample rate.
 
 This is the plot when `sample` is 1e-3.
 
@@ -39,11 +39,11 @@ But it would takes a lot of time to do this when we have billions of training sa
 
 So when dealing with word pair ('fox','quick'), we update quick's weight to output 1, and other 5 random words' weight to output 1.
 
-The probability of selecting word \\(\omega\_i\\) is \\(P(\omega\_i)\\):
+The probability of selecting word \(\omega_i\) is \(P(\omega_i)\):
 
-\\[P(\omega\_i)=\frac{{f(\omega\_i)}^{{3}/{4}}}{\sum\_{j=0}^{n}\left({f(\omega\_j)}^{{3}/{4}}\right)}\\]
+\[P(\omega_i)=\frac{{f(\omega_i)}^{{3}/{4}}}{\sum_{j=0}^{n}\left({f(\omega_j)}^{{3}/{4}}\right)}\]
 
-\\(f(\omega\_j)\\) is the frequency of word \\(\omega\_j\\).
+\(f(\omega_j)\) is the frequency of word \(\omega_j\).
 
 
 ## Ref {#ref}
