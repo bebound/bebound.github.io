@@ -796,7 +796,7 @@ CLOSED: [2019-12-04 Wed 00:16]
 Before talking about *SimHash*, let's review some other methods which can also identify duplication.
 
 
-**** Longest Common Subsequence(LCS)
+**** Longest Common Sub-sequence(LCS)
 This is the algorithm used by =diff= command. It is also *edit distance* with insertion and deletion as the only two edit operations.
 
 This works good for short strings. However, the algorithm's time complexity is $O(m*n)$, if two strings' lengths are $m$ and $n$ respectively. So it's not suitable for large corpus. Also, if two corpus consists of same paragraph but the order is not same. LCS treat them as different corpus, and that's not we expected.
@@ -833,15 +833,17 @@ It uses $k$ hashing functions to calculate the phrase hashes. Then for each hash
 
 Compare with Hashing, *MinHash* successfully reduce the time complexity and storage complexity to $O(1)$, an improvement over $O(m+n)$ and $O(n)$, where n is the phrase number, m is the phrase number to compare.
 
-**** SimHash 
+**** SimHash
 
 For a given document, how to find it's most similar document? If using *MinHash*, we need to travel the whole corpus. Is there any more effective method? *SimHash* comes to the rescue.
 
 For a set of input hashes, *SimHash* will generate a fingerprint(f-bits vector) for the input And the produced hashes has a property: similar input hashes generate similar fingerprint. So the dissimilarity of two documents can be calculated by the =XOR= of two fingerprint. In google's [[https://www2007.org/papers/paper215.pdf][Detecting Near-Duplicates for Web Crawling]] paper, they map 8B web-pages to 64 bits. If two bits differ less than *3* bits, then two web-pages are similar.
 
-The calculation of *SimHash* is quiet simple. Given a set of features extracted from the document and their weights, we'll maintain f-bits vector $V$, and initialize it to zero. Each feature will also hash to f-bit value $V_i$. Then each dimension of $V_i$ will multiply by it's weight $W_i$ and add this new value to $V$. If i-th bits if 1, then $V$ is incremented by the weight of that feature. Otherwise $V$ is decremented by the weight. When all features have been processed, $V$ contains positive and negative dimension. Mapping positive values to =1= and negative numbers to =0= to get the final hash value.
+The calculation of *SimHash* is quiet simple. Given a set of features extracted from the document and their weights, we'll maintain f-bits vector $V$, and initialize it to zero. Each feature will also hash to f-bit value $V_i$. Then each dimension of $V_i$ will multiply by it's weight $W_{i}$ and add this new value to $V$. If i-th bits if 1, then $V$ is incremented by the weight of that feature. Otherwise $V$ is decremented by the weight. When all features have been processed, $V$ contains positive and negative dimension. Mapping positive values to =1= and negative numbers to =0= to get the final hash value.
 
-$$V = zero\_or\_one(\sum{W_i*inc\_or\_dec(V_i)})$$
+
+$$V = zero\_or\_one(\sum{W_i \times inc\_or\_dec(V_i)})$$
+
 
 ***** How to generate features from document
 

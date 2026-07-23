@@ -22,34 +22,34 @@ Here is the structure of LSTM:
 
 The calculate procedure are:
 
-\\[\begin{aligned}
-f\_t&=\sigma(W\_f\cdot[h\_{t-1},x\_t]+b\_f)\\\\
-i\_t&=\sigma(W\_i\cdot[h\_{t-1},x\_t]+b\_i)\\\\
-o\_t&=\sigma(W\_o\cdot[h\_{t-1},x\_t]+b\_o)\\\\
-\tilde{C\_t}&=tanh(W\_C\cdot[h\_{t-1},x\_t]+b\_C)\\\\
-C\_t&=f\_t\ast C\_{t-1}+i\_t\ast \tilde{C\_t}\\\\
-h\_t&=o\_t \ast tanh(C\_t)
-\end{aligned}\\]
+\[\begin{aligned}
+f_t&=\sigma(W_f\cdot[h_{t-1},x_t]+b_f)\\
+i_t&=\sigma(W_i\cdot[h_{t-1},x_t]+b_i)\\
+o_t&=\sigma(W_o\cdot[h_{t-1},x_t]+b_o)\\
+\tilde{C_t}&=tanh(W_C\cdot[h_{t-1},x_t]+b_C)\\
+C_t&=f_t\ast C_{t-1}+i_t\ast \tilde{C_t}\\
+h_t&=o_t \ast tanh(C_t)
+\end{aligned}\]
 
-\\(f\_t\\),\\(i\_t\\),\\(o\_t\\) are forget gate, input gate and output gate respectively. \\(\tilde{C\_t}\\) is the new memory content. \\(C\_t\\) is cell state. \\(h\_t\\) is the output.
+\(f_t\),\(i_t\),\(o_t\) are forget gate, input gate and output gate respectively. \(\tilde{C_t}\) is the new memory content. \(C_t\) is cell state. \(h_t\) is the output.
 
-Use \\(f\_t\\) and \\(i\_t\\) to update \\(C\_t\\), use \\(o\_t\\) to decide which part of hidden state should be outputted.
+Use \(f_t\) and \(i_t\) to update \(C_t\), use \(o_t\) to decide which part of hidden state should be outputted.
 
 
 ## GRU {#gru}
 
 {{< figure src="/images/LSTM_GRU.png" class="image-size-s" >}}
 
-\\[\begin{aligned}
-z\_t&=\sigma(W\_z\cdot[h\_{t-1},x\_t])\\\\
-r\_t&=\sigma(W\_r\cdot[h\_{t-1},x\_t])\\\\
-\tilde{h\_t}&=tanh(W\cdot[r\_t \ast h\_{t-1},x\_t])\\\\
-h\_t&=(1-z\_t)\ast h\_{t-1}+z\_t \ast \tilde{h\_t}
-\end{aligned}\\]
+\[\begin{aligned}
+z_t&=\sigma(W_z\cdot[h_{t-1},x_t])\\
+r_t&=\sigma(W_r\cdot[h_{t-1},x_t])\\
+\tilde{h_t}&=tanh(W\cdot[r_t \ast h_{t-1},x_t])\\
+h_t&=(1-z_t)\ast h_{t-1}+z_t \ast \tilde{h_t}
+\end{aligned}\]
 
-\\(z\_t\\) is update gate, \\(r\_t\\) is reset gate, \\(\tilde{h\_t}\\) is candidate activation, \\(h\_t\\) is activation.
+\(z_t\) is update gate, \(r_t\) is reset gate, \(\tilde{h_t}\) is candidate activation, \(h_t\) is activation.
 
-Compare with LSTM, GRU merge cell state and hidden state to one hidden state, and use \\(z\_t\\) to decide how to update the state rather than \\(f\_t\\) and \\(i\_t\\).
+Compare with LSTM, GRU merge cell state and hidden state to one hidden state, and use \(z_t\) to decide how to update the state rather than \(f_t\) and \(i_t\).
 
 
 ## Ref {#ref}

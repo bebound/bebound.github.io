@@ -42,17 +42,17 @@ Here is a trained result:
 
     The vanilla DQN has the overestimate problem. As the `max` function will accumulate the noise when training. This leads to converging at suboptimal point. Two following architectures are submitted to solve this problem.
 
-\\[ Q(s, a) = r + \gamma \max\_{a'}[Q(s', a')] \\]
+\[ Q(s, a) = r + \gamma \max_{a'}[Q(s', a')] \]
 
 Double DQN was published two year later DQN. It has two value function, one is used to choose the action with max Q value, another one is used to calculate the Q value of this action.
 
-\\[ a^{max}(S'\_j, w) = \arg\max\_{a'}Q(\phi(S'\_j),a,w) \\]
+\[ a^{max}(S'_j, w) = \arg\max_{a'}Q(\phi(S'_j),a,w) \]
 
-\\[ Q(s,a) = r + \gamma Q'(\phi(S'\_j),a^{max}(S'\_j, w),w') \\]
+\[ Q(s,a) = r + \gamma Q'(\phi(S'_j),a^{max}(S'_j, w),w') \]
 
 Dueling DQN is another solution. It has two estimator, one estimates the score of current state, another estimates the action score.
 
-\\[Q(s, a) = r + \gamma( \max\_{a’}[A(s',a')+V(s')]\\]
+\[Q(s, a) = r + \gamma( \max_{a’}[A(s',a')+V(s')]\]
 
 In order to distinguish the score of the actions, the return the Q-value will minus the mean action score:
 
