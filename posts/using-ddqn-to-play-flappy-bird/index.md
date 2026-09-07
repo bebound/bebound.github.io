@@ -41,7 +41,7 @@ Double DQN was published two year later DQN. It has two value function, one is u
 
 Dueling DQN is another solution. It has two estimator, one estimates the score of current state, another estimates the action score.
 
-\[Q(s, a) = r + \gamma( \max_{a’}[A(s',a')+V(s')] )\]
+\[ Q(s, a) = r + \gamma( \max_{a'}[A(s',a')+V(s')]) \]
 
 In order to distinguish the score of the actions, the return the Q-value will minus the mean action score:
 
