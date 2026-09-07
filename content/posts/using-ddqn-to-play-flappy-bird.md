@@ -1,7 +1,6 @@
 +++
 title = "Using Dueling DQN to Play Flappy Bird"
 date = 2019-04-14T17:10:00+08:00
-lastmod = 2026-09-07T21:29:50+08:00
 tags = ["Machine Learning"]
 categories = ["Machine-Learning"]
 draft = false
@@ -32,7 +31,7 @@ After doing some research on the cartpole DNQ code, I managed to made a model to
 
 Here is the model architecture:
 
-{{< figure src="/images/ddqn_model.png" width="600" >}}
+{{< figure src="/images/ddqn_model.png" class="image-size-m" >}}
 
 Here is a trained result:
 
