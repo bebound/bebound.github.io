@@ -1,7 +1,7 @@
 +++
 title = "Near-duplicate with SimHash"
 date = 2019-12-04T00:16:00+08:00
-lastmod = 2026-06-26T19:03:15+08:00
+lastmod = 2026-09-18T16:10:02+08:00
 tags = ["Machine Learning", "SimHash"]
 categories = ["Machine-Learning"]
 draft = false
@@ -38,7 +38,7 @@ BoW drops the word context information. In order to take word context into consi
 
 Saving shingling result take k times disk space if using k words phrase. To solve this problem, save phrase's hashing value instead of string.
 
-{{< figure src="/images/simhash_hashing.png" width="600" >}}
+{{< figure src="/images/simhash_hashing.png" class="image-size-m" >}}
 
 
 ## MinHash {#minhash}
@@ -47,9 +47,9 @@ The larger the document is, the more the hashing needs to compare. Is there a wa
 
 It uses \(k\) hashing functions to calculate the phrase hashes. Then for each hashing function, using the minimal hashing result as signature. Finally, we get \(k\) hashing value as document's signature. The procedure is shown below.
 
-{{< figure src="/images/simhash_minhash1.png" width="600" >}}
+{{< figure src="/images/simhash_minhash1.png" class="image-size-m" >}}
 
-{{< figure src="/images/simhash_minhash2.png" width="600" >}}
+{{< figure src="/images/simhash_minhash2.png" class="image-size-m" >}}
 
 Compare with Hashing, **MinHash** successfully reduce the time complexity and storage complexity to \(O(1)\), an improvement over \(O(m+n)\) and \(O(n)\), where n is the phrase number, m is the phrase number to compare.
 
@@ -76,7 +76,7 @@ Suppose we only get these first 3 sub-string and their hash values are `1001`, `
 
 Here is an example of using the words, word number and longest work length as features.
 
-{{< figure src="/images/simhash.png" width="500" >}}
+{{< figure src="/images/simhash.png" class="image-size-m" >}}
 
 
 ### How to find similar document {#how-to-find-similar-document}
@@ -101,19 +101,26 @@ Depending on the fingerprints' bit and documents number, you need to find a opti
 As you can see, **SimHash** is designed for large corpus. If you want to use it for small corpus like logs, the generated hash value may be vary even if there is only two different user id in the log. How to make the generate hash value more stable? Here is my solution.
 
 
-### Clean the known variable {#clean-the-known-variable}
+### Clean the Known Variable {#clean-the-known-variable}
 
 You need to replace the `user id`, `url`, `timestamp` and other known variables with placeholders.
 
 
-### Add custom features in Text {#add-custom-features-in-text}
+### Add Custom Features in the Text {#add-custom-features-in-the-text}
 
 For example, you can add `has user id`, `has url` as features. You can also use placeholders' index and counts as features. For example, `has 2 user id` or `time index is 2` as features. In addition, you should assign high weights for these features to make sure the log generate by same template will have close hash value.
 
 
-### Use average hash value as template's hash value {#use-average-hash-value-as-template-s-hash-value}
+### Manage Clusters Center {#manage-clusters-center}
 
-As time goes, the log template may change. You can sample 10000 recent log for each type of log, then calculate the average hash value as the template's hash value. Then you can compare the new log's hash value with template's hash value to find the most similar template.
+The idea is similar to the K-means algorithm. When new log comes, we need to check its distance with all clusters' center. If the distance is less than a threshold, we add this log to the cluster and update the cluster's center. Otherwise, we create a new cluster with this log as center.
+
+As time goes, the cluster's center may drift away from the original template. We need to update the cluster's center gradually. Sometimes we may merge two clusters if they are close enough.
+
+
+### Search Original Log from ElasticSearch {#search-original-log-from-elasticsearch}
+
+To make it possible to find the original logs from the ElasticSearch, we need to save the original log in the cluster. Then we can generate a search query from the sample log and search the original log from ES.
 
 
 ## Ref {#ref}
