@@ -7,7 +7,7 @@ LPA is a simple, effective semi-supervised algorithm. It can use the density of 
 
 Here are the main stop of the algorithm:
 
-1.  Let $ (x_1,y1)...(x_l,y_l)$ be labeled data, $Y_L = \\{y_1...y_l\\} $ are the class labels. Let \((x_{l+1},y_{l+u})\) be unlabeled data where \(Y_U = \{y_{l+1}...y_{l+u}\}\) are unobserved, usually \(l \ll u\). Let \(X=\{x_1...x_{l+u}\}\) where \(x_i\in R^D\). The problem is to estimate \(Y_U\) for \(X\) and \(Y_L\).
+1.  Let \((x_1,y1)...(x_l,y_l)\) be labeled data, \(Y_L = \{y_1...y_l\}\) are the class labels. Let \((x_{l+1},y_{l+u})\) be unlabeled data where \(Y_U = \{y_{l+1}...y_{l+u}\}\) are unobserved, usually \(l \ll u\). Let \(X=\{x_1...x_{l+u}\}\) where \(x_i\in R^D\). The problem is to estimate \(Y_U\) for \(X\) and \(Y_L\).
 2.  Calculate the similarity of the data points. The most simple metric is Euclidean distance. Use a parameter \(\sigma\) to control the weights.
 
 \[w_{ij}= exp(-\frac{d^2_{ij}}{\sigma^2})=exp(-\frac{\sum^D_{d=1}{(x^d_i-x^d_j})^2}{\sigma^2})\]
