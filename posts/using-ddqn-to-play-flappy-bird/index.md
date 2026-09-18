@@ -21,7 +21,7 @@ After doing some research on the cartpole DNQ code, I managed to made a model to
 
 Here is the model architecture:
 
-{{< figure src="/images/ddqn_model.png" width="600" >}}
+{{< figure src="/images/ddqn_model.png" class="image-size-m" >}}
 
 Here is a trained result:
 

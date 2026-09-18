@@ -3,7 +3,7 @@
 
 Here is the main logic for jaeger agent and jaeger collector. (Based on [jaeger](https://github.com/jaegertracing/jaeger) 1.13.1)
 
-{{< figure src="/images/jaeger.svg" width="600" >}}
+{{< figure src="/images/jaeger.svg" class="image-size-m" >}}
 
 
 ## Jaeger Agent {#jaeger-agent}

@@ -8,7 +8,7 @@ It's easy to get small dataset from Elasticsearch by using `size` and `from`. Ho
 
 As we know it, Elasticsearch data is organised into indexes, which is a logical namespace, and the real data is stored into physical shards. Each shard is an instance of Lucene. There are two kind of shards, primary shards and replica shards. Replica shards is the copy of primary shards in case nodes or shards fail. By distributing documents in an index across multiple shards, and distributing those shards across multiple nodes, Elasticsearch can ensure redundancy and scalability. By default, Elasticsearch create **5** primary shards and one replica shard for each primary shards.
 
-{{< figure src="/images/elasticsearch_cluster.png" width="600" >}}
+{{< figure src="/images/elasticsearch_cluster.png" class="image-size-m" >}}
 
 How to decide which shard should the document be distributed? By default, `shard = hashCode(doc._id) % primary_shards_number`. To make this stable, the number of primary shards cannot be change the index has been created.
 
