@@ -34,6 +34,8 @@ Larger weight allow labels to travel through easier.
 2.  Row-normalize Y.
 3.  Reset labeled data's Y. Repeat 3 until Y converges.
 
+---
+
 In short, let the nearest label has larger weight, then calculate each label's new label, reset labeled data's label, repeat.
 
 {{< figure src="/images/label_spreading.png" class="image-size-s" >}}
