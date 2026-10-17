@@ -2967,12 +2967,14 @@ reverse_proxy  127.0.0.1:181
 #+end_src
 Voila, a HTTPS enabled website is deployed.
 
-**** Fever API and Mercury
+**** Fever API, FressRSS API and Mercury
 - Fever
   1. Check =Enable API: Allows accessing this account through the API= in preference
   2. Enter a new password for fever in =Plugins - Fever Emulation=
-- Mecury Fulltext Extraction
-  1. Check =mecury-fulltext= plugin in =Preference - Plugins=
+- FreshRSS
+  The FreshRSS API is the same as GReader API, which provides faster sync speed and the ability to edit subscription function compared with Fever API. You can enable it in =Plugins - freshapi=. Then you can use == as the endpoint. [[https://ttrss.henry.wang/#freshrss-google-reader-api][More details]].
+- Mercury Fulltext Extraction
+  1. Check =mercury-fulltext= plugin in =Preference - Plugins=
   2. Set Mercury Parser API address to =service.mercury:3000= in =Feeds - Mercury Fulltext settings=
 
 **** Update
@@ -2983,13 +2985,21 @@ docker-compose up -d
 #+end_src
 
 **** App recommendation
-[[https://reederapp.com][Reeder 4]] works great on my iPad. It's smooth and fast, and is worth every penny.
++[[https://reederapp.com][Reeder 4]] works great on my iPad. It's smooth and fast, and is worth every penny.+
 
 If you want a free app, I suggest [[http://cocoacake.net/apps/fiery/][Fiery Feeds]]. I stopped using it after ver 2.2, as it's so lagging. If this issue was fixed, I thought it was the biggest competitor for Reeder 4. For more alternative, read this article: [[https://thesweetsetup.com/apps/best-rss-app-ipad/][The Best RSS App for iPhone and iPad]].
+
+Since Reeder 5 has become Reeder Classic and is no longer being developed, [[https://www.goldenhillsoftware.com/unread/][Unread]] now becomes my favorite app. It support the GReader API, so you can use it with TTRSS. It's compatible with iOS, iPad and macOS.
+
+---
 
 - update 25-03-20:
 
 You can find the latest document [[https://ttrss.henry.wang][here]].
+
+- update 26-10-17:
+
+Add FreshRSS API and Unread app
 
 **** Ref
 1. [[https://henry.wang/2018/04/25/ttrss-docker-plugins-guide.html][A ttrss setup guide - Start your own RSS aggregator today]]
