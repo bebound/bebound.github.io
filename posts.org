@@ -41,6 +41,8 @@ $T_{ij}$ is the probability to jump from node $j$ to $i$. If there are $C$ class
 4. Row-normalize Y.
 5. Reset labeled data's Y. Repeat 3 until Y converges.
 
+---
+
 In short, let the nearest label has larger weight, then calculate each label's new label, reset labeled data's label, repeat.
 #+attr_html: :class image-size-s
 [[file:/images/label_spreading.png]]
@@ -1148,6 +1150,7 @@ If this output is not =-1=, then it's fine.
 from gensim.models import word2vec
 print(word2vec.FAST_VERSION)
 #+end_src
+
 *** DONE Using Chinese Characters in Matplotlib                :Matplotlib:
 CLOSED: [2018-10-04 Thu 15:53]
    :PROPERTIES:
@@ -1565,6 +1568,7 @@ If this is the same as you thought, you already know how python import works. Yo
 When Python imports a module for the first time, it create a new module object and set =sys.modules[module_name]=module object= , then executes execute in module object to define its content. If you import that module again, Python will just return the object save in =sys.modules=.
 
 In =X.py= line 5, Python add =Y= into =sys.modules= and start execute code in =Y.py=. In =Y.xy= line5, it pause import Y, add =X= into =sys.modules=, and execute code =X.py=. Back to =X.py= line5, Python find =Y= in =sys.modules= and try to import Y2 in Y. But =Y2= is not yet defined, so the ImportError was raised.
+
 **** How to fix
 - Change import order.
 - Wrap function call related to other module into =configure= function, call it manually.
@@ -1598,6 +1602,7 @@ When calling =build_vocab=, torchtext will add =<unk>= in vocabulary list. Set ~
                                                   format='tsv',
                                                   fields=[(None, None), ('input', INPUT), ('tag', TAG)])
 #+end_src
+
 **** Load single file
 #+begin_src python
   all_data = data.TabularDataset(path=base_dir / 'gossip_train_data.csv',
@@ -1605,12 +1610,14 @@ When calling =build_vocab=, torchtext will add =<unk>= in vocabulary list. Set ~
                                  fields=[('text', TEXT), ('category', CATEGORY)])
   train, val, test = all_data.split([0.7, 0.2, 0.1])
 #+end_src
+
 **** Create iterator
 #+begin_src python
 train_iter, val_iter, test_iter = data.BucketIterator.splits(
     (train, val, test), batch_sizes=(32, 256, 256), shuffle=True,
     sort_key=lambda x: x.input)
 #+end_src
+
 **** Load pretrained vector
 #+begin_src python
   vectors = Vectors(name='cc.zh.300.vec', cache='./')
@@ -1618,11 +1625,13 @@ train_iter, val_iter, test_iter = data.BucketIterator.splits(
   INPUT.build_vocab(train, vectors=vectors)
   TAG.build_vocab(train, val, test)
 #+end_src
+
 **** Check vocab sizes
 You can view vocab index by ~vocab.itos~.
 #+begin_src python
   tag_size = len(TAG.vocab)
 #+end_src
+
 **** Use field vector in model
 #+begin_src python
   vec = INPUT.vocab.vectors
@@ -1630,6 +1639,7 @@ You can view vocab index by ~vocab.itos~.
   class Model:
       nn.Embedding.from_pretrained(vec, freeze=False)
 #+end_src
+
 **** Convert text to vector
 #+begin_src python
   s = ' '.join(segmentize(s))
@@ -2391,6 +2401,7 @@ CLOSED: [2024-08-11 Sun 15:56]
    :EXPORT_FILE_NAME: sys-dot-path-in-python
    :END:
 Here is the process how ~sys.path~ is set in Python, with some parts omitted.
+
 **** Python Command Line Arguments
 By default, as initialized upon program startup, a potentially unsafe path is prepended to ~sys.path~:
 
@@ -2401,8 +2412,10 @@ By default, as initialized upon program startup, a potentially unsafe path is pr
 ~python -c~ and python (REPL): prepend an empty string, which means the current working directory.
 
 You can remove these path with ~-P~ param.
+
 **** ~PYTHONPATH~
 If this environment variable is set, the folders in it will be added to ~sys.path~. The folders are separated by colons on Unix and semicolons on Windows.
+
 **** ~prefix~ and ~exec_prefix~
 These two variable define the standard Python modules and extension modules. Python has a specific path to search depends on the OS. The start point is Python executable path, which is called ~home~ (the symbolic links are followed).
 
@@ -2425,7 +2438,6 @@ If a ~name.pth~ file exits in the ~site-packages~ folder, its content are additi
 The site module also tries to add ~USER_SITE~ folder into ~sys.path~. Default value is ~~/.local/lib/pythonX.Y/site-packages~ for UNIX and non-framework macOS builds, ~~/Library/Python/X.Y/lib/python/site-packages~ for macOS framework builds, and ~%APPDATA%\Python\PythonXY\site-packages~ on Windows.
 
 **** ~_pth~ file
-
 If there is a ~pythohn._pth~ or ~python314._pth~ in the same directory as Python executable, the isolated mode is enabled and ~site~ module is not imported. Isolated mode is the same as ~python3 -I~: the environment and registry variable are ignored, the ~site~ module is not imported and the [[https://docs.python.org/3/using/cmdline.html#cmdoption-P][unsafe path]] and [[https://docs.python.org/3/library/site.html#site.USER_SITE][USER_SITE]] are not added to ~sys.path~. After adding this file, only the path in the ~_pth~ file is added into ~sys.path~. This is a special use case for embedding Python. Here is the ~python314._pth~ file in embed Python 3.14:
 
 #+begin_src
@@ -2581,6 +2593,7 @@ Recently, there is a [[https://github.com/Azure/azure-cli/issues/31843#issuecomm
 
 **** What is Namespace Package
 If several packages share the same root folder, then the root folder is a namespace package. ~subpackageA~ and ~subpackageb~ can be installed separately, even in different Python path, but they can be imported as importing a single package: ~import root~.
+
 **** How to create namespace Package
 There are three ways to create namespace package in Python, you can find the details in [[https://packaging.python.org/en/latest/guides/packaging-namespace-packages/][Packaging namespace packages]].
 
@@ -2613,7 +2626,6 @@ After installation, the ~__init__.py~ is not kept in the root folder.
 If you forget to declare the namespace package in ~setup.py~, ~__init__.py~ is kept in the root folder, and the root folder become a normal package. You will get trouble if you install subpackages in different Python path.
 
 **** Difference between these three styles
-
 The main difference is whether there is a ~__init__.py~ in the root folder after installation. If there is, then it is a imported as regular package, otherwise it is a namespace package. ~pkgutil~ style will include a ~__init__.py~ in the root folder.
 
 Another difference is that if it's a namespace package, then if you change the ~sys.path~, the namespace package will be updated. If it's a regular package, then it will not be updated. For example, if you update the ~sys.path~ and there is new subpackage in the added path, the namespace package will be updated to include the new subpackages. But if it's a regular package, it will not be updated, and you will get ~ModuleNotFoundError~ when you try to import the new subpackages.
@@ -2621,7 +2633,6 @@ Another difference is that if it's a namespace package, then if you change the ~
 I encountered this issue in the development of Azure CLI. ~azure-cli~ and ~azure-cli-core~ still use the ~pkgutls~ style namespace package. After installing them in editable mode, the extensions' ~azure-xxxx~ dependency fails to load. Because there is a ~__init__.py~ in source code, and ~azure~ folder is treated as a regular package. The extension dependencies are added to the ~sys.path~ after ~azure~ is imported so the new ~azure=xxx~ package is ignored. (Maybe deleting ~azure~ from ~sys.moudule~ and importing again can fix this but I haven't tried this.)
 
 **** Mix use of different style namespace packages
-
 You should avoid mixing different style namespace packages, but if you're working with legacy code, you may encounter this situation. (It get even worse that some packages' packaging is wrong. For example, they forget to declare the namespace package in ~setup.py~ in pkg_resource-style namespace packages, then the root folder becomes a normal package.)
 
 Let's see the Python's import mechanism first:
@@ -2696,7 +2707,6 @@ sys.set_lazy_imports_filter(my_filter)
 #+end_src
 
 **** Compatibility with existing code
-
 For prior versions of Python, you can use ~PYTHONLAZYIMPORTS=all~ to enable lazy import for 3.15+. But if you only want to use lazy import for some modules, you can define the ~__lazy_modules__~ variable. When defined at module scope, any regular import statement in that module whose target module name appears in this container is treated as a lazy import, as if the lazy keyword had been used.
 
 #+begin_src python
@@ -2896,7 +2906,6 @@ Run this command to deploy: =docker-compose up -d=. After it finished, the TTRSS
 I made minor modification on the yml file, you can find the latest file [[https://github.com/HenryQW/Awesome-TTRSS][here]].
 
 **** Nginx Configuration
-
 If you have a domain and you can use Nginx as reverse proxy to redirect TTRSS to the domain.
 
 #+begin_src 
@@ -2959,7 +2968,6 @@ reverse_proxy  127.0.0.1:181
 Voila, a HTTPS enabled website is deployed.
 
 **** Fever API and Mercury
-
 - Fever
   1. Check =Enable API: Allows accessing this account through the API= in preference
   2. Enter a new password for fever in =Plugins - Fever Emulation=
@@ -2979,11 +2987,9 @@ docker-compose up -d
 
 If you want a free app, I suggest [[http://cocoacake.net/apps/fiery/][Fiery Feeds]]. I stopped using it after ver 2.2, as it's so lagging. If this issue was fixed, I thought it was the biggest competitor for Reeder 4. For more alternative, read this article: [[https://thesweetsetup.com/apps/best-rss-app-ipad/][The Best RSS App for iPhone and iPad]].
 
-
 - update 25-03-20:
 
 You can find the latest document [[https://ttrss.henry.wang][here]].
-
 
 **** Ref
 1. [[https://henry.wang/2018/04/25/ttrss-docker-plugins-guide.html][A ttrss setup guide - Start your own RSS aggregator today]]
@@ -3021,7 +3027,6 @@ Simple aggregation can be done by InfluxDB's continuous queries.
 
 ****** Overwrite Duplicated Points
 If you submit a new point with same measurements, tag set and timestamp, the new data will overwrite the old one.
-
 
 **** Preset Time Boundary
 InfluxDB is well documented, but the [[https://docs.influxdata.com/influxdb/v1.7/query_language/data_exploration/#basic-group-by-time-syntax][group by time]] section is not very clear. It says it will group data by ==preset time boundary=. But the example it use is too simple and doesn't explain it very well.
@@ -3172,7 +3177,6 @@ Although we only need 10 items, each shards has to return the first 10010 result
 As deep paging is costly, Elasticsearch has restrict =from+size= less than =index.max-result-window=, the default value is =10000=.
 
 **** Scroll
-
 The =search= method has to retrieve and sort the result over and over again, because it does not know how to continue the search from previous position.
 
 =scroll= is more efficient when retrieve large set of data.
@@ -3203,7 +3207,6 @@ POST /_search/scroll
 PS: In fact, when dealing the initial search request, =scoll= will cache all the matched documents' id, then get the =size= document content in batches for each following requests.
 
 ***** Slice
-
 It's also possible to split the scroll in multiple slices and consume them independently.
 
 #+begin_src 
@@ -3266,7 +3269,6 @@ from [[https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-rein
 
 
 **** Search After
-
 Scroll is not suitable for real-time user requests. After Elasticsearch 5, =Search After= API is added. It's similar to scroll but provides a live cursor. It uses the results from the previous page to retrieve the next page.
 
 To use search after, the query must be sorted, and the following query also contains =search_after=previous sort value=.
@@ -3315,6 +3317,7 @@ GET twitter/_search
 4. [[https://discuss.elastic.co/t/documentation-for-scroll-api-is-a-bit-confusing/185954][Documentation for scroll API is a bit confusing!]]
 5. [[https://www.elastic.co/guide/en/elasticsearch/reference/6.3/search-request-scroll.html][Request Body Search: Scroll]]
 6. [[https://qbox.io/blog/optimizing-elasticsearch-how-many-shards-per-index][Optimizing Elasticsearch: How Many Shards per Index?]]
+
 *** DONE Timezone in JVM                                       :Java:Scala:
 CLOSED: [2020-10-18 Sun 23:49]
    :PROPERTIES:
@@ -3472,6 +3475,8 @@ How to choose compression type? According to cloudflare's test result in [[https
 
 =Gzip= has best compression ratio but take lots of CPU time. =Snappy= keeps a balance between the CPU time and space. The new compression type =zstd= added in Kafka 2.1 produce larger compression ratio than =Snappy= with the cost of a little more CPU time.
 
+---
+
 These are common configurations, you can find more from the official document contains such as =max.in.flight.requests.per.connection=.
 
 **** Ref
@@ -3542,7 +3547,6 @@ With the help of =sc.requestExecutors=, we can create as many executors as we wa
 3. If there is backlog data, request more executors.
 
 **** Result
-
 After using manually allocation, the CPU usage grows a lot and reaches 40%. The cores used by Spark programs drop from 1700 to 800. Furthermore, the Spark program can scale automatically.
 
 [[/images/dymanic_cpu_before.png]]
@@ -3561,7 +3565,6 @@ I tried these methods, but none of them works.
 + Boot in [[https://support.apple.com/en-us/HT201262][safe mode]], delete account.
 + Delete record in ~ZACCOUNT~ table in ~~/Library/Accounts/Accounts4.sqlite~.
 + Delete related items in Keychain Access app.
-
 
 Later, =RedHatDude='s answer gives me a clue, it looks like a iCloud sync problem. I tried to delete the account on my 3 MacBooks together. Thank goodness! It does not show up again.
 
@@ -3664,6 +3667,7 @@ CLOSED: [2022-02-17 Thu 01:27]
    :PROPERTIES:
    :EXPORT_FILE_NAME: emacs-chinese-related-settings
    :END:
+
 **** Auto Switch Input Method in Evil
 This setting makes it possible to switch input method based on the context of cursor when entering insert mode.
 
@@ -3742,7 +3746,6 @@ The mounted folder are kept in the image, but the files are gone. Don't forget t
 **** ~--squash~ option in ~docker build~
 You can also use ~--squash~ to reduce image size.
 Once the build is complete, Docker creates a new image loading the diffs from each layer into a single new layer and references all the parent's layers. So the extra space created by ~COPY~ command can be freed by ~squash~.
-
 
 **** Ref
 1. [[https://docs.docker.com/develop/develop-images/dockerfile_best-practices/][Dockerfile best practice]]
@@ -3946,6 +3949,7 @@ I have one SSD and one HDD. The SSD is used for PVE and Synology, but I don't ha
 [[file:/images/qnap_recover.png]]
 
 However, when I choose load the OS, it reboot and back to the same screen. I guess it might be a compatibility issue. Reset OS may work. For me, I create a new disk for the QNAP VM an install the QNAP OS, then I pass-through the HDD to the QNAP VM. Then in the ~Storage and Snapshot~ app, under ~Storage-Disks/VJOBD~, on the right corner, click the ~More~ button and choose ~Recover~. I managed to recover the data in the HDD. After that, I can use the QNAP as usual.
+
 **** Synology OS vs QNAP OS
 After using Synology for a while, I found the Synology OS is more user-friendly than QNAP OS. The UI is more responsive and the applications are more polished. There are more community applications available for Synology, and the overall experience feels more integrated. The Synology OS is more optimized. For example, the Synology backend services uses much less CPU and RAM than QNAP. I will migrate all of my data to Synology in the future once I got a new HDD.
 
@@ -4013,7 +4017,6 @@ CLOSED: [2026-05-23 Sat 17:18]
 #+attr_html: :class image-size-l
 [[file:/images/椅子.jpg]]
 
-
 避雷商家：享坐就坐椅类直供。小红书上营销的挺好，可惜卖的就是翻新货。
 
 **** 最终结果
@@ -4036,7 +4039,6 @@ First, install the 8528 kernel module to get the fan speed information. In Linux
 [[https://github.com/0xgiddi/qnap8528][qnap8528]] provides a kernel module to support this controller. It contains the instruction to install with DKMS and [[https://github.com/0xgiddi/qnap8528#autoload-module-on-startup-with-systemd][autoload module on startup with systemd]]. Don't forget to install the pre-requisite packages: ~apt install build-essential pve-headers dkms~. You may need to install ~proxmox-headers-$(uname -r)~ if the kernel is not the latest version.
 
 This methods automatically rebuild the kernel module when the kernel is updated.
-
 
 ***** Option 2: Build module in Docker
 Gzxiexl created [[https://github.com/gzxiexl/qnap8528][a more conventient script]] to build, install and automatically load the kernel module. This script does not support PVE 9 currently, but I've created a [[https://github.com/gzxiexl/qnap8528/pull/1][PR]]. Before it's merged, you need to install the kernel headers with ~apt install proxmox-headers-$(uname -r)~ and edit the ~Dockerfile~ to use ~debian:13~ as base image. Then you can run the ~sudo build.sh~.
