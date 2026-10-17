@@ -1,6 +1,7 @@
 +++
 title = "Resources for Software Engineer Interview"
 date = 2026-10-17T20:30:00+08:00
+tags = ["Interview"]
 categories = ["Programming"]
 draft = false
 author = "KK"

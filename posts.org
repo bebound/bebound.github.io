@@ -1334,7 +1334,7 @@ from [[https://golang.org/pkg/os/#Exit][godoc]]
 5. [[https://golang.org/pkg/runtime/#Goexit][Golang Runtime]]
 6. [[https://tachingchen.com/tw/blog/go-defer-and-os-exit/][Go defer 遇上 os.Exit 時失效]]
 
-*** DONE Resources for Software Engineer Interview
+*** DONE Resources for Software Engineer Interview              :Interview:
 CLOSED: [2026-10-17 Sat 20:30]
    :PROPERTIES:
    :EXPORT_FILE_NAME: resources-for-software-engineer-interview
