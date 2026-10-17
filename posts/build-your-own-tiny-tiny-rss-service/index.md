@@ -132,13 +132,15 @@ reverse_proxy  127.0.0.1:181
 Voila, a HTTPS enabled website is deployed.
 
 
-## Fever API and Mercury {#fever-api-and-mercury}
+## Fever API, FressRSS API and Mercury {#fever-api-fressrss-api-and-mercury}
 
 -   Fever
     1.  Check `Enable API: Allows accessing this account through the API` in preference
     2.  Enter a new password for fever in `Plugins - Fever Emulation`
--   Mecury Fulltext Extraction
-    1.  Check `mecury-fulltext` plugin in `Preference - Plugins`
+-   FreshRSS
+    The FreshRSS API is the same as GReader API, which provides faster sync speed and the ability to edit subscription function compared with Fever API. You can enable it in `Plugins - freshapi`. Then you can use == as the endpoint. [More details](https://ttrss.henry.wang/#freshrss-google-reader-api).
+-   Mercury Fulltext Extraction
+    1.  Check `mercury-fulltext` plugin in `Preference - Plugins`
     2.  Set Mercury Parser API address to `service.mercury:3000` in `Feeds - Mercury Fulltext settings`
 
 
@@ -154,13 +156,21 @@ docker-compose up -d
 
 ## App recommendation {#app-recommendation}
 
-[Reeder 4](https://reederapp.com) works great on my iPad. It's smooth and fast, and is worth every penny.
+~~[Reeder 4](https://reederapp.com) works great on my iPad. It's smooth and fast, and is worth every penny.~~
 
 If you want a free app, I suggest [Fiery Feeds](http://cocoacake.net/apps/fiery/). I stopped using it after ver 2.2, as it's so lagging. If this issue was fixed, I thought it was the biggest competitor for Reeder 4. For more alternative, read this article: [The Best RSS App for iPhone and iPad](https://thesweetsetup.com/apps/best-rss-app-ipad/).
+
+Since Reeder 5 has become Reeder Classic and is no longer being developed, [Unread](https://www.goldenhillsoftware.com/unread/) now becomes my favorite app. It support the GReader API, so you can use it with TTRSS. It's compatible with iOS, iPad and macOS.
+
+---
 
 -   update 25-03-20:
 
 You can find the latest document [here](https://ttrss.henry.wang).
+
+-   update 26-10-17:
+
+Add FreshRSS API and Unread app
 
 
 ## Ref {#ref}

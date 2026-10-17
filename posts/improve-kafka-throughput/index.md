@@ -92,6 +92,8 @@ How to choose compression type? According to cloudflare's test result in [Squeez
 
 `Gzip` has best compression ratio but take lots of CPU time. `Snappy` keeps a balance between the CPU time and space. The new compression type `zstd` added in Kafka 2.1 produce larger compression ratio than `Snappy` with the cost of a little more CPU time.
 
+---
+
 These are common configurations, you can find more from the official document contains such as `max.in.flight.requests.per.connection`.
 
 
