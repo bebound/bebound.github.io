@@ -1354,6 +1354,12 @@ If you are applying for senior position, you need to prepare for system design p
 
 [[https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF][System Design Interview – An Insider's Guide]] and [[https://www.amazon.com/System-Design-Interview-Insiders-Guide/dp/1736049119][System Design Interview – An Insider's Guide: Volume 2]] contains more examples. [[https://www.youtube.com/@jordanhasnolife5163][Jordan has no life]] created a series of videos about the system design as well.
 
+**** Project Deep Dive
+The interviewer should also ask you about the projects you have listed on the resume. You need to prepare for this part as well. You should be able to stat the problem you are trying to resolve, the solutions and the outcome, or even the plan for the next step. You should also be able to answer why you choose that solution, what's the trade-off, is there any better solution, etc.
+
+**** Behavioral Questions
+The manager or director round focuses on the behavioral questions. There is no good resource for this part, the questions vary from company to company. Don't be nervous, just be yourself and be honest and positive. Some common questions are: why join this company, what's the most proud project you have, what if you disagree with others, how to arrange your work.
+
 **** SQL
 Some positions also require SQL knowledge. I believe [[https://leetcode.com/studyplan/top-sql-50/][LeetCode Top SQL 50]] is enough to prepare for SQL interview.
 
