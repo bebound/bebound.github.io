@@ -138,6 +138,7 @@ Voila, a HTTPS enabled website is deployed.
     1.  Check `Enable API: Allows accessing this account through the API` in preference
     2.  Enter a new password for fever in `Plugins - Fever Emulation`
 -   FreshRSS
+
     The FreshRSS API is the same as GReader API, which provides faster sync speed and the ability to edit subscription function compared with Fever API. You can enable it in `Plugins - freshapi`. Then you can use == as the endpoint. [More details](https://ttrss.henry.wang/#freshrss-google-reader-api).
 -   Mercury Fulltext Extraction
     1.  Check `mercury-fulltext` plugin in `Preference - Plugins`
