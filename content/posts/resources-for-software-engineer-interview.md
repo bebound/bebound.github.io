@@ -27,7 +27,7 @@ LeetCode still plays a important role in the interview process, both in online a
 
 If you are applying for senior position, you need to prepare for system design problem. [System Design in a Hurry](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction) is a good starting point. It shows the common [delivery framework](https://www.hellointerview.com/learn/system-design/in-a-hurry/delivery) to solve the problem and lots of [classic problems](https://www.hellointerview.com/learn/system-design/problem-breakdowns/bitly) to help you understand the framework.
 
-[System Design Interview – An Insider's Guide](https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF) and [System Design Interview – An Insider's Guide: Volume 2](https://www.amazon.com/System-Design-Interview-Insiders-Guide/dp/1736049119) contains more examples. [Jordan has no life](https://www.youtube.com/@jordanhasnolife5163) created a series of videos about the system design as well.
+[System Design Interview – An Insider's Guide](https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF) and [System Design Interview – An Insider's Guide: Volume 2](https://www.amazon.com/System-Design-Interview-Insiders-Guide/dp/1736049119) contains more examples. [Jordan has no life](https://www.youtube.com/@jordanhasnolife5163) created a series of videos about the system design as well. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-2nd-Maintainable/dp/B0H27BX5FH) is a classic book about system design. It covers the fundamental topics of system design, you should read it if you want to knows more besides passing the interview.
 
 
 ## Project Deep Dive {#project-deep-dive}
