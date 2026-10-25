@@ -17,7 +17,17 @@ LeetCode still plays a important role in the interview process, both in online a
 
 If you are applying for senior position, you need to prepare for system design problem. [System Design in a Hurry](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction) is a good starting point. It shows the common [delivery framework](https://www.hellointerview.com/learn/system-design/in-a-hurry/delivery) to solve the problem and lots of [classic problems](https://www.hellointerview.com/learn/system-design/problem-breakdowns/bitly) to help you understand the framework.
 
-[System Design Interview – An Insider's Guide](https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF) and [System Design Interview – An Insider's Guide: Volume 2](https://www.amazon.com/System-Design-Interview-Insiders-Guide/dp/1736049119) contains more examples. [Jordan has no life](https://www.youtube.com/@jordanhasnolife5163) created a series of videos about the system design as well.
+[System Design Interview – An Insider's Guide](https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF) and [System Design Interview – An Insider's Guide: Volume 2](https://www.amazon.com/System-Design-Interview-Insiders-Guide/dp/1736049119) contains more examples. [Jordan has no life](https://www.youtube.com/@jordanhasnolife5163) created a series of videos about the system design as well. [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-2nd-Maintainable/dp/B0H27BX5FH) is a classic book about system design. It covers the fundamental topics of system design, you should read it if you want to knows more besides passing the interview.
+
+
+## Project Deep Dive {#project-deep-dive}
+
+The interviewer should also ask you about the projects you have listed on the resume. You need to prepare for this part as well. You should be able to stat the problem you are trying to resolve, the solutions and the outcome, or even the plan for the next step. You should also be able to answer why you choose that solution, what's the trade-off, is there any better solution, etc.
+
+
+## Behavioral Questions {#behavioral-questions}
+
+The manager or director round focuses on the behavioral questions. There is no good resource for this part, the questions vary from company to company. Don't be nervous, just be yourself and be honest and positive. Some common questions are: why join this company, what's the most proud project you have, what if you disagree with others, how to arrange your work.
 
 
 ## SQL {#sql}
