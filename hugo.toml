@@ -1489,8 +1489,8 @@ id = ""
 
 # Umami Analytics
 [params.analytics.umami]
-data_website_id = ""
-src = ""
+data_website_id = "e58f6301-b5ee-4f93-9f50-014a2fb6f9ef"
+src = "https://uma.fromkk.com/stat.js"
 data_host_url = ""
 data_domains = ""
 
