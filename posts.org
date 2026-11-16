@@ -4109,3 +4109,51 @@ CLOSED: [2026-11-11 Wed 13:51]
 
 -----
 总的花费：验光80，镜框500，镜片960，原厂加工100。
+
+*** DONE Goodbye Google Analytics, Hello Umami                      :Umami:
+CLOSED: [2026-11-16 Mon 20:54]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: goodbye-google-analytics-hello-umami
+   :END:
+
+Recently, my open-source project [[https://github.com/bebound/AltGallery][AltGallery]] was recommended by a popular telegram channel [[https://t.me/iosrxwy][iOS宝藏]], and picked up lots of new stars on GitHub. I was glad to see it. Because of this, I also add a few things: a Chinese readme, [[https://altgallery.fromkk.com][AltGallery Web]] and Chinese translation. I was also curioushow many people actualy use it. GitHub Traffic only shows rough numbers like this; I wanted something more accurate.
+
+[[file:/images/umami_github.png]]
+
+My blog still runs on Google Analytics, and honestly, I don’t like it. It’s complicated and slow, and it can’t even filter out bot traffic.
+
+| [[file:/images/umami_google1.png]] | [[file:/images/umami_google2.png]] |
+
+After some research, I decided to switch to [[https://umami.is/][Umami]] to replace Google Analytics. Umami offers a [[https://umami.is/pricing][hobby plan]] that tracks 100k events for 1 website for free. You can also [[https://docs.umami.is/docs/guides/running-on-vercel][run it on Vercel]] to cover more websites and events. I have tried it, but the network speed is insanely slow. (Netlify is fast in my experience, you may want to try [[https://docs.umami.is/docs/guides/running-on-netlify][Netlify guide]] with a [[https://neon.com/][free Neon database]] instead.) So I decided to deploy it on my server. The setup is simple: run Umami and Postgres with docker-compose and you’re good to go.
+
+**** Umami usage
+To get started, log in to the dashboard and create a website, then copy the tracking code onto your site. Some ad blockers may block the tracking code, so you can use the [[https://docs.umami.is/docs/environment-variables#tracker_script_name][custom tracker script name]] to get around them. And now you should be able to see the traffic data in the dashboard. Here are some useful features of Umami:
+
+***** Track Event
+If you want to track some specific events, you can use the [[https://docs.umami.is/docs/track-events][track event]] function. The design is elegant: you can use the ~data-attributes~ or JavaScript code. Here’s how I track clicks on the Add altstore source button on AltGallery Web:
+#+begin_src html
+<a class="btn-mini"
+  data-umami-event="Add single source"
+  data-umami-event-app="HermesEnabler">Add
+</a>
+#+end_src
+This will track the event as ~Add single source~ with the property ~app=HermesEnabler~.
+
+***** Link Tracking
+Umami can also create a [[https://docs.umami.is/docs/links][tracking link]]. That’s handy when you want to track clicks on a link.
+
+***** Pixel Tracking
+[[https://docs.umami.is/docs/pixels][Pixel tracking]] is also supported in Umami. I wanted to use it to track traffic to the AltGallery repo, but GitHub doesn’t allow that.
+
+#+BEGIN_QUOTE
+To host your images, GitHub uses the open-source project Camo. Camo generates an anonymous URL proxy for each file which hides your browser details and related information from other users. On GitHub.com, the URL starts https://<subdomain>.githubusercontent.com/, with different subdomains depending on how you uploaded the image.
+
+-- https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-anonymized-urls
+#+END_QUOTE
+
+------
+
+PS: Umami is the third app which uses Postgres, alongside [[https://tt-rss.org/][Tiny Tiny RSS]] and [[https://linkwarden.app/][Linkwarden]]. Previously, They use two PG16 instances. I don't want to waste the resource to spin up a third. So I just use Claude to help me migrate the data to a new PG 18 instance, and update the docker compose file. It did a good job. I really couldn't imagine that AI can be so smart like this two years ago.
+
+**** Ref
+1. [[https://docs.umami.is/docs/environment-variables][Environment Variables - Umami Docs]]
