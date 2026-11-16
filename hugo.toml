@@ -13,7 +13,7 @@
 # website title
 title = "KK's Blog (fromkk)"
 # hostname (and path) to the root
-baseURL="Https://fromkk.com"
+baseURL="https://fromkk.com"
 # theme list
 # theme = ["FixIt"] # enable in your site config file
 # determines default content language ["en", "zh-cn", "fr", "pl", ...]
