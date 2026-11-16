@@ -1473,7 +1473,7 @@ enable = true
 
 # Google Analytics
 [params.analytics.google]
-id = "G-L0BDGPWEMG"
+# id = "G-L0BDGPWEMG"
 # whether to anonymize IP
 anonymize_ip = true
 
