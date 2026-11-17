@@ -1,8 +1,16 @@
-[build.environment]
-HUGO_VERSION = "0.165.0"
-TZ = "Asia/Shanghai"
-
 [build]
 publish = "public"
-command = "git config core.quotepath false && hugo --gc --minify"
+# FixIt v1 compiles SCSS with the dartsass transpiler, which needs Dart Sass >= 1.99.0
+command = """\
+  curl -sLJO https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz && \
+  tar -xf dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz && \
+  rm dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz && \
+  export PATH=$PWD/dart-sass:$PATH && \
+  git config core.quotepath false && \
+  hugo --gc --minify \
+  """
 
+[build.environment]
+HUGO_VERSION = "0.166.0"
+DART_SASS_VERSION = "1.108.2"
+TZ = "Asia/Shanghai"

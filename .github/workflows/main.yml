@@ -5,6 +5,10 @@ on:
     branches:
       - src
 
+env:
+  HUGO_VERSION: "0.166.0"
+  DART_SASS_VERSION: "1.108.2"
+
 jobs:
   deploy:
     runs-on: ubuntu-22.04
@@ -17,11 +21,21 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: '0.165.0'
+          hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
 
+      # FixIt v1 compiles SCSS with the dartsass transpiler, which needs Dart Sass >= 1.99.0
+      - name: Setup Dart Sass
+        run: |
+          curl -sLJO "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
+          tar -xf "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
+          rm "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
+          echo "${PWD}/dart-sass" >> "$GITHUB_PATH"
+
       - name: Build
-        run: hugo --minify
+        run: |
+          git config core.quotepath false
+          hugo --minify
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

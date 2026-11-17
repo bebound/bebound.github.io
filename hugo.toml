@@ -19,9 +19,9 @@ baseURL="https://fromkk.com"
 # determines default content language ["en", "zh-cn", "fr", "pl", ...]
 defaultContentLanguage = "en"
 # language code ["en", "zh-CN", "fr", "pl", ...]
-languageCode = "en"
+locale = "en"
 # language name ["English", "简体中文", "Français", "Polski", ...]
-languageName = "English"
+label = "English"
 # whether to include Chinese/Japanese/Korean
 hasCJKLanguage = true
 # copyright description used only for seo schema
@@ -58,6 +58,14 @@ lastmod = [
 
 [imaging]
 _merge = "shallow"
+
+[imaging.jpeg]
+quality = 75
+
+[imaging.webp]
+quality = 75
+
+[imaging.avif]
 quality = 75
 
 # -------------------------------------------------------------------------------------
@@ -196,7 +204,7 @@ weight = 80
 
 [module.hugoVersion]
 extended = true
-min = "0.161.0"
+min = "0.166.0"
 
 [[module.imports]]
 path = "github.com/hugo-fixit/FixIt"
@@ -658,7 +666,7 @@ boxed = true
 # See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/file-tree/
 [params.filetree]
 # the expand level of the tree (expand all: -1, collapse all: 0)
-level = 1
+expand_level = 1
 # whether to append a trailing "/" to folder names
 folder_slash = false
 # list of file or folder names to ignore
@@ -712,8 +720,9 @@ enable = true
 keep_static = false
 # whether to make the table of the contents in the sidebar automatically collapsed
 auto = true
-# position of TOC ["left", "right"]
-position = "right"
+# Position of TOC.
+# Available values: ["start", "end"]
+position = "end"
 # supersede `markup.tableOfContents` settings
 ordered = false
 start_level = 2
@@ -742,14 +751,6 @@ capitalize = false
 enable = false
 # only enable in main section pages (default is posts)
 only_main_section = true
-
-[params.heading.number.format]
-h1 = "{title}"
-h2 = "{h2} {title}"
-h3 = "{h2}.{h3} {title}"
-h4 = "{h2}.{h3}.{h4} {title}"
-h5 = "{h2}.{h3}.{h4}.{h5} {title}"
-h6 = "{h2}.{h3}.{h4}.{h5}.{h6} {title}"
 
 # mathematical formulas configuration
 # See http://fixit.lruihao.cn/documentation/content-management/markdown-syntax/extended/#formula
@@ -954,19 +955,18 @@ Trello = false
 Mix = false
 
 # Comment config
-[params.page.comment]
+[params.comment]
 enable = true
 
-
 # Utterances comment config (https://utteranc.es)
-[params.page.comment.utterances]
+[params.comment.utterances]
 enable = true
 # owner/repo
 repo = "bebound/bebound.github.io"
-issueTerm = "pathname"
+issue_term = "pathname"
 label = "utterances"
-lightTheme = "github-light"
-darkTheme = "github-dark"
+light_theme = "github-light"
+dark_theme = "github-dark"
 
 # Third-party library config
 [params.library]
@@ -1037,27 +1037,28 @@ type = "image/png"
 # Search config
 [params.search]
 enable = true
-# type of search engine ["fuse", "algolia", "pagefind", "cse"]
-type = "fuse"
-# max index length of the chunked content
+# Type of search engine.
+# Available values: ["fuse", "algolia", "pagefind", "cse"]
+type = "algolia"
+# Max index length of the chunked content.
 content_length = 4000
-# placeholder of the search bar
+# Placeholder of the search bar.
 placeholder = ""
-# max number of results length
+# Max number of results length.
 max_result_length = 10
-# snippet length of the result
+# Snippet length of the result.
 snippet_length = 30
-# HTML tag name of the highlight part in results
+# HTML tag name of the highlight part in results.
 highlight_tag = "em"
-# whether to use the absolute URL based on the baseURL in search index
+# Whether to use the absolute URL based on the baseURL in search index.
 absolute_url = false
-# whether to enable anchorify for headings in search results
+# Whether to enable anchorify for headings in search results.
 anchorify = true
 
 [params.search.algolia]
-index = ""
-app_id = ""
-search_key = ""
+index = "fromkk"
+app_id = "NQSJDZJCE1"
+search_key = "70bace73e6e4c0dc2745f46327c80eb0"
 
 # https://fusejs.io/api/options.html
 [params.search.fuse]
@@ -1140,8 +1141,6 @@ capitalize = true
 
 # Post navigation config
 [params.navigation]
-# whether to show the post navigation in section pages scope
-in_section = false
 # whether to reverse the next/previous post navigation order
 reverse = false
 
@@ -1175,14 +1174,6 @@ icon = "fa-solid fa-heartbeat"
 pre = ""
 # e.g. "2021-12-18T16:15:22+08:00"
 value = ""
-
-# footer lines order, optional values: ["first", 0-5, "last"]
-[params.footer.order]
-powered = 0
-copyright = 0
-statistics = 0
-visitor = 0
-beian = 0
 
 # Archives page config (all pages of posts type)
 [params.archives]
@@ -1226,6 +1217,25 @@ section = true
 list = true
 days = 30
 max_count = 5
+
+# Contribution heatmap configuration for the home page and author archive pages.
+[params.contribution]
+# Whether to show the contribution heatmap.
+enable = true
+# First day of the week.
+# Available values: ["monday", "sunday"]
+first_day_of_week = "sunday"
+# Whether to show contribution statistics (longest/current streak).
+stats = true
+# Metric used to calculate contribution intensity.
+# Available values: ["count", "words", "score"]
+# - count: number of posts per day, using fixed thresholds 1 / 2 / 3-4 / 5+.
+# - words: total words per day, bucketed by the p50/p75/p90 of days with posts.
+# - score: posts + words / 1500, bucketed by the p50/p75/p90 of days with posts.
+metric = "count"
+# Maximum number of years to display, newest first. 0 means all years with posts.
+max_years = 0
+
 
 # TagCloud config for tags page
 [params.tag_cloud]
@@ -1503,16 +1513,6 @@ src = ""
 [params.analytics.cloudflare]
 token = ""
 
-# Splitbee Analytics
-[params.analytics.splitbee]
-enable = false
-# no cookie mode
-no_cookie = true
-# respect the do not track setting of the browser
-do_not_track = true
-# token(optional), more info on https://splitbee.io/docs/embed-the-script
-data_token = ""
-
 # Cookie consent config
 [params.cookieconsent]
 enable = true
@@ -1542,8 +1542,8 @@ object_fit = false
 [params.github_corner]
 enable = false
 permalink = "https://github.com/hugo-fixit/FixIt"
-title = "View source on GitHub"
-position = "right" # ["left", "right"]
+# Available values: ["start", "end"]
+position = "end"
 
 # Gravatar config
 [params.gravatar]
@@ -1562,8 +1562,8 @@ scrollpercent = false
 # Reading progress bar
 [params.reading_progress]
 enable = false
-# available values: ["left", "right"]
-start = "left"
+# Available values: ["start", "end"]
+start = "start"
 # available values: ["top", "bottom"]
 position = "top"
 reversed = false
