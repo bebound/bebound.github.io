@@ -593,7 +593,7 @@ end_flag = ""
 name = "KK"
 email = ""
 link = ""
-avatar = "/images/avatar.png"
+avatar = "/images/avatar.webp"
 
 # Link config
 [params.link]
