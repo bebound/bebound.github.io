@@ -20,7 +20,7 @@ In Emacs, `RET` is not a key in keyboard, it's a logical key). Emacs bind `RET` 
 {{< figure src="/images/emacs.png" >}}
 
 This can be proved: type `SPC h d k <Enter>` in spacemacs, it will output `RET (translated from <return>) runs the command org-open-at-point, which is an
-interactive compiled Lisp function in ‘org.el’.`
+interactive compiled Lisp function in 'org.el'.`
 
 Pressing `C-m` or `<Enter>` key usually given the same result, but you can also bind these with two different command. Take `M-RET` as example. If only `<M-return>` is bind, the `M-RET` is unbinded. If only `M-RET` is binded, then `M-return` is implicitly also bind to same command as `M-RET`.
 

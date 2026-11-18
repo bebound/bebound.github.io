@@ -15,23 +15,27 @@ Recently, my open-source project [AltGallery](https://github.com/bebound/AltGall
 
 {{< figure src="/images/umami_github.png" >}}
 
-My blog still runs on Google Analytics, and honestly, I don’t like it. It’s complicated and slow, and it can’t even filter out bot traffic.
+My blog still runs on Google Analytics, and honestly, I don't like it. It's complicated and slow, and it can't even filter out bot traffic.
 
 |                                |                                |
 |--------------------------------|--------------------------------|
 | ![](/images/umami_google1.png) | ![](/images/umami_google2.png) |
 
-After some research, I decided to switch to [Umami](https://umami.is/) to replace Google Analytics. Umami offers a [hobby plan](https://umami.is/pricing) that tracks 100k events for 1 website for free. You can also [run it on Vercel](https://docs.umami.is/docs/guides/running-on-vercel) to cover more websites and events. I have tried it, but the network speed is insanely slow. (Netlify is fast in my experience, you may want to try [Netlify guide](https://docs.umami.is/docs/guides/running-on-netlify) with a [free Neon database](https://neon.com/) instead.) So I decided to deploy it on my server. The setup is simple: run Umami and Postgres with docker-compose and you’re good to go.
+After some research, I decided to switch to [Umami](https://umami.is/) to replace Google Analytics. Umami offers a [hobby plan](https://umami.is/pricing) that tracks 100k events for 1 website for free. You can also [run it on Vercel](https://docs.umami.is/docs/guides/running-on-vercel) to cover more websites and events. I have tried it, but the network speed is insanely slow. (Netlify is fast in my experience, you may want to try [Netlify guide](https://docs.umami.is/docs/guides/running-on-netlify) with a [free Neon database](https://neon.com/) instead.) So I decided to deploy it on my server. The setup is simple: run Umami and Postgres with docker-compose and you're good to go.
 
 
 ## Umami usage {#umami-usage}
 
-To get started, log in to the dashboard and create a website, then copy the tracking code onto your site. Some ad blockers may block the tracking code, so you can use the [custom tracker script name](https://docs.umami.is/docs/environment-variables#tracker_script_name) to get around them. And now you should be able to see the traffic data in the dashboard. Here are some useful features of Umami:
+To get started, log in to the dashboard and create a website, then copy the tracking code onto your site. Some ad blockers may block the tracking code, so you can use the [custom tracker script name](https://docs.umami.is/docs/environment-variables#tracker_script_name) to get around them. And now you should be able to see the traffic data in the dashboard.
+
+The first impression is that it's simple and clean. It doesn't create many new concept compared to GA. The dashboard is simple, you can see all of data in one page. Since it uses JavaScrip to upload the data and the [isbot](https://github.com/omrilotan/isbot) library to filter the bot traffic, the data is more accurate than GA.
+
+Here are some useful features of Umami:
 
 
 ### Track Event {#track-event}
 
-If you want to track some specific events, you can use the [track event](https://docs.umami.is/docs/track-events) function. The design is elegant: you can use the `data-attributes` or JavaScript code. Here’s how I track clicks on the Add altstore source button on AltGallery Web:
+If you want to track some specific events, you can use the [track event](https://docs.umami.is/docs/track-events) function. The design is elegant: you can use the `data-attributes` or JavaScript code. Here's how I track clicks on the Add altstore source button on AltGallery Web:
 
 ```html
 <a class="btn-mini"
@@ -45,12 +49,12 @@ This will track the event as `Add single source` with the property `app=HermesEn
 
 ### Link Tracking {#link-tracking}
 
-Umami can also create a [tracking link](https://docs.umami.is/docs/links). That’s handy when you want to track clicks on a link.
+Umami can also create a [tracking link](https://docs.umami.is/docs/links). That's handy when you want to track clicks on a link.
 
 
 ### Pixel Tracking {#pixel-tracking}
 
-[Pixel tracking](https://docs.umami.is/docs/pixels) is also supported in Umami. I wanted to use it to track traffic to the AltGallery repo, but GitHub doesn’t allow that.
+[Pixel tracking](https://docs.umami.is/docs/pixels) is also supported in Umami. I wanted to use it to track traffic to the AltGallery repo, but GitHub doesn't allow that.
 
 > To host your images, GitHub uses the open-source project Camo. Camo generates an anonymous URL proxy for each file which hides your browser details and related information from other users. On GitHub.com, the URL starts <https://<subdomain>.githubusercontent.com/>, with different subdomains depending on how you uploaded the image.
 >

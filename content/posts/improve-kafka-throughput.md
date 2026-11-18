@@ -111,7 +111,7 @@ These are common configurations, you can find more from the official document co
 
 1.  [Kafka message format](https://kafka.apache.org/documentation/#messageformat)
 2.  [Kafka高性能探秘](https://juejin.cn/post/6844903632521920519)
-3.  [Exploit Apache Kafka’s Message Format to Save Storage and Bandwidth](https://medium.com/swlh/exploit-apache-kafkas-message-format-to-save-storage-and-bandwidth-7e0c533edf26)
+3.  [Exploit Apache Kafka's Message Format to Save Storage and Bandwidth](https://medium.com/swlh/exploit-apache-kafkas-message-format-to-save-storage-and-bandwidth-7e0c533edf26)
 4.  [Consuming big messages from Kafka](https://ibmstreams.github.io/streamsx.kafka/docs/user/ConsumingBigMessages/)
 5.  [How does max.poll.records affect the consumer poll](https://stackoverflow.com/questions/53308986/how-does-max-poll-records-affect-the-consumer-poll)
 6.  [A Practical Introduction to Kafka Storage Internals](https://medium.com/@durgaswaroop/a-practical-introduction-to-kafka-storage-internals-d5b544f6925f)

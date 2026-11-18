@@ -20,7 +20,7 @@ By default, as initialized upon program startup, a potentially unsafe path is pr
 
 `python -m`: prepend the current working directory.
 
-`python script.py`: prepend the script’s directory. If it’s a symbolic link, resolve symbolic links.
+`python script.py`: prepend the script's directory. If it's a symbolic link, resolve symbolic links.
 
 `python -c` and python (REPL): prepend an empty string, which means the current working directory.
 

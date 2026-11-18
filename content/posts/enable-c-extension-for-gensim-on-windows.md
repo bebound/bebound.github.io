@@ -10,7 +10,7 @@ nopaging = true
 noread = true
 +++
 
-These days, I’m working on some text classification works, and I use `gensim` ’s `doc2vec` function.
+These days, I'm working on some text classification works, and I use `gensim` 's `doc2vec` function.
 
 When using gensim, it shows this warning message:
 
