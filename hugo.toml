@@ -51,22 +51,6 @@ lastmod = [
   ":default",
 ]
 
-# -------------------------------------------------------------------------------------
-# Imaging Configuration
-# See: https://gohugo.io/configuration/imaging/
-# -------------------------------------------------------------------------------------
-
-[imaging]
-_merge = "shallow"
-
-[imaging.jpeg]
-quality = 75
-
-[imaging.webp]
-quality = 75
-
-[imaging.avif]
-quality = 75
 
 # -------------------------------------------------------------------------------------
 # Menu Configuration
