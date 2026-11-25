@@ -11,7 +11,7 @@
 # -------------------------------------------------------------------------------------
 
 # website title
-title = "KK's Blog (fromkk)"
+title = "KK's Blog"
 # hostname (and path) to the root
 baseURL="https://fromkk.com"
 # theme list
