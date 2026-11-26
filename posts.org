@@ -4129,9 +4129,13 @@ After some research, I decided to switch to [[https://umami.is/][Umami]] to repl
 **** Umami usage
 To get started, log in to the dashboard and create a website, then copy the tracking code onto your site. Some ad blockers may block the tracking code, so you can use the [[https://docs.umami.is/docs/environment-variables#tracker_script_name][custom tracker script name]] to get around them. And now you should be able to see the traffic data in the dashboard.
 
-The first impression is that it's simple and clean. It doesn't create many new concept compared to GA. The dashboard is simple, you can see all of data in one page. Since it uses JavaScrip to upload the data and the [[https://github.com/omrilotan/isbot][isbot]] library to filter the bot traffic, the data is more accurate than GA.
+The first impression is that it's simple and clean. It doesn't create many new concept compared to GA. The dashboard is simple, you can see all of data in one page. Since it uses JavaScript to upload the data and the [[https://github.com/omrilotan/isbot][isbot]] library to filter the bot traffic, the data is more accurate than GA. Here is the data for AltGallery:
 
-Here are some useful features of Umami:
+[[file:/images/umami_1.png]]
+
+[[file:/images/umami_2.png]]
+
+There are some useful features of Umami:
 
 ***** Track Event
 If you want to track some specific events, you can use the [[https://docs.umami.is/docs/track-events][track event]] function. The design is elegant: you can use the ~data-attributes~ or JavaScript code. Here's how I track clicks on the Add altstore source button on AltGallery Web:
